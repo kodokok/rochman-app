@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\JobTitle;
 
 class JobTitlesTableSeeder extends Seeder
 {
@@ -11,8 +12,10 @@ class JobTitlesTableSeeder extends Seeder
      */
     public function run()
     {
-        \App\JobTitle::create(['title' => 'Ka. Dept']);
-        \App\JobTitle::create(['title' => 'Ka. Div']);
-        \App\JobTitle::create(['title' => 'Direksi']);
+        JobTitle::create(
+            ['title' => 'Ka. Dept'],
+            ['title' => 'Ka. Div'],
+            ['title' => 'Direksi']
+        );
     }
 }

@@ -24,7 +24,7 @@
         <!-- User Status Dropdown Menu -->
         <li class="nav-item dropdown">
             <a href="#" class="nav-link" data-toggle="dropdown" href="#">
-                User ID
+                {{ Auth::user()->name }}
                 <img src="{{ asset('img/avatar.png') }}" width="30" height="30" class="d-inline-block align-top img-circle" alt="User Image">
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -33,7 +33,7 @@
                     <div class="media">
                         <div class="media-body">
                             <h3 class="dropdown-item-title font-weight-bold">
-                                Brad Diesel
+                                {{ Auth::user()->email }}
                                 <span class="float-right text-sm text-muted"><i class="fas fa-info"></i></span>
                             </h3>
                             <p class="text-sm">Call me whenever you can...</p>
@@ -44,11 +44,15 @@
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item dropdown-footer">PROFILE</a>
+                <div class="dropdown-divider"></div>
                 <a class="dropdown-item dropdown-footer" href="{{ route('logout') }}"
                     onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
-                    {{ __('Logout') }}
+                    {{ __('LOGOUT') }}
                 </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
             </div>
         </li>
     </ul>

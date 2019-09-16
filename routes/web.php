@@ -13,4 +13,9 @@
 
 Auth::routes();
 
-Route::get('/', 'AppController@index')->name('app');
+Route::get('/', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => ['role:admin']], function () {
+    Route::resource('users', 'UsersController');
+    Route::resource('jobtitle', 'JobTitleController');
+});

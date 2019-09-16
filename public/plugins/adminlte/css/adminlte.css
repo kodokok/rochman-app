@@ -17412,6 +17412,10 @@ html.maximized-card {
   background: #e9ecef;
 }
 
+.auth-page {
+  background: #e9ecef;
+}
+
 .login-box,
 .register-box {
   margin: 7% auto;
