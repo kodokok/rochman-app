@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use DataTables;
 
 class UsersController extends Controller
 {
@@ -97,7 +98,7 @@ class UsersController extends Controller
                 ]);
             })
             ->addIndexColumn()
-            ->rawColumn(['action'])
+            ->rawColumns(['action'])
             ->make(true);
     }
 }
