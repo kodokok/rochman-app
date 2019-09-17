@@ -82,4 +82,22 @@ class UsersController extends Controller
     {
         //
     }
+
+    public function dataTable()
+    {
+        $model = User::query();
+
+        return DataTables::of($model)
+            ->addColumn('action', function ($model) {
+                return view('users._action', [
+                    'model' => $model,
+                    'url_show' => route('users.show', $model->id),
+                    'url_edit' => route('users.edit', $model->id),
+                    'url_destroy' => route('users.destroy', $model->id),
+                ]);
+            })
+            ->addIndexColumn()
+            ->rawColumn(['action'])
+            ->make(true);
+    }
 }

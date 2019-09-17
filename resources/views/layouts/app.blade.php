@@ -3,7 +3,6 @@
 
 <head>
     @include('layouts.partials.htmlheader')
-    @yield('optional_css')
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -27,7 +26,7 @@
 
     @include('layouts.partials.scripts')
 
-    @yield('optional_scripts')
+    @stack('scripts')
 </body>
 
 </html>
