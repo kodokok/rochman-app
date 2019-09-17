@@ -25,7 +25,9 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $model = new User();
+
+        return view('users.form', compact('model'));
     }
 
     /**
@@ -36,7 +38,12 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|string|max:100',
+            'email' => 'required|string|max:100|unique:users,email'
+        ]);
+
+
     }
 
     /**
@@ -90,7 +97,7 @@ class UsersController extends Controller
 
         return DataTables::of($model)
             ->addColumn('action', function ($model) {
-                return view('users._action', [
+                return view('layouts.partials._action', [
                     'model' => $model,
                     'url_show' => route('users.show', $model->id),
                     'url_edit' => route('users.edit', $model->id),

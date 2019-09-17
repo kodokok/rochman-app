@@ -24,13 +24,13 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <button type="button" class="btn btn-success" name="add_button" id="add_button">
-                        <i class="fas fa-plus mr-2"></i>Add New User
-                    </button>
+                    <a href="{{ route('users.create') }}" class="btn btn-primary modal-show" title="Create New User">
+                        <i class="fas fa-plus mr-2"></i>Create New User
+                    </a>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <table id="datatable" class="table table-bordered table-striped">
+                    <table id="datatable" class="table table-bordered table-striped" style="width:100%">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -40,9 +40,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -68,7 +65,7 @@
             {data: 'DT_RowIndex', name: 'id'},
             {data: 'name', name: 'name'},
             {data: 'email', name: 'email'},
-            {data: 'action', name: 'action'}
+            {data: 'action', name: 'action', className: 'text-center'}
         ]
     });
 </script>
