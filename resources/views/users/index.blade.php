@@ -24,18 +24,19 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{ route('users.create') }}" class="btn btn-primary modal-show" title="Create New User">
+                    <a href="{{ route('users.create') }}" class="btn btn-success modal-show" title="Create New User">
                         <i class="fas fa-plus mr-2"></i>Create New User
                     </a>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <table id="datatable" class="table table-bordered table-striped" style="width:100%">
+                    <table id="datatables" class="table table-bordered table-striped" style="width:100%">
                         <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Roles</th>
                                 <th style="width: 20%"></th>
                             </tr>
                         </thead>
@@ -56,18 +57,28 @@
 
 @push('scripts')
 <script>
-    $('#datatable').DataTable({
-        responsive: true,
-        processing: true,
-        serverSide: true,
-        ajax: "{{ route('table.user') }}",
-        columns: [
-            {data: 'DT_RowIndex', name: 'id'},
-            {data: 'name', name: 'name'},
-            {data: 'email', name: 'email'},
-            {data: 'action', name: 'action', className: 'text-center'}
-        ]
+    $(document).ready(function() {
+        $('#datatables').DataTable({
+            responsive: true,
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('table.user') }}",
+            columns: [
+                {data: 'DT_RowIndex', name: 'id'},
+                {data: 'name', name: 'name'},
+                {data: 'email', name: 'email'},
+                {data: 'roles', name: 'roles'},
+                {data: 'action', name: 'action', 'searchable': false, 'orderable': false, 'className': 'text-center'}
+            ]
+        });
+
+        // $('body').on('shown.bs.modal', '#modal', function() {
+        //     $('#roles').val(null).trigger('change');
+        //     $('#roles').select2({
+        //         dropdownParent: $('#modal'),
+        //         theme: 'classic',
+        //     });
+        // });
     });
 </script>
 @endpush
-

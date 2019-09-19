@@ -9,5 +9,7 @@
 <!-- dataTables -->
 <script src="{{ asset('plugins/datatables/jquery.dataTables.js') }}"></script>
 <script src="{{ asset('plugins/datatables/dataTables.bootstrap4.js') }}"></script>
+<!-- select2 -->
 <!-- Custom JS -->
 <script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('plugins/select2/js/select2.min.js') }}"></script>

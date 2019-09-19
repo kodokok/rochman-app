@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use DataTables;
+use Spatie\Permission\Models\Role;
 
 class UsersController extends Controller
 {
@@ -15,7 +16,11 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view('users.index')->with('users', User::all());
+        // $users = User::all();
+        // $roles = $users->getRoleNames();
+        // $user = User::find(1);
+        // dd($user->getRoleNames());
+        return view('users.index');
     }
 
     /**
@@ -26,8 +31,9 @@ class UsersController extends Controller
     public function create()
     {
         $model = new User();
+        $roles = Role::pluck('name','name')->all();
 
-        return view('users.form', compact('model'));
+        return view('users.form', compact(['model', 'roles']));
     }
 
     /**
@@ -43,7 +49,13 @@ class UsersController extends Controller
             'email' => 'required|string|max:100|unique:users,email'
         ]);
 
+        $model = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt('password')
+        ]);
 
+        return $model;
     }
 
     /**
@@ -93,9 +105,18 @@ class UsersController extends Controller
 
     public function dataTable()
     {
-        $model = User::query();
+        $model = User::all();
 
         return DataTables::of($model)
+            ->addColumn('roles', function ($user) {
+                // return implode("<br/>", $user->roles->pluck('name')->toArray());
+                $roles = $user->roles->pluck('name')->all();
+                $output = array_map(function($role) {
+                    return '<span class="badge badge-primary mr-2">'. $role .'</span>';
+                }, $roles);
+                $output = implode('',$output);
+                return $output;
+            })
             ->addColumn('action', function ($model) {
                 return view('layouts.partials._action', [
                     'model' => $model,
@@ -105,7 +126,7 @@ class UsersController extends Controller
                 ]);
             })
             ->addIndexColumn()
-            ->rawColumns(['action'])
+            ->rawColumns(['roles','action'])
             ->make(true);
     }
 }

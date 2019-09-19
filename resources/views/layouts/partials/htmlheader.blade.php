@@ -15,7 +15,9 @@
 <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 <!-- Google Font: Source Sans Pro -->
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-<!-- Theme style -->
-<link rel="stylesheet" href="{{ asset('plugins/adminlte/css/adminlte.min.css') }}">
 <!-- dataTables Style-->
 <link rel="stylesheet" href="{{ asset('plugins/datatables/dataTables.bootstrap4.css') }}">
+<!-- select2 Style-->
+<!-- Theme style -->
+<link rel="stylesheet" href="{{ asset('plugins/adminlte/css/adminlte.min.css') }}">
+<link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
