@@ -20,7 +20,16 @@
 <div class="form-group row">
     <label for="roles" class="col-sm-2 col-form-label">Roles</label>
     <div class="col-sm-10">
-        {!! Form::select('roles[]', $roles, [], ['class' => 'form-control', 'id' => 'roles', 'multiple']) !!}
+        <ul class="list-group">
+        @foreach ($roles as $roleId => $roleName)
+            <li class="list-group-item">
+            <div class="custom-control custom-checkbox">
+                {!! Form::checkbox('roles[]', $roleName, false, ['class' => 'custom-control-input', 'id' => $roleId]) !!}
+                {!! Form::label($roleId, $roleName, ['class'=>'custom-control-label font-weight-normal']) !!}
+            </div>
+            </li>
+        @endforeach
+        </ul>
         <div id="error-roles" class="invalid-feedback"></div>
     </div>
 </div>

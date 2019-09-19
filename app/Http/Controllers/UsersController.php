@@ -31,8 +31,9 @@ class UsersController extends Controller
     public function create()
     {
         $model = new User();
-        $roles = Role::pluck('name','name')->all();
+        $roles = Role::pluck('name','id')->all();
 
+        // dd($roles);
         return view('users.form', compact(['model', 'roles']));
     }
 
@@ -44,16 +45,29 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request['roles']);
+
         $this->validate($request, [
             'name' => 'required|string|max:100',
             'email' => 'required|string|max:100|unique:users,email'
         ]);
+
 
         $model = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt('password')
         ]);
+
+        $roles = $request['roles']; //Retrieving the roles field
+        //Checking if a role was selected
+        if (isset($roles)) {
+
+            //foreach ($roles as $role) {
+            //    $role_r = Role::where('id', '=', $role)->firstOrFail();
+                $model->assignRole($roles); //Assigning role to user
+            //}
+        }
 
         return $model;
     }
@@ -108,8 +122,7 @@ class UsersController extends Controller
         $model = User::all();
 
         return DataTables::of($model)
-            ->addColumn('roles', function ($user) {
-                // return implode("<br/>", $user->roles->pluck('name')->toArray());
+            ->addColumn('roles', function (User $user) {
                 $roles = $user->roles->pluck('name')->all();
                 $output = array_map(function($role) {
                     return '<span class="badge badge-primary mr-2">'. $role .'</span>';
