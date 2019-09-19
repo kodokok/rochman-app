@@ -24,8 +24,6 @@
         @foreach ($roles as $roleId => $roleName)
             <li class="list-group-item">
                 <div class="custom-control custom-checkbox">
-                    {{-- {!! Form::checkbox('roles[]', false, ['class' => 'custom-control-input', 'id' => $roleId]) !!}
-                    {!! Form::label($roleId, $roleName, ['class'=>'custom-control-label font-weight-normal']) !!} --}}
                     <input name="roles[]" type="checkbox" class="custom-control-input" id="{{ $roleId }}"
                         @if ($model->exists)
                             @if ($model->hasRole($roleName))
