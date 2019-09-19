@@ -45,7 +45,6 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request['roles']);
 
         $this->validate($request, [
             'name' => 'required|string|max:100',
@@ -88,7 +87,6 @@ class UsersController extends Controller
     public function edit(User $user)
     {
         $model = User::findOrFail($user->id);
-        // // dd($model->roles());
         $roles = Role::pluck('name','id')->all();
         return view('users.form', compact(['model', 'roles']));
     }
@@ -102,7 +100,22 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        // grab data
+
+        $this->validate($request, [
+            'name' => 'required|string|max:100',
+            'email' => 'required|string|max:100|unique:users,email,' . $user->id
+        ]);
+
+        $data = $request->only(['name', 'email']);
+
+        $roles = $request->input('roles');
+
+        if ($roles) {
+            $user->syncRoles($roles);
+        }
+
+        $user->update($data);
     }
 
     /**

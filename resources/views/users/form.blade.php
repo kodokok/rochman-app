@@ -24,7 +24,7 @@
         @foreach ($roles as $roleId => $roleName)
             <li class="list-group-item">
                 <div class="custom-control custom-checkbox">
-                    <input name="roles[]" type="checkbox" class="custom-control-input" id="{{ $roleId }}"
+                    <input name="roles[]" type="checkbox" class="custom-control-input" id="{{ $roleId }}"  value="{{ $roleName }}"
                         @if ($model->exists)
                             @if ($model->hasRole($roleName))
                                 checked

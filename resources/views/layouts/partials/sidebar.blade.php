@@ -26,26 +26,15 @@
                         <p>Schedule<span class="badge badge-info right">2</span></p>
                     </a>
                 </li>
-                @role('admin')
                 <li class="nav-header">DATA</li>
+                @hasanyrole('admin')
                 <li class="nav-item">
                     <a href="{{ route('users.index') }}" class="nav-link {{ active(['users.*']) }}">
                         <i class="nav-icon fas fa-users"></i>
                         <p>Users</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route('jobtitle.index') }}" class="nav-link {{ active(['jobtitle.*']) }}">
-                        <i class="nav-icon fas fa-id-badge"></i>
-                        <p>Job Title</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-user-secret"></i>
-                        <p>Auditor<span class="badge badge-info right">4</span> </p>
-                    </a>
-                </li>
+                @endhasanyrole
                 <li class="nav-header">SYSTEMS</li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
@@ -53,7 +42,6 @@
                         <p>Settings</p>
                     </a>
                 </li>
-                @endrole
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

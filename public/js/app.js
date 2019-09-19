@@ -25,9 +25,8 @@ $(document).ready(function() {
 
         var form = $("#modal-body form");
         var url = form.attr("action");
-        var method =
-            $("input[name=_method]").val() == undefined ? "POST" : "PUT";
-
+        var method = $("input[name=_method]").val() == undefined ? "POST" : "PUT";
+        console.log(method);
         $(".invalid-feedback").hide();
         $(".is-invalid").removeClass("is-invalid");
 

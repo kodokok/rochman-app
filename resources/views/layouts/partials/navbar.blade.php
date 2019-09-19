@@ -24,7 +24,7 @@
         <!-- User Status Dropdown Menu -->
         <li class="nav-item dropdown">
             <a href="#" class="nav-link" data-toggle="dropdown" href="#">
-                {{ Auth::user()->name }}
+                {{ auth()->user()->name }}
                 <img src="{{ asset('img/avatar.png') }}" width="30" height="30" class="d-inline-block align-top img-circle" alt="User Image">
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -33,10 +33,10 @@
                     <div class="media">
                         <div class="media-body">
                             <h3 class="dropdown-item-title font-weight-bold">
-                                {{ Auth::user()->email }}
+                                {{ auth()->user()->email }}
                                 <span class="float-right text-sm text-muted"><i class="fas fa-info"></i></span>
                             </h3>
-                            <p class="text-sm">Call me whenever you can...</p>
+                            <p class="text-sm">Welcome</p>
                             <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                         </div>
                     </div>
