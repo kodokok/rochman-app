@@ -7,7 +7,7 @@ $(document).ready(function() {
             title = me.attr("title");
 
         $("#modal-title").text(title);
-        $("#modal-btn-save").text("Create");
+        $("#modal-btn-save").text('me.hasClass("edit")');
 
         $.ajax({
             url: url,

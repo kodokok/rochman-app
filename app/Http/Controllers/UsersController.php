@@ -62,11 +62,7 @@ class UsersController extends Controller
         $roles = $request['roles']; //Retrieving the roles field
         //Checking if a role was selected
         if (isset($roles)) {
-
-            //foreach ($roles as $role) {
-            //    $role_r = Role::where('id', '=', $role)->firstOrFail();
-                $model->assignRole($roles); //Assigning role to user
-            //}
+            $model->assignRole($roles); //Assigning role to user
         }
 
         return $model;
@@ -91,7 +87,10 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        $model = User::findOrFail($user->id);
+        // // dd($model->roles());
+        $roles = Role::pluck('name','id')->all();
+        return view('users.form', compact(['model', 'roles']));
     }
 
     /**

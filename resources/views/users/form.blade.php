@@ -1,6 +1,6 @@
 {!! Form::model($model, [
-    'route' => 'users.store',
-    'method' => 'POST',
+    'route' => $model->exists ? ['users.update', $model->id] : 'users.store',
+    'method' => $model->exists ? 'PUT' : 'POST',
 ]) !!}
 @csrf
 <div class="form-group row">
@@ -23,14 +23,21 @@
         <ul class="list-group">
         @foreach ($roles as $roleId => $roleName)
             <li class="list-group-item">
-            <div class="custom-control custom-checkbox">
-                {!! Form::checkbox('roles[]', $roleName, false, ['class' => 'custom-control-input', 'id' => $roleId]) !!}
-                {!! Form::label($roleId, $roleName, ['class'=>'custom-control-label font-weight-normal']) !!}
-            </div>
+                <div class="custom-control custom-checkbox">
+                    {{-- {!! Form::checkbox('roles[]', false, ['class' => 'custom-control-input', 'id' => $roleId]) !!}
+                    {!! Form::label($roleId, $roleName, ['class'=>'custom-control-label font-weight-normal']) !!} --}}
+                    <input name="roles[]" type="checkbox" class="custom-control-input" id="{{ $roleId }}"
+                        @if ($model->exists)
+                            @if ($model->hasRole($roleName))
+                                checked
+                            @endif
+                        @endif
+                    >
+                    <label class="custom-control-label font-weight-normal" for="{{$roleId}}">{{$roleName}}</label>
+                </div>
             </li>
         @endforeach
         </ul>
-        <div id="error-roles" class="invalid-feedback"></div>
     </div>
 </div>
 
