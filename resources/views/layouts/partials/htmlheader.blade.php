@@ -17,7 +17,9 @@
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 <!-- dataTables Style-->
 <link rel="stylesheet" href="{{ asset('plugins/datatables/dataTables.bootstrap4.css') }}">
-<!-- select2 Style-->
+<!-- select2 Style -->
+<link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
 <!-- Theme style -->
 <link rel="stylesheet" href="{{ asset('plugins/adminlte/css/adminlte.min.css') }}">
-<link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
+<!-- sweet alert -->
+<link rel="stylesheet" href="{{ asset('plugins/sweetalert2/sweetalert2.min.css') }}">

@@ -7,7 +7,7 @@ $(document).ready(function() {
             title = me.attr("title");
 
         $("#modal-title").text(title);
-        $("#modal-btn-save").text(me.hasClass('edit') ? 'Update' : 'Create');
+        $("#modal-btn-save").text(me.hasClass("edit") ? "Update" : "Create");
 
         $.ajax({
             url: url,
@@ -34,12 +34,10 @@ $(document).ready(function() {
             url: url,
             method: method,
             data: form.serialize(),
-            success: function(res) {
+            success: function(response) {
                 form.trigger("reset");
                 $("#modal").modal("hide");
-                $("#datatables")
-                    .DataTable()
-                    .ajax.reload();
+                $("#datatables").DataTable().ajax.reload();
             },
             error: function(xhr) {
                 var res = xhr.responseJSON;
@@ -50,6 +48,44 @@ $(document).ready(function() {
                         $("#error-" + key).html(value);
                     });
                 }
+            }
+        });
+    });
+
+    $("body").on("click", ".btn-delete", function(event) {
+        event.preventDefault();
+
+        var me = $(this);
+        var url = me.attr('href');
+        var title = me.attr('title');
+        var csrf_token = $('meta[name="csrf-token"]').attr('content');
+
+        Swal.fire({
+            title: 'Are you sure want to delete ' + title + '?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: {
+                        '_method': 'DELETE',
+                        '_token': csrf_token
+                    },
+                    success: function(response) {
+                        $('#datatables').DataTable().ajax.reload();
+                        Swal.fire(
+                            'Deleted!',
+                            'Data has been deleted.',
+                            'success'
+                        );
+                    }
+                });
             }
         });
     });
