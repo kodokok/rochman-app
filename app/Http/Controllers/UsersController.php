@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use DataTables;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -16,10 +17,6 @@ class UsersController extends Controller
      */
     public function index()
     {
-        // $users = User::all();
-        // $roles = $users->getRoleNames();
-        // $user = User::find(1);
-        // dd($user->getRoleNames());
         return view('users.index');
     }
 
@@ -33,7 +30,6 @@ class UsersController extends Controller
         $model = new User();
         $roles = Role::pluck('name','id')->all();
 
-        // dd($roles);
         return view('users.form', compact(['model', 'roles']));
     }
 
@@ -48,20 +44,23 @@ class UsersController extends Controller
 
         $this->validate($request, [
             'name' => 'required|string|max:100',
-            'email' => 'required|string|max:100|unique:users,email'
+            'email' => 'required|string|max:100|unique:users,email',
+            'password' => 'required|min:6'
         ]);
 
 
         $model = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt('password')
+            'password' => Hash::make($request->password),
         ]);
 
-        $roles = $request['roles']; //Retrieving the roles field
+        //Retrieving the roles field
+        $roles = $request['roles'];
         //Checking if a role was selected
         if (isset($roles)) {
-            $model->assignRole($roles); //Assigning role to user
+            //Assigning role to user
+            $model->assignRole($roles);
         }
 
         return $model;
@@ -108,7 +107,6 @@ class UsersController extends Controller
         ]);
 
         $data = $request->only(['name', 'email']);
-
         $roles = $request->input('roles');
 
         if ($roles) {
@@ -146,7 +144,7 @@ class UsersController extends Controller
             ->addColumn('action', function ($model) {
                 return view('layouts.partials._action', [
                     'model' => $model,
-                    'url_show' => route('users.show', $model->id),
+                    // 'url_show' => route('users.show', $model->id),
                     'url_edit' => route('users.edit', $model->id),
                     'url_destroy' => route('users.destroy', $model->id),
                 ]);

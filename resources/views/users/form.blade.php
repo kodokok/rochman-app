@@ -17,6 +17,15 @@
         <div id="error-email" class="invalid-feedback"></div>
     </div>
 </div>
+@if (!$model->exists)
+    <div class="form-group row">
+        <label for="password" class="col-sm-2 col-form-label">Password</label>
+        <div class="col-sm-10">
+            {!! Form::password('password', ['class' => 'form-control', 'id' => 'password']) !!}
+            <div id="error-password" class="invalid-feedback"></div>
+        </div>
+    </div>
+@endif
 <div class="form-group row">
     <label for="roles" class="col-sm-2 col-form-label">Roles</label>
     <div class="col-sm-10">
