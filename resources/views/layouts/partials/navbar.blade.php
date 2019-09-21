@@ -40,14 +40,12 @@
                                 {{ auth()->user()->email }}
                                 <span class="float-right text-sm text-muted"><i class="fas fa-info"></i></span>
                             </h3>
-                            <p class="text-sm">Welcome</p>
-                            <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                         </div>
                     </div>
                     <!-- Message End -->
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="{{ route('users.profile', auth()->user()) }}" class="dropdown-item dropdown-footer">PROFILE</a>
+                <a href="{{ route('profile', auth()->user()) }}" class="dropdown-item dropdown-footer">PROFILE</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item dropdown-footer" href="{{ route('logout') }}"
                     onclick="event.preventDefault();
