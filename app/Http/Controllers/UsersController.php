@@ -72,28 +72,6 @@ class UsersController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function profile(User $user)
-    {
-        return view('users.profile', compact('user'));
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\User  $user
@@ -146,23 +124,6 @@ class UsersController extends Controller
         }
     }
 
-    public function updateProfile(Request $request, User $user)
-    {
-        // grab data
-        $data = $request->only(['name', 'email']);
-
-        $this->validate($request, [
-            'name' => 'required|string|max:100',
-            'email' => 'required|string|max:100|unique:users,email,' . $user->id
-        ]);
-
-        // update users
-        $user->update($data);
-
-        return redirect()->back();
-        // dd($user);
-    }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -192,7 +153,7 @@ class UsersController extends Controller
             ->addColumn('action', function ($model) {
                 return view('layouts.partials._action', [
                     'model' => $model,
-                    // 'url_show' => route('users.show', $model->id),
+                    'url_show' => route('profile', $model->id),
                     'url_edit' => route('users.edit', $model->id),
                     'url_destroy' => route('users.destroy', $model->id),
                 ]);
