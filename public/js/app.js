@@ -48,7 +48,6 @@ $(document).ready(function() {
                 form.trigger("reset");
                 $("#modal").modal("hide");
                 $("#datatables").DataTable().ajax.reload();
-                console.log(formData);
             },
             error: function(xhr) {
                 var res = xhr.responseJSON;

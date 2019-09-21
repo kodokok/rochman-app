@@ -25,7 +25,11 @@
         <li class="nav-item dropdown">
             <a href="#" class="nav-link" data-toggle="dropdown" href="#">
                 {{ auth()->user()->name }}
-                <img src="{{ asset('img/avatar.png') }}" width="30" height="30" class="d-inline-block align-top img-circle" alt="User Image">
+                <img src="{{ auth()->user()->image ? asset('storage/' . auth()->user()->image) : asset('img/avatar.png') }}"
+                    width="30"
+                    height="30"
+                    class="d-inline-block align-top img-circle"
+                    alt="User Image">
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <a href="#" class="dropdown-item">

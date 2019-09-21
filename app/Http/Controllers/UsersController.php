@@ -50,7 +50,7 @@ class UsersController extends Controller
 
         // upload image to the storage
         if ($request->hasFile('image')) {
-            $image = $request->image->store('users');
+            $image = $request->image->store('img\users');
         }
 
         $model = User::create([
