@@ -20,6 +20,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::group(['middleware' => ['role:admin']], function () {
         Route::resource('users', 'UsersController');
-        // Route::resource('jobtitle', 'JobTitleController');
+        Route::get('users/{user}/profile', 'UsersController@profile')->name('users.profile');
     });
 });

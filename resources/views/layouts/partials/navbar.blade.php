@@ -43,7 +43,7 @@
                     <!-- Message End -->
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item dropdown-footer">PROFILE</a>
+                <a href="{{ route('users.profile', auth()->user()) }}" class="dropdown-item dropdown-footer">PROFILE</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item dropdown-footer" href="{{ route('logout') }}"
                     onclick="event.preventDefault();

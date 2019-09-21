@@ -78,6 +78,17 @@ class UsersController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function profile(User $user)
+    {
+        return view('users.profile', compact('user'));
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\User  $user
