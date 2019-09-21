@@ -1,6 +1,7 @@
 {!! Form::model($model, [
     'route' => $model->exists ? ['users.update', $model->id] : 'users.store',
     'method' => $model->exists ? 'PUT' : 'POST',
+    'files' => true
 ]) !!}
 @csrf
 <div class="form-group row">
@@ -17,6 +18,14 @@
         <div id="error-email" class="invalid-feedback"></div>
     </div>
 </div>
+<div class="form-group row">
+    <label for="image" class="col-sm-2 col-form-label">Image</label>
+    <div class="col-sm-10">
+        {!! Form::file('image', ['class' => 'form-control', 'id' => 'image']) !!}
+        <div id="error-image" class="invalid-feedback"></div>
+    </div>
+</div>
+
 @if (!$model->exists)
     <div class="form-group row">
         <label for="password" class="col-sm-2 col-form-label">Password</label>

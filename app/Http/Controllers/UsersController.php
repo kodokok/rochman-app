@@ -41,17 +41,22 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-
         $this->validate($request, [
             'name' => 'required|string|max:100',
             'email' => 'required|string|max:100|unique:users,email',
-            'password' => 'required|min:6'
+            'image' => 'nullable|image',
+            'password' => 'required|min:6',
         ]);
 
+        // upload image to the storage
+        if ($request->hasFile('image')) {
+            $image = $request->image->store('users');
+        }
 
         $model = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'image' => $image,
             'password' => Hash::make($request->password),
         ]);
 
@@ -111,20 +116,35 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         // grab data
+        $data = $request->only(['name', 'email']);
 
         $this->validate($request, [
             'name' => 'required|string|max:100',
             'email' => 'required|string|max:100|unique:users,email,' . $user->id
         ]);
 
-        $data = $request->only(['name', 'email']);
-        $roles = $request->input('roles');
+        // check if new image
+        if ($request->hasFile('image')) {
+            // upload image
+            $image = $request->image->store('users');
 
+            // delete image
+            $user->deleteImage();
+
+            // save new image to array
+            $data['image'] = $image;
+        }
+
+        // update users
+        $user->update($data);
+
+        // get roles from input
+        $roles = $request->input('roles');
+        // if roles changed, sync the roles
         if ($roles) {
             $user->syncRoles($roles);
         }
 
-        $user->update($data);
     }
 
     /**
@@ -135,8 +155,9 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete();
         $user->roles()->detach();
+        $user->deleteImage();
+        $user->delete();
     }
 
     public function dataTable()

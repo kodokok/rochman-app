@@ -23,7 +23,15 @@ $(document).ready(function() {
     $("#modal-btn-save").click(function(event) {
         event.preventDefault();
 
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
         var form = $("#modal-body form");
+        // console.log(form);
+        var formData = new FormData(form[0]);
         var url = form.attr("action");
         var method = $("input[name=_method]").val() == undefined ? "POST" : "PUT";
 
@@ -33,11 +41,14 @@ $(document).ready(function() {
         $.ajax({
             url: url,
             method: method,
-            data: form.serialize(),
+            data: formData,
+            contentType: false,
+            processData: false,
             success: function(response) {
                 form.trigger("reset");
                 $("#modal").modal("hide");
                 $("#datatables").DataTable().ajax.reload();
+                console.log(formData);
             },
             error: function(xhr) {
                 var res = xhr.responseJSON;
