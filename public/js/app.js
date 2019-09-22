@@ -8,7 +8,7 @@ $(document).ready(function() {
             title = me.attr("title");
 
         $("#modal-title").text(title);
-        $("#modal-btn-save").text(me.hasClass("edit") ? "Update" : "Create");
+        $("#modal-btn-save").text(me.hasClass("edit") || me.hasClass("change") ? "Update" : "Create");
 
         $.ajax({
             url: url,
@@ -24,16 +24,23 @@ $(document).ready(function() {
     $("#modal-btn-save").click(function(event) {
         event.preventDefault();
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
         var form = $("#modal-body form");
-        var formData = new FormData(form[0]);
+        var data = form.serializeArray();
         var url = form.attr("action");
         var method = $("input[name=_method]").val() == undefined ? "POST" : "PUT";
+
+        if (form.attr("enctype") == "multipart/form-data") {
+            data = new FormData(form[0]);
+            method = "POST";
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                contentType: false,
+                processData: false
+            });
+        }
 
         $(".invalid-feedback").hide();
         $(".is-invalid").removeClass("is-invalid");
@@ -41,9 +48,7 @@ $(document).ready(function() {
         $.ajax({
             url: url,
             method: method,
-            data: formData,
-            contentType: false,
-            processData: false,
+            data: data,
             success: function(response) {
                 form.trigger("reset");
                 $("#modal").modal("hide");

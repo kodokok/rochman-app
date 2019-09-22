@@ -15,12 +15,24 @@ class ProfileController extends Controller
 
     public function update(Request $request)
     {
-        $user = User::findOrFail(auth()->user()->id);
+        $user = auth()->user();
 
         $this->validate($request, [
             'name' => 'required|string|max:100',
             'email' => 'required|string|max:100|unique:users,email,' . $user->id
         ]);
+
+        // check if new image
+        if ($request->hasFile('image')) {
+            // upload image
+            $image = $request->image->store('users');
+
+            // delete image
+            $user->deleteImage();
+
+            // save new image to array
+            $request['image'] = $image;
+        }
 
         // update users
         $user->update($request->all());

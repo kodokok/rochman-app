@@ -18,9 +18,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/table/user', 'UsersController@dataTable')->name('table.user');
 
     Route::get('profile', 'ProfileController@show')->name('profile');
-    Route::post('profile', 'ProfileController@update')->name('profile.update');
+    Route::put('profile/update', 'ProfileController@update')->name('profile.update');
     Route::get('password', 'PasswordController@index')->name('password');
-    Route::post('password', 'PasswordController@update')->name('password.change');
+    Route::put('password/change', 'PasswordController@update')->name('password.change');
 
     Route::group(['middleware' => ['role:admin']], function () {
         Route::resource('users', 'UsersController');

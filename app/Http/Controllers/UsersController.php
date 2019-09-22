@@ -99,6 +99,7 @@ class UsersController extends Controller
     {
 
         // grab data
+        // dd($request->all());
         $data = $request->only(['name', 'email']);
 
         $this->validate($request, [

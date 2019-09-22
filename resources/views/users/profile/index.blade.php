@@ -37,7 +37,6 @@
 
                         <p class="text-muted text-center">{{ $user->email }}</p>
 
-                        <a href="{{ route('password') }}" class="btn btn-primary btn-block modal-show change" title="Change Password"><b>Change Password</b></a>
                     </div>
                     <!-- /.card-body -->
                 </div>

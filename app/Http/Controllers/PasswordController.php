@@ -10,18 +10,19 @@ class PasswordController extends Controller
     public function index()
     {
         // dd(auth()->user());
-        return view('users.password.change');
+        return view('users.password.index');
     }
 
     public function update(Request $request)
     {
-        $this->validate($request, [
+        $request->only('old_password', 'new_password', 'confirm_password');
+
+        $data = $this->validate($request, [
             'old_password' => 'required',
             'new_password' => 'required|min:6',
             'confirm_password' => 'required|same:new_password',
         ]);
 
-        $data = $request->all();
         $user = auth()->user();
 
         // dd($data);
@@ -30,7 +31,7 @@ class PasswordController extends Controller
         }
 
         $user->update([
-            'password' => $data['new_password']
+            'password' => Hash::make($data['new_password'])
         ]);
     }
 }

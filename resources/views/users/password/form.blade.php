@@ -1,8 +1,7 @@
 {!! Form::open([
-    'route' => 'password.change',
-    'method' => 'POST'
+'route' => 'password.change',
+'method' => 'PUT'
 ]) !!}
-{{Form::hidden('_method','PUT')}}
 
 <div class="form-group row">
     <label for="old_password" class="col-sm-4 col-form-label">Current Password</label>
@@ -25,5 +24,10 @@
         <div id="error-confirm-password" class="invalid-feedback"></div>
     </div>
 </div>
-
+<div class="form-group row">
+    <label for="" class="col-sm-2 col-form-label"></label>
+    <div class="col-sm-10 float-right">
+        <button type="submit" class="btn btn-danger btn-update float-right">Update</button>
+    </div>
+</div>
 {!! Form::close() !!}

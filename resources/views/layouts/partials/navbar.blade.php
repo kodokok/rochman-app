@@ -39,6 +39,7 @@
                     </a>
                     <div class="dropdown-divider"></div>
                     <a href="{{ route('profile') }}" class="dropdown-item dropdown-footer">PROFILE</a>
+                    <a href="{{ route('password') }}" class="dropdown-item dropdown-footer">CHANGE PASSWORD</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item dropdown-footer" href="{{ route('logout') }}"
                     onclick="event.preventDefault();
