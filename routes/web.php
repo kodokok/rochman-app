@@ -15,7 +15,6 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/', 'HomeController@index')->name('home');
-    Route::get('/table/user', 'UsersController@dataTable')->name('table.user');
 
     Route::get('profile', 'ProfileController@show')->name('profile');
     Route::put('profile/update', 'ProfileController@update')->name('profile.update');
@@ -23,7 +22,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('password/change', 'PasswordController@update')->name('password.change');
 
     Route::group(['middleware' => ['role:admin']], function () {
-        Route::resource('users', 'UsersController');
-        Route::resource('roles', 'RolesController');
+        Route::get('table/user', 'UsersController@dataTable')->name('table.user');
+        Route::resource('users', 'UsersController')->except([
+            'show'
+        ]);
+        Route::resource('roles', 'RolesController')->only([
+            'index', 'store', 'destroy', 'create'
+        ]);
     });
 });
