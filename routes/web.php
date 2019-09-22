@@ -24,5 +24,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::group(['middleware' => ['role:admin']], function () {
         Route::resource('users', 'UsersController');
+        Route::resource('roles', 'RolesController');
     });
 });
