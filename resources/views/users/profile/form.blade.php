@@ -1,5 +1,5 @@
 {!! Form::model($user, [
-    'route' => ['profile.update', $user->id],
+    'route' => ['profile.update'],
     'method' => 'PUT',
     'files' => true
 ]) !!}

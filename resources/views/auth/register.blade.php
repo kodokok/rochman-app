@@ -1,6 +1,9 @@
 @extends('layouts.auth')
 
 @section('content')
+<div class="container h-100">
+        <div class="row h-100 justify-content-center align-items-center">
+<div class="col-md-12">
 <div class="register-box">
     <div class="register-logo">
         <a href="#">{{ config('app.name', 'Laravel') }}</a>
@@ -66,4 +69,8 @@
     </div><!-- /.card -->
   </div>
   <!-- /.register-box -->
+
+</div>
+</div>
+</div>
 @endsection

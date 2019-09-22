@@ -46,6 +46,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+
         if($exception instanceof NotFoundHttpException){
             return response()->view('errors/404', ['invalid_url'=>true], 404);
         }

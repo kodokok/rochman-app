@@ -3,7 +3,12 @@
 <head>
   @include('layouts.partials.htmlheader')
 </head>
-<body class="hold-transition auth-page">
+<style>
+body {
+    height: 100vh !important;
+}
+</style>
+<body>
 
 @yield('content')
 

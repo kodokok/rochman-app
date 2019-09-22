@@ -49,17 +49,20 @@ class UsersController extends Controller
             'password' => 'required|min:6',
         ]);
 
-        // upload image to the storage
-        if ($request->hasFile('image')) {
-            $image = $request->image->store('img\users');
-        }
-
         $model = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'image' => $image,
             'password' => Hash::make($request->password),
         ]);
+
+        // upload image to the storage
+        if ($request->hasFile('image')) {
+            $image = $request->image->store('img\users');
+
+            $model->update([
+                'image' => $image
+            ]);
+        }
 
         //Retrieving the roles field
         $roles = $request['roles'];
@@ -94,6 +97,7 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
+
         // grab data
         $data = $request->only(['name', 'email']);
 
@@ -158,7 +162,7 @@ class UsersController extends Controller
             ->addColumn('action', function ($model) {
                 return view('layouts.partials._action', [
                     'model' => $model,
-                    'url_show' => route('profile', $model->id),
+                    'url_show' => null,
                     'url_edit' => route('users.edit', $model->id),
                     'url_destroy' => route('users.destroy', $model->id),
                 ]);

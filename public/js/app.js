@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     $("body").on("click", ".modal-show", function(event) {
         event.preventDefault();
 
@@ -30,7 +31,6 @@ $(document).ready(function() {
         });
 
         var form = $("#modal-body form");
-        // console.log(form);
         var formData = new FormData(form[0]);
         var url = form.attr("action");
         var method = $("input[name=_method]").val() == undefined ? "POST" : "PUT";
@@ -47,7 +47,9 @@ $(document).ready(function() {
             success: function(response) {
                 form.trigger("reset");
                 $("#modal").modal("hide");
-                $("#datatables").DataTable().ajax.reload();
+                if ($("#datatables").length) {
+                    $("#datatables").DataTable().ajax.reload();
+                }
             },
             error: function(xhr) {
                 var res = xhr.responseJSON;
