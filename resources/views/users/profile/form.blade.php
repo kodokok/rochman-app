@@ -18,6 +18,20 @@
     </div>
 </div>
 <div class="form-group row">
+    <label for="phone" class="col-sm-2 col-form-label">Phone</label>
+    <div class="col-sm-10">
+        {!! Form::text('phone', null, ['class' => 'form-control', 'id' => 'phone']) !!}
+        <div id="error-name" class="invalid-feedback"></div>
+    </div>
+</div>
+<div class="form-group row">
+    <label for="address" class="col-sm-2 col-form-label">Address</label>
+    <div class="col-sm-10">
+        {!! Form::textarea('address', null, ['class' => 'form-control', 'id' => 'address', 'rows'=> '3']) !!}
+        <div id="error-name" class="invalid-feedback"></div>
+    </div>
+</div>
+<div class="form-group row">
     <label for="image" class="col-sm-2 col-form-label">Image</label>
     <div class="col-sm-10">
         {!! Form::file('image', ['class' => 'form-control', 'id' => 'image']) !!}

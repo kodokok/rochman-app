@@ -15,7 +15,7 @@ class UserProfileController extends Controller
     public function update(Request $request, User $user)
     {
         // grab data
-        $data = $request->only(['name', 'email']);
+        $data = $request->all();
 
         $this->validate($request, [
             'name' => 'required|string|max:100',

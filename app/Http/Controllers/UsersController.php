@@ -144,11 +144,15 @@ class UsersController extends Controller
         return DataTables::of($model)
             ->addColumn('roles', function (User $user) {
                 $roles = $user->roles->pluck('name')->all();
-                $output = array_map(function($role) {
+                return implode('', array_map(function ($role) {
                     return '<span class="badge badge-primary mr-2">'. $role .'</span>';
-                }, $roles);
-                $output = implode('',$output);
-                return $output;
+                }, $roles));
+            })
+            ->addColumn('status', function (User $user) {
+                if ($user->isOnline()) {
+                    return '<span class="badge badge-success">Online</span>';
+                }
+                return '<span class="badge badge-secondary">Offline</span>';
             })
             ->addColumn('action', function ($model) {
                 return view('layouts.partials._action', [
@@ -159,7 +163,7 @@ class UsersController extends Controller
                 ]);
             })
             ->addIndexColumn()
-            ->rawColumns(['roles','action'])
+            ->rawColumns(['roles', 'status', 'action'])
             ->make(true);
     }
 }

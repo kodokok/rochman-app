@@ -13,6 +13,7 @@
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^6.0",
+        "league/flysystem": "^1.0",
         "spatie/laravel-permission": "^3.0",
         "watson/active": "^4.0",
         "yajra/laravel-datatables-oracle": "^9.6"
