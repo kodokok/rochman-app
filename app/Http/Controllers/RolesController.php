@@ -36,4 +36,22 @@ class RolesController extends Controller
     {
         $role->delete();
     }
+
+    public function dataTable()
+    {
+        $model = Role::all();
+
+        return DataTables::of($model)
+            ->addColumn('action', function ($model) {
+                return view('layouts.partials._action', [
+                    'model' => $model,
+                    'url_show' => null,
+                    'url_edit' => route('users.edit', $model->id),
+                    'url_destroy' => route('users.destroy', $model->id),
+                ]);
+            })
+            ->addIndexColumn()
+            ->rawColumns(['roles', 'status', 'action'])
+            ->make(true);
+    }
 }
