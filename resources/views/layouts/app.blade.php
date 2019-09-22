@@ -24,7 +24,7 @@
 
     </div>
 
-    @include('layouts.partials._modal');
+    @include('layouts.partials._modal')
 
     @include('layouts.partials.scripts')
 

@@ -14,16 +14,13 @@ class UserProfileController extends Controller
 
     public function update(Request $request, User $user)
     {
-        // grab data
-        $data = $request->all();
-
         $this->validate($request, [
             'name' => 'required|string|max:100',
             'email' => 'required|string|max:100|unique:users,email,' . $user->id
         ]);
 
         // update users
-        $user->update($data);
+        $user->update($request->all());
 
         return redirect()->back();
     }

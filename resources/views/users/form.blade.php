@@ -3,7 +3,7 @@
     'method' => $model->exists ? 'PUT' : 'POST',
     'files' => true
 ]) !!}
-@csrf
+
 <div class="form-group row">
     <label for="name" class="col-sm-2 col-form-label">Name</label>
     <div class="col-sm-10">
