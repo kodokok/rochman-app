@@ -12,13 +12,24 @@ class RolesController extends Controller
         return view('roles.index');
     }
 
+    public function create()
+    {
+        $guards = array_keys(config('auth.guards'));
+        // dd($guards);
+        return view('roles.form', compact('guards'));
+    }
+
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|max:20|unique:roles,name'
+            'name' => 'required|max:20|unique:roles,name',
+            'guard_name' => 'required'
         ]);
 
-        Role::firstOrCreate(['name' => $request->name]);
+        Role::firstOrCreate([
+            'name' => $request->name,
+            'guard_name' => $request->guard_name
+        ]);
     }
 
     public function destroy(Role $role)
