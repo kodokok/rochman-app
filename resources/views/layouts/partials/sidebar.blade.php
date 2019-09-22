@@ -36,18 +36,11 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('roles.index') }}" class="nav-link {{ active(['users.*']) }}">
-                        <i class="nav-icon fas fa-users"></i>
+                        <i class="nav-icon fas fa-user-cog"></i>
                         <p>Roles</p>
                     </a>
                 </li>
                 @endhasanyrole
-                <li class="nav-header">SYSTEMS</li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-cog"></i>
-                        <p>Settings</p>
-                    </a>
-                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
