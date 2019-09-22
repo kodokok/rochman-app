@@ -34,6 +34,12 @@
                         <p>Users</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('roles.index') }}" class="nav-link {{ active(['users.*']) }}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>Roles</p>
+                    </a>
+                </li>
                 @endhasanyrole
                 <li class="nav-header">SYSTEMS</li>
                 <li class="nav-item">
