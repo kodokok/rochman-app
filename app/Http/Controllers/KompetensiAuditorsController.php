@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\KompetensiAuditor;
 use App\User;
+use DataTables;
 use Illuminate\Http\Request;
 
 class KompetensiAuditorsController extends Controller
@@ -43,7 +44,6 @@ class KompetensiAuditorsController extends Controller
     public function dataTable()
     {
         $model = KompetensiAuditor::all();
-        // dd(Departement::find(1)->user->name);
 
         return DataTables::of($model)
             ->addColumn('auditor', function($model) {
