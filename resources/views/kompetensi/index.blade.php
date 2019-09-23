@@ -35,10 +35,10 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Auditor</th>
-                                <th>Pendidikan</th>
-                                <th>Masa Kerja</th>
                                 <th>Pelatihan</th>
                                 <th>Tanggal Pelatihan</th>
+                                <th>Pendidikan</th>
+                                <th>Masa Kerja</th>
                                 <th style="width: 20%"></th>
                             </tr>
                         </thead>
