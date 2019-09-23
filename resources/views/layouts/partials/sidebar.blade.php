@@ -49,13 +49,13 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('roles.index') }}" class="nav-link {{ active(['roles.*']) }}">
-                        <i class="nav-icon fas fa-user-cog"></i>
+                        <i class="nav-icon fas fa-user-lock"></i>
                         <p>Roles</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('departements.index') }}" class="nav-link {{ active(['departements.*']) }}">
-                        <i class="nav-icon fas fa-user-cog"></i>
+                        <i class="nav-icon fas fa-map-marked-alt"></i>
                         <p>Departements</p>
                     </a>
                 </li>

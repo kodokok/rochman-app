@@ -39,9 +39,13 @@ class DepartementsController extends Controller
         return view('departements.form', compact(['model', 'kadept']));
     }
 
-    public function update()
+    public function update(Request $request, Departement $departement)
     {
-        # code...
+        $this->validate($request, [
+            'name' => 'required|alpha_dash|max:40|unique:departements,name,' . $departement->id,
+        ]);
+
+        $departement->update($request->all());
     }
 
     public function destroy(Departement $departement)
