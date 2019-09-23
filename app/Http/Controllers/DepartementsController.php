@@ -56,7 +56,6 @@ class DepartementsController extends Controller
     public function dataTable()
     {
         $model = Departement::all();
-        // dd(Departement::find(1)->user->name);
 
         return DataTables::of($model)
             ->addColumn('kadept', function($model) {
