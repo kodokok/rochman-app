@@ -38,9 +38,9 @@ class DepartementsController extends Controller
         # code...
     }
 
-    public function destroy()
+    public function destroy(Departement $departement)
     {
-        # code...
+        $departement->delete();
     }
 
     public function dataTable()
