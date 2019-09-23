@@ -33,12 +33,6 @@
                         <p>Temuan Audit</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-id-badge"></i>
-                        <p>Kompetensi Auditor</p>
-                    </a>
-                </li>
                 @hasanyrole('admin')
                 <li class="nav-header">DATA</li>
                 <li class="nav-item">
@@ -51,6 +45,12 @@
                     <a href="{{ route('roles.index') }}" class="nav-link {{ active(['roles.*']) }}">
                         <i class="nav-icon fas fa-user-lock"></i>
                         <p>Roles</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-user-graduate"></i>
+                        <p>Kompetensi Auditor</p>
                     </a>
                 </li>
                 <li class="nav-item">
