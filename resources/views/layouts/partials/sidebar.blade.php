@@ -48,7 +48,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('kompetensi.index') }}" class="nav-link {{ active(['kompetensi.*']) }}">
                         <i class="nav-icon fas fa-user-graduate"></i>
                         <p>Kompetensi Auditor</p>
                     </a>
