@@ -9,6 +9,7 @@ use Cache;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Facades\Storage;
 use App\Departement;
+use App\KompetensiAuditor;
 
 class User extends Authenticatable
 {
@@ -60,5 +61,10 @@ class User extends Authenticatable
     public function departements()
     {
         return $this->hasMany(Departement::class);
+    }
+
+    public function kompetensi_auditors()
+    {
+        return $this->hasMany(KompetensiAuditor::class);
     }
 }
