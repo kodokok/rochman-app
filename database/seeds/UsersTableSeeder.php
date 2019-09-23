@@ -33,7 +33,7 @@ class UsersTableSeeder extends Seeder
 
         $auditor_leader = User::create([
             'email' => 'auditor_leader@mail.com',
-            'name' => 'user',
+            'name' => 'auditor_leader',
             'password' => Hash::make('lead')
         ]);
 
