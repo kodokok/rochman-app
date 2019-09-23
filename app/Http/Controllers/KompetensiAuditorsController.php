@@ -19,7 +19,7 @@ class KompetensiAuditorsController extends Controller
     public function create()
     {
         $model = new KompetensiAuditor();
-        $auditor = User::roles($this->auditorRoles)->all();;
+        $auditor = User::role($this->auditorRoles);;
         return view('kompetensi.form', compact(['model','auditor']));
     }
 
