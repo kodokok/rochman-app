@@ -25,7 +25,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('table/users', 'UsersController@dataTable')->name('table.users');
         Route::get('table/roles', 'RolesController@dataTable')->name('table.roles');
         Route::get('table/departements', 'DepartementsController@dataTable')->name('table.departements');
-        Route::get('table/kompetensi', 'DepartementsController@dataTable')->name('table.departements');
+        Route::get('table/kompetensi', 'KompetensiAuditorsController@dataTable')->name('table.departements');
 
         Route::resource('users', 'UsersController')->except([
             'show'
