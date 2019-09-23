@@ -17,7 +17,7 @@ class CreateDepartementsTable extends Migration
             $table->bigIncrements('id')->unsigned();
             $table->string('name');
             $table->string('lokasi')->nullable();
-            $table->unsignedBigInteger('kadept');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateDepartementsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('departemen');
+        Schema::dropIfExists('departements');
     }
 }

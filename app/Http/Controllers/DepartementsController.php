@@ -30,8 +30,7 @@ class DepartementsController extends Controller
     {
         $model = $departement;
         $kadept = User::pluck('name','id')->all();
-        $kadept_selected = User::findOrFail($model->kadept);
-        return view('departements.form', compact(['model', 'kadept', 'kadept_selected']));
+        return view('departements.form', compact(['model', 'kadept']));
     }
 
     public function update()
@@ -47,9 +46,12 @@ class DepartementsController extends Controller
     public function dataTable()
     {
         $model = Departement::all();
+        // dd(Departement::find(1)->user->name);
 
         return DataTables::of($model)
-            ->addColumn('kadept', null)
+            ->addColumn('kadept', function($model) {
+                return Departement::find($model->id)->user->name;
+            })
             ->addColumn('action', function ($model) {
                 return view('layouts.partials._action', [
                     'model' => $model,

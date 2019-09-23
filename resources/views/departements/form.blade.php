@@ -19,9 +19,9 @@
     </div>
 </div>
 <div class="form-group row">
-    <label for="kadept" class="col-sm-2 col-form-label">Kadept</label>
+    <label for="user_id" class="col-sm-2 col-form-label">Kadept</label>
     <div class="col-sm-10">
-        {!! Form::select('kadept', $kadept, null, ['class' => 'form-control', 'id' => 'kadept', 'placeholder' => 'Please Select', $kadept_selected ? 'selected' : '']) !!}
+        {!! Form::select('user_id', $kadept, null, ['class' => 'form-control', 'id' => 'user_id', 'placeholder' => 'Please Select']) !!}
         <div id="error-kadept" class="invalid-feedback"></div>
     </div>
 </div>
