@@ -75,9 +75,10 @@ class KompetensiAuditorsController extends Controller
         return $model;
     }
 
-    public function destroy(KompetensiAuditor $kompetensiAuditor)
+    public function destroy($id)
     {
-        $kompetensiAuditor->delete();
+        $model = KompetensiAuditor::findOrFail($id);
+        $model->delete();
     }
 
     public function dataTable()
