@@ -27,12 +27,12 @@ class RolesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|max:20|unique:roles,name',
+            'name' => 'required|alpha_dash|max:20|unique:roles,name',
             'guard_name' => 'required'
         ]);
 
         Role::firstOrCreate([
-            'name' => $request->name,
+            'name' => strtolower($request->name),
             'guard_name' => $request->guard_name
         ]);
     }
