@@ -39,8 +39,8 @@
                         <p>Kompetensi Auditor</p>
                     </a>
                 </li>
-                <li class="nav-header">DATA</li>
                 @hasanyrole('admin')
+                <li class="nav-header">DATA</li>
                 <li class="nav-item">
                     <a href="{{ route('users.index') }}" class="nav-link {{ active(['users.*']) }}">
                         <i class="nav-icon fas fa-users"></i>
@@ -51,6 +51,12 @@
                     <a href="{{ route('roles.index') }}" class="nav-link {{ active(['roles.*']) }}">
                         <i class="nav-icon fas fa-user-cog"></i>
                         <p>Roles</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('departements.index') }}" class="nav-link {{ active(['departements.*']) }}">
+                        <i class="nav-icon fas fa-user-cog"></i>
+                        <p>Departements</p>
                     </a>
                 </li>
                 @endhasanyrole

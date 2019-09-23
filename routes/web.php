@@ -31,5 +31,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('roles', 'RolesController')->only([
             'index', 'create', 'store', 'destroy'
         ]);
+        Route::resource('departements', 'DepartementsController')->except([
+            'show'
+        ]);
     });
 });
