@@ -22,8 +22,10 @@ class RolesAndPermissionsSeeder extends Seeder
         // create roles and assign created permissions
 
         // this can be done as separate statements
-        $role = Role::create(['name' => 'admin']);
-        $role = Role::create(['name' => 'user']);
+        Role::create([
+            'admin', 'auditee', 'auditor', 'auditor_leader'
+        ]);
+
 
         // or may be done by chaining
         // $role = Role::create(['name' => 'moderator'])
