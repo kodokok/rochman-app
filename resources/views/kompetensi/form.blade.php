@@ -7,7 +7,7 @@
 <div class="form-group row">
     <label for="user_id" class="col-sm-4 col-form-label">Auditor</label>
     <div class="col-sm-8">
-        {!! Form::select('user_id', $auditor, null, ['class' => 'form-control', 'id' => 'user_id', 'placeholder' => 'Please Select']) !!}
+        {!! Form::select('user_id', $auditor, null, ['class' => 'form-control dateprangepicker', 'id' => 'user_id', 'placeholder' => 'Please Select']) !!}
         <div id="error-auditor" class="invalid-feedback"></div>
     </div>
 </div>

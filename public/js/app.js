@@ -1,12 +1,11 @@
 $(document).ready(function() {
-
     $("body").on("click", ".modal-show", function(event) {
         event.preventDefault();
 
         var me = $(this),
             url = me.attr("href"),
             title = me.attr("title");
-
+        console.log(url);
         $("#modal-title").text(title);
         $("#modal-btn-save").text(me.hasClass("edit") || me.hasClass("change") ? "Update" : "Create");
 
