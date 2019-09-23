@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 
 class KompetensiAuditorsController extends Controller
 {
+    protected $auditorRoles = ['auditor','auditor_leader'];
+
     public function index()
     {
         return view('kompetensi.index');
@@ -17,7 +19,7 @@ class KompetensiAuditorsController extends Controller
     public function create()
     {
         $model = new KompetensiAuditor();
-        $auditor = User::roles(['auditor','auditor_lead'])->all();;
+        $auditor = User::roles($this->auditorRoles)->all();;
         return view('kompetensi.form', compact(['model','auditor']));
     }
 
