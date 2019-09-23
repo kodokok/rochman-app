@@ -15,25 +15,25 @@ class UsersTableSeeder extends Seeder
     {
         $admin = User::create([
             'email' => 'admin@mail.com',
-            'name' => 'admin',
+            'name' => 'Rochman Hidayat',
             'password' => Hash::make('admin')
         ]);
 
         $auditor = User::create([
             'email' => 'auditor@mail.com',
-            'name' => 'auditor',
+            'name' => 'Jaja Miharja',
             'password' => Hash::make('auditor')
         ]);
 
         $auditee = User::create([
             'email' => 'auditee@mail.com',
-            'name' => 'auditee',
+            'name' => 'Andre Taulani',
             'password' => Hash::make('auditee')
         ]);
 
         $auditor_leader = User::create([
             'email' => 'auditor_leader@mail.com',
-            'name' => 'auditor_leader',
+            'name' => 'Bobi Cool',
             'password' => Hash::make('lead')
         ]);
 
