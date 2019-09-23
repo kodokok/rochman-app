@@ -21,9 +21,15 @@ class DepartementsController extends Controller
         return view('departements.form', compact(['model','kadept']));
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        # code...
+        $this->validate($request, [
+            'name' => 'required|alpha_dash|max:40|unique:departements,name',
+        ]);
+
+        $model = Departement::firstOrCreate($request->all());
+
+        return $model;
     }
 
     public function edit(Departement $departement)

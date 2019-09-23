@@ -17,8 +17,13 @@ class CreateDepartementsTable extends Migration
             $table->bigIncrements('id')->unsigned();
             $table->string('name');
             $table->string('lokasi')->nullable();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 
