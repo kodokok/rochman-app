@@ -64,14 +64,14 @@
             responsive: true,
             processing: true,
             serverSide: true,
-            ajax: "{{ route('table.users') }}",
+            ajax: "{{ route('table.kompetensi') }}",
             columns: [
                 {data: 'DT_RowIndex', name: 'id'},
                 {data: 'auditor', name: 'auditor'},
-                {data: 'pendidikan', name: 'pendidikan'},
-                {data: 'masa_kerja', name: 'masa_kerja'},
                 {data: 'pelatihan', name: 'pelatihan'},
                 {data: 'tanggal_pelatihan', name: 'tanggal_pelatihan'},
+                {data: 'pendidikan', name: 'pendidikan'},
+                {data: 'masa_kerja', name: 'masa_kerja'},
                 {data: 'action', name: 'action', 'searchable': false, 'orderable': false, 'className': 'text-center'}
             ]
         });
