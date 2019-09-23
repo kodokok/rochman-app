@@ -19,6 +19,8 @@
 <link rel="stylesheet" href="{{ asset('plugins/datatables/dataTables.bootstrap4.css') }}">
 <!-- select2 Style -->
 <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
+<!-- daterangepicker Style -->
+<link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
 <!-- Theme style -->
 <link rel="stylesheet" href="{{ asset('plugins/adminlte/css/adminlte.min.css') }}">
 <!-- sweet alert -->
