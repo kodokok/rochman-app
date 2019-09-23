@@ -22,7 +22,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('password/change', 'PasswordController@update')->name('password.change');
 
     Route::group(['middleware' => ['role:admin']], function () {
-        Route::get('table/user', 'UsersController@dataTable')->name('table.user');
+        Route::get('table/user', 'UsersController@dataTable')->name('table.users');
+        Route::get('table/roles', 'RolesController@dataTable')->name('table.roles');
+
         Route::resource('users', 'UsersController')->except([
             'show'
         ]);

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use DataTables;
 
 class RolesController extends Controller
 {
@@ -42,12 +44,15 @@ class RolesController extends Controller
         $model = Role::all();
 
         return DataTables::of($model)
+            ->addColumn('users', function ($model) {
+                return User::role($model->name)->count();
+            })
             ->addColumn('action', function ($model) {
                 return view('layouts.partials._action', [
                     'model' => $model,
                     'url_show' => null,
-                    'url_edit' => route('users.edit', $model->id),
-                    'url_destroy' => route('users.destroy', $model->id),
+                    'url_edit' => null,
+                    'url_destroy' => route('roles.destroy', $model->id),
                 ]);
             })
             ->addIndexColumn()

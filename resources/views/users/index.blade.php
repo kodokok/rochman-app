@@ -63,7 +63,7 @@
             responsive: true,
             processing: true,
             serverSide: true,
-            ajax: "{{ route('table.user') }}",
+            ajax: "{{ route('table.users') }}",
             columns: [
                 {data: 'DT_RowIndex', name: 'id'},
                 {data: 'name', name: 'name'},
@@ -73,14 +73,6 @@
                 {data: 'action', name: 'action', 'searchable': false, 'orderable': false, 'className': 'text-center'}
             ]
         });
-
-        // $('body').on('shown.bs.modal', '#modal', function() {
-        //     $('#roles').val(null).trigger('change');
-        //     $('#roles').select2({
-        //         dropdownParent: $('#modal'),
-        //         theme: 'classic',
-        //     });
-        // });
     });
 </script>
 @endpush

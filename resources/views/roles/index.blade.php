@@ -35,6 +35,8 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Role</th>
+                                <th>Guard</th>
+                                <th>Users</th>
                                 <th style="width: 20%"></th>
                             </tr>
                         </thead>
@@ -55,6 +57,20 @@
 
 @push('scripts')
 <script>
-
+$(document).ready(function() {
+    $('#datatables').DataTable({
+        responsive: true,
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('table.roles') }}",
+        columns: [
+            {data: 'DT_RowIndex', name: 'id'},
+            {data: 'name', name: 'name'},
+            {data: 'guard_name', name: 'guard_name'},
+            {data: 'users', name: 'users'},
+            {data: 'action', name: 'action', 'searchable': false, 'orderable': false, 'className': 'text-center'}
+        ]
+    });
+});
 </script>
 @endpush

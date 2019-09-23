@@ -1,5 +1,5 @@
 {!! Form::open($guards, [
-    'route' => 'roles.create',
+    'route' => 'roles.store',
     'method' => 'POST',
 ]) !!}
 
