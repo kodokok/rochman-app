@@ -16,18 +16,30 @@ class UsersTableSeeder extends Seeder
         $admin = User::create([
             'email' => 'admin@mail.com',
             'name' => 'admin',
-            'image' => null,
             'password' => Hash::make('admin')
         ]);
 
-        $user = User::create([
-            'email' => 'user@mail.com',
+        $auditor = User::create([
+            'email' => 'auditor@mail.com',
+            'name' => 'auditor',
+            'password' => Hash::make('auditor')
+        ]);
+
+        $auditee = User::create([
+            'email' => 'auditee@mail.com',
+            'name' => 'auditee',
+            'password' => Hash::make('auditee')
+        ]);
+
+        $auditor_leader = User::create([
+            'email' => 'auditor_leader@mail.com',
             'name' => 'user',
-            'image' => null,
-            'password' => Hash::make('user')
+            'password' => Hash::make('lead')
         ]);
 
         $admin->assignRole('admin');
-        $user->assignRole('auditee');
+        $auditor->assignRole('auditor');
+        $auditee->assignRole('auditee');
+        $auditor_leader->assignRole('auditor_leader');
     }
 }
