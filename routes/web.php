@@ -29,7 +29,7 @@ Route::group(['middleware' => ['auth']], function () {
             'show'
         ]);
         Route::resource('roles', 'RolesController')->only([
-            'index', 'store', 'destroy', 'create'
+            'index', 'create', 'store', 'destroy'
         ]);
     });
 });

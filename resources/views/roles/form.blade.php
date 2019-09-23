@@ -1,4 +1,4 @@
-{!! Form::open($guards, [
+{!! Form::open([
     'route' => 'roles.store',
     'method' => 'POST',
 ]) !!}

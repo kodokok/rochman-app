@@ -16,9 +16,12 @@ class RolesController extends Controller
 
     public function create()
     {
-        $guards = array_keys(config('auth.guards'));
-        // dd($guards);
-        return view('roles.form', compact('guards'));
+        $auth_guard = array_keys(config('auth.guards'));
+        $guards = [];
+        foreach ($auth_guard as $key => $value) {
+            $guards[$value] = $value;
+        }
+        return view('roles.form', compact(['guards']));
     }
 
     public function store(Request $request)
@@ -42,7 +45,6 @@ class RolesController extends Controller
     public function dataTable()
     {
         $model = Role::all();
-
         return DataTables::of($model)
             ->addColumn('users', function ($model) {
                 return User::role($model->name)->count();
@@ -56,7 +58,7 @@ class RolesController extends Controller
                 ]);
             })
             ->addIndexColumn()
-            ->rawColumns(['roles', 'status', 'action'])
+            ->rawColumns(['action'])
             ->make(true);
     }
 }
