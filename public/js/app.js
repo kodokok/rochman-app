@@ -5,7 +5,7 @@ $(document).ready(function() {
         var me = $(this),
             url = me.attr("href"),
             title = me.attr("title");
-        console.log(url);
+
         $("#modal-title").text(title);
         $("#modal-btn-save").text(me.hasClass("edit") || me.hasClass("change") ? "Update" : "Create");
 
