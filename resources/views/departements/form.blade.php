@@ -22,7 +22,7 @@
     <label for="user_id" class="col-sm-2 col-form-label">Kadept</label>
     <div class="col-sm-10">
         {!! Form::select('user_id', $kadept, null, ['class' => 'form-control', 'id' => 'user_id', 'placeholder' => 'Please Select']) !!}
-        <div id="error-kadept" class="invalid-feedback"></div>
+        <div id="error-user_id" class="invalid-feedback"></div>
     </div>
 </div>
 
