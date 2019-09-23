@@ -1,5 +1,5 @@
 {!! Form::model($model, [
-    'route' => $model->exists ? ['komptensi.update', $model->id] : 'komptensi.store',
+    'route' => $model->exists ? ['kompetensi.update', $model->id] : 'kompetensi.store',
     'method' => $model->exists ? 'PUT' : 'POST',
     'files' => true
 ]) !!}
