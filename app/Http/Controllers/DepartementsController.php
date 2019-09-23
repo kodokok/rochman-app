@@ -27,7 +27,7 @@ class DepartementsController extends Controller
             'name' => 'required|alpha_dash|max:40|unique:departements,name',
         ]);
 
-        $model = Departement::firstOrCreate($request->all());
+        $model = Departement::create($request->all());
 
         return $model;
     }
@@ -56,7 +56,8 @@ class DepartementsController extends Controller
 
         return DataTables::of($model)
             ->addColumn('kadept', function($model) {
-                return Departement::find($model->id)->user->name;
+                $user = Departement::find($model->id)->user;
+                return $user ? $user->name : '';
             })
             ->addColumn('action', function ($model) {
                 return view('layouts.partials._action', [
