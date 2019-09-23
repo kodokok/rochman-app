@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateKomptensiAuditorTable extends Migration
+class CreateKompetensiAuditorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateKomptensiAuditorTable extends Migration
      */
     public function up()
     {
-        Schema::create('komptensi_auditor', function (Blueprint $table) {
+        Schema::create('kompetensi_auditors', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
-            $table->unsignedInteger('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('pelatihan')->nullable();
             $table->date('tanggal_pelatihan')->nullable();
             $table->string('pendidikan')->nullable();
@@ -31,6 +31,6 @@ class CreateKomptensiAuditorTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('komptensi_auditor');
+        Schema::dropIfExists('kompetensi_auditors');
     }
 }
