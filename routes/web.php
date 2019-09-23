@@ -22,9 +22,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('password/change', 'PasswordController@update')->name('password.change');
 
     Route::group(['middleware' => ['role:admin']], function () {
-        Route::get('table/user', 'UsersController@dataTable')->name('table.users');
+        Route::get('table/users', 'UsersController@dataTable')->name('table.users');
         Route::get('table/roles', 'RolesController@dataTable')->name('table.roles');
         Route::get('table/departements', 'DepartementsController@dataTable')->name('table.departements');
+        Route::get('table/kompetensi', 'DepartementsController@dataTable')->name('table.departements');
 
         Route::resource('users', 'UsersController')->except([
             'show'
@@ -33,6 +34,9 @@ Route::group(['middleware' => ['auth']], function () {
             'index', 'create', 'store', 'destroy'
         ]);
         Route::resource('departements', 'DepartementsController')->except([
+            'show'
+        ]);
+        Route::resource('kompetensi', 'KompetensiAuditorsController')->except([
             'show'
         ]);
     });
