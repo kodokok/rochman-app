@@ -13,9 +13,13 @@ class KomptensiAuditorTableSeeder extends Seeder
      */
     public function run()
     {
-        $user = User::findOrFail(1);
-        $user2 = User::findOrFail(2);
+        $admin = User::findOrFail(1);
+        $auditor = User::findOrFail(2);
 
-        KompetensiAuditor::create(['user_id' => $user->id, '']);
+        KompetensiAuditor::create(['user_id' => $admin->id, 'pelatihan' => 'Basic Traning Auditor', 'tanggal_pelatihan' => date('1999-05-01'), 'pendidikan' => 'S1', 'masa_kerja' => 4 ]);
+        KompetensiAuditor::create(['user_id' => $admin->id, 'pelatihan' => 'Advanced Traning Auditor', 'tanggal_pelatihan' => date('2001-05-01'), 'pendidikan' => 'S1', 'masa_kerja' => 4 ]);
+        KompetensiAuditor::create(['user_id' => $admin->id, 'pelatihan' => 'Expert Traning Auditor', 'tanggal_pelatihan' => date('2001-05-01'), 'pendidikan' => 'S1', 'masa_kerja' => 4 ]);
+        KompetensiAuditor::create(['user_id' => $auditor->id, 'pelatihan' => 'Basic Traning Auditor', 'tanggal_pelatihan' => date('2001-05-01'), 'pendidikan' => 'S1', 'masa_kerja' => 4 ]);
+        KompetensiAuditor::create(['user_id' => $auditor->id, 'pelatihan' => 'Advanced Traning Auditor', 'tanggal_pelatihan' => date('2001-05-01'), 'pendidikan' => 'S1', 'masa_kerja' => 4 ]);
     }
 }
