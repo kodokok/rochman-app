@@ -16,10 +16,10 @@ class DepartementsTableSeeder extends Seeder
         $user = User::findOrFail(1);
         $user2 = User::findOrFail(2);
 
-        Departement::create(['nama' => 'QA', 'lokasi' => 'office', 'kadept' => $user->id]);
-        Departement::create(['nama' => 'IT', 'lokasi' => 'office', 'kadept' => $user->id]);
-        Departement::create(['nama' => 'MS', 'lokasi' => 'office', 'kadept' => $user2->id]);
-        Departement::create(['nama' => 'HR', 'lokasi' => 'office', 'kadept' => $user2->id]);
-        Departement::create(['nama' => 'PRODUCTION', 'lokasi' => 'office', 'kadept' => $user2->id]);
+        Departement::create(['name' => 'QA', 'lokasi' => 'office', 'kadept' => $user->id]);
+        Departement::create(['name' => 'IT', 'lokasi' => 'office', 'kadept' => $user->id]);
+        Departement::create(['name' => 'MS', 'lokasi' => 'office', 'kadept' => $user2->id]);
+        Departement::create(['name' => 'HR', 'lokasi' => 'office', 'kadept' => $user2->id]);
+        Departement::create(['name' => 'PRODUCTION', 'lokasi' => 'office', 'kadept' => $user2->id]);
     }
 }

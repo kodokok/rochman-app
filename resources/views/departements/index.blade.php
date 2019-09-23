@@ -62,12 +62,12 @@ $(document).ready(function() {
         responsive: true,
         processing: true,
         serverSide: true,
-        ajax: "{{ route('table.roles') }}",
+        ajax: "{{ route('table.departements') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'id'},
-            {data: 'name', name: 'name'},
-            {data: 'guard_name', name: 'guard_name'},
-            {data: 'users', name: 'users'},
+            {data: 'name', name: 'nama'},
+            {data: 'lokasi', name: 'lokasi'},
+            {data: 'kadept', name: 'kadept'},
             {data: 'action', name: 'action', 'searchable': false, 'orderable': false, 'className': 'text-center'}
         ]
     });

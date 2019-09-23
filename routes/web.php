@@ -24,6 +24,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['role:admin']], function () {
         Route::get('table/user', 'UsersController@dataTable')->name('table.users');
         Route::get('table/roles', 'RolesController@dataTable')->name('table.roles');
+        Route::get('table/departements', 'DepartementsController@dataTable')->name('table.departements');
 
         Route::resource('users', 'UsersController')->except([
             'show'
