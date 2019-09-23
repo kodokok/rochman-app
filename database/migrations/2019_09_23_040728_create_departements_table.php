@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDepartemenTable extends Migration
+class CreateDepartementsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateDepartemenTable extends Migration
      */
     public function up()
     {
-        Schema::create('departemen', function (Blueprint $table) {
+        Schema::create('departements', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
             $table->string('nama');
-            $table->string('lokasi');
+            $table->string('lokasi')->nullable();
             $table->unsignedBigInteger('kadept');
             $table->timestamps();
         });

@@ -15,15 +15,15 @@ class CreateAuditPlanTable extends Migration
     {
         Schema::create('audit_plan', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
-            $table->string('objektif_audit');
-            $table->string('klausul');
-            $table->bigInteger('departement');
-            $table->dateTime('konfirmasi_kadept');
+            $table->string('objektif_audit')->nullable();
+            $table->string('klausul')->nullable();
+            $table->unsignedBigInteger('departement');
+            $table->dateTime('konfirmasi_kadept')->nullable();
             $table->unsignedBigInteger('auditee');
             $table->unsignedBigInteger('auditor');
             $table->unsignedBigInteger('lead_auditor');
-            $table->date('tanggal');
-            $table->time('waktu');
+            $table->date('tanggal')->nullable();
+            $table->time('waktu')->nullable();
             $table->timestamps();
         });
     }
