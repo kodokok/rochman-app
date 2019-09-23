@@ -37,7 +37,7 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('lead')
         ]);
 
-        $admin->assignRole('admin');
+        $admin->assignRole(['admin','auditor']);
         $auditor->assignRole('auditor');
         $auditee->assignRole('auditee');
         $auditor_leader->assignRole('auditor_leader');
