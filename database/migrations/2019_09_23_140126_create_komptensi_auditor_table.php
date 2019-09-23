@@ -15,7 +15,7 @@ class CreateKomptensiAuditorTable extends Migration
     {
         Schema::create('komptensi_auditor', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
-            $table->bigIncrements('user_id');
+            $table->unsignedInteger('user_id');
             $table->string('pendidikan')->nullable();
             $table->string('pelatihan')->nullable();
             $table->unsignedInteger('masa_kerja')->nullable();
