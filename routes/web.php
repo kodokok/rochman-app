@@ -14,7 +14,7 @@
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/', 'AppController@index')->name('app');
 
     Route::get('profile', 'ProfileController@show')->name('profile');
     Route::put('profile/update', 'ProfileController@update')->name('profile.update');
