@@ -24,7 +24,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{ route('users.create') }}" class="btn btn-success modal-show" title="Create New User">
+                    <a href="{{ route('users.create') }}" class="btn btn-success" title="Create New User">
                         <i class="fas fa-plus mr-2"></i>Create New User
                     </a>
                 </div>
