@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\KompetensiAuditor;
 use App\User;
-use Carbon\Carbon;
 use DataTables;
 use Illuminate\Http\Request;
 
@@ -30,14 +29,12 @@ class KompetensiAuditorsController extends Controller
         $this->validate($request, [
             'user_id' => 'required',
             'masa_kerja' => 'nullable|integer',
-            'tanggal_pelatihan' => 'nullable|date_format:d/m/Y'
         ]);
 
         // dd($request->tanggal_pelatihan);
         $model = KompetensiAuditor::create([
             'user_id' => $request->user_id,
             'pelatihan' => $request->pelatihan,
-            'tanggal_pelatihan' => Carbon::parse($request->tanggal_pelatihan)->format('Y-m-d'),
             'pendidikan' => $request->pendidikan,
             'masa_kerja' => $request->masa_kerja,
         ]);
@@ -49,6 +46,7 @@ class KompetensiAuditorsController extends Controller
     {
         $model = KompetensiAuditor::findOrFail($id);
 
+        // dd($model->tanggal_pelatihan);
         $auditor = User::role($this->auditorRoles)->pluck('name', 'id');
 
         return view('kompetensi.form', compact(['model','auditor']));
@@ -58,8 +56,7 @@ class KompetensiAuditorsController extends Controller
     {
         $this->validate($request, [
             'user_id' => 'required',
-            'masa_kerja' => 'nullable|integer',
-            'tanggal_pelatihan' => 'nullable|date_format:d/m/Y'
+            'masa_kerja' => 'nullable|integer'
         ]);
 
         $model = KompetensiAuditor::findOrFail($id);
@@ -67,7 +64,6 @@ class KompetensiAuditorsController extends Controller
         $model->update([
             'user_id' => $request->user_id,
             'pelatihan' => $request->pelatihan,
-            'tanggal_pelatihan' => Carbon::parse($request->tanggal_pelatihan)->format('Y-m-d'),
             'pendidikan' => $request->pendidikan,
             'masa_kerja' => $request->masa_kerja,
         ]);

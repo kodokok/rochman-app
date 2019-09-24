@@ -13,19 +13,12 @@
     </div>
 </div>
 <div class="form-group row">
-        <label for="pelatihan" class="col-sm-4 col-form-label">Pelatihan</label>
-        <div class="col-sm-8">
-            {!! Form::text('pelatihan', null, ['class' => 'form-control', 'id' => 'pelatihan']) !!}
-            <div id="error-pelatihan" class="invalid-feedback"></div>
-        </div>
+    <label for="pelatihan" class="col-sm-4 col-form-label">Pelatihan</label>
+    <div class="col-sm-8">
+        {!! Form::text('pelatihan', null, ['class' => 'form-control', 'id' => 'pelatihan']) !!}
+        <div id="error-pelatihan" class="invalid-feedback"></div>
     </div>
-    <div class="form-group row">
-        <label for="tanggal_pelatihan" class="col-sm-4 col-form-label">Tanggal Pelatihan</label>
-        <div class="col-sm-8">
-            {!! Form::text('tanggal_pelatihan', null, ['class' => 'form-control', 'id' => 'tanggal_pelatihan', 'placeholder' => 'dd/mm/yyyy']) !!}
-            <div id="error-tanggal_pelatihan" class="invalid-feedback"></div>
-        </div>
-    </div>
+</div>
 <div class="form-group row">
     <label for="pendidikan" class="col-sm-4 col-form-label">Pendidikan</label>
     <div class="col-sm-8">

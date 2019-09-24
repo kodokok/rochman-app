@@ -17,7 +17,6 @@ class CreateKompetensiAuditorsTable extends Migration
             $table->bigIncrements('id')->unsigned();
             $table->unsignedBigInteger('user_id');
             $table->string('pelatihan')->nullable();
-            $table->date('tanggal_pelatihan')->nullable();
             $table->string('pendidikan')->nullable();
             $table->unsignedInteger('masa_kerja')->nullable();
             $table->timestamps();
