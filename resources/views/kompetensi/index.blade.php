@@ -36,7 +36,6 @@
                                 <th>ID</th>
                                 <th>Auditor</th>
                                 <th>Pelatihan</th>
-                                <th>Tanggal Pelatihan</th>
                                 <th>Pendidikan</th>
                                 <th>Masa Kerja</th>
                                 <th style="width: 20%"></th>
@@ -69,7 +68,6 @@
                 {data: 'DT_RowIndex', name: 'id'},
                 {data: 'auditor', name: 'auditor'},
                 {data: 'pelatihan', name: 'pelatihan'},
-                {data: 'tanggal_pelatihan', name: 'tanggal_pelatihan'},
                 {data: 'pendidikan', name: 'pendidikan'},
                 {data: 'masa_kerja', name: 'masa_kerja'},
                 {data: 'action', name: 'action', 'searchable': false, 'orderable': false, 'className': 'text-center'}
