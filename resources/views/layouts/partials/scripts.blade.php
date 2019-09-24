@@ -13,7 +13,7 @@
 <script src="{{ asset('plugins/select2/js/select2.min.js') }}"></script>
 <!-- daterangepicker -->
 <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
-
+<script src="{{ asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 <!-- sweetalert2 -->
 <script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 <!-- FastClick -->
