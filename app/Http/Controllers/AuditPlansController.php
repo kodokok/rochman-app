@@ -14,7 +14,7 @@ class AuditPlansController extends Controller
      */
     public function index()
     {
-        return view('audit_plans/index');
+        return view('auditplan/index');
     }
 
     /**
