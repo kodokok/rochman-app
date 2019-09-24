@@ -15,6 +15,9 @@ class CreateAuditNotesTable extends Migration
     {
         Schema::create('audit_notes', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('audit_plan_id');
+            $table->unsignedBigInteger('user_id');
+            $table->text('notes');
             $table->timestamps();
         });
     }
