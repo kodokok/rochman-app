@@ -13,11 +13,11 @@ class CreateAuditPlansTable extends Migration
      */
     public function up()
     {
-        Schema::create('audit_plans', function (Blueprint $table) {
+        Schema::create('audit_plan', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
             $table->string('objektif_audit')->nullable();
             $table->string('klausul')->nullable();
-            $table->unsignedBigInteger('departement');
+            $table->unsignedBigInteger('departement_id');
             $table->unsignedTinyInteger('konfirmasi_kadept')->nullable();
             $table->unsignedBigInteger('auditee');
             $table->unsignedBigInteger('auditor');
@@ -35,6 +35,6 @@ class CreateAuditPlansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('audit_plans');
+        Schema::dropIfExists('audit_plan');
     }
 }
