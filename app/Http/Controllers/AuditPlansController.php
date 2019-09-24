@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 
 class AuditPlansController extends Controller
 {
+    protected $auditeeRoles = ['auditor','auditor_leader','admin'];
+    protected $auditorRoles = ['auditor','auditor_leader','admin'];
+    protected $auditorLeaderRoles =  ['auditor_leader','admin'];
+
     /**
      * Display a listing of the resource.
      *
@@ -27,7 +31,13 @@ class AuditPlansController extends Controller
      */
     public function create()
     {
-        return view('auditplan.create');
+        $model = new AuditPlan();
+        $auditee = User::with('roles')->pluck('name', 'id');
+        $auditor = User::role($this->auditorRoles)->pluck('name', 'id');
+        $auditorLeader = User::role($this->auditorLeaderRoles)->pluck('name', 'id');
+        $departements = Departement::pluck('name', 'id');
+
+        return view('auditplan.create', compact(['model','departements', 'auditee', 'auditor', 'auditorLeader']));
     }
 
     /**
