@@ -6,7 +6,7 @@
         'route' => $model->exists ? ['users.update', $model->id] : 'users.store',
         'method' => $model->exists ? 'PUT' : 'POST',
         'files' => true,
-        'autocomplete' =
+        'autocomplete' => 'off'
     ]) !!}
         <div class="card card-primary">
             <div class="card-header">
