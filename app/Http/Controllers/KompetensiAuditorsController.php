@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class KompetensiAuditorsController extends Controller
 {
-    protected $auditorRoles = ['auditor','auditor_leader'];
+    protected $auditorRoles = ['auditor','auditor_leader','admin'];
 
     public function index()
     {
