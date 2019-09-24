@@ -22,7 +22,7 @@
                 </li>
                 <li class="nav-header">APPLICATION</li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('auditplan.index') }}" class="nav-link {{ active(['auditplan.*']) }}">
                         <i class="nav-icon fas fa-calendar-alt"></i>
                         <p>Audit Plan</p>
                     </a>
