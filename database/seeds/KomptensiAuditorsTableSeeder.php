@@ -37,7 +37,6 @@ class KomptensiAuditorsTableSeeder extends Seeder
         KompetensiAuditor::create([
             'user_id' => $auditor->id,
             'pelatihan' => 'Basic Traning Auditor',
-            'tanggal_pelatihan' => date('2001-05-01'),
             'pendidikan' => 'S1',
             'masa_kerja' => 4
         ]);
