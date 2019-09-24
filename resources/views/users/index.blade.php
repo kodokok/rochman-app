@@ -36,6 +36,8 @@
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Address</th>
+                                <th>Phone</th>
                                 <th>Roles</th>
                                 <th>Status</th>
                                 <th style="width: 20%"></th>
@@ -68,6 +70,8 @@
                 {data: 'DT_RowIndex', name: 'id'},
                 {data: 'name', name: 'name'},
                 {data: 'email', name: 'email'},
+                {data: 'address', name: 'address'},
+                {data: 'phone', name: 'phone'},
                 {data: 'roles', name: 'roles'},
                 {data: 'status', name: 'status', 'className': 'text-center'},
                 {data: 'action', name: 'action', 'searchable': false, 'orderable': false, 'className': 'text-center'}
