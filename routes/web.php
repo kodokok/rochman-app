@@ -27,16 +27,19 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('table/departements', 'DepartementsController@dataTable')->name('table.departements');
         Route::get('table/kompetensi', 'KompetensiAuditorsController@dataTable')->name('table.kompetensi');
 
-        Route::resource('users', 'UsersController')->except([
-            'show'
-        ]);
         Route::resource('roles', 'RolesController')->only([
             'index', 'create', 'store', 'destroy'
+        ]);
+        Route::resource('users', 'UsersController')->except([
+            'show'
         ]);
         Route::resource('departements', 'DepartementsController')->except([
             'show'
         ]);
         Route::resource('kompetensi', 'KompetensiAuditorsController')->except([
+            'show'
+        ]);
+        Route::resource('auditplan', 'AuditPlansController')->except([
             'show'
         ]);
     });
