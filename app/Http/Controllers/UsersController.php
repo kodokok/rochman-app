@@ -52,6 +52,8 @@ class UsersController extends Controller
         $model = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'address' => $request->address,
+            'phone' => $request->phone,
             'password' => Hash::make($request->password),
         ]);
 
@@ -72,7 +74,7 @@ class UsersController extends Controller
             $model->assignRole($roles);
         }
 
-        return $model;
+        return redirect(route('users.index'));
     }
 
     /**
@@ -100,7 +102,7 @@ class UsersController extends Controller
 
         // grab data
         // dd($request->all());
-        $data = $request->only(['name', 'email']);
+        $data = $request->only(['name', 'email', 'address', 'phone']);
 
         $this->validate($request, [
             'name' => 'required|string|max:100',
@@ -128,6 +130,8 @@ class UsersController extends Controller
         if ($roles) {
             $user->syncRoles($roles);
         }
+
+        return redirect(route('users.index'));
     }
 
     /**
