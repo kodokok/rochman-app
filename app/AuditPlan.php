@@ -3,14 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\AuditNote;
+use App\Departement;
 
 class AuditPlan extends Model
 {
     protected $guarded = [];
 
-    public function auditNotes()
+    public function departement()
     {
-        return $this->hasMany(AuditNote::class);
+        return $this->belongsTo(Departement::class);
     }
 }
