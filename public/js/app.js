@@ -51,9 +51,6 @@ $(document).ready(function() {
             success: function(response) {
                 form.trigger("reset");
                 $("#modal").modal("hide");
-                if ($("#datatables").length) {
-                    $("#datatables").DataTable().ajax.reload();
-                }
             },
             error: function(xhr) {
                 var res = xhr.responseJSON;
@@ -64,6 +61,9 @@ $(document).ready(function() {
                         $("#error-" + key).html(value);
                     });
                 }
+            },
+            complete: function() {
+                location.reload();
             }
         });
     });
