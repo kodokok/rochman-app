@@ -24,7 +24,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{ route('auditplan.create') }}" class="btn btn-success modal-show" title="Create New Departement">
+                    <a href="{{ route('auditplan.create') }}" class="btn btn-success title="Create New Audit Plan">
                         <i class="fas fa-plus mr-2"></i>Create Audit Plan
                     </a>
                 </div>
@@ -71,7 +71,7 @@ $(document).ready(function() {
         ajax: "{{ route('table.auditplan') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'id'},
-            {data: 'objectif_audit', name: 'objectif_audit'},
+            {data: 'objektif_audit', name: 'objektif_audit'},
             {data: 'klausul', name: 'lokasi'},
             {data: 'departement', name: 'departement'},
             {data: 'konfirmasi_kadept', name: 'konfirmasi_kadept'},
