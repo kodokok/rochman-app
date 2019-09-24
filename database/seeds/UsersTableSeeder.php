@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin@mail.com',
             'name' => 'Rochman Hidayat',
             'address' => 'Jl. Danau Toba No.235, Tangerang Curug',
-            'phone' => 'Phone 1',
+            'phone' => '777-778-7770',
             'password' => Hash::make('admin')
         ]);
 
