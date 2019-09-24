@@ -25,7 +25,7 @@ class AuditPlanTableSeeder extends Seeder
             'auditor' => $auditor->id,
             'auditor_leader' => $auditor_leader->id,
             'tanggal' => date('Y-m-d'),
-            'waktu' => time(),
+            'waktu' => date('H:i:s'),
         ]);
     }
 }
