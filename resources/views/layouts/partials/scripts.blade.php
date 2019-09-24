@@ -4,6 +4,8 @@
 <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap -->
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<!-- moment -->
+<script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
 <!-- dataTables -->
 <script src="{{ asset('plugins/datatables/jquery.dataTables.js') }}"></script>
 <script src="{{ asset('plugins/datatables/dataTables.bootstrap4.js') }}"></script>
@@ -11,8 +13,7 @@
 <script src="{{ asset('plugins/select2/js/select2.min.js') }}"></script>
 <!-- daterangepicker -->
 <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
-<!-- daterangepicker -->
-<script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
+
 <!-- sweetalert2 -->
 <script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 <!-- FastClick -->
