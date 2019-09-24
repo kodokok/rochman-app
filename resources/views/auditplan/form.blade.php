@@ -31,14 +31,33 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <label for="departement_id">Departement</label>
-                        {!! Form::select('departement_id', $departement, null, ['class' => 'form-control', 'id' => 'departement_id',
-                        'placeholder' => 'Please Select']) !!}
+                        {{-- {!! Form::select('departement_id', $departement, null, ['class' => 'form-control', 'id' => 'departement_id',
+                        'placeholder' => 'Please Select' 'data-kadept'="{{$user->role->name}}"> ]) !!} --}}
+                        <select class="form-control" name="departement_id" id="departement_id">
+                            <option value="" {{ !$model->exists ? 'selected' : ''}} disabled>Please select</option>
+                            @foreach($departement as $dept)
+                                <option value="{{ $dept->id }}" data-kadept="{{ $dept->user->name }}"
+                                    @if ($model->exist)
+                                        @if ($model->departement->id === $dept->id)
+                                            selected
+                                        @endif
+                                    @endif
+                                >
+                                    {{ $dept->name }}
+                                </option>
+                            @endforeach
+                        </select>
                         <div id="error-departement_id" class="invalid-feedback"></div>
                     </div>
                     <div class="col-sm-6">
                             {{-- <div class="form-group"> --}}
                         <label for="kadept">Kadept</label>
-                        {!! Form::text('kadept', null, ['class' => 'form-control', 'id' => 'kadept', 'disabled']) !!}
+                        @if ($model->exists)
+                            {!! Form::text('kadept', $model->departement->user->name, ['class' => 'form-control', 'id' => 'kadept', 'disabled']) !!}
+                        @else
+                            {!! Form::text('kadept', null, ['class' => 'form-control', 'id' => 'kadept', 'disabled']) !!}
+                        @endif
+                        {{-- <input class="form-control" type="text" name="kadept" id="kadept" disabled value="{{ $model->departement->user->name }}"> --}}
                     {{-- </div> --}}
 
                     </div>
@@ -46,7 +65,11 @@
                 <div class="form-group row">
                     <div class="col-sm-6">
                         <label for="tanggal">Tanggal</label>
-                        {!! Form::text('tanggal', null, ['class' => 'form-control', 'id' => 'tanggal']) !!}
+                        @if ($model->exists)
+                            {!! Form::text('tanggal', null, ['class' => 'form-control', 'id' => 'tanggal']) !!}
+                        @else
+                            <input type="text" id="tanggal" class="form-control" name="tanggal">
+                        @endif
                         <div id="error-tanggal" class="invalid-feedback"></div>
                     </div>
                     <div class="col-sm-6">
@@ -94,7 +117,7 @@
                         @foreach($auditor as $key => $value)
                             <option value="{{ $key}}"
                                 @if ($model->exist)
-                                    @if ($model->auditor_id === $key)
+                                    @if ($model->auditor->id === $key)
                                         selected
                                     @endif
                                 @endif

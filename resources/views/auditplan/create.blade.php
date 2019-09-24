@@ -30,6 +30,7 @@
 @push('scripts')
 <script>
 $(function () {
+
     //Date range picker
     $('#tanggal').daterangepicker({
         singleDatePicker: true,
@@ -38,6 +39,12 @@ $(function () {
     //Timepicker
     $('#waktu').datetimepicker({
       format: "hh:mm:ss",
+    });
+
+    $('#departement_id').on('change', function(){
+       var kadept = $(this).children('option:selected').data('kadept');
+       console.log(kadept);
+       $('#kadept').val(kadept);
     });
 });
 </script>

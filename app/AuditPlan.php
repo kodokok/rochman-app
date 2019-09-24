@@ -21,8 +21,8 @@ class AuditPlan extends Model
 
     public function getWaktuAttribute()
     {
-        return Carbon::parse($this->attributes['waktu'])
-           ->format('H:i:s');
+        $attr = $this->attributes['waktu'] ? $this->attributes['waktu'] : Carbon::now();
+        return Carbon::parse($attr)->format('H:i:s');
     }
 
     public function departement()
