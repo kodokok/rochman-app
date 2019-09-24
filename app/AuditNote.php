@@ -14,6 +14,7 @@ class AuditNote extends Model
     {
         return $this->belongsTo(User::class);
     }
+
     public function auditPlan()
     {
         return $this->belongsTo(AuditPlan::class);
