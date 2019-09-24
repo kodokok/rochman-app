@@ -5,7 +5,8 @@
     {!! Form::model($model, [
         'route' => $model->exists ? ['users.update', $model->id] : 'users.store',
         'method' => $model->exists ? 'PUT' : 'POST',
-        'files' => true
+        'files' => true,
+        'autocomplete' =
     ]) !!}
         <div class="card card-primary">
             <div class="card-header">
