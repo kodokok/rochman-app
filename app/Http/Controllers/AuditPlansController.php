@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AuditPlan;
 use Illuminate\Http\Request;
 
 class AuditPlansController extends Controller
@@ -80,5 +81,23 @@ class AuditPlansController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function dataTable()
+    {
+        $model = AuditPlan::all();
+
+        return DataTables::of($model)
+            ->addColumn('action', function ($model) {
+                return view('layouts.partials._action-page', [
+                    'model' => $model,
+                    'url_show' => null,
+                    'url_edit' => route('kompetensi.edit', $model->id),
+                    'url_destroy' => route('kompetensi.destroy', $model->id),
+                ]);
+            })
+            ->addIndexColumn()
+            ->rawColumns(['action'])
+            ->make(true);
     }
 }
