@@ -18,11 +18,11 @@ class CreateAuditPlansTable extends Migration
             $table->string('objektif_audit')->nullable();
             $table->string('klausul')->nullable();
             $table->unsignedBigInteger('departement_id');
-
             $table->unsignedTinyInteger('konfirmasi_kadept')->nullable();
-            $table->unsignedBigInteger('auditee');
-            $table->unsignedBigInteger('auditor');
-            $table->unsignedBigInteger('auditor_leader');
+
+            $table->unsignedBigInteger('auditee_id');
+            $table->unsignedBigInteger('auditor_id');
+            $table->unsignedBigInteger('auditor_leader_id');
             $table->date('tanggal')->nullable();
             $table->time('waktu')->nullable();
             $table->timestamps();

@@ -88,12 +88,7 @@ class AuditPlansController extends Controller
 
     public function dataTable()
     {
-        // $model = AuditPlan::all();
-        $model = AuditPlan::find(1);
-
-        // $user = User::find(1)->auditeeAuditPlans;
-        // dd($model->departement->name);
-        dd($model->departement);
+        $model = AuditPlan::all();
 
         return DataTables::of($model)
             ->addColumn('departement', function ($model) {
@@ -102,13 +97,12 @@ class AuditPlansController extends Controller
             ->addColumn('auditee', function($model) {
                 return $model->auditee->name;
             })
-            // ->addColumn('auditor', function($model) {
-            //     return $model->auditor->name;
-            // })
-            // ->addColumn('auditor_leader', function($model) {
-            //     return $model->auditor_leader->name;
-            // })
-
+            ->addColumn('auditor', function($model) {
+                return $model->auditor->name;
+            })
+            ->addColumn('auditor_leader', function($model) {
+                return $model->auditorLeader->name;
+            })
             ->addColumn('action', function ($model) {
                 return view('layouts.partials._action-page', [
                     'model' => $model,

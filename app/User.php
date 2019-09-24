@@ -69,18 +69,18 @@ class User extends Authenticatable
         return $this->hasMany(KompetensiAuditor::class);
     }
 
-    public function auditeeAuditPlans()
+    public function auditees()
     {
-        return $this->hasMany(AuditPlan::class, 'auditee');
+        return $this->hasMany(AuditPlan::class, 'auditee_id');
     }
 
-    public function auditorAuditPlans()
+    public function auditors()
     {
-        return $this->hasMany(AuditPlan::class, 'auditor');
+        return $this->hasMany(AuditPlan::class, 'auditor_id');
     }
 
-    public function auditorLeaderAuditPlans()
+    public function auditorLeaders()
     {
-        return $this->hasMany(AuditPlan::class, 'auditor_leader');
+        return $this->hasMany(AuditPlan::class, 'auditor_leader_id');
     }
 }

@@ -17,17 +17,17 @@ class AuditPlan extends Model
         return $this->belongsTo(Departement::class);
     }
 
-    public function auditeeUser()
+    public function auditee()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function auditorUser()
+    public function auditor()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function auditorLeaderUser()
+    public function auditorLeader()
     {
         return $this->belongsTo(User::class);
     }
