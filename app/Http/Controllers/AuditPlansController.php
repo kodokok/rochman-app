@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\AuditPlan;
+use App\Departement;
+use App\User;
+use DataTables;
 use Illuminate\Http\Request;
 
 class AuditPlansController extends Controller
@@ -85,15 +88,33 @@ class AuditPlansController extends Controller
 
     public function dataTable()
     {
-        $model = AuditPlan::all();
+        // $model = AuditPlan::all();
+        $model = AuditPlan::find(1);
+
+        // $user = User::find(1)->auditeeAuditPlans;
+        // dd($model->departement->name);
+        dd($model->departement);
 
         return DataTables::of($model)
+            ->addColumn('departement', function ($model) {
+                return $model->departement->name;
+            })
+            ->addColumn('auditee', function($model) {
+                return $model->auditee->name;
+            })
+            // ->addColumn('auditor', function($model) {
+            //     return $model->auditor->name;
+            // })
+            // ->addColumn('auditor_leader', function($model) {
+            //     return $model->auditor_leader->name;
+            // })
+
             ->addColumn('action', function ($model) {
                 return view('layouts.partials._action-page', [
                     'model' => $model,
                     'url_show' => null,
-                    'url_edit' => route('kompetensi.edit', $model->id),
-                    'url_destroy' => route('kompetensi.destroy', $model->id),
+                    'url_edit' => route('auditplan.edit', $model->id),
+                    'url_destroy' => route('auditplan.destroy', $model->id),
                 ]);
             })
             ->addIndexColumn()

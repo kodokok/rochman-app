@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Storage;
 use App\Departement;
 use App\KompetensiAuditor;
 use App\AuditPlan;
-use App\AuditNote;
 
 class User extends Authenticatable
 {
@@ -70,13 +69,18 @@ class User extends Authenticatable
         return $this->hasMany(KompetensiAuditor::class);
     }
 
-    public function auditPlans()
+    public function auditeeAuditPlans()
     {
-        return $this->hasMany(AuditPlan::class);
+        return $this->hasMany(AuditPlan::class, 'auditee');
     }
 
-    public function auditNotes()
+    public function auditorAuditPlans()
     {
-        return $this->hasMany(AuditNote::class);
+        return $this->hasMany(AuditPlan::class, 'auditor');
+    }
+
+    public function auditorLeaderAuditPlans()
+    {
+        return $this->hasMany(AuditPlan::class, 'auditor_leader');
     }
 }
