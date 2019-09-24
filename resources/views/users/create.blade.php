@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>User</h1>
+                <h1>{{ $model->exists ? 'Edit: ' . $model->id : 'Create New User' }}</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -20,7 +20,7 @@
 
 <!-- Main content -->
 <section class="content">
-    @include('users.form')
+    @include('users.form', $model)
 </section>
 <!-- /.content -->
 

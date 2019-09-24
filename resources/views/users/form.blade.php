@@ -34,15 +34,22 @@
                     <div id="error-address" class="invalid-feedback"></div>
                 </div>
                 <div class="form-group">
+                    <label for="phone">Phone</label>
+                    {!! Form::text('phone', null, ['class' => 'form-control', 'id' => 'phone']) !!}
+                    <div id="error-phone" class="invalid-feedback"></div>
+                </div>
+                <div class="form-group">
                     <label for="image">Image</label>
                     {!! Form::file('image', ['class' => 'form-control', 'id' => 'image']) !!}
                     <div id="error-image" class="invalid-feedback"></div>
                 </div>
+                @if(!$model->exists)
                 <div class="form-group">
                     <label for="password">Password</label>
                     {!! Form::password('password', ['class' => 'form-control', 'id' => 'password']) !!}
                     <div id="error-password" class="invalid-feedback"></div>
                 </div>
+                @endif
             </div>
             <!-- /.card-body -->
         </div>
@@ -89,7 +96,7 @@
 <div class="row">
     <div class="col-12">
         <a href="{{ route('users.index') }}" class="btn btn-secondary">Cancel</a>
-        <input type="submit" value="Create new Porject" class="btn btn-success float-right">
+        <input type="submit" value="{{ $model->exists ? 'Update' : 'Create New'}}" class="btn btn-success float-right">
     </div>
 </div>
 {!! Form::close() !!}

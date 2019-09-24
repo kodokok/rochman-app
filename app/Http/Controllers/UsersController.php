@@ -85,7 +85,7 @@ class UsersController extends Controller
     {
         $model = User::findOrFail($user->id);
         $roles = Role::pluck('name','id')->all();
-        return view('users.form', compact(['model', 'roles']));
+        return view('users.create', compact(['model', 'roles']));
     }
 
     /**
@@ -161,7 +161,7 @@ class UsersController extends Controller
                 return '<span class="badge badge-secondary">Offline</span>';
             })
             ->addColumn('action', function ($model) {
-                return view('layouts.partials._action', [
+                return view('layouts.partials._action-page', [
                     'model' => $model,
                     'url_show' => null,
                     'url_edit' => route('users.edit', $model->id),
