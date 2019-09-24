@@ -17,7 +17,7 @@ class AuditPlansController extends Controller
      */
     public function index()
     {
-        return view('auditplan/index');
+        return view('auditplan.index');
     }
 
     /**
@@ -27,7 +27,7 @@ class AuditPlansController extends Controller
      */
     public function create()
     {
-        //
+        return view('auditplan.create');
     }
 
     /**
