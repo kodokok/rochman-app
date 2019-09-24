@@ -31,7 +31,7 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <label for="departement_id">Departement</label>
-                        {!! Form::select('departement_id', $departements, null, ['class' => 'form-control', 'id' => 'departement_id',
+                        {!! Form::select('departement_id', $departement, null, ['class' => 'form-control', 'id' => 'departement_id',
                         'placeholder' => 'Please Select']) !!}
                         <div id="error-departement_id" class="invalid-feedback"></div>
                     </div>
@@ -52,11 +52,11 @@
                     <div class="col-sm-6">
                         <label for="waktu">Waktu</label>
                         <div class="input-group date" id="waktu" data-target-input="nearest">
-                            <input type="text" name="waktu" id="waktu" class="form-control datetimepicker-input" data-target="#waktu"/>
-                            <div class="input-group-append" data-target="#waktu" data-toggle="datetimepicker">
-                                <div class="input-group-text"><i class="fas fa-clock"></i></div>
+                            <input type="text" name="waktu" id="waktu" class="form-control datetimepicker-input" data-target="#waktu" value="{{ $model->exists ? $model->waktu : ''}}"/>
+                                <div class="input-group-append" data-target="#waktu" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fas fa-clock"></i></div>
+                                </div>
                             </div>
-                        </div>
                         <div id="error-waktu" class="invalid-feedback"></div>
                     </div>
 
@@ -78,25 +78,38 @@
                 </div>
             </div>
             <div class="card-body">
+
                 <div class="form-group">
-                    <div class="form-group">
-                        <label for="auditee_id">Auditee</label>
-                        {!! Form::select('auditee_id', $auditee, null, ['class' => 'form-control', 'id' => 'auditee_id',
-                        'placeholder' => 'Please Select']) !!}
-                        <div id="error-auditee_id" class="invalid-feedback"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="auditor_id">Auditor</label>
-                        {!! Form::select('auditor_id', $auditor, null, ['class' => 'form-control', 'id' => 'auditor_id',
-                        'placeholder' => 'Please Select']) !!}
-                        <div id="error-auditor_id" class="invalid-feedback"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="auditor_leader_id">Auditor Leader</label>
-                        {!! Form::select('auditor_leader_id', $auditorLeader, null, ['class' => 'form-control', 'id' => 'auditor_leader_id',
-                        'placeholder' => 'Please Select']) !!}
-                        <div id="error-auditor_leader_id" class="invalid-feedback"></div>
-                    </div>
+                    <label for="auditee_id">Auditee</label>
+                    {!! Form::select('auditee_id', $auditee, null, ['class' => 'form-control', 'id' => 'auditee_id',
+                    'placeholder' => 'Please Select']) !!}
+                    <div id="error-auditee_id" class="invalid-feedback"></div>
+                </div>
+                <div class="form-group">
+                    <label for="auditor_id">Auditor</label>
+                    {{-- {!! Form::select('auditor_id', $auditor, null, ['class' => 'form-control', 'id' => 'auditor_id',
+                    'placeholder' => 'Please Select', $model->exists ? 'selected' : '']) !!} --}}
+                    <select class="form-control" name="auditor_id" id="auditor_id">
+                        <option value="" {{ !$model->exists ? 'selected' : ''}} disabled>Please select</option>
+                        @foreach($auditor as $key => $value)
+                            <option value="{{ $key}}"
+                                @if ($model->exist)
+                                    @if ($model->auditor_id === $key)
+                                        selected
+                                    @endif
+                                @endif
+                            >
+                                {{ $value }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <div id="error-auditor_id" class="invalid-feedback"></div>
+                </div>
+                <div class="form-group">
+                    <label for="auditor_leader_id">Auditor Leader</label>
+                    {!! Form::select('auditor_leader_id', $auditorLeader, null, ['class' => 'form-control', 'id' => 'auditor_leader_id',
+                    'placeholder' => 'Please Select']) !!}
+                    <div id="error-auditor_leader_id" class="invalid-feedback"></div>
                 </div>
             </div>
             <!-- /.card-body -->
@@ -106,7 +119,7 @@
 </div>
 <div class="row">
     <div class="col-12">
-        <a href="{{ route('users.index') }}" class="btn btn-secondary">Cancel</a>
+        <a href="{{ route('auditplan.index') }}" class="btn btn-secondary">Cancel</a>
         <input type="submit" value="{{ $model->exists ? 'Update' : 'Create New'}}" class="btn btn-success float-right">
     </div>
 </div>

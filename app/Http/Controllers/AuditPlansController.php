@@ -35,9 +35,9 @@ class AuditPlansController extends Controller
         $auditee = User::with('roles')->pluck('name', 'id');
         $auditor = User::role($this->auditorRoles)->pluck('name', 'id');
         $auditorLeader = User::role($this->auditorLeaderRoles)->pluck('name', 'id');
-        $departements = Departement::pluck('name', 'id');
+        $departement = Departement::pluck('name', 'id');
 
-        return view('auditplan.create', compact(['model','departements', 'auditee', 'auditor', 'auditorLeader']));
+        return view('auditplan.create', compact(['model','departement', 'auditee', 'auditor', 'auditorLeader']));
     }
 
     /**
@@ -51,16 +51,6 @@ class AuditPlansController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -70,7 +60,13 @@ class AuditPlansController extends Controller
      */
     public function edit($id)
     {
-        //
+        $model = AuditPlan::findOrFail($id);
+        $auditee = User::with('roles')->pluck('name', 'id');
+        $auditor = User::role($this->auditorRoles)->pluck('name', 'id');
+        $auditorLeader = User::role($this->auditorLeaderRoles)->pluck('name', 'id');
+        $departement = Departement::pluck('name', 'id');
+        // dd($model);
+        return view('auditplan.create', compact(['model','departement', 'auditee', 'auditor', 'auditorLeader']));
     }
 
     /**

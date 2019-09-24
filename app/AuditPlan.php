@@ -5,12 +5,25 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Departement;
 use App\User;
+use Carbon\Carbon;
 
 class AuditPlan extends Model
 {
     protected $guarded = [];
     protected $dates = ['tanggal'];
     protected $times = ['waktu'];
+
+    public function getTanggalAttribute()
+    {
+        return Carbon::parse($this->attributes['tanggal'])
+           ->format('m-d-Y');
+    }
+
+    public function getWaktuAttribute()
+    {
+        return Carbon::parse($this->attributes['waktu'])
+           ->format('H:i:s');
+    }
 
     public function departement()
     {
