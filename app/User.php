@@ -10,6 +10,8 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Facades\Storage;
 use App\Departement;
 use App\KompetensiAuditor;
+use App\AuditPlan;
+use App\AuditNote;
 
 class User extends Authenticatable
 {
@@ -66,5 +68,15 @@ class User extends Authenticatable
     public function kompetensi_auditors()
     {
         return $this->hasMany(KompetensiAuditor::class);
+    }
+
+    public function auditPlans()
+    {
+        return $this->hasMany(AuditPlan::class);
+    }
+
+    public function auditNotes()
+    {
+        return $this->hasMany(AuditNote::class);
     }
 }
