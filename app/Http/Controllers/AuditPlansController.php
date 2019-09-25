@@ -76,9 +76,8 @@ class AuditPlansController extends Controller
         $auditor = User::role($this->auditorRoles)->pluck('name', 'id');
         $auditorLeader = User::role($this->auditorLeaderRoles)->pluck('name', 'id');
         $departement = Departement::all();
-        $kadept = $model->departement->user->name;
         // dd($kadept);
-        return view('auditplan.create', compact(['model','departement', 'auditee', 'auditor', 'auditorLeader', 'kadept']));
+        return view('auditplan.create', compact(['model','departement', 'auditee', 'auditor', 'auditorLeader']));
     }
 
     /**
