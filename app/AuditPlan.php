@@ -15,11 +15,13 @@ class AuditPlan extends Model
 
     public function getTanggalAttribute($value)
     {
+        // dd($value);
         return Carbon::parse($value)->format('m-d-Y');
     }
 
     public function getWaktuAttribute($value)
     {
+        // dd($value);
         return Carbon::parse($value)->format('H:i:s');
     }
 

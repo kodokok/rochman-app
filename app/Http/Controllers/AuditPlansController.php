@@ -55,13 +55,28 @@ class AuditPlansController extends Controller
             'klausul' => 'required|string|max:100',
             'departement_id' => 'required',
             'auditee_id' => 'required',
-            'auditor_id' => 'required',
-            'auditor_leader_id' => 'required',
+            'auditor_id' => 'required|different:auditee_id',
+            'auditor_leader_id' => 'required|different:auditee_id',
             'tanggal' => 'required|date_format:m-d-Y',
-            'waktu' => 'required',
+            'waktu' => 'required|date_format:H:i:s',
         ]);
 
-        // dd($request->all());
+        $tanggal =  Carbon::createFromFormat('m-d-Y', $request->tanggal)->format('Y-m-d');
+        $waktu =  Carbon::createFromFormat('H:i:s', $request->waktu)->format('H:i:s');
+
+        AuditPlan::create([
+            'objektif_audit' => $request->objektif_audit,
+            'klausul' => $request->klausul,
+            'departement_id' => $request->departement_id,
+            'konfirmasi_kadept' => 0,
+            'auditee_id' => $request->auditee_id,
+            'auditor_id' => $request->auditor_id,
+            'auditor_leader_id' => $request->auditor_leader_id,
+            'tanggal' => $tanggal,
+            'waktu' => $waktu,
+        ]);
+
+        return redirect(route('auditplan.index'));
     }
 
 

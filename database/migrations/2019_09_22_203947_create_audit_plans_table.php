@@ -23,8 +23,8 @@ class CreateAuditPlansTable extends Migration
             $table->unsignedBigInteger('auditee_id');
             $table->unsignedBigInteger('auditor_id');
             $table->unsignedBigInteger('auditor_leader_id');
-            $table->date('tanggal')->nullable();
-            $table->time('waktu')->nullable();
+            $table->date('tanggal');
+            $table->time('waktu');
             $table->timestamps();
         });
     }
