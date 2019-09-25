@@ -5,7 +5,7 @@ use App\Departement;
 use App\User;
 use Illuminate\Database\Seeder;
 
-class AuditPlanTableSeeder extends Seeder
+class AuditPlansTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
