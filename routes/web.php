@@ -40,8 +40,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('kompetensi', 'KompetensiAuditorsController')->except([
             'show'
         ]);
-        Route::resource('auditplan', 'AuditPlansController')->except([
-            'show'
-        ]);
+        Route::resource('auditplan', 'AuditPlansController');
+        Route::put('auditplan/auditplan/{1}/cofirm', 'AuditPlansController@confirm')->name('auditplan.confirm');
     });
 });

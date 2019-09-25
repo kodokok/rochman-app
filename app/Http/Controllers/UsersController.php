@@ -165,7 +165,7 @@ class UsersController extends Controller
                 return '<span class="badge badge-secondary">Offline</span>';
             })
             ->addColumn('action', function ($model) {
-                return view('layouts.partials._action-page', [
+                return view('users.action', [
                     'model' => $model,
                     'url_show' => null,
                     'url_edit' => route('users.edit', $model->id),

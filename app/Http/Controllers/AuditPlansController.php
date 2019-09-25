@@ -145,7 +145,25 @@ class AuditPlansController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $model = AuditPlan::findOrFail($id);
+        $model->delete();
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $model = AuditPlan::findOrFail($id);
+        $auditee = User::with('roles')->pluck('name', 'id');
+        $auditor = User::role($this->auditorRoles)->pluck('name', 'id');
+        $auditorLeader = User::role($this->auditorLeaderRoles)->pluck('name', 'id');
+        $departement = Departement::all();
+        // dd($kadept);
+        return view('auditplan.confirm.index', compact(['model', 'departement', 'auditee', 'auditor', 'auditorLeader']));
     }
 
     public function dataTable()
@@ -166,9 +184,9 @@ class AuditPlansController extends Controller
                 return $model->auditorLeader->name;
             })
             ->addColumn('action', function ($model) {
-                return view('layouts.partials._action-page', [
+                return view('auditplan.action', [
                     'model' => $model,
-                    'url_show' => null,
+                    'url_show' => route('auditplan.show', $model->id),
                     'url_edit' => route('auditplan.edit', $model->id),
                     'url_destroy' => route('auditplan.destroy', $model->id),
                 ]);

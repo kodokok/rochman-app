@@ -74,7 +74,12 @@ $(document).ready(function() {
             {data: 'objektif_audit', name: 'objektif_audit'},
             {data: 'klausul', name: 'lokasi'},
             {data: 'departement', name: 'departement'},
-            {data: 'konfirmasi_kadept', name: 'konfirmasi_kadept'},
+            {data: 'konfirmasi_kadept',
+                name: 'konfirmasi_kadept',
+                render: function (data, type, row) {
+                    return (data == 1) ? '<span class="badge badge-success">Yes</span>' : '<span class="badge badge-warning">No</span>';
+                }, 'className': 'text-center'
+            },
             {data: 'auditee', name: 'auditee'},
             {data: 'auditor', name: 'auditor'},
             {data: 'auditor_leader', name: 'auditor_leader'},
