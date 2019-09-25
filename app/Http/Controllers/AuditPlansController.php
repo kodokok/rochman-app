@@ -11,9 +11,9 @@ use Illuminate\Http\Request;
 
 class AuditPlansController extends Controller
 {
-    protected $auditeeRoles = ['auditor','auditor_leader','admin'];
-    protected $auditorRoles = ['auditor','auditor_leader','admin'];
-    protected $auditorLeaderRoles =  ['auditor_leader','admin'];
+    protected $auditeeRoles = ['auditor', 'auditor_leader', 'admin'];
+    protected $auditorRoles = ['auditor', 'auditor_leader', 'admin'];
+    protected $auditorLeaderRoles =  ['auditor_leader', 'admin'];
 
     /**
      * Display a listing of the resource.
@@ -38,7 +38,7 @@ class AuditPlansController extends Controller
         $auditorLeader = User::role($this->auditorLeaderRoles)->pluck('name', 'id');
         $departement = Departement::all();
         // dd($departement);
-        return view('auditplan.create', compact(['model','departement', 'auditee', 'auditor', 'auditorLeader']));
+        return view('auditplan.create', compact(['model', 'departement', 'auditee', 'auditor', 'auditorLeader']));
     }
 
     /**
@@ -94,7 +94,7 @@ class AuditPlansController extends Controller
         $auditorLeader = User::role($this->auditorLeaderRoles)->pluck('name', 'id');
         $departement = Departement::all();
         // dd($kadept);
-        return view('auditplan.create', compact(['model','departement', 'auditee', 'auditor', 'auditorLeader']));
+        return view('auditplan.create', compact(['model', 'departement', 'auditee', 'auditor', 'auditorLeader']));
     }
 
     /**
@@ -106,7 +106,35 @@ class AuditPlansController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($request->all());
+        $this->validate($request, [
+            'objektif_audit' => 'required|string|max:255',
+            'klausul' => 'required|string|max:100',
+            'departement_id' => 'required',
+            'auditee_id' => 'required',
+            'auditor_id' => 'required|different:auditee_id',
+            'auditor_leader_id' => 'required|different:auditee_id',
+            'tanggal' => 'required|date_format:m-d-Y',
+            'waktu' => 'required|date_format:H:i:s',
+        ]);
+
+        $tanggal =  Carbon::createFromFormat('m-d-Y', $request->tanggal)->format('Y-m-d');
+        $waktu =  Carbon::createFromFormat('H:i:s', $request->waktu)->format('H:i:s');
+
+        $model = AuditPlan::findOrFail($id);
+
+        $model->update([
+            'objektif_audit' => $request->objektif_audit,
+            'klausul' => $request->klausul,
+            'departement_id' => $request->departement_id,
+            'auditee_id' => $request->auditee_id,
+            'auditor_id' => $request->auditor_id,
+            'auditor_leader_id' => $request->auditor_leader_id,
+            'tanggal' => $tanggal,
+            'waktu' => $waktu,
+        ]);
+
+        return redirect(route('auditplan.index'));
     }
 
     /**
@@ -128,13 +156,13 @@ class AuditPlansController extends Controller
             ->addColumn('departement', function ($model) {
                 return $model->departement->name;
             })
-            ->addColumn('auditee', function($model) {
+            ->addColumn('auditee', function ($model) {
                 return $model->auditee->name;
             })
-            ->addColumn('auditor', function($model) {
+            ->addColumn('auditor', function ($model) {
                 return $model->auditor->name;
             })
-            ->addColumn('auditor_leader', function($model) {
+            ->addColumn('auditor_leader', function ($model) {
                 return $model->auditorLeader->name;
             })
             ->addColumn('action', function ($model) {
