@@ -50,7 +50,7 @@ class AuditPlansController extends Controller
     {
         $this->validate($request, [
             'objektif_audit' => 'required|string|max:255',
-            'kalusul' => 'required|string|max:100',
+            'klausul' => 'required|string|max:100',
             'departement_id' => 'required',
             'auditee_id' => 'required',
             'auditor_id' => 'required',
