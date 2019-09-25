@@ -48,7 +48,18 @@ class AuditPlansController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'objektif_audit' => 'required|string|max:255',
+            'kalusul' => 'required|string|max:100',
+            'departement_id' => 'required',
+            'auditee_id' => 'required',
+            'auditor_id' => 'required',
+            'auditor_leader_id' => 'required',
+            'tanggal' => 'required|date',
+            'waktu' => 'required|date_format:H:i:s',
+        ]);
+
+        dd($request->all());
     }
 
 
