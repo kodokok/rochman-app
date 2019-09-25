@@ -78,7 +78,7 @@
                                 <input id="tanggal" name="tanggal" type="text"
                                     class="form-control datetimepicker-input {{ $errors->has('tanggal') ? ' is-invalid': '' }}"
                                     data-target="#datetimepicker4"
-                                    value="{{ $model->exists ? $model->tanggal : old('waktu') }}"
+                                    value="{{ $model->exists ? $model->tanggal : old('tanggal') }}"
                                 />
                                 <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>

@@ -49,6 +49,7 @@ class AuditPlansController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $this->validate($request, [
             'objektif_audit' => 'required|string|max:255',
             'klausul' => 'required|string|max:100',
@@ -56,11 +57,11 @@ class AuditPlansController extends Controller
             'auditee_id' => 'required',
             'auditor_id' => 'required',
             'auditor_leader_id' => 'required',
-            'tanggal' => 'required|date',
+            'tanggal' => 'required|date_format:m-d-Y',
             'waktu' => 'required',
         ]);
 
-        dd($request->all());
+        // dd($request->all());
     }
 
 
