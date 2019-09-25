@@ -22,7 +22,7 @@
                     <div class="row">
                         <label for="objektif_audit" class="col-sm-2 col-form-label">Objektif Audit</label>
                         <div class="col-sm-10">
-                            {!! Form::textarea('objektif_audit', null, ['class' => 'form-control', 'id' => 'objektif_audit', 'rows' => 3, 'disabled']) !!}
+                            {!! Form::textarea('objektif_audit',  $model->objektif_audit, ['class' => 'form-control', 'id' => 'objektif_audit', 'rows' => 3, 'disabled']) !!}
                         </div>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                     <div class="row">
                         <label for="klausul" class="col-sm-2 col-form-label">Klausul</label>
                         <div class="col-sm-10">
-                        {!! Form::text('klausul', null, ['class' => 'form-control', 'id' => 'klausul', 'disabled']) !!}
+                        {!! Form::text('klausul', $model->klausul, ['class' => 'form-control', 'id' => 'klausul', 'disabled']) !!}
                         </div>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
                                 <div class="input-group-append">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
-                                {!! Form::text('tanggal', null, ['class' => 'form-control', 'id' => 'tanggal', 'disabled']) !!}
+                                {!! Form::text('tanggal', $model->tanggal, ['class' => 'form-control', 'id' => 'tanggal', 'disabled']) !!}
                             </div>
                         </div>
                     </div>
@@ -88,7 +88,7 @@
                                 <div class="input-group-append">
                                     <div class="input-group-text"><i class="fa fa-clock"></i></div>
                                 </div>
-                                {!! Form::text('waktu', null, ['class' => 'form-control', 'id' => 'waktu', 'disabled']) !!}
+                                {!! Form::text('waktu',  $model->waktu, ['class' => 'form-control', 'id' => 'waktu', 'disabled']) !!}
                             </div>
                         </div>
                     </div>
