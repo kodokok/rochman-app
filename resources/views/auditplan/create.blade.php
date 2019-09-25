@@ -31,16 +31,12 @@
 <script>
 $(function () {
 
-    //Date range picker
-    $('#tanggal').daterangepicker({
-        singleDatePicker: true,
-        showDropdowns: true,
+    $('#datetimepicker4').datetimepicker({
+        format: 'L'
     });
-    //Timepicker
-    $('#waktu').datetimepicker({
-      format: "hh:mm:ss",
+    $('#datetimepicker3').datetimepicker({
+        format: 'hh:mm:ss'
     });
-
     $('#departement_id').on('change', function(){
        var kadept = $(this).children('option:selected').data('kadept');
        console.log(kadept);

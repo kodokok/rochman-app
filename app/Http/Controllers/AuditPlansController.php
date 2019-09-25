@@ -57,7 +57,7 @@ class AuditPlansController extends Controller
             'auditor_id' => 'required',
             'auditor_leader_id' => 'required',
             'tanggal' => 'required|date',
-            'waktu' => 'required|date_format:' . Carbon::parse($request->waktu)->format('H:i:s'),
+            'waktu' => 'required',
         ]);
 
         dd($request->all());

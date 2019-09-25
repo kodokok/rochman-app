@@ -34,67 +34,60 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                        <label for="departement_id">Departement</label>
-                        {{-- {!! Form::select('departement_id', $departement, null, ['class' => 'form-control', 'id' => 'departement_id',
-                        'placeholder' => 'Please Select' 'data-kadept'="{{$user->role->name}}"> ]) !!} --}}
-                        <select class="form-control {{ $errors->has('klausul')? ' is-invalid': '' }}" name="departement_id" id="departement_id">
-                            <option value="" {{ !$model->exists ? 'selected' : ''}} disabled>Please select</option>
-                            @foreach($departement as $dept)
-                                <option value="{{ $dept->id }}" data-kadept="{{ $dept->user->name }}"
-                                    @if ($model->exist)
-                                        @if ($model->departement->id === $dept->id)
-                                            selected
+                        <div class="form-group">
+                            <label for="departement_id">Departement</label>
+                            <select class="form-control {{ $errors->has('klausul')? ' is-invalid': '' }}" name="departement_id" id="departement_id">
+                                <option value="" {{ !$model->exists ? 'selected' : ''}} disabled>Please select</option>
+                                @foreach($departement as $dept)
+                                    <option value="{{ $dept->id }}" data-kadept="{{ $dept->user->name }}"
+                                        @if ($model->exist)
+                                            @if ($model->departement->id === $dept->id)
+                                                selected
+                                            @endif
                                         @endif
-                                    @endif
-                                >
-                                    {{ $dept->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('departement_id')
+                                    >
+                                        {{ $dept->name }}
+                                    </option>
+                                @endforeach
+                            </select>
                             <div id="error-departement_id" class="invalid-feedback">{{ $errors->first('departement_id') }}</div>
-                        @enderror
+                        </div>
                     </div>
                     <div class="col-sm-6">
-                            {{-- <div class="form-group"> --}}
-                        <label for="kadept">Kadept</label>
-                        @if ($model->exists)
-                            {!! Form::text('kadept', ($model->exists ? $model->departement->user->name : null), ['class' => 'form-control', 'id' => 'kadept', 'disabled']) !!}
-                        @else
-                            {!! Form::text('kadept', null, ['class' => 'form-control', 'id' => 'kadept', 'disabled']) !!}
-                        @endif
-                        {{-- <input class="form-control" type="text" name="kadept" id="kadept" disabled value="{{ $model->departement->user->name }}"> --}}
-                    {{-- </div> --}}
-
+                        <div class="form-group">
+                            <label for="kadept">Kadept</label>
+                            @if ($model->exists)
+                                {!! Form::text('kadept', ($model->exists ? $model->departement->user->name : null), ['class' => 'form-control', 'id' => 'kadept', 'disabled']) !!}
+                            @else
+                                {!! Form::text('kadept', null, ['class' => 'form-control', 'id' => 'kadept', 'disabled']) !!}
+                            @endif
+                        </div>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-6">
-                        <label for="tanggal">Tanggal</label>
-                        @if ($model->exists)
-                            {!! Form::text('tanggal', null, ['class' => 'form-control' . ($errors->has('tanggal')? ' is-invalid': ''), 'id' => 'tanggal']) !!}
-                        @else
-                            <input type="text" id="tanggal" class="form-control" name="tanggal">
-                        @endif
-                        @error('tanggal')
-                            <div id="error-tanggal" class="invalid-feedback">{{ $errors->first('tanggal') }}</div>
-                        @enderror
-                    </div>
-                    <div class="col-sm-6">
-                        <label for="waktu">Waktu</label>
-                        <div class="input-group date" id="waktu" data-target-input="nearest">
-                            <input type="text" name="waktu" id="waktu"
-                                class="form-control datetimepicker-input {{ $errors->has('waktu') ? ' is-invalid': '' }}"
-                                data-target="#waktu"
-                                value="{{ $model->exists ? $model->waktu : ''}}"
-                            />
-                            <div class="input-group-append" data-target="#waktu" data-toggle="datetimepicker">
-                                <div class="input-group-text"><i class="fas fa-clock"></i></div>
+                        <div class="form-group">
+                            <label for="tanggal">Tanggal</label>
+                            <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
+                                <input id="tanggal" name="tanggal" type="text" class="form-control datetimepicker-input {{ $errors->has('waktu') ? ' is-invalid': '' }}" data-target="#datetimepicker4"/>
+                                <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                                <div id="error-tanggal" class="invalid-feedback">{{ $errors->first('tanggal') }}</div>
                             </div>
                         </div>
-                        @error('waktu')
-                        <div id="error-waktu" class="invalid-feedback">{{ $errors->first('waktu') }}</div>
-                        @enderror
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="waktu">Waktu</label>
+                            <div class="input-group date" id="datetimepicker3" data-target-input="nearest">
+                                <input id="waktu" name="waktu" type="text" class="form-control datetimepicker-input {{ $errors->has('waktu') ? ' is-invalid': '' }}" data-target="#datetimepicker3"/>
+                                <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fas fa-clock"></i></div>
+                                </div>
+                                <div id="error-waktu" class="invalid-feedback">{{ $errors->first('waktu') }}</div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -124,8 +117,6 @@
                 </div>
                 <div class="form-group">
                     <label for="auditor_id">Auditor</label>
-                    {{-- {!! Form::select('auditor_id', $auditor, null, ['class' => 'form-control'. ($errors->has('auditee_id')? ' is-invalid': ', 'id' => 'auditor_id',
-                    'placeholder' => 'Please Select', $model->exists ? 'selected' : '']) !!} --}}
                     <select class="form-control {{ $errors->has('auditor_id') ? ' is-invalid': '' }}" name="auditor_id" id="auditor_id">
                         <option value="" {{ !$model->exists ? 'selected' : ''}} disabled>Please select</option>
                         @foreach($auditor as $key => $value)
