@@ -191,7 +191,9 @@ class AuditPlansController extends Controller
             ->addColumn('action', function ($model) {
                 return view('auditplan.action', [
                     'model' => $model,
-                    'url_show' => route('auditplan.show', $model->id),
+                    'url_confirm' => null,
+                    'url_change' => null,
+                    'url_reject' => null,
                     'url_edit' => route('auditplan.edit', $model->id),
                     'url_destroy' => route('auditplan.destroy', $model->id),
                 ]);
