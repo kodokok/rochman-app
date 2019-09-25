@@ -166,6 +166,11 @@ class AuditPlansController extends Controller
         return view('auditplan.confirm.index', compact(['model', 'departement', 'auditee', 'auditor', 'auditorLeader']));
     }
 
+    public function confirm($id)
+    {
+
+    }
+
     public function dataTable()
     {
         $model = AuditPlan::all();

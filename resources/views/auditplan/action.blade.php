@@ -1,6 +1,6 @@
 @if ($url_show)
     @if (!$model->konfirmasi_kadept)
-        <a href="{{ $url_show }}" class="btn btn-primary btn-sm btn-show" title="Confirm: {{ $model->objektif_audit }}"><i class="fas fa-check"></i></a></a>
+        <a href="{{ $url_show }}" class="btn btn-primary btn-sm btn-show" title="View: {{ $model->objektif_audit }}"><i class="fas fa-eye"></i></a></a>
     @endif
 @endif
 @if ($url_edit)
