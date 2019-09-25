@@ -159,12 +159,7 @@ class AuditPlansController extends Controller
     public function show($id)
     {
         $model = AuditPlan::findOrFail($id);
-        $auditee = User::with('roles')->pluck('name', 'id');
-        $auditor = User::role($this->auditorRoles)->pluck('name', 'id');
-        $auditorLeader = User::role($this->auditorLeaderRoles)->pluck('name', 'id');
-        $departement = null;
-        // dd($kadept);
-        return view('auditplan.show.index', compact(['model', 'departement', 'auditee', 'auditor', 'auditorLeader']));
+        return view('auditplan.show.index', compact(['model']));
     }
 
     public function change(Request $request, $id)

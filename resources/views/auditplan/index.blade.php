@@ -43,6 +43,7 @@
                                 <th>Auditor Leader</th>
                                 <th>Tanggal</th>
                                 <th>Waktu</th>
+                                <th>Remarks</th>
                                 <th style="width: 20%"></th>
                             </tr>
                         </thead>
@@ -91,6 +92,7 @@ $(document).ready(function() {
             {data: 'auditor_leader', name: 'auditor_leader'},
             {data: 'tanggal', name: 'tanggal'},
             {data: 'waktu', name: 'waktu'},
+            {data: 'remarks', name: 'remarks'},
             {data: 'action', name: 'action', 'searchable': false, 'orderable': false, 'className': 'text-center'}
         ]
     });
