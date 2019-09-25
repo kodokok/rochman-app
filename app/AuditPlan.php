@@ -13,16 +13,14 @@ class AuditPlan extends Model
     protected $dates = ['tanggal'];
     protected $times = ['waktu'];
 
-    public function getTanggalAttribute()
+    public function getTanggalAttribute($value)
     {
-        return Carbon::parse($this->attributes['tanggal'])
-           ->format('m-d-Y');
+        return Carbon::parse($value)->format('m-d-Y');
     }
 
-    public function getWaktuAttribute()
+    public function getWaktuAttribute($value)
     {
-        $attr = $this->attributes['waktu'] ? $this->attributes['waktu'] : Carbon::now();
-        return Carbon::parse($attr)->format('H:i:s');
+        return Carbon::parse($value)->format('H:i:s');
     }
 
     public function departement()

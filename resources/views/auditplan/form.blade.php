@@ -22,7 +22,7 @@
                     <label for="objektif_audit">Objektif Audit</label>
                     {!! Form::textarea('objektif_audit', null, ['class' => 'form-control' . ($errors->has('objektif_audit')? ' is-invalid': ''), 'id' => 'objektif_audit', 'rows' => 3]) !!}
                     @error('objektif_audit')
-                        <div id="error-objektif_audit" class="invalid-feedback">{{ $errors->first('objektif_audit') }}(</div>
+                        <div id="error-objektif_audit" class="invalid-feedback">{{ $errors->first('objektif_audit') }}</div>
                     @enderror
                 </div>
                 <div class="form-group">
@@ -36,18 +36,24 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="departement_id">Departement</label>
-                            <select class="form-control {{ $errors->has('klausul')? ' is-invalid': '' }}" name="departement_id" id="departement_id">
+                            <select class="form-control {{ $errors->has('departement_id')? ' is-invalid': '' }}" name="departement_id" id="departement_id">
                                 <option value="" {{ !$model->exists ? 'selected' : ''}} disabled>Please select</option>
                                 @foreach($departement as $dept)
-                                    <option value="{{ $dept->id }}" data-kadept="{{ $dept->user->name }}"
-                                        @if ($model->exist)
-                                            @if ($model->departement->id === $dept->id)
-                                                selected
-                                            @endif
-                                        @endif
-                                    >
-                                        {{ $dept->name }}
-                                    </option>
+                                    @if ($model->exist)
+                                        <option {{ $model->departement->id == $dept->id ? "selected" : "" }}
+                                            value="{{ $dept->id }}"
+                                            data-kadept="{{ $dept->user->name }}"
+                                            >
+                                            {{ $dept->name }}
+                                        </option>
+                                    @else
+                                        <option {{ old('departement_id') == $dept->id ? "selected" : "" }}
+                                            value="{{ $dept->id }}"
+                                            data-kadept="{{ $dept->user->name }}"
+                                        >
+                                            {{ $dept->name }}
+                                        </option>
+                                    @endif
                                 @endforeach
                             </select>
                             <div id="error-departement_id" class="invalid-feedback">{{ $errors->first('departement_id') }}</div>
@@ -69,7 +75,11 @@
                         <div class="form-group">
                             <label for="tanggal">Tanggal</label>
                             <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-                                <input id="tanggal" name="tanggal" type="text" class="form-control datetimepicker-input {{ $errors->has('waktu') ? ' is-invalid': '' }}" data-target="#datetimepicker4"/>
+                                <input id="tanggal" name="tanggal" type="text"
+                                    class="form-control datetimepicker-input {{ $errors->has('tanggal') ? ' is-invalid': '' }}"
+                                    data-target="#datetimepicker4"
+                                    value="{{ $model->exists ? $model->tanggal : old('waktu') }}"
+                                />
                                 <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
@@ -81,7 +91,11 @@
                         <div class="form-group">
                             <label for="waktu">Waktu</label>
                             <div class="input-group date" id="datetimepicker3" data-target-input="nearest">
-                                <input id="waktu" name="waktu" type="text" class="form-control datetimepicker-input {{ $errors->has('waktu') ? ' is-invalid': '' }}" data-target="#datetimepicker3"/>
+                                <input id="waktu" name="waktu" type="text"
+                                    class="form-control datetimepicker-input {{ $errors->has('waktu') ? ' is-invalid': '' }}"
+                                    data-target="#datetimepicker3"
+                                    value="{{ $model->exists ? $model->waktu : old('waktu') }}"
+                                />
                                 <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fas fa-clock"></i></div>
                                 </div>
@@ -111,34 +125,23 @@
 
                 <div class="form-group">
                     <label for="auditee_id">Auditee</label>
-                    {!! Form::select('auditee_id', $auditee, null, ['class' => 'form-control' . ($errors->has('auditee_id')? ' is-invalid': ''), 'id' => 'auditee_id',
-                    'placeholder' => 'Please Select']) !!}
+                    {!! Form::select('auditee_id', $auditee, old('auditee_id'),
+                        ['class' => 'form-control' . ($errors->has('auditee_id') ? ' is-invalid': ''), 'id' => 'auditee_id', 'placeholder' => 'Please Select'])
+                    !!}
                     <div id="error-auditee_id" class="invalid-feedback">{{ $errors->first('auditee_id') }}</div>
                 </div>
                 <div class="form-group">
                     <label for="auditor_id">Auditor</label>
-                    <select class="form-control {{ $errors->has('auditor_id') ? ' is-invalid': '' }}" name="auditor_id" id="auditor_id">
-                        <option value="" {{ !$model->exists ? 'selected' : ''}} disabled>Please select</option>
-                        @foreach($auditor as $key => $value)
-                            <option value="{{ $key}}"
-                                @if ($model->exist)
-                                    @if ($model->auditor->id === $key)
-                                        selected
-                                    @endif
-                                @endif
-                            >
-                                {{ $value }}
-                            </option>
-                        @endforeach
-                    </select>
+                    {!! Form::select('auditor_id', $auditee, old('auditor_id'),
+                        ['class' => 'form-control' . ($errors->has('auditor_id') ? ' is-invalid': ''), 'id' => 'auditor_id', 'placeholder' => 'Please Select'])
+                    !!}
                     <div id="error-auditor_id" class="invalid-feedback">{{ $errors->first('auditor_id') }}</div>
                 </div>
                 <div class="form-group">
                     <label for="auditor_leader_id">Auditor Leader</label>
-                    {!! Form::select('auditor_leader_id', $auditorLeader, null,
-                        ['class' => 'form-control' . ($errors->has('auditor_leader_id')? ' is-invalid': '')
-                        , 'id' => 'auditor_leader_id'
-                        , 'placeholder' => 'Please Select']) !!}
+                    {!! Form::select('auditor_leader_id', $auditorLeader, old('auditor_leader_id'),
+                        ['class' => 'form-control' . ($errors->has('auditor_leader_id') ? ' is-invalid': ''), 'id' => 'auditor_leader_id', 'placeholder' => 'Please Select'])
+                    !!}
                     <div id="error-auditor_leader_id" class="invalid-feedback">{{ $errors->first('auditor_leader_id') }}</div>
                 </div>
             </div>

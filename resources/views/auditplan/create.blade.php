@@ -32,14 +32,15 @@
 $(function () {
 
     $('#datetimepicker4').datetimepicker({
-        format: 'L'
+        format: 'MM-DD-YYYY',
     });
+
     $('#datetimepicker3').datetimepicker({
-        format: 'hh:mm:ss'
+        format: 'HH:mm:ss'
     });
+
     $('#departement_id').on('change', function(){
        var kadept = $(this).children('option:selected').data('kadept');
-       console.log(kadept);
        $('#kadept').val(kadept);
     });
 });
