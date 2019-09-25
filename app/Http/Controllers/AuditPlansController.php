@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AuditPlan;
 use App\Departement;
 use App\User;
+use Carbon\Carbon;
 use DataTables;
 use Illuminate\Http\Request;
 
@@ -56,7 +57,7 @@ class AuditPlansController extends Controller
             'auditor_id' => 'required',
             'auditor_leader_id' => 'required',
             'tanggal' => 'required|date',
-            'waktu' => 'required|date_format:H:i:s',
+            'waktu' => 'required|date_format:' . Carbon::parse($request->waktu)->format('H:i:s'),
         ]);
 
         dd($request->all());
