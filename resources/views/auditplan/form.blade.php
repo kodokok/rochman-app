@@ -25,7 +25,7 @@
                 </div>
                 <div class="form-group">
                     <label for="klausul">Klausul</label>
-                    {!! Form::textarea('klausul', null, ['class' => 'form-control', 'id' => 'klausul', 'rows' => 3]) !!}
+                    {!! Form::text('klausul', null, ['class' => 'form-control', 'id' => 'klausul']) !!}
                     <div id="error-klausul" class="invalid-feedback"></div>
                 </div>
                 <div class="row">
