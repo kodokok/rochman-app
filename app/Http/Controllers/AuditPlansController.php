@@ -14,6 +14,7 @@ class AuditPlansController extends Controller
     protected $auditeeRoles = ['auditor', 'auditor_leader', 'admin'];
     protected $auditorRoles = ['auditor', 'auditor_leader', 'admin'];
     protected $auditorLeaderRoles =  ['auditor_leader', 'admin'];
+    protected $statusPlan = ['Pending', 'Approved', 'Rejected'];
 
     /**
      * Display a listing of the resource.
@@ -170,16 +171,37 @@ class AuditPlansController extends Controller
     {
         $data = AuditPlan::findOrFail($id);
         // dd($request->action);
+
         switch ($request->action) {
             case 'Approve':
+                $data->update([
+                    'konfirmasi_kadept' => 1,
+                    'remarks' => $request->remarks
+                ]);
 
                 break;
+            case 'Change':
+                $this->validate($request, [
+                    'new_tanggal' => 'required|date_format:m-d-Y',
+                    'new_waktu' => 'required|date_format:H:i:s',
+                ]);
+
+                $new_tanggal =  Carbon::createFromFormat('m-d-Y', $request->new_tanggal)->format('Y-m-d');
+                $new_waktu =  Carbon::createFromFormat('H:i:s', $request->new_waktu)->format('H:i:s');
+
+                $data->update([
+                    'tanggal' => $new_tanggal,
+                    'waktu' => $new_waktu,
+                    'remarks' => $request->remarks
+                ]);
+
+                break;
+
             case 'Reject':
-
-                break;
-
-            default:
-
+                $data->update([
+                    'konfirmasi_kadept' => 2,
+                    'remarks' => $request->remarks
+                ]);
                 break;
         }
 

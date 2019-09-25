@@ -116,7 +116,7 @@
                         <div class="form-group">
                             <label for="new_tanggal">Tanggal</label>
                             <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-                                <input id="new_tanggal" name="tanggal" type="text"
+                                <input id="new_tanggal" name="new_tanggal" type="text"
                                     class="form-control datetimepicker-input {{ $errors->has('new_tanggal') ? ' is-invalid': '' }}"
                                     data-target="#datetimepicker4"
                                     value="{{ old('new_tanggal') }}"
@@ -132,7 +132,7 @@
                         <div class="form-group">
                             <label for="new_waktu">Waktu</label>
                             <div class="input-group date" id="datetimepicker3" data-target-input="nearest">
-                                <input id="new_waktu" name="waktu" type="text"
+                                <input id="new_waktu" name="new_waktu" type="text"
                                     class="form-control datetimepicker-input {{ $errors->has('new_waktu') ? ' is-invalid': '' }}"
                                     data-target="#datetimepicker3"
                                     value="{{ old('new_waktu') }}"
