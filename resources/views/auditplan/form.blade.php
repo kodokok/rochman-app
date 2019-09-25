@@ -3,9 +3,8 @@
 
     <div class="col-md-6">
     {!! Form::model($model, [
-        'route' => $model->exists ? ['auditplan.update', $model->id] : 'auditplan.store',
+        'route' => $model->exists ? ['auditplan.change', $model->id] : 'auditplan.store',
         'method' => $model->exists ? 'PUT' : 'POST',
-        'files' => true,
         'autocomplete' => 'off'
     ]) !!}
         <div class="card card-primary">
@@ -75,7 +74,7 @@
                         <div class="form-group">
                             <label for="tanggal">Tanggal</label>
                             <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-                                <input id="tanggal" name="tanggal" type="text"
+                                <input id="tanggal" name="new_tanggal" type="text"
                                     class="form-control datetimepicker-input {{ $errors->has('tanggal') ? ' is-invalid': '' }}"
                                     data-target="#datetimepicker4"
                                     value="{{ $model->exists ? $model->tanggal : old('tanggal') }}"

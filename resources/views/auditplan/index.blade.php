@@ -37,7 +37,7 @@
                                 <th>Objektif Audit</th>
                                 <th>Klausul</th>
                                 <th>Departement</th>
-                                <th>Konfirmasi Kadept</th>
+                                <th>Status</th>
                                 <th>Auditee</th>
                                 <th>Auditor</th>
                                 <th>Auditor Leader</th>
@@ -77,7 +77,13 @@ $(document).ready(function() {
             {data: 'konfirmasi_kadept',
                 name: 'konfirmasi_kadept',
                 render: function (data, type, row) {
-                    return (data == 1) ? '<span class="badge badge-success">Yes</span>' : '<span class="badge badge-warning">No</span>';
+                    if (data == 1) {
+                        return '<span class="badge badge-success">Approved</span>';
+                    } else if (data == 2) {
+                        return '<span class="badge badge-danger">Rejected</span>'
+                    } else {
+                        return '<span class="badge badge-warning">Pending</span>';
+                    }
                 }, 'className': 'text-center'
             },
             {data: 'auditee', name: 'auditee'},

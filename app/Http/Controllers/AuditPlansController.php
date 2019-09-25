@@ -161,14 +161,29 @@ class AuditPlansController extends Controller
         $auditee = User::with('roles')->pluck('name', 'id');
         $auditor = User::role($this->auditorRoles)->pluck('name', 'id');
         $auditorLeader = User::role($this->auditorLeaderRoles)->pluck('name', 'id');
-        $departement = Departement::all();
+        $departement = null;
         // dd($kadept);
-        return view('auditplan.confirm.index', compact(['model', 'departement', 'auditee', 'auditor', 'auditorLeader']));
+        return view('auditplan.show.index', compact(['model', 'departement', 'auditee', 'auditor', 'auditorLeader']));
     }
 
-    public function confirm($id)
+    public function change(Request $request, $id)
     {
+        $data = AuditPlan::findOrFail($id);
+        // dd($request->action);
+        switch ($request->action) {
+            case 'Approve':
 
+                break;
+            case 'Reject':
+
+                break;
+
+            default:
+
+                break;
+        }
+
+        return redirect(route('auditplan.index'));
     }
 
     public function dataTable()
@@ -191,9 +206,7 @@ class AuditPlansController extends Controller
             ->addColumn('action', function ($model) {
                 return view('auditplan.action', [
                     'model' => $model,
-                    'url_confirm' => null,
-                    'url_change' => null,
-                    'url_reject' => null,
+                    'url_show' => route('auditplan.show', $model->id),
                     'url_edit' => route('auditplan.edit', $model->id),
                     'url_destroy' => route('auditplan.destroy', $model->id),
                 ]);

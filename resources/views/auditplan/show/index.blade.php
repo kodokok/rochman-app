@@ -21,7 +21,7 @@
 
 <!-- Main content -->
 <section class="content">
-    @include('auditplan.confirm.form')
+    @include('auditplan.show.form')
 </section>
 <!-- /.content -->
 
