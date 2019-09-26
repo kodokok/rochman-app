@@ -1,13 +1,12 @@
 <!-- Main content -->
 <div class="row">
-
     <div class="col-md-6">
         {!! Form::model($model, [
         'route' => ['auditplan.change', $model->id],
         'method' => 'PUT',
         'autocomplete' => 'off'
         ]) !!}
-        <div class="card card-secondary">
+        <div class="card card-default">
             <div class="card-header">
                 <h3 class="card-title">General</h3>
                 <div class="card-tools">
@@ -19,61 +18,30 @@
             </div>
             <div class="card-body">
                 <div class="form-group">
-                    <div class="row">
-                        <label for="objektif_audit" class="col-sm-2 col-form-label">Objektif Audit</label>
-                        <div class="col-sm-10">
-                            {!! Form::textarea('objektif_audit',  $model->objektif_audit, ['class' => 'form-control', 'id' => 'objektif_audit', 'rows' => 3, 'disabled']) !!}
-                        </div>
-                    </div>
+                    <label for="objektif_audit">Objektif Audit</label>
+                    {!! Form::textarea('objektif_audit',  $model->objektif_audit, ['class' => 'form-control', 'id' => 'objektif_audit', 'rows' => 3, 'disabled']) !!}
+                </div>
+                <div class="form-group">
+                    <label for="klausul">Klausul</label>
+                    {!! Form::text('klausul', $model->klausul, ['class' => 'form-control', 'id' => 'klausul', 'disabled']) !!}
                 </div>
                 <div class="form-group">
                     <div class="row">
-                        <label for="klausul" class="col-sm-2 col-form-label">Klausul</label>
-                        <div class="col-sm-10">
-                        {!! Form::text('klausul', $model->klausul, ['class' => 'form-control', 'id' => 'klausul', 'disabled']) !!}
+                        <div class="col-sm-6">
+                            <label for="departement_id">Departement</label>
+                            {!! Form::text('departement_id', $model->departement->name, ['class' => 'form-control', 'id' => 'departement_id', 'disabled']) !!}
                         </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <label for="departement_id" class="col-sm-2 col-form-label">Departement</label>
-                        <div class="col-sm-5">
-                                {!! Form::text('departement_id', $model->departement->name, ['class' => 'form-control', 'id' => 'departement_id', 'disabled']) !!}
-                        </div>
-                        <div class="col-sm-5">
+                        <div class="col-sm-6">
+                            <label for="departement_id">Kadept</label>
                             {!! Form::text('kadept', $model->departement->user->name, ['class' => 'form-control', 'id' => 'kadept', 'disabled']) !!}
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="row">
-                        <label for="auditee_id" class="col-sm-2 col-form-label">Auditee</label>
-                        <div class="col-sm-10">
-                        {!! Form::text('auditee_id', $model->auditee->name, ['class' => 'form-control', 'id' => 'auditee_id', 'disabled']) !!}
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <label for="auditor_id" class="col-sm-2 col-form-label">Auitor</label>
-                        <div class="col-sm-10">
-                            {!! Form::text('auditor_id', $model->auditor->name, ['class' => 'form-control', 'id' => 'auditor_id', 'disabled']) !!}
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <label for="auditor_leader_id" class="col-sm-2 col-form-label">Auditor Leader</label>
-                        <div class="col-sm-10">
-                            {!! Form::text('auditor_leader_id', $model->auditorLeader->name, ['class' => 'form-control', 'id' => 'auditor_leader_id', 'disabled']) !!}
-                        </div>
-                    </div>
-                </div>
 
-                <div class="form-group row">
-                    <label for="schedule" class="col-sm-2 col-form-label">Schedule</label>
-                    <div class="col-sm-5">
-                        <div class="form-group">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label for="tanggal">Tanggal</label>
                             <div class="input-group">
                                 <div class="input-group-append">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -81,9 +49,8 @@
                                 {!! Form::text('tanggal', $model->tanggal, ['class' => 'form-control', 'id' => 'tanggal', 'disabled']) !!}
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-5">
-                        <div class="form-group">
+                        <div class="col-sm-4">
+                            <label for="waktu">Waktu</label>
                             <div class="input-group">
                                 <div class="input-group-append">
                                     <div class="input-group-text"><i class="fa fa-clock"></i></div>
@@ -91,11 +58,43 @@
                                 {!! Form::text('waktu',  $model->waktu, ['class' => 'form-control', 'id' => 'waktu', 'disabled']) !!}
                             </div>
                         </div>
+                        <div class="col-sm-4">
+                            <label for="approval">Approval Status</label>
+                            {!! Form::text('approval', $model->approval, ['class' => 'form-control', 'id' => 'approval', 'disabled']) !!}
+                        </div>
                     </div>
                 </div>
-
             </div>
             <!-- /.card-body -->
+        </div>
+        <div class="card card-default">
+            <div class="card-header">
+                <h3 class="card-title">Team Audit</h3>
+                <div class="card-tools">
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fas fa-minus"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label for="auditee_id">Auditee</label>
+                            {!! Form::text('auditee_id', $model->auditee->name, ['class' => 'form-control', 'id' => 'auditee_id', 'disabled']) !!}
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="auditor_id">Auditor</label>
+                            {!! Form::text('auditor_id', $model->auditor->name, ['class' => 'form-control', 'id' => 'auditor_id', 'disabled']) !!}
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="auditor_leader_id">Auditor Leader</label>
+                            {!! Form::text('auditor_leader_id', $model->auditorLeader->name, ['class' => 'form-control', 'id' => 'auditor_leader_id', 'disabled']) !!}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- /.card -->
     </div>
@@ -117,7 +116,7 @@
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
                     <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
-                    <label class="custom-control-label" for="customRadioInline2">Change Schedule</label>
+                    <label class="custom-control-label" for="customRadioInline2">Reschedule</label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
                     <input type="radio" id="customRadioInline3" name="customRadioInline1" class="custom-control-input">
@@ -128,7 +127,7 @@
         </div>
         <div class="card card-info">
             <div class="card-header">
-                <h3 class="card-title">Change Schedule</h3>
+                <h3 class="card-title">Schedule Request</h3>
                 <div class="card-tools">
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -194,7 +193,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-12">
+    <div class="col-12 mb-2">
         <a href="{{ route('auditplan.index') }}" class="btn btn-secondary">Cancel</a>
         <input type="submit" name="action" value="Confirm" class="btn btn-success float-right mr-2" style="width: 120px;">
         {{-- <input type="submit" name="action" value="Change" class="btn btn-info float-right mr-2" style="width: 120px;">
