@@ -68,7 +68,7 @@ $(document).ready(function() {
     $('#datatables').DataTable({
         responsive: true,
         processing: true,
-        serverSide: true,
+        scrollX: true,
         ajax: "{{ route('table.auditplan') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'id'},
