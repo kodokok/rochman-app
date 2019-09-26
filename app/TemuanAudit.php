@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\AuditPlan;
+use Illuminate\Support\Arr;
 
 class TemuanAudit extends Model
 {
