@@ -102,6 +102,32 @@
     <div class="col-md-6">
         <div class="card card-primary">
             <div class="card-header">
+                <h3 class="card-title">Action</h3>
+                <div class="card-tools">
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fas fa-minus"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body text-center">
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" checked>
+                    <label class="custom-control-label" for="customRadioInline1">Approve</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadioInline2">Change Schedule</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline3" name="customRadioInline1" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadioInline3">Reject</label>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <div class="card card-info">
+            <div class="card-header">
                 <h3 class="card-title">Change Schedule</h3>
                 <div class="card-tools">
                     <div class="card-tools">
@@ -148,7 +174,7 @@
             </div>
             <!-- /.card-body -->
         </div>
-        <div class="card card-primary">
+        <div class="card card-info">
             <div class="card-header">
                 <h3 class="card-title">Remarks</h3>
                 <div class="card-tools">
@@ -160,7 +186,7 @@
             </div>
             <div class="card-body mb-3">
                 <div class="form-group">
-                    {!! Form::textarea('remarks', null, ['class' => 'form-control', 'id' => 'remarks', 'rows' => 8, 'placeholder' => 'Enter remarks...']) !!}
+                    {!! Form::textarea('remarks', null, ['class' => 'form-control', 'id' => 'remarks', 'rows' => 4, 'placeholder' => 'Enter remarks...']) !!}
                 </div>
             </div>
             <!-- /.card-body -->
@@ -170,9 +196,9 @@
 <div class="row">
     <div class="col-12">
         <a href="{{ route('auditplan.index') }}" class="btn btn-secondary">Cancel</a>
-        <input type="submit" name="action" value="Approve" class="btn btn-success float-right mr-2" style="width: 120px;">
-        <input type="submit" name="action" value="Change" class="btn btn-info float-right mr-2" style="width: 120px;">
-        <input type="submit" name="action" value="Reject" class="btn btn-danger float-right mr-2" style="width: 120px;">
+        <input type="submit" name="action" value="Confirm" class="btn btn-success float-right mr-2" style="width: 120px;">
+        {{-- <input type="submit" name="action" value="Change" class="btn btn-info float-right mr-2" style="width: 120px;">
+        <input type="submit" name="action" value="Reject" class="btn btn-danger float-right mr-2" style="width: 120px;"> --}}
     </div>
 </div>
 {!! Form::close() !!}
