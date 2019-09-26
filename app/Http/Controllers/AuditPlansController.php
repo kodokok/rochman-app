@@ -233,6 +233,9 @@ class AuditPlansController extends Controller
             ->addColumn('auditor_leader', function ($model) {
                 return $model->auditorLeader->name;
             })
+            ->addColumn('temuan', function ($model) {
+                return $model->temuanaudits->count();
+            })
             ->addColumn('action', function ($model) {
                 return view('auditplan.action', [
                     'model' => $model,

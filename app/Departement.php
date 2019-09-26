@@ -15,8 +15,8 @@ class Departement extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function auditPlans()
+    public function auditplans()
     {
-        return $this->hasMany(AuditPlan::class);
+        return $this->hasMany(AuditPlan::class, 'auditplan_id');
     }
 }

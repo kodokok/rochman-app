@@ -14,7 +14,7 @@ class TemuanAuditTableSeeder extends Seeder
     public function run()
     {
         TemuanAudit::create([
-            'auditplan_id' => 1,
+            'audit_plan_id' => 1,
             'status' => 0,
             'ketidaksesuaian' => 'auditplan 1, ini tidak sesuai ini pertama',
             'akar_masalah' => 'auditplan 1, ini akar masalah pertama',
@@ -28,7 +28,7 @@ class TemuanAuditTableSeeder extends Seeder
             'approve_auditor_lead' => 0,
         ]);
         TemuanAudit::create([
-            'auditplan_id' => 1,
+            'audit_plan_id' => 1,
             'status' => 1,
             'ketidaksesuaian' => 'auditplan 1, ini tidak sesuai ini kedua',
             'akar_masalah' => 'auditplan 1, ini akar masalah kedua',
@@ -43,7 +43,7 @@ class TemuanAuditTableSeeder extends Seeder
         ]);
 
         TemuanAudit::create([
-            'auditplan_id' => 2,
+            'audit_plan_id' => 2,
             'status' => 1,
             'ketidaksesuaian' => 'auditplan 2,ini tidak sesuai ini pertama',
             'akar_masalah' => 'auditplan 2,ini akar masalah pertama',
@@ -57,7 +57,7 @@ class TemuanAuditTableSeeder extends Seeder
             'approve_auditor_lead' => 0,
         ]);
         TemuanAudit::create([
-            'auditplan_id' => 2,
+            'audit_plan_id' => 2,
             'status' => 0,
             'ketidaksesuaian' => 'auditplan 2,ini tidak sesuai ini kedua',
             'akar_masalah' => 'auditplan 2,ini akar masalah pertama',
