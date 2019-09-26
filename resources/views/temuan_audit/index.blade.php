@@ -64,7 +64,30 @@
 @push('scripts')
 <script>
 $(document).ready(function() {
-
+    $('#datatables').DataTable({
+        responsive: true,
+        processing: true,
+        scrollX: true,
+        ajax: "{{ route('table.temuanAudit') }}",
+        columns: [
+            {data: 'DT_RowIndex', name: 'id'},
+            {data: 'objektif_audit', name: 'objektif_audit'},
+            {data: 'klausul', name: 'lokasi'},
+            {data: 'departement', name: 'departement'},
+            {data: 'approval', name: 'approval',
+                render: function ( data, type, row ) {
+                    return data.toUpperCase();
+                }
+            },
+            {data: 'auditee', name: 'auditee'},
+            {data: 'auditor', name: 'auditor'},
+            {data: 'auditor_leader', name: 'auditor_leader'},
+            {data: 'tanggal', name: 'tanggal'},
+            {data: 'waktu', name: 'waktu'},
+            {data: 'remarks', name: 'remarks'},
+            {data: 'action', name: 'action', 'searchable': false, 'orderable': false, 'className': 'text-center'}
+        ]
+    });
 });
 </script>
 @endpush
