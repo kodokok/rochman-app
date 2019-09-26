@@ -40,6 +40,7 @@
                                 <th>Tindakan Perbaikan</th>
                                 <th>Tindakan Pencegahan</th>
                                 <th>Review</th>
+                                <th>Status</th>
                                 <th style="width: 20%"></th>
                             </tr>
                         </thead>
