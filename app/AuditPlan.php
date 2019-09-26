@@ -6,12 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 use App\Departement;
 use App\User;
 use Carbon\Carbon;
+use Illuminate\Support\Arr;
 
 class AuditPlan extends Model
 {
     protected $guarded = [];
     protected $dates = ['tanggal'];
     protected $times = ['waktu'];
+    protected $approvalStatus = ['Pending', 'Approved', 'Rejected'];
+
+    public function getApprovalAttribute($value)
+    {
+        return Arr::get($this->approvalStatus, $value);
+    }
 
     public function getTanggalAttribute($value)
     {

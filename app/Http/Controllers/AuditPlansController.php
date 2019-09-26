@@ -14,7 +14,6 @@ class AuditPlansController extends Controller
     protected $auditeeRoles = ['auditor', 'auditor_leader', 'admin'];
     protected $auditorRoles = ['auditor', 'auditor_leader', 'admin'];
     protected $auditorLeaderRoles =  ['auditor_leader', 'admin'];
-    protected $statusPlan = ['Pending', 'Approved', 'Rejected'];
 
     /**
      * Display a listing of the resource.
@@ -159,6 +158,8 @@ class AuditPlansController extends Controller
     public function show($id)
     {
         $auditPlan = AuditPlan::findOrFail($id);
+        // $approval = $this->approvalStatus[$auditPlan->approval];
+        // dd($auditPlan->approval);
         return view('auditplan.confirm', compact(['auditPlan']));
     }
 
