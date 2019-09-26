@@ -26,6 +26,7 @@ class RolesAndPermissionsSeeder extends Seeder
         Role::create(['name'=>'auditee']);
         Role::create(['name'=>'auditor']);
         Role::create(['name'=>'auditor_leader']);
+        Role::create(['name'=>'direksi']);
 
 
         // or may be done by chaining

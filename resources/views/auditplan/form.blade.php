@@ -19,7 +19,7 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="objektif_audit">Objektif Audit</label>
-                    {!! Form::textarea('objektif_audit', null, ['class' => 'form-control' . ($errors->has('objektif_audit')? ' is-invalid': ''), 'id' => 'objektif_audit', 'rows' => 3]) !!}
+                    {!! Form::textarea('objektif_audit', null, ['class' => 'form-control' . ($errors->has('objektif_audit') ? ' is-invalid': ''), 'id' => 'objektif_audit', 'rows' => 3]) !!}
                     @error('objektif_audit')
                         <div id="error-objektif_audit" class="invalid-feedback">{{ $errors->first('objektif_audit') }}</div>
                     @enderror
@@ -74,7 +74,7 @@
                         <div class="form-group">
                             <label for="tanggal">Tanggal</label>
                             <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-                                <input id="tanggal" name="new_tanggal" type="text"
+                                <input id="tanggal" name="tanggal" type="text"
                                     class="form-control datetimepicker-input {{ $errors->has('tanggal') ? ' is-invalid': '' }}"
                                     data-target="#datetimepicker4"
                                     value="{{ $model->exists ? $model->tanggal : old('tanggal') }}"

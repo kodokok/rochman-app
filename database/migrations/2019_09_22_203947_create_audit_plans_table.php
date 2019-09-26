@@ -18,7 +18,7 @@ class CreateAuditPlansTable extends Migration
             $table->string('objektif_audit')->nullable();
             $table->string('klausul')->nullable();
             $table->unsignedBigInteger('departement_id');
-            $table->unsignedTinyInteger('konfirmasi_kadept');
+            $table->unsignedTinyInteger('approval');
             $table->text('remarks')->nullable();
 
             $table->unsignedBigInteger('auditee_id');

@@ -16,6 +16,7 @@ class CreateTemuanAuditTable extends Migration
         Schema::create('temuan_audit', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
             $table->unsignedBigInteger('audit_plan');
+            $table->unsignedTinyInteger('status');
             $table->string('ketidaksesuaian')->nullable();
             $table->string('akar_masalah')->nullable();
             $table->string('tindakan_perbaikan')->nullable();
