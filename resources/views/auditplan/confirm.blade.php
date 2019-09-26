@@ -6,13 +6,13 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>View Audit Plan</h1>
+                <h1>Confirm Audit Plan</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('app') }}">Home</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('auditplan.index') }}">Audit Plan</a></li>
-                    <li class="breadcrumb-item active">View</li>
+                    <li class="breadcrumb-item active">Confirm</li>
                 </ol>
             </div>
         </div>
@@ -22,7 +22,7 @@
 <!-- Main content -->
 <section class="content">
     <!-- Main content -->
-<div class="row">
+    <div class="row">
         @include('auditplan.details')
         <div class="col-md-6">
             {!! Form::model($auditPlan, [
@@ -127,8 +127,6 @@
         <div class="col-12 mb-2">
             <a href="{{ route('auditplan.index') }}" class="btn btn-secondary">Cancel</a>
             <input type="submit" name="action" value="Confirm" class="btn btn-success float-right mr-2" style="width: 120px;">
-            {{-- <input type="submit" name="action" value="Change" class="btn btn-info float-right mr-2" style="width: 120px;">
-            <input type="submit" name="action" value="Reject" class="btn btn-danger float-right mr-2" style="width: 120px;"> --}}
         </div>
     </div>
     {!! Form::close() !!}
