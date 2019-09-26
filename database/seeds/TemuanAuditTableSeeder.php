@@ -11,6 +11,6 @@ class TemuanAuditTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+
     }
 }
