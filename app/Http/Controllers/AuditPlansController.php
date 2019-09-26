@@ -158,8 +158,8 @@ class AuditPlansController extends Controller
      */
     public function show($id)
     {
-        $model = AuditPlan::findOrFail($id);
-        return view('auditplan.show.index', compact(['model']));
+        $auditPlan = AuditPlan::findOrFail($id);
+        return view('auditplan.confirm', compact(['auditPlan']));
     }
 
     public function change(Request $request, $id)
