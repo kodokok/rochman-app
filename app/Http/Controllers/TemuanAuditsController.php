@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AuditPlan;
 use Illuminate\Http\Request;
 
 class TemuanAuditsController extends Controller
@@ -23,7 +24,8 @@ class TemuanAuditsController extends Controller
      */
     public function create()
     {
-        //
+        $model = AuditPlan::findOrFail(1);
+        return view('temuan.create', compact(['model']));
     }
 
     /**
