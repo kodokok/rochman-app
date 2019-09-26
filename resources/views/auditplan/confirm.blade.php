@@ -26,7 +26,7 @@
         @include('auditplan.details')
         <div class="col-md-6">
             {!! Form::model($auditPlan, [
-                'route' => ['auditplan.change', $auditPlan->id],
+                'route' => ['auditplan.confirm', $auditPlan->id],
                 'method' => 'PUT',
                 'autocomplete' => 'off'
             ]) !!}
@@ -35,17 +35,22 @@
                     <h3 class="card-title">Action</h3>
                 </div>
                 <div class="card-body text-center">
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" value="approve" checked>
-                        <label class="custom-control-label" for="customRadioInline1">Approve</label>
+
+                    <div class="custom-control custom-radio custom-control-inline {{ $auditPlan->approval === 'pending' ? 'd-none': '' }}">
+                        <input type="radio" id="customRadioInline1" name="action" class="custom-control-input" value="pending" {{ old('action') ? 'checked': '' }}>
+                        <label class="custom-control-label" for="customRadioInline1">Pending</label>
                     </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input" value="reschedule">
-                        <label class="custom-control-label" for="customRadioInline2">Reschedule</label>
+                    <div class="custom-control custom-radio custom-control-inline {{ $auditPlan->approval === 'approve' ? 'd-none': '' }}">
+                        <input type="radio" id="customRadioInline2" name="action" class="custom-control-input" value="approve" {{ old('action') ? 'checked': '' }}>
+                        <label class="custom-control-label" for="customRadioInline2">Approve</label>
                     </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="customRadioInline3" name="customRadioInline1" class="custom-control-input" value="reject">
-                        <label class="custom-control-label" for="customRadioInline3">Reject</label>
+                    <div class="custom-control custom-radio custom-control-inline {{ $auditPlan->approval === 'reschedule' ? 'd-none': '' }}">
+                        <input type="radio" id="customRadioInline3" name="action" class="custom-control-input" value="reschedule" {{ old('action') ? 'checked': '' }}>
+                        <label class="custom-control-label" for="customRadioInline3">Reschedule</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline {{ $auditPlan->approval === 'reject' ? 'd-none': '' }}">
+                        <input type="radio" id="customRadioInline4" name="action" class="custom-control-input" value="reject" {{ old('action') ? 'checked': '' }}>
+                        <label class="custom-control-label" for="customRadioInline4">Reject</label>
                     </div>
                 </div>
                 <!-- /.card-body -->
@@ -62,7 +67,8 @@
                 </div>
                 <div class="card-body mb-3">
                     <div class="form-group">
-                        {!! Form::textarea('remarks', null, ['class' => 'form-control', 'id' => 'remarks', 'rows' => 4, 'placeholder' => 'Enter remarks...']) !!}
+                        {!! Form::textarea('remarks', null, ['class' => 'form-control' . ($errors->has('remarks') ? ' is-invalid': ''), 'id' => 'remarks', 'rows' => 4, 'placeholder' => 'Enter remarks...']) !!}
+                        <div id="error-remarks" class="invalid-feedback">{{ $errors->first('remarks') }}</div>
                     </div>
                 </div>
                 <!-- /.card-body -->
@@ -115,7 +121,7 @@
     <div class="row">
         <div class="col-12 mb-2">
             <a href="{{ route('auditplan.index') }}" class="btn btn-secondary">Cancel</a>
-            <input type="submit" name="action" value="Confirm" class="btn btn-success float-right mr-2" style="width: 120px;">
+            <input type="submit" value="Confirm" class="btn btn-success float-right mr-2" style="width: 120px;">
         </div>
     </div>
     {!! Form::close() !!}
@@ -137,13 +143,6 @@ $(function () {
         } else {
             target.addClass('d-none');
         }
-
-        // console.log(targetBox);
-        // $(".card").not(targetBox).hide();
-        // if (targetBox) {
-        //     $('.' + inputValue).hide();
-        // }
-        // $('.' + inputValue).show();
     });
 
     $('#datetimepicker4').datetimepicker({

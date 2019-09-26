@@ -75,7 +75,11 @@ $(document).ready(function() {
             {data: 'objektif_audit', name: 'objektif_audit'},
             {data: 'klausul', name: 'lokasi'},
             {data: 'departement', name: 'departement'},
-            {data: 'approval', name: 'approval'},
+            {data: 'approval', name: 'approval',
+                render: function ( data, type, row ) {
+                    return data.toUpperCase();
+                }
+            },
             {data: 'auditee', name: 'auditee'},
             {data: 'auditor', name: 'auditor'},
             {data: 'auditor_leader', name: 'auditor_leader'},

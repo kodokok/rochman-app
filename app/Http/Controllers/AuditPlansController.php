@@ -163,46 +163,50 @@ class AuditPlansController extends Controller
         return view('auditplan.confirm', compact(['auditPlan']));
     }
 
-    public function change(Request $request, $id)
+    public function confirm(Request $request, $id)
     {
+
         $auditPlan = AuditPlan::findOrFail($id);
-        // dd($request->action);
 
         switch ($request->action) {
-            case 'Approve':
+            case 'pending':
                 $auditPlan->update([
-                    'approval' => 1,
+                    'approval' => 0,
                     'remarks' => $request->remarks
                 ]);
 
                 break;
-            case 'Change':
+            case 'reschedule':
+                $this->validate($request, [
+                    'new_tanggal' => 'required|date_format:m-d-Y',
+                    'new_waktu' => 'required|date_format:H:i:s',
+                    'remarks' => 'required|string'
+                ]);
 
-                $data = $request->only(['new_tanggal', 'new_waktu']);
-                // dd($data);
-                if (collect($data)->isNotEmpty()) {
-                    $this->validate($request, [
-                        'new_tanggal' => 'required|date_format:m-d-Y',
-                        'new_waktu' => 'required|date_format:H:i:s',
-                    ]);
+                $new_tanggal =  Carbon::createFromFormat('m-d-Y', $request->new_tanggal)->format('Y-m-d');
+                $new_waktu =  Carbon::createFromFormat('H:i:s', $request->new_waktu)->format('H:i:s');
 
-                    $new_tanggal =  Carbon::createFromFormat('m-d-Y', $request->new_tanggal)->format('Y-m-d');
-                    $new_waktu =  Carbon::createFromFormat('H:i:s', $request->new_waktu)->format('H:i:s');
-
-                    $data['tanggal'] = $new_tanggal;
-                    $data['waktu'] = $new_waktu;
-                }
-
-                $data['approval'] = 0;
-                $data['remarks'] = $request->remarks;
-
-                $auditPlan->update($data);
+                $auditPlan->update([
+                    'tanggal' => $new_tanggal,
+                    'waktu' => $new_waktu,
+                    'remarks' => $request->remarks,
+                    'approval' => 1,
+                ]);
 
                 break;
-
-            case 'Reject':
+            case 'approve':
                 $auditPlan->update([
                     'approval' => 2,
+                    'remarks' => $request->remarks
+                ]);
+
+                break;
+            case 'reject':
+                $this->validate($request, [
+                    'remarks' => 'required|string'
+                ]);
+                $auditPlan->update([
+                    'approval' => 3,
                     'remarks' => $request->remarks
                 ]);
 

@@ -53,7 +53,7 @@
                     </div>
                     <div class="col-sm-4">
                         <label for="approval">Approval Status</label>
-                        {!! Form::text('approval', $auditPlan->approval, ['class' => 'form-control', 'id' => 'approval', 'disabled']) !!}
+                        {!! Form::text('approval', strtoupper($auditPlan->approval), ['class' => 'form-control', 'id' => 'approval', 'disabled']) !!}
                     </div>
                 </div>
             </div>

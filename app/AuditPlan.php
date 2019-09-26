@@ -13,7 +13,7 @@ class AuditPlan extends Model
     protected $guarded = [];
     protected $dates = ['tanggal'];
     protected $times = ['waktu'];
-    protected $approvalStatus = ['Pending', 'Approved', 'Rejected'];
+    protected $approvalStatus = ['pending', 'reschedule', 'approve', 'reject'];
 
     public function getApprovalAttribute($value)
     {
