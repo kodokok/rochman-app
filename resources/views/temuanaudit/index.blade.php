@@ -66,8 +66,8 @@
 $(document).ready(function() {
     $('#datatables').DataTable({
         responsive: true,
-        // processing: true,
-        // scrollX: true,
+        processing: true,
+        scrollX: true,
         ajax: "{{ route('table.temuanaudits') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'id'},
@@ -79,11 +79,11 @@ $(document).ready(function() {
             {data: 'tindakan_pencegahan', name: 'tindakan_pencegahan'},
             {data: 'duedate_pencegahan', name: 'duedate_pencegahan'},
             {data: 'status', name: 'status',
-            {data: 'review', name: 'review'},
                 render: function ( data, type, row ) {
                     return data.toUpperCase();
                 }
             },
+            {data: 'review', name: 'review'},
             {data: 'action', name: 'action', 'searchable': false, 'orderable': false, 'className': 'text-center'}
         ]
     });

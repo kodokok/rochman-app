@@ -17,7 +17,7 @@ class TemuanAudit extends Model
         return Arr::get($this->statusList, $value);
     }
 
-    public function auditplan()
+    public function audit_plan()
     {
         return $this->belongsTo(AuditPlan::class);
     }
