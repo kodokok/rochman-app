@@ -171,7 +171,7 @@
     <div class="col-12">
         <a href="{{ route('auditplan.index') }}" class="btn btn-secondary">Cancel</a>
         <input type="submit" name="action" value="Approve" class="btn btn-success float-right mr-2" style="width: 120px;">
-        <input type="submit" name="action" value="Change" class="btn btn-warning float-right mr-2" style="width: 120px;">
+        <input type="submit" name="action" value="Change" class="btn btn-info float-right mr-2" style="width: 120px;">
         <input type="submit" name="action" value="Reject" class="btn btn-danger float-right mr-2" style="width: 120px;">
     </div>
 </div>
