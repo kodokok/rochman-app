@@ -69,7 +69,7 @@ class AuditPlansController extends Controller
             'objektif_audit' => $request->objektif_audit,
             'klausul' => $request->klausul,
             'departement_id' => $request->departement_id,
-            'konfirmasi_kadept' => 0,
+            'approval' => 0,
             'auditee_id' => $request->auditee_id,
             'auditor_id' => $request->auditor_id,
             'auditor_leader_id' => $request->auditor_leader_id,
@@ -170,7 +170,7 @@ class AuditPlansController extends Controller
         switch ($request->action) {
             case 'Approve':
                 $auditPlan->update([
-                    'konfirmasi_kadept' => 1,
+                    'approval' => 1,
                     'remarks' => $request->remarks
                 ]);
 
@@ -192,7 +192,7 @@ class AuditPlansController extends Controller
                     $data['waktu'] = $new_waktu;
                 }
 
-                $data['konfirmasi_kadept'] = 0;
+                $data['approval'] = 0;
                 $data['remarks'] = $request->remarks;
 
                 $auditPlan->update($data);
@@ -201,7 +201,7 @@ class AuditPlansController extends Controller
 
             case 'Reject':
                 $auditPlan->update([
-                    'konfirmasi_kadept' => 2,
+                    'approval' => 2,
                     'remarks' => $request->remarks
                 ]);
 

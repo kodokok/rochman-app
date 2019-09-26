@@ -42,5 +42,7 @@ Route::group(['middleware' => ['auth']], function () {
         ]);
         Route::resource('auditplan', 'AuditPlansController');
         Route::put('auditplan/{auditPlan}/change', 'AuditPlansController@change')->name('auditplan.change');
+
+        Route::resource('temuan', 'TemuanAuditsController');
     });
 });

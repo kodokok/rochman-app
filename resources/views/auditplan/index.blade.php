@@ -37,7 +37,7 @@
                                 <th>Objektif Audit</th>
                                 <th>Klausul</th>
                                 <th>Departement</th>
-                                <th>Status</th>
+                                <th>Approval</th>
                                 <th>Auditee</th>
                                 <th>Auditor</th>
                                 <th>Auditor Leader</th>
@@ -75,8 +75,8 @@ $(document).ready(function() {
             {data: 'objektif_audit', name: 'objektif_audit'},
             {data: 'klausul', name: 'lokasi'},
             {data: 'departement', name: 'departement'},
-            {data: 'konfirmasi_kadept',
-                name: 'konfirmasi_kadept',
+            {data: 'approval',
+                name: 'approval',
                 render: function (data, type, row) {
                     if (data == 1) {
                         return '<span class="badge badge-success">Approved</span>';

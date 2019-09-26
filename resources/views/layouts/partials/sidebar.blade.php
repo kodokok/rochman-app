@@ -28,7 +28,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('temuan.index') }}" class="nav-link {{ active(['temuan.*']) }}">
                         <i class="nav-icon fas fa-calendar-check"></i>
                         <p>Temuan Audit</p>
                     </a>
