@@ -82,4 +82,34 @@ class TemuanAuditsController extends Controller
     {
         //
     }
+
+    public function dataTable()
+    {
+        $model = TemuanAudit::all();
+
+        return DataTables::of($model)
+            // ->addColumn('departement', function ($model) {
+            //     return $model->departement->name;
+            // })
+            // ->addColumn('auditee', function ($model) {
+            //     return $model->auditee->name;
+            // })
+            // ->addColumn('auditor', function ($model) {
+            //     return $model->auditor->name;
+            // })
+            // ->addColumn('auditor_leader', function ($model) {
+            //     return $model->auditorLeader->name;
+            // })
+            ->addColumn('action', function ($model) {
+                return view('auditplan.action', [
+                    'model' => $model,
+                    'url_show' => route('auditplan.show', $model->id),
+                    'url_edit' => route('auditplan.edit', $model->id),
+                    'url_destroy' => route('auditplan.destroy', $model->id),
+                ]);
+            })
+            ->addIndexColumn()
+            ->rawColumns(['action'])
+            ->make(true);
+    }
 }
