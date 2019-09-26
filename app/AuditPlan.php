@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Departement;
 use App\User;
+use App\TemuanAudit;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 
@@ -50,5 +51,10 @@ class AuditPlan extends Model
     public function auditorLeader()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function temuanAudits()
+    {
+        return $this->hasMany(TemuanAudit::class);
     }
 }
