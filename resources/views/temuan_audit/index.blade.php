@@ -38,7 +38,9 @@
                                 <th>Ketidaksesuaian</th>
                                 <th>Akar Masalah</th>
                                 <th>Tindakan Perbaikan</th>
+                                <th>Due Date Pebaikan</th>
                                 <th>Tindakan Pencegahan</th>
+                                <th>Due Date Pencegahan</th>
                                 <th>Review</th>
                                 <th>Status</th>
                                 <th style="width: 20%"></th>
