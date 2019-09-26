@@ -102,11 +102,11 @@ class TemuanAuditsController extends Controller
             //     return $model->auditorLeader->name;
             // })
             ->addColumn('action', function ($model) {
-                return view('auditplan.action', [
+                return view('temuan_audit.action', [
                     'model' => $model,
-                    'url_show' => route('auditplan.show', $model->id),
-                    'url_edit' => route('auditplan.edit', $model->id),
-                    'url_destroy' => route('auditplan.destroy', $model->id),
+                    'url_show' => route('temuanAudit.show', $model->id),
+                    'url_edit' => route('temuanAudit.edit', $model->id),
+                    'url_destroy' => route('temuanAudit.destroy', $model->id),
                 ]);
             })
             ->addIndexColumn()
