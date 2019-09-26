@@ -1,7 +1,7 @@
 <div class="col-md-6">
     <div class="card card-default">
         <div class="card-header">
-            <h3 class="card-title">General</h3>
+            <h3 class="card-title">Audit Plan</h3>
             <div class="card-tools">
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">

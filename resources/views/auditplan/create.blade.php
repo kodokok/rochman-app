@@ -25,7 +25,7 @@
 <div class="row">
     <div class="col-md-6">
     {!! Form::model($model, [
-        'route' => $model->exists ? ['auditplan.change', $model->id] : 'auditplan.store',
+        'route' => $model->exists ? ['auditplan.update', $model->id] : 'auditplan.store',
         'method' => $model->exists ? 'PUT' : 'POST',
         'autocomplete' => 'off'
     ]) !!}
