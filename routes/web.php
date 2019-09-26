@@ -26,7 +26,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('table/roles', 'RolesController@dataTable')->name('table.roles');
         Route::get('table/departements', 'DepartementsController@dataTable')->name('table.departements');
         Route::get('table/kompetensi', 'KompetensiAuditorsController@dataTable')->name('table.kompetensi');
-        Route::get('table/auditplans', 'AuditPlansController@dataTable')->name('table.auditplan');
+        Route::get('table/auditplans', 'AuditPlansController@dataTable')->name('table.auditplans');
         Route::get('table/temuanaudits', 'TemuanAuditsController@dataTable')->name('table.temuanaudits');
 
         Route::resource('roles', 'RolesController')->only([

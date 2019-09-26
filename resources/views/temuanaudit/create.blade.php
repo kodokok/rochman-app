@@ -34,6 +34,12 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    {{-- select2 --}}
+
+                    <div class="form-group">
+                        <select class="js-data-example-ajax"></select>
+                    </div>
+
                     <div class="form-group">
                         <label for="objektif_audit">Objektif Audit</label>
                         {!! Form::textarea('objektif_audit',  null, ['class' => 'form-control', 'id' => 'objektif_audit', 'rows' => 3, 'disabled']) !!}
@@ -222,7 +228,13 @@
 @push('scripts')
 <script>
 $(function () {
-
+    $('.js-data-example-ajax').select2({
+        ajax: {
+        url: '{{ route("table.auditplans") }}',
+        dataType: 'json'
+        // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+        }
+    });
 });
 </script>
 @endpush

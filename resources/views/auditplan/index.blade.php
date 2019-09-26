@@ -70,7 +70,7 @@ $(document).ready(function() {
         responsive: true,
         processing: true,
         scrollX: true,
-        ajax: "{{ route('table.auditplan') }}",
+        ajax: "{{ route('table.auditplans') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'id'},
             {data: 'objektif_audit', name: 'objektif_audit'},
