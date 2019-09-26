@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTemuanAuditTable extends Migration
+class CreateTemuanAuditsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTemuanAuditTable extends Migration
      */
     public function up()
     {
-        Schema::create('temuan_audit', function (Blueprint $table) {
+        Schema::create('temuan_audits', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
             $table->unsignedBigInteger('auditplan_id');
             $table->unsignedTinyInteger('status')->default(0);
@@ -39,6 +39,6 @@ class CreateTemuanAuditTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('temuan_audit');
+        Schema::dropIfExists('temuan_audits');
     }
 }
