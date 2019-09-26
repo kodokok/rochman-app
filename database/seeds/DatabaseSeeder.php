@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(DepartementsTableSeeder::class);
         $this->call(KomptensiAuditorsTableSeeder::class);
         $this->call(AuditPlansTableSeeder::class);
+        $this->call(TemuanAuditTableSeeder::class);
     }
 }
