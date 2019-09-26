@@ -17,10 +17,12 @@ class CreateTemuanAuditTable extends Migration
             $table->bigIncrements('id')->unsigned();
             $table->unsignedBigInteger('auditplan_id');
             $table->unsignedTinyInteger('status')->default(0);
-            $table->string('ketidaksesuaian')->nullable();
-            $table->string('akar_masalah')->nullable();
-            $table->string('tindakan_perbaikan')->nullable();
-            $table->string('tindakan_pencegahan')->nullable();
+            $table->string('ketidaksesuaian');
+            $table->string('akar_masalah');
+            $table->string('tindakan_perbaikan');
+            $table->date('duedate_perbaikan');
+            $table->string('tindakan_pencegahan');
+            $table->date('duedate_pencegahan');
             $table->text('review')->nullable();
             $table->unsignedTinyInteger('approve_dept')->default(0);
             $table->unsignedTinyInteger('approve_auditee')->default(0);
