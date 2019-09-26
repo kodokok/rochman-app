@@ -37,7 +37,8 @@
                     {{-- select2 --}}
 
                     <div class="form-group">
-                        <select class="js-data-example-ajax"></select>
+                        <select id="auditplans" class="form-control"></select>
+                        {{-- {!! Form::select('auditplans', $auditplans, null, ['class'=> 'form-control', 'placeholder' => 'Select Audit Plan']) !!} --}}
                     </div>
 
                     <div class="form-group">
@@ -227,12 +228,43 @@
 
 @push('scripts')
 <script>
-$(function () {
-    $('.js-data-example-ajax').select2({
+$(document).ready(function(){
+    // $('.js-data-example-ajax').select2({
+    //     ajax: {
+    //         url: "{{ route('table.auditplans') }}",
+    //         processResults: function (data) {
+    //         // Transforms the top-level key of the response object from 'items' to 'results'
+    //         console.log(data);
+    //             return {
+    //                 results: data.objektif_audit
+    //             };
+    //         }
+    //     }
+    // });
+    // $("#auditplans").select2();
+    $('#auditplans').select2({
+        placeholder: 'Select an item',
         ajax: {
-        url: '{{ route("table.auditplans") }}',
-        dataType: 'json'
-        // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+            url: "{{ route('table.auditplans') }}",
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                console.log(params)
+                return {
+                    searchTerm: params.term // search term
+                };
+            },
+            processResults: function (response) {
+                return {
+                    results:  $.map(response.data, function (item) {
+                        return {
+                            text: item.objektif_audit,
+                            id: item.id
+                        }
+                    })
+                };
+            },
+            cache: true
         }
     });
 });

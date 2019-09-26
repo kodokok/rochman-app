@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AuditPlan;
 use App\TemuanAudit;
 use Illuminate\Http\Request;
 use DataTables;
@@ -26,7 +27,8 @@ class TemuanAuditsController extends Controller
     public function create()
     {
         $model = new TemuanAudit();
-        return view('temuanaudit.create', compact(['model']));
+        $auditplans = AuditPlan::pluck('objektif_audit', 'id');
+        return view('temuanaudit.create', compact(['model','auditplans']));
     }
 
     /**
