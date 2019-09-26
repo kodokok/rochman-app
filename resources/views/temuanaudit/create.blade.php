@@ -11,7 +11,7 @@
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('app') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('temuan.index') }}">Temuan Audit</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('temuanaudit.index') }}">Temuan Audit</a></li>
                     <li class="breadcrumb-item active">{{ $model->exists ? 'Edit' : 'Create'}}</li>
                 </ol>
             </div>
@@ -21,7 +21,7 @@
 
 <!-- Main content -->
 <section class="content">
-    @include('temuan.form')
+
 </section>
 <!-- /.content -->
 
