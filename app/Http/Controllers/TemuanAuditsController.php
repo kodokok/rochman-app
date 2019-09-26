@@ -86,12 +86,14 @@ class TemuanAuditsController extends Controller
 
     public function dataTable()
     {
-        $model = TemuanAudit::all();
+        $model = TemuanAudit::findOrFail(1);
+
+        dd($model->auditplan);
 
         return DataTables::of($model)
-            // ->addColumn('departement', function ($model) {
-            //     return $model->departement->name;
-            // })
+            ->addColumn('auditPlan', function ($model) {
+                return $model->auditPlan->objektif_audit;
+            })
             // ->addColumn('auditee', function ($model) {
             //     return $model->auditee->name;
             // })
