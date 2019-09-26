@@ -15,17 +15,17 @@ class CreateTemuanAuditTable extends Migration
     {
         Schema::create('temuan_audit', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
-            $table->unsignedBigInteger('audit_plan');
-            $table->unsignedTinyInteger('status');
+            $table->unsignedBigInteger('auditplan_id');
+            $table->unsignedTinyInteger('status')->default(0);
             $table->string('ketidaksesuaian')->nullable();
             $table->string('akar_masalah')->nullable();
             $table->string('tindakan_perbaikan')->nullable();
             $table->string('tindakan_pencegahan')->nullable();
-            $table->string('review')->nullable();
-            $table->dateTime('approve_kadept')->nullable();
-            $table->dateTime('approve_auditee')->nullable();
-            $table->dateTime('approve_auditor')->nullable();
-            $table->dateTime('approve_auditor_lead');
+            $table->text('review')->nullable();
+            $table->unsignedTinyInteger('approve_dept')->default(0);
+            $table->unsignedTinyInteger('approve_auditee')->default(0);
+            $table->unsignedTinyInteger('approve_auditor')->default(0);
+            $table->unsignedTinyInteger('approve_auditor_lead')->default(0);
             $table->timestamps();
         });
     }
