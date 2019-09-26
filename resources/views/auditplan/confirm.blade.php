@@ -33,24 +33,18 @@
             <div class="card card-primary">
                 <div class="card-header">
                     <h3 class="card-title">Action</h3>
-                    <div class="card-tools">
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fas fa-minus"></i></button>
-                        </div>
-                    </div>
                 </div>
                 <div class="card-body text-center">
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" checked>
+                        <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" value="approve" checked>
                         <label class="custom-control-label" for="customRadioInline1">Approve</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+                        <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input" value="reschedule">
                         <label class="custom-control-label" for="customRadioInline2">Reschedule</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="customRadioInline3" name="customRadioInline1" class="custom-control-input">
+                        <input type="radio" id="customRadioInline3" name="customRadioInline1" class="custom-control-input" value="reject">
                         <label class="custom-control-label" for="customRadioInline3">Reject</label>
                     </div>
                 </div>
@@ -58,13 +52,24 @@
             </div>
             <div class="card card-info">
                 <div class="card-header">
-                    <h3 class="card-title">Schedule Request</h3>
+                    <h3 class="card-title">Remarks</h3>
                     <div class="card-tools">
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                                 <i class="fas fa-minus"></i></button>
                         </div>
                     </div>
+                </div>
+                <div class="card-body mb-3">
+                    <div class="form-group">
+                        {!! Form::textarea('remarks', null, ['class' => 'form-control', 'id' => 'remarks', 'rows' => 4, 'placeholder' => 'Enter remarks...']) !!}
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <div class="card card-warning d-none" id="reschedule">
+                <div class="card-header">
+                    <h3 class="card-title">Schedule Request</h3>
                 </div>
                 <div class="card-body">
                     <div class="form-group row">
@@ -104,23 +109,7 @@
                 </div>
                 <!-- /.card-body -->
             </div>
-            <div class="card card-info">
-                <div class="card-header">
-                    <h3 class="card-title">Remarks</h3>
-                    <div class="card-tools">
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fas fa-minus"></i></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body mb-3">
-                    <div class="form-group">
-                        {!! Form::textarea('remarks', null, ['class' => 'form-control', 'id' => 'remarks', 'rows' => 4, 'placeholder' => 'Enter remarks...']) !!}
-                    </div>
-                </div>
-                <!-- /.card-body -->
-            </div>
+
         </div>
     </div>
     <div class="row">
@@ -138,6 +127,24 @@
 @push('scripts')
 <script>
 $(function () {
+    $('input[type="radio"]').click(function(){
+
+        var inputValue = $(this).attr("value");
+        var target = $('#reschedule');
+
+        if (inputValue === target.attr('id')){
+            target.removeClass('d-none');
+        } else {
+            target.addClass('d-none');
+        }
+
+        // console.log(targetBox);
+        // $(".card").not(targetBox).hide();
+        // if (targetBox) {
+        //     $('.' + inputValue).hide();
+        // }
+        // $('.' + inputValue).show();
+    });
 
     $('#datetimepicker4').datetimepicker({
         format: 'MM-DD-YYYY',
