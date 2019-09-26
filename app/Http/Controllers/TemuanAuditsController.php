@@ -15,7 +15,7 @@ class TemuanAuditsController extends Controller
      */
     public function index()
     {
-        //
+        return view('temuan_audit.index');
     }
 
     /**
@@ -95,9 +95,9 @@ class TemuanAuditsController extends Controller
             ->addColumn('action', function ($model) {
                 return view('temuan_audit.action', [
                     'model' => $model,
-                    'url_show' => route('temuanAudit.show', $model->id),
-                    'url_edit' => route('temuanAudit.edit', $model->id),
-                    'url_destroy' => route('temuanAudit.destroy', $model->id),
+                    'url_show' => route('temuanaudit.show', $model->id),
+                    'url_edit' => route('temuanaudit.edit', $model->id),
+                    'url_destroy' => route('temuanaudit.destroy', $model->id),
                 ]);
             })
             ->addIndexColumn()

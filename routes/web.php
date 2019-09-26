@@ -27,7 +27,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('table/departements', 'DepartementsController@dataTable')->name('table.departements');
         Route::get('table/kompetensi', 'KompetensiAuditorsController@dataTable')->name('table.kompetensi');
         Route::get('table/auditplans', 'AuditPlansController@dataTable')->name('table.auditplan');
-        Route::get('table/temuanaudits', 'TemuanAuditsController@dataTable')->name('table.temuanAudit');
+        Route::get('table/temuanaudits', 'TemuanAuditsController@dataTable')->name('table.temuanaudits');
 
         Route::resource('roles', 'RolesController')->only([
             'index', 'create', 'store', 'destroy'
@@ -44,6 +44,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('auditplan', 'AuditPlansController');
         Route::put('auditplan/{auditPlan}/confirm', 'AuditPlansController@confirm')->name('auditplan.confirm');
 
-        Route::resource('temuanAudit', 'TemuanAuditsController');
+        Route::resource('temuanaudit', 'TemuanAuditsController');
     });
 });

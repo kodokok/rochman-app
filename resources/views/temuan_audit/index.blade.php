@@ -24,7 +24,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{ route('temuan.create') }}" class="btn btn-success title="Create Audit Plan">
+                    <a href="{{ route('temuanaudit.create') }}" class="btn btn-success title="Create Audit Plan">
                         <i class="fas fa-plus mr-2"></i>Create Temuan Audit
                     </a>
                 </div>
@@ -41,8 +41,8 @@
                                 <th>Due Date Pebaikan</th>
                                 <th>Tindakan Pencegahan</th>
                                 <th>Due Date Pencegahan</th>
-                                <th>Review</th>
                                 <th>Status</th>
+                                <th>Review</th>
                                 <th style="width: 20%"></th>
                             </tr>
                         </thead>
@@ -66,25 +66,24 @@
 $(document).ready(function() {
     $('#datatables').DataTable({
         responsive: true,
-        processing: true,
-        scrollX: true,
-        ajax: "{{ route('table.temuanAudit') }}",
+        // processing: true,
+        // scrollX: true,
+        ajax: "{{ route('table.temuanaudits') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'id'},
-            {data: 'objektif_audit', name: 'objektif_audit'},
-            {data: 'klausul', name: 'lokasi'},
-            {data: 'departement', name: 'departement'},
-            {data: 'approval', name: 'approval',
+            {data: 'auditplan_objectif_audit', name: 'auditplan_objectif_audit'},
+            {data: 'ketidaksesuaian', name: 'ketidaksesuaian'},
+            {data: 'akar_masalah', name: 'akar_masalah'},
+            {data: 'tindakan_perbaikan', name: 'tindakan_perbaikan'},
+            {data: 'duedate_perbaikan', name: 'duedate_perbaikan'},
+            {data: 'tindakan_pencegahan', name: 'tindakan_pencegahan'},
+            {data: 'duedate_pencegahan', name: 'duedate_pencegahan'},
+            {data: 'status', name: 'status',
+            {data: 'review', name: 'review'},
                 render: function ( data, type, row ) {
                     return data.toUpperCase();
                 }
             },
-            {data: 'auditee', name: 'auditee'},
-            {data: 'auditor', name: 'auditor'},
-            {data: 'auditor_leader', name: 'auditor_leader'},
-            {data: 'tanggal', name: 'tanggal'},
-            {data: 'waktu', name: 'waktu'},
-            {data: 'remarks', name: 'remarks'},
             {data: 'action', name: 'action', 'searchable': false, 'orderable': false, 'className': 'text-center'}
         ]
     });
