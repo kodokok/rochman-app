@@ -36,10 +36,32 @@
                 <div class="card-body">
                     {{-- select2 --}}
 
-                    <div class="form-group">
-                        <select id="auditplans" class="form-control"></select>
+                    {{-- <div class="form-group"> --}}
+                        {{-- <select id="auditplans" class="form-control"></select> --}}
                         {{-- {!! Form::select('auditplans', $auditplans, null, ['class'=> 'form-control', 'placeholder' => 'Select Audit Plan']) !!} --}}
-                    </div>
+                    {{-- </div> --}}
+                    <select name="select" class="form-control select2">
+                        <option value ="1"> Virginie Keam</option>
+                        <option value ="2"> Archambault Devoy</option>
+                        <option value ="3"> Isobel Dudbridge</option>
+                        <option value ="4"> Orsa Dorran</option>
+                        <option value ="5"> Harmonia Sandland</option>
+                        <option value ="6"> Lusa Antrack</option>
+                        <option value ="7"> Caroljean Ibanez</option>
+                        <option value ="8"> Britni Philpot</option>
+                        <option value ="9"> Renelle Edney</option>
+                        <option value ="10"> Ursulina Pering</option>
+                        <option value ="11"> Daffi Flott</option>
+                        <option value ="12"> Anthea Gripton</option>
+                        <option value ="13"> Ermanno Kenafaque</option>
+                        <option value ="14"> Nil Hamner</option>
+                        <option value ="15"> Domenic Faulds</option>
+                        <option value ="16"> Loria Shaudfurth</option>
+                        <option value ="17"> Joete Wilbud</option>
+                        <option value ="18"> Parnell Vaune</option>
+                        <option value ="19"> Geri Espinay</option>
+                        <option value ="20"> Suzy Haslehurst</option>
+                    </select>
 
                     <div class="form-group">
                         <label for="objektif_audit">Objektif Audit</label>
@@ -229,44 +251,7 @@
 @push('scripts')
 <script>
 $(document).ready(function(){
-    // $('.js-data-example-ajax').select2({
-    //     ajax: {
-    //         url: "{{ route('table.auditplans') }}",
-    //         processResults: function (data) {
-    //         // Transforms the top-level key of the response object from 'items' to 'results'
-    //         console.log(data);
-    //             return {
-    //                 results: data.objektif_audit
-    //             };
-    //         }
-    //     }
-    // });
-    // $("#auditplans").select2();
-    $('#auditplans').select2({
-        placeholder: 'Select an item',
-        ajax: {
-            url: "{{ route('table.auditplans') }}",
-            dataType: 'json',
-            delay: 250,
-            data: function (params) {
-                console.log(params)
-                return {
-                    searchTerm: params.term // search term
-                };
-            },
-            processResults: function (response) {
-                return {
-                    results:  $.map(response.data, function (item) {
-                        return {
-                            text: item.objektif_audit,
-                            id: item.id
-                        }
-                    })
-                };
-            },
-            cache: true
-        }
-    });
+    $('.select2').select2();
 });
 </script>
 @endpush
