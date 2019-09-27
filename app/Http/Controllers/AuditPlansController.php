@@ -51,7 +51,7 @@ class AuditPlansController extends Controller
     {
         // dd($request->all());
         $this->validate($request, [
-            'objektif_audit' => 'required|string|max:255',
+            'objektif_audit' => 'required|string|max:255|unique:audit_plans,objektif_audit',
             'klausul' => 'required|string|max:100',
             'departement_id' => 'required',
             'auditee_id' => 'required',
@@ -107,8 +107,10 @@ class AuditPlansController extends Controller
     public function update(Request $request, $id)
     {
         // dd($request->all());
+        $model = AuditPlan::findOrFail($id);
+
         $this->validate($request, [
-            'objektif_audit' => 'required|string|max:255',
+            'objektif_audit' => 'required|string|max:255|unique:audit_plans,objektif_audit,' . $model->id,
             'klausul' => 'required|string|max:100',
             'departement_id' => 'required',
             'auditee_id' => 'required',
@@ -120,8 +122,6 @@ class AuditPlansController extends Controller
 
         $tanggal =  Carbon::createFromFormat('m-d-Y', $request->tanggal)->format('Y-m-d');
         $waktu =  Carbon::createFromFormat('H:i:s', $request->waktu)->format('H:i:s');
-
-        $model = AuditPlan::findOrFail($id);
 
         $model->update([
             'objektif_audit' => $request->objektif_audit,
