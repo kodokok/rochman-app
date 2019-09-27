@@ -1,8 +1,8 @@
 <?php
 
+use Illuminate\Database\Seeder;
 use App\TemuanAudit;
 use Carbon\Carbon;
-use Illuminate\Database\Seeder;
 
 class TemuanAuditTableSeeder extends Seeder
 {
