@@ -167,7 +167,7 @@
                                     <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                     </div>
-                                    <div id="error-tanggal" class="invalid-feedback">{{ $errors->first('tanggal') }}</div>
+                                    <div id="error-tanggal" class="invalid-feedback">{{ $errors->first('duedate_perbaikan') }}</div>
                                 </div>
                             </div>
                         </div>
@@ -189,7 +189,7 @@
                                     <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                     </div>
-                                    <div id="error-tanggal" class="invalid-feedback">{{ $errors->first('tanggal') }}</div>
+                                    <div id="error-tanggal" class="invalid-feedback">{{ $errors->first('duedate_pencegahan') }}</div>
                                 </div>
                             </div>
                         </div>
