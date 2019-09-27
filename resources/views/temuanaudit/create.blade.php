@@ -34,33 +34,13 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    {{-- select2 --}}
-
-                    {{-- <div class="form-group"> --}}
-                        {{-- <select id="auditplans" class="form-control"></select> --}}
-                        {{-- {!! Form::select('auditplans', $auditplans, null, ['class'=> 'form-control', 'placeholder' => 'Select Audit Plan']) !!} --}}
-                    {{-- </div> --}}
-                    <select name="select" class="form-control select2">
-                        <option value ="1"> Virginie Keam</option>
-                        <option value ="2"> Archambault Devoy</option>
-                        <option value ="3"> Isobel Dudbridge</option>
-                        <option value ="4"> Orsa Dorran</option>
-                        <option value ="5"> Harmonia Sandland</option>
-                        <option value ="6"> Lusa Antrack</option>
-                        <option value ="7"> Caroljean Ibanez</option>
-                        <option value ="8"> Britni Philpot</option>
-                        <option value ="9"> Renelle Edney</option>
-                        <option value ="10"> Ursulina Pering</option>
-                        <option value ="11"> Daffi Flott</option>
-                        <option value ="12"> Anthea Gripton</option>
-                        <option value ="13"> Ermanno Kenafaque</option>
-                        <option value ="14"> Nil Hamner</option>
-                        <option value ="15"> Domenic Faulds</option>
-                        <option value ="16"> Loria Shaudfurth</option>
-                        <option value ="17"> Joete Wilbud</option>
-                        <option value ="18"> Parnell Vaune</option>
-                        <option value ="19"> Geri Espinay</option>
-                        <option value ="20"> Suzy Haslehurst</option>
+                    <select name="auditplans" class="form-control select2">
+                        <option value=""></option>
+                        @foreach ($auditplans as $ap)
+                            <option value="{{ $ap->id }}">
+                                {{ $ap->departement->name . ' - ' . $ap->objektif_audit . ' - ' . $ap->klausul }}
+                            </option>
+                        @endforeach
                     </select>
 
                     <div class="form-group">
@@ -251,7 +231,10 @@
 @push('scripts')
 <script>
 $(document).ready(function(){
-    $('.select2').select2();
+    $('.select2').select2({
+        placeholder: 'Please select objektif audit',
+        allowClear: true
+    });
 });
 </script>
 @endpush
