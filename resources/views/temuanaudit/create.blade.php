@@ -25,7 +25,7 @@
         <div class="col-md-6">
             <div class="card card-default">
                 <div class="card-header">
-                    <h3 class="card-title">Audit Plan</h3>
+                    <h3 class="card-title">Select Audit Plan</h3>
                     <div class="card-tools">
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -42,7 +42,20 @@
                             </option>
                         @endforeach
                     </select>
+                </div>
+            </div>
 
+            <div class="card card-default">
+                <div class="card-header">
+                    <h3 class="card-title">Team Audit</h3>
+                    <div class="card-tools">
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                <i class="fas fa-minus"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
                     <div class="form-group">
                         <label for="objektif_audit">Objektif Audit</label>
                         {!! Form::textarea('objektif_audit',  null, ['class' => 'form-control', 'id' => 'objektif_audit', 'rows' => 3, 'disabled']) !!}
@@ -63,7 +76,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="form-group">
                         <div class="row">
                             <div class="col-sm-4">
@@ -90,20 +102,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- /.card-body -->
-            </div>
-            <div class="card card-default">
-                <div class="card-header">
-                    <h3 class="card-title">Team Audit</h3>
-                    <div class="card-tools">
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fas fa-minus"></i></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
                     <div class="form-group">
                         <div class="row">
                             <div class="col-sm-4">
@@ -232,8 +230,8 @@
 <script>
 $(document).ready(function(){
     $('.select2').select2({
+        width:'100%',
         placeholder: 'Please select objektif audit',
-        allowClear: true
     });
 });
 </script>

@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class AuditPlansController extends Controller
 {
-    protected $auditeeRoles = ['auditor', 'auditor_leader', 'admin'];
+    protected $auditeeRoles = ['auditee', 'auditor', 'auditor_leader', 'admin'];
     protected $auditorRoles = ['auditor', 'auditor_leader', 'admin'];
     protected $auditorLeaderRoles =  ['auditor_leader', 'admin'];
 
