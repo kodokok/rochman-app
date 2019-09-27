@@ -37,7 +37,7 @@
                     <select name="auditplans" class="form-control select2">
                         <option value=""></option>
                         @foreach ($auditplans as $ap)
-                            <option value="{{ $ap->id }}">
+                            <option value="{{ $ap->id }}" data-auditplan="{{ $ap }}">
                                 {{ $ap->departement->name . ' - ' . $ap->objektif_audit . ' - ' . $ap->klausul }}
                             </option>
                         @endforeach
@@ -151,15 +151,50 @@
                         <div id="error-akar_masalah" class="invalid-feedback">{{ $errors->first('akar_masalah') }}</div>
                     </div>
                     <div class="form-group">
-                        <label for="tindakan_perbaikan">Tindakan Perbaikan</label>
-                        {!! Form::text('tindakan_perbaikan', null, ['class' => 'form-control'. ($errors->has('tindakan_perbaikan')? ' is-invalid': ''), 'id' => 'tindakan_perbaikan']) !!}
-                        <div id="error-tindakan_perbaikan" class="invalid-feedback">{{ $errors->first('tindakan_perbaikan') }}</div>
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <label for="tindakan_perbaikan">Tindakan Perbaikan</label>
+                                {!! Form::text('tindakan_perbaikan', null, ['class' => 'form-control'. ($errors->has('tindakan_perbaikan')? ' is-invalid': ''), 'id' => 'tindakan_perbaikan']) !!}
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="duedate_perbaikan">Due Date Pencegahan</label>
+                                <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                                    <input id="duedate_perbaikan" name="duedate_perbaikan" type="text"
+                                        class="form-control datetimepicker-input {{ $errors->has('duedate_perbaikan') ? ' is-invalid': '' }}"
+                                        data-target="#datetimepicker1"
+                                        value="{{ $model->exists ? $model->duedate_perbaikan : old('duedate_perbaikan') }}"
+                                    />
+                                    <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                    </div>
+                                    <div id="error-tanggal" class="invalid-feedback">{{ $errors->first('tanggal') }}</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="tidakan_pencegahan">Tindakan Pencegahan</label>
-                        {!! Form::text('tidakan_pencegahan', null, ['class' => 'form-control'. ($errors->has('tidakan_pencegahan')? ' is-invalid': ''), 'id' => 'tidakan_pencegahan']) !!}
-                        <div id="error-tidakan_pencegahan" class="invalid-feedback">{{ $errors->first('tidakan_pencegahan') }}</div>
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <label for="tindakan_pencegahan">Tindakan Pencegahan</label>
+                                {!! Form::text('tindakan_pencegahan', null, ['class' => 'form-control'. ($errors->has('tindakan_pencegahan')? ' is-invalid': ''), 'id' => 'tindakan_pencegahan']) !!}
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="duedate_pencegahan">Due Date Pencegahan</label>
+                                <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+                                    <input id="duedate_pencegahan" name="duedate_pencegahan" type="text"
+                                        class="form-control datetimepicker-input {{ $errors->has('duedate_pencegahan') ? ' is-invalid': '' }}"
+                                        data-target="#datetimepicker2"
+                                        value="{{ $model->exists ? $model->duedate_pencegahan : old('duedate_pencegahan') }}"
+                                    />
+                                    <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                    </div>
+                                    <div id="error-tanggal" class="invalid-feedback">{{ $errors->first('tanggal') }}</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="form-group">
                         <label for="reviews">Review</label>
                             {!! Form::textarea('reviews',  null, ['class' => 'form-control', 'id' => 'reviews', 'rows' => 3]) !!}
@@ -215,8 +250,8 @@
     </div>
     <div class="row">
         <div class="col-12 mb-2">
-            <a href="{{ route('auditplan.index') }}" class="btn btn-secondary">Cancel</a>
-            <input type="submit" class="btn btn-success float-right mr-2" style="width: 120px;">
+            <a href="{{ route('auditplan.index') }}" class="btn btn-secondary" style="width: 120px;">Cancel</a>
+            <input type="submit" value="Create" class="btn btn-success float-right mr-2" style="width: 120px;">
         </div>
     </div>
     {!! Form::close() !!}
@@ -232,6 +267,16 @@ $(document).ready(function(){
     $('.select2').select2({
         width:'100%',
         placeholder: 'Please select objektif audit',
+    });
+
+    // datetimepicker due date perbaikan
+    $('#datetimepicker1').datetimepicker({
+        format: 'MM-DD-YYYY',
+    });
+
+    // datetimepicker due date pencegahan
+    $('#datetimepicker2').datetimepicker({
+        format: 'MM-DD-YYYY',
     });
 });
 </script>
