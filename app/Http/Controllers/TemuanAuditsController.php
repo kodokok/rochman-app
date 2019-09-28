@@ -66,17 +66,17 @@ class TemuanAuditsController extends Controller
             'duedate_pencegahan' => $duedate_pencegahan,
         ]);
 
-        $route = '';
-        switch ($request->action) {
-            case 'Save':
-                $route = redirect(route('temuanaudit.index'));
-                break;
-            case 'Save & Create New':
-                $route = redirect((route('temuanaudit.create')));
-                break;
+        $route = 'temuanaudit.index';
+        if ($request->action === 'Save & Create New') {
+            $route = 'temuanaudit.create';
         }
 
-        return $route;
+        $notification = [
+            'message' => 'Temuan Audit successfully created!',
+            'alert-type' => 'success'
+        ];
+
+        return redirect(route($route))->with($notification);;
     }
 
     /**

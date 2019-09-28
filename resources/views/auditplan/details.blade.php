@@ -3,6 +3,7 @@
         <h3 class="card-title">Audit Plan</h3>
         <div class="card-tools">
             <div class="card-tools">
+                    <span class="badge badge-info text-uppercase">{{ $auditplan->approval }}</span>
                 <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                 <i class="fas fa-minus"></i></button>
             </div>
@@ -32,7 +33,7 @@
 
         <div class="form-group">
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                     <label for="tanggal">Tanggal</label>
                     <div class="input-group">
                         <div class="input-group-append">
@@ -41,7 +42,7 @@
                         {!! Form::text('tanggal', $auditplan->tanggal, ['class' => 'form-control', 'id' => 'tanggal', 'disabled']) !!}
                     </div>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                     <label for="waktu">Waktu</label>
                     <div class="input-group">
                         <div class="input-group-append">
@@ -49,10 +50,6 @@
                         </div>
                         {!! Form::text('waktu',  $auditplan->waktu, ['class' => 'form-control', 'id' => 'waktu', 'disabled']) !!}
                     </div>
-                </div>
-                <div class="col-sm-4">
-                    <label for="approval">Status</label>
-                    {!! Form::text('approval', strtoupper($auditplan->approval), ['class' => 'form-control', 'id' => 'approval', 'disabled']) !!}
                 </div>
             </div>
         </div>

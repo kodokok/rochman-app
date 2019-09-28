@@ -23,5 +23,8 @@
 <link rel="stylesheet" href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
 <!-- sweet alert -->
 <link rel="stylesheet" href="{{ asset('plugins/sweetalert2/sweetalert2.min.css') }}">
+<!-- toastr -->
+<link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.css') }}">
+
 <!-- Theme style -->
 <link rel="stylesheet" href="{{ asset('plugins/adminlte/css/adminlte.min.css') }}">

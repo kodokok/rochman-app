@@ -3,6 +3,7 @@
         <h3 class="card-title">Temuan Audit</h3>
         <div class="card-tools">
             <div class="card-tools">
+                <span class="badge badge-info text-uppercase">{{ $temuanaudit->status }}</span>
                 <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                     <i class="fas fa-minus"></i></button>
             </div>
