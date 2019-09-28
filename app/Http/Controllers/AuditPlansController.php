@@ -76,7 +76,12 @@ class AuditPlansController extends Controller
             'waktu' => $waktu,
         ]);
 
-        return redirect(route('auditplan.index'));
+        $notification = [
+            'message' => 'Audit Plan successfully created!',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->route('auditplan.index')->with($notification);
     }
 
 
@@ -134,7 +139,12 @@ class AuditPlansController extends Controller
             'waktu' => $waktu,
         ]);
 
-        return redirect(route('auditplan.index'));
+        $notification = [
+            'message' => 'Audit Plan successfully updated!',
+            'alert-type' => 'info'
+        ];
+
+        return redirect()->route('auditplan.index')->with($notification);
     }
 
     /**
@@ -219,7 +229,12 @@ class AuditPlansController extends Controller
                 break;
         }
 
-        return redirect(route('auditplan.index'));
+        $notification = [
+            'message' => 'Audit Plan successfully updated!',
+            'alert-type' => 'info'
+        ];
+
+        return redirect()->route('auditplan.index')->with($notification);
     }
 
     public function dataTable()
