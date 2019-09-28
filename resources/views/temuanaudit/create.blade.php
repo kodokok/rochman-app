@@ -73,6 +73,7 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    {!! Form::hidden('audit_plan_id', null, ['id' => 'audit_plan_id']) !!}
                     <div class="form-group">
                         <label for="klausul">Ketidaksesuaian</label>
                         {!! Form::text('ketidaksesuaian', null, ['class' => 'form-control'. ($errors->has('ketidaksesuaian')? ' is-invalid': ''), 'id' => 'ketidaksesuaian']) !!}
