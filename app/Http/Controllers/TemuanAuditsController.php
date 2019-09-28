@@ -7,6 +7,7 @@ use App\Departement;
 use App\TemuanAudit;
 use Illuminate\Http\Request;
 use DataTables;
+use Carbon\Carbon;
 
 class TemuanAuditsController extends Controller
 {
@@ -51,6 +52,31 @@ class TemuanAuditsController extends Controller
             'tindakan_pencegahan' => 'required|string|max:255',
             'duedate_pencegahan' => 'required|date_format:m-d-Y',
         ]);
+
+        $duedate_perbaikan =  Carbon::createFromFormat('m-d-Y', $request->duedate_perbaikan)->format('Y-m-d');
+        $duedate_pencegahan =  Carbon::createFromFormat('m-d-Y', $request->duedate_pencegahan)->format('Y-m-d');
+
+        TemuanAudit::create([
+            'audit_plan_id' => $request->audit_plan_id,
+            'ketidaksesuaian' => $request->ketidaksesuaian,
+            'akar_masalah' => $request->akar_masalah,
+            'tindakan_perbaikan' => $request->tindakan_perbaikan,
+            'duedate_perbaikan' => $duedate_perbaikan,
+            'tindakan_pencegahan' => $request->tindakan_pencegahan,
+            'duedate_pencegahan' => $duedate_pencegahan,
+        ]);
+
+        $route = '';
+        switch ($request->action) {
+            case 'Save':
+                $route = redirect(route('temuanaudit.index'));
+                break;
+            case 'Save & Create New':
+                $route = redirect((route('temuanaudit.create')));
+                break;
+        }
+
+        return $route;
     }
 
     /**
