@@ -34,14 +34,28 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <select name="auditplans" class="form-control select2">
-                        <option value=""></option>
-                        @foreach ($auditplans as $ap)
-                            <option value="{{ $ap->id }}" data-auditplan="{{ $ap }}">
-                                {{ $ap->departement->name . ' - ' . $ap->objektif_audit . ' - ' . $ap->klausul }}
-                            </option>
-                        @endforeach
-                    </select>
+                    <div class="form-group">
+                        <label for="select_departement">Departement</label>
+                        <select name="select_departement" class="form-control select_departement" id="select_departement">
+                            <option value=""></option>
+                            @foreach ($auditplans as $ap)
+                                <option value="{{ $ap->id }}" data-auditplan="{{ $ap }}">
+                                    {{ $ap->departement->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="select_objektif_audit">Objektif Audit</label>
+                        <select name="select_objektif_audit" class="form-control select_objektif_audit" id="select_objektif_audit">
+                            <option value=""></option>
+                            @foreach ($auditplans as $ap)
+                                <option value="{{ $ap->id }}" data-auditplan="{{ $ap }}">
+                                    {{ $ap->objektif_audit }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
             </div>
 
@@ -264,7 +278,11 @@
 @push('scripts')
 <script>
 $(document).ready(function(){
-    $('.select2').select2({
+    $('#select_departement').select2({
+        width:'100%',
+        placeholder: 'Please select departement',
+    });
+    $('#select_objektif_audit').select2({
         width:'100%',
         placeholder: 'Please select objektif audit',
     });
