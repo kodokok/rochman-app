@@ -165,7 +165,7 @@ class AuditPlansController extends Controller
 
     public function getDepartements($id)
     {
-        $data = AuditPlan::where('departement_id', $id)->get();
+        $data = AuditPlan::where('departement_id', $id)->where('approval', 2)->get();
         return $data;
     }
 
