@@ -36,14 +36,7 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="select_departement">Departement</label>
-                        <select name="select_departement" class="form-control" id="select_departement">
-                            <option value=""></option>
-                            @foreach ($departement as $dept)
-                                <option value="{{ $dept->id }}">
-                                    {{ $dept->name }}
-                                </option>
-                            @endforeach
-                        </select>
+                        {!! Form::select('select_departement', $departement, old('select_departement'), ['class' => 'form-control', 'id' => 'select_departement', 'placeholder' => 'Please select departement']) !!}
                     </div>
                     <div class="form-group">
                         <label for="select_objektif">Objektif Audit</label>

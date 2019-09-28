@@ -28,7 +28,7 @@ class TemuanAuditsController extends Controller
     public function create()
     {
         $model = new TemuanAudit();
-        $departement = Departement::all();
+        $departement = Departement::pluck('name', 'id');
         // dd($auditplans);
         return view('temuanaudit.create', compact(['model','departement']));
     }
