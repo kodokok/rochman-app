@@ -136,7 +136,8 @@
     <div class="row">
         <div class="col-12 mb-2">
             <a href="{{ route('auditplan.index') }}" class="btn btn-secondary" style="width: 120px;">Cancel</a>
-            <input type="submit" value="Create" class="btn btn-success float-right mr-2" style="width: 120px;">
+            <input type="submit" name="action" value="Save" class="btn btn-success float-right mr-2" style="width: 150px;">
+            <input type="submit" name="action" value="Save & Create New" class="btn btn-warning float-right mr-2" style="width: 150px;">
         </div>
     </div>
     {!! Form::close() !!}
