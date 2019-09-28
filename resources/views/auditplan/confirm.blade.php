@@ -23,10 +23,16 @@
 <section class="content">
     <!-- Main content -->
     <div class="row">
-        @include('auditplan.details')
-        <div class="col-md-6">
-            {!! Form::model($auditPlan, [
-                'route' => ['auditplan.confirm', $auditPlan->id],
+        <div class="col-md-4">
+            @include('auditplan.details')
+        </div>
+        <div class="col-md-4">
+            @include('auditplan.detail-team')
+        </div>
+
+        <div class="col-md-4">
+            {!! Form::model($auditplan, [
+                'route' => ['auditplan.confirm', $auditplan->id],
                 'method' => 'PUT',
                 'autocomplete' => 'off'
             ]) !!}
@@ -36,19 +42,19 @@
                 </div>
                 <div class="card-body text-center">
 
-                    <div class="custom-control custom-radio custom-control-inline {{ $auditPlan->approval === 'pending' ? 'd-none': '' }}">
+                    <div class="custom-control custom-radio custom-control-inline {{ $auditplan->approval === 'pending' ? 'd-none': '' }}">
                         <input type="radio" id="customRadioInline1" name="action" class="custom-control-input" value="pending" {{ old('action') ? 'checked': '' }}>
                         <label class="custom-control-label" for="customRadioInline1">Pending</label>
                     </div>
-                    <div class="custom-control custom-radio custom-control-inline {{ $auditPlan->approval === 'approve' ? 'd-none': '' }}">
+                    <div class="custom-control custom-radio custom-control-inline {{ $auditplan->approval === 'approve' ? 'd-none': '' }}">
                         <input type="radio" id="customRadioInline2" name="action" class="custom-control-input" value="approve" {{ old('action') ? 'checked': '' }}>
                         <label class="custom-control-label" for="customRadioInline2">Approve</label>
                     </div>
-                    <div class="custom-control custom-radio custom-control-inline {{ $auditPlan->approval === 'reschedule' ? 'd-none': '' }}">
+                    <div class="custom-control custom-radio custom-control-inline {{ $auditplan->approval === 'reschedule' ? 'd-none': '' }}">
                         <input type="radio" id="customRadioInline3" name="action" class="custom-control-input" value="reschedule" {{ old('action') ? 'checked': '' }}>
                         <label class="custom-control-label" for="customRadioInline3">Reschedule</label>
                     </div>
-                    <div class="custom-control custom-radio custom-control-inline {{ $auditPlan->approval === 'reject' ? 'd-none': '' }}">
+                    <div class="custom-control custom-radio custom-control-inline {{ $auditplan->approval === 'reject' ? 'd-none': '' }}">
                         <input type="radio" id="customRadioInline4" name="action" class="custom-control-input" value="reject" {{ old('action') ? 'checked': '' }}>
                         <label class="custom-control-label" for="customRadioInline4">Reject</label>
                     </div>

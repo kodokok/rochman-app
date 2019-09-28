@@ -34,6 +34,13 @@
                     </div>
                 </div>
                 <div class="card-body">
+
+                    {!! Form::model($model, [
+                        'route' => $model->exists ? ['temuanaudit.update', $model->id] : 'temuanaudit.store',
+                        'method' => $model->exists ? 'PUT' : 'POST',
+                        'autocomplete' => 'off'
+                    ]) !!}
+
                     @error('audit_plan_id')
                         <div class="alert alert-warning alert-dismissible fade show" role="alert">
                             <strong>Error!</strong> You should check in on some of those fields below.
@@ -46,6 +53,7 @@
                         <label for="select_departement">Departement</label>
                         {!! Form::select('select_departement', $departement, old('select_departement'), ['class' => 'form-control', 'id' => 'select_departement', 'placeholder' => 'Please select departement']) !!}
                     </div>
+                    {!! Form::hidden('audit_plan_id', old('audit_plan_id'), ['id' => 'audit_plan_id']) !!}
                     <div class="form-group">
                         <label for="select_objektif">Objektif Audit</label>
                         <select name="select_objektif" class="form-control" id="select_objektif">
@@ -56,11 +64,6 @@
             </div>
         </div>
         <div class="col-md-6">
-            {!! Form::model($model, [
-                'route' => $model->exists ? ['temuanaudit.update', $model->id] : 'temuanaudit.store',
-                'method' => $model->exists ? 'PUT' : 'POST',
-                'autocomplete' => 'off'
-            ]) !!}
             <div class="card card-primary">
                 <div class="card-header">
                     <h3 class="card-title">Temuan Audit</h3>
@@ -72,7 +75,6 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    {!! Form::hidden('audit_plan_id', null, ['id' => 'audit_plan_id']) !!}
                     <div class="form-group">
                         <label for="klausul">Ketidaksesuaian</label>
                         {!! Form::text('ketidaksesuaian', null, ['class' => 'form-control'. ($errors->has('ketidaksesuaian')? ' is-invalid': ''), 'id' => 'ketidaksesuaian']) !!}
@@ -150,6 +152,8 @@
 @push('scripts')
 <script>
 $(document).ready(function(){
+
+
     $('#select_departement').select2({
         width:'100%',
         placeholder: 'Please select departement',
@@ -168,17 +172,23 @@ $(document).ready(function(){
             $.each(data, function(index, value) {
                 var option = new Option(value.objektif_audit, value.id);
                 $("#select_objektif").append(option);
-
             });
 
         });
 
         $("#select_objektif option[value]").remove();
+
         $("#select_objektif").val("").trigger("change");
     });
 
+    var oldSelectedObjektif = $('#audit_plan_id');
+    if (oldSelectedObjektif !== '') {
+        $("#select_objektif").val(oldSelectedObjektif).trigger("change");
+    }
+
     $('#select_objektif').on('change', function() {
         var value = $(this).val();
+
         $('#audit_plan_id').val(value);
     });
 

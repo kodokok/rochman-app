@@ -157,10 +157,10 @@ class AuditPlansController extends Controller
      */
     public function show($id)
     {
-        $auditPlan = AuditPlan::findOrFail($id);
+        $auditplan = AuditPlan::findOrFail($id);
         // $approval = $this->approvalStatus[$auditPlan->approval];
         // dd($auditPlan->approval);
-        return view('auditplan.confirm', compact(['auditPlan']));
+        return view('auditplan.confirm', compact(['auditplan']));
     }
 
     public function getDepartements($id)
@@ -172,11 +172,11 @@ class AuditPlansController extends Controller
     public function confirm(Request $request, $id)
     {
 
-        $auditPlan = AuditPlan::findOrFail($id);
+        $auditplan = AuditPlan::findOrFail($id);
 
         switch ($request->action) {
             case 'pending':
-                $auditPlan->update([
+                $auditplan->update([
                     'approval' => 0,
                     'remarks' => $request->remarks
                 ]);
@@ -192,7 +192,7 @@ class AuditPlansController extends Controller
                 $new_tanggal =  Carbon::createFromFormat('m-d-Y', $request->new_tanggal)->format('Y-m-d');
                 $new_waktu =  Carbon::createFromFormat('H:i:s', $request->new_waktu)->format('H:i:s');
 
-                $auditPlan->update([
+                $auditplan->update([
                     'tanggal' => $new_tanggal,
                     'waktu' => $new_waktu,
                     'remarks' => $request->remarks,
@@ -201,7 +201,7 @@ class AuditPlansController extends Controller
 
                 break;
             case 'approve':
-                $auditPlan->update([
+                $auditplan->update([
                     'approval' => 2,
                     'remarks' => $request->remarks
                 ]);
@@ -211,7 +211,7 @@ class AuditPlansController extends Controller
                 $this->validate($request, [
                     'remarks' => 'required|string'
                 ]);
-                $auditPlan->update([
+                $auditplan->update([
                     'approval' => 3,
                     'remarks' => $request->remarks
                 ]);

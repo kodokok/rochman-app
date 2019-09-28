@@ -82,21 +82,24 @@ class TemuanAuditsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\TemuanAudit  $temuanAudit
+     * @param  \App\TemuanAudit  $temuanaudit
      * @return \Illuminate\Http\Response
      */
-    public function show(TemuanAudit $temuanAudit)
+    public function show(TemuanAudit $temuanaudit)
     {
-        //
+        // dd($temuanaudit);
+        // $model = $temuanaudit;
+        $auditplan = AuditPlan::findOrFail($temuanaudit->audit_plan_id);
+        return view('temuanaudit.confirm', compact(['temuanaudit', 'auditplan']));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\TemuanAudit  $temuanAudit
+     * @param  \App\TemuanAudit  $temuanaudit
      * @return \Illuminate\Http\Response
      */
-    public function edit(TemuanAudit $temuanAudit)
+    public function edit(TemuanAudit $temuanaudit)
     {
         //
     }
@@ -105,10 +108,10 @@ class TemuanAuditsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\TemuanAudit  $temuanAudit
+     * @param  \App\TemuanAudit  $temuanaudit
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TemuanAudit $temuanAudit)
+    public function update(Request $request, TemuanAudit $temuanaudit)
     {
         //
     }
@@ -116,10 +119,10 @@ class TemuanAuditsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\TemuanAudit  $temuanAudit
+     * @param  \App\TemuanAudit  $temuanaudit
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TemuanAudit $temuanAudit)
+    public function destroy(TemuanAudit $temuanaudit)
     {
         //
     }
