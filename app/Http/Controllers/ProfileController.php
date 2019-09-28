@@ -37,6 +37,11 @@ class ProfileController extends Controller
         // update users
         $user->update($request->all());
 
-        return redirect()->back();
+        $notification = [
+            'message' => 'User successfully updated!',
+            'alert-type' => 'info'
+        ];
+
+        return redirect()->back()->with($notification);
     }
 }
