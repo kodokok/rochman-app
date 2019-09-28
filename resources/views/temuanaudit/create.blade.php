@@ -34,6 +34,14 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    @error('audit_plan_id')
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>Error!</strong> You should check in on some of those fields below.
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                    @enderror
                     <div class="form-group">
                         <label for="select_departement">Departement</label>
                         {!! Form::select('select_departement', $departement, old('select_departement'), ['class' => 'form-control', 'id' => 'select_departement', 'placeholder' => 'Please select departement']) !!}
@@ -46,55 +54,13 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="col-md-6">
             {!! Form::model($model, [
                 'route' => $model->exists ? ['temuanaudit.update', $model->id] : 'temuanaudit.store',
                 'method' => $model->exists ? 'PUT' : 'POST',
                 'autocomplete' => 'off'
             ]) !!}
-
-            <div class="card card-secondary">
-                <div class="card-header">
-                    <h3 class="card-title">Approval</h3>
-                    <div class="card-tools">
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fas fa-minus"></i></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="form-group row">
-                        <div class="col-sm-3">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="approve_kadept">
-                                <label class="custom-control-label" for="approve_kadept">Kadept</label>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="approve_auditee">
-                                <label class="custom-control-label" for="approve_auditee">Auditee</label>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="approve_auditor">
-                                <label class="custom-control-label" for="approve_auditor">Auditor</label>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="approve_auditor_leader">
-                                <label class="custom-control-label" for="approve_auditor_leader">Auditor Leader</label>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
             <div class="card card-primary">
                 <div class="card-header">
                     <h3 class="card-title">Temuan Audit</h3>
@@ -122,6 +88,7 @@
                             <div class="col-sm-8">
                                 <label for="tindakan_perbaikan">Tindakan Perbaikan</label>
                                 {!! Form::text('tindakan_perbaikan', null, ['class' => 'form-control'. ($errors->has('tindakan_perbaikan')? ' is-invalid': ''), 'id' => 'tindakan_perbaikan']) !!}
+                                <div id="error-tindakan_perbaikan" class="invalid-feedback">{{ $errors->first('tindakan_perbaikan') }}</div>
                             </div>
                             <div class="col-sm-4">
                                 <label for="duedate_perbaikan">Due Date Pencegahan</label>
@@ -134,7 +101,7 @@
                                     <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                     </div>
-                                    <div id="error-tanggal" class="invalid-feedback">{{ $errors->first('duedate_perbaikan') }}</div>
+                                    <div id="error-duedate_perbaikan" class="invalid-feedback">{{ $errors->first('duedate_perbaikan') }}</div>
                                 </div>
                             </div>
                         </div>
@@ -144,6 +111,7 @@
                             <div class="col-sm-8">
                                 <label for="tindakan_pencegahan">Tindakan Pencegahan</label>
                                 {!! Form::text('tindakan_pencegahan', null, ['class' => 'form-control'. ($errors->has('tindakan_pencegahan')? ' is-invalid': ''), 'id' => 'tindakan_pencegahan']) !!}
+                                <div id="error-tindakan_pencegahan" class="invalid-feedback">{{ $errors->first('tindakan_pencegahan') }}</div>
                             </div>
                             <div class="col-sm-4">
                                 <label for="duedate_pencegahan">Due Date Pencegahan</label>
@@ -156,31 +124,13 @@
                                     <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                     </div>
-                                    <div id="error-tanggal" class="invalid-feedback">{{ $errors->first('duedate_pencegahan') }}</div>
+                                    <div id="error-duedate_pencegahan" class="invalid-feedback">{{ $errors->first('duedate_pencegahan') }}</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="card card-primary">
-                <div class="card-header">
-                    <h3 class="card-title">Review</h3>
-                    <div class="card-tools">
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fas fa-minus"></i></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="form-group">
-                        {!! Form::textarea('review', old('review'), ['class' => 'form-control', 'id' => 'review', 'rows' => 3]) !!}
-                        <div id="error-review" class="invalid-feedback">{{ $errors->first('reviews') }}</div>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
     <div class="row">

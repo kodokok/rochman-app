@@ -41,7 +41,16 @@ class TemuanAuditsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        $this->validate($request, [
+            'audit_plan_id' => 'required',
+            'ketidaksesuaian' => 'required|string|max:255',
+            'akar_masalah' => 'required|string|max:255',
+            'tindakan_perbaikan' => 'required|string|max:255',
+            'duedate_perbaikan' => 'required|date_format:m-d-Y',
+            'tindakan_pencegahan' => 'required|string|max:255',
+            'duedate_pencegahan' => 'required|date_format:m-d-Y',
+        ]);
     }
 
     /**
