@@ -74,7 +74,12 @@ class UsersController extends Controller
             $model->assignRole($roles);
         }
 
-        return redirect(route('users.index'));
+        $notification = [
+            'message' => 'User successfully created!',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->route('users.index')->with($notification);
     }
 
     /**
@@ -131,7 +136,12 @@ class UsersController extends Controller
             $user->syncRoles($roles);
         }
 
-        return redirect(route('users.index'));
+        $notification = [
+            'message' => 'User successfully updated!',
+            'alert-type' => 'info'
+        ];
+
+        return redirect()->route('users.index')->with($notification);
     }
 
     /**
