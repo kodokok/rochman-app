@@ -76,7 +76,7 @@ class TemuanAuditsController extends Controller
             'alert-type' => 'success'
         ];
 
-        return redirect(route($route))->with($notification);;
+        return redirect()->route($route)->with($notification);;
     }
 
     /**
