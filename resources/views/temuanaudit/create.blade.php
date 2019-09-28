@@ -46,15 +46,55 @@
                     </div>
                 </div>
             </div>
-
-        </div>
-        <div class="col-md-6">
             {!! Form::model($model, [
                 'route' => $model->exists ? ['temuanaudit.update', $model->id] : 'temuanaudit.store',
                 'method' => $model->exists ? 'PUT' : 'POST',
                 'autocomplete' => 'off'
             ]) !!}
 
+            <div class="card card-secondary">
+                <div class="card-header">
+                    <h3 class="card-title">Approval</h3>
+                    <div class="card-tools">
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                <i class="fas fa-minus"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-group row">
+                        <div class="col-sm-3">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="approve_kadept">
+                                <label class="custom-control-label" for="approve_kadept">Kadept</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="approve_auditee">
+                                <label class="custom-control-label" for="approve_auditee">Auditee</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="approve_auditor">
+                                <label class="custom-control-label" for="approve_auditor">Auditor</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="approve_auditor_leader">
+                                <label class="custom-control-label" for="approve_auditor_leader">Auditor Leader</label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
             <div class="card card-primary">
                 <div class="card-header">
                     <h3 class="card-title">Temuan Audit</h3>
@@ -121,58 +161,26 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="reviews">Review</label>
-                            {!! Form::textarea('reviews',  null, ['class' => 'form-control', 'id' => 'reviews', 'rows' => 3]) !!}
-                        <div id="error-reviews" class="invalid-feedback">{{ $errors->first('reviews') }}</div>
+                </div>
+            </div>
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Review</h3>
+                    <div class="card-tools">
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                <i class="fas fa-minus"></i></button>
+                        </div>
                     </div>
                 </div>
-                <!-- /.card-body -->
+                <div class="card-body">
+                    <div class="form-group">
+                        {!! Form::textarea('review', old('review'), ['class' => 'form-control', 'id' => 'review', 'rows' => 3]) !!}
+                        <div id="error-review" class="invalid-feedback">{{ $errors->first('reviews') }}</div>
+                    </div>
+                </div>
             </div>
 
-            <div class="card card-info">
-                    <div class="card-header">
-                        <h3 class="card-title">Approval</h3>
-                        <div class="card-tools">
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                    <i class="fas fa-minus"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-group row">
-
-                            <div class="col-sm-3">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="approve_kadept">
-                                    <label class="custom-control-label" for="approve_kadept">Kadept</label>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="approve_auditee">
-                                    <label class="custom-control-label" for="approve_auditee">Auditee</label>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="approve_auditor">
-                                    <label class="custom-control-label" for="approve_auditor">Auditor</label>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="approve_auditor_leader">
-                                    <label class="custom-control-label" for="approve_auditor_leader">Auditor Leader</label>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
         </div>
     </div>
     <div class="row">
