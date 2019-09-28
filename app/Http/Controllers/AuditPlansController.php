@@ -168,8 +168,6 @@ class AuditPlansController extends Controller
     public function show($id)
     {
         $auditplan = AuditPlan::findOrFail($id);
-        // $approval = $this->approvalStatus[$auditPlan->approval];
-        // dd($auditPlan->approval);
         return view('auditplan.confirm', compact(['auditplan']));
     }
 
@@ -225,7 +223,6 @@ class AuditPlansController extends Controller
                     'approval' => 3,
                     'remarks' => $request->remarks
                 ]);
-
                 break;
         }
 
