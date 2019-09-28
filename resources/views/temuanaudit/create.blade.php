@@ -203,6 +203,7 @@ $(document).ready(function(){
         placeholder: 'Please select departement',
     });
     $('#select_objektif').select2({
+        width:'100%',
         placeholder: 'Please select objektif plan',
     });
 
@@ -222,6 +223,11 @@ $(document).ready(function(){
 
         $("#select_objektif option[value]").remove();
         $("#select_objektif").val("").trigger("change");
+    });
+
+    $('#select_objektif').on('change', function() {
+        var value = $(this).val();
+        $('#audit_plan_id').val(value);
     });
 
     // datetimepicker due date perbaikan
