@@ -28,10 +28,10 @@ class TemuanAuditsController extends Controller
      */
     public function create()
     {
-        $model = new TemuanAudit();
+        $temuanaudit = new TemuanAudit();
         $departement = Departement::pluck('name', 'id');
         // dd($auditplans);
-        return view('temuanaudit.create', compact(['model','departement']));
+        return view('temuanaudit.create', compact(['temuanaudit','departement']));
     }
 
     /**
@@ -101,7 +101,12 @@ class TemuanAuditsController extends Controller
      */
     public function edit(TemuanAudit $temuanaudit)
     {
-        //
+        $model = $temuanaudit;
+        $departement = Departement::pluck('name', 'id');
+        $auditplan = AuditPlan::findOrFail($temuanaudit->audit_plan_id);
+        // dd($auditplans);
+        // dd($temuanaudit);
+        return view('temuanaudit.create', compact(['temuanaudit', 'auditplan', 'departement']));
     }
 
     /**
@@ -113,7 +118,41 @@ class TemuanAuditsController extends Controller
      */
     public function update(Request $request, TemuanAudit $temuanaudit)
     {
-        //
+        // dd($request->all());
+        $this->validate($request, [
+            'audit_plan_id' => 'required',
+            'ketidaksesuaian' => 'required|string|max:255',
+            'akar_masalah' => 'required|string|max:255',
+            'tindakan_perbaikan' => 'required|string|max:255',
+            'duedate_perbaikan' => 'required|date_format:m-d-Y',
+            'tindakan_pencegahan' => 'required|string|max:255',
+            'duedate_pencegahan' => 'required|date_format:m-d-Y',
+        ]);
+
+        $duedate_perbaikan =  Carbon::createFromFormat('m-d-Y', $request->duedate_perbaikan)->format('Y-m-d');
+        $duedate_pencegahan =  Carbon::createFromFormat('m-d-Y', $request->duedate_pencegahan)->format('Y-m-d');
+
+        $data = [
+            'ketidaksesuaian' => $request->ketidaksesuaian,
+            'akar_masalah' => $request->akar_masalah,
+            'tindakan_perbaikan' => $request->tindakan_perbaikan,
+            'duedate_perbaikan' => $duedate_perbaikan,
+            'tindakan_pencegahan' => $request->tindakan_pencegahan,
+            'duedate_pencegahan' => $duedate_pencegahan,
+        ];
+
+        if ($request->has('status')) {
+            $data['status'] = $request->status;
+        }
+
+        $temuanaudit->update($data);
+
+        $notification = [
+            'message' => 'Temuan Audit successfully updated!',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->route('temuanaudit.index')->with($notification);
     }
 
     /**
@@ -124,7 +163,7 @@ class TemuanAuditsController extends Controller
      */
     public function destroy(TemuanAudit $temuanaudit)
     {
-        //
+        $temuanaudit->delete();
     }
 
     public function dataTable()

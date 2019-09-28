@@ -46,8 +46,9 @@ Route::group(['middleware' => ['auth']], function () {
             'show'
         ]);
         Route::resource('auditplan', 'AuditPlansController');
-        Route::put('auditplan/{auditPlan}/confirm', 'AuditPlansController@confirm')->name('auditplan.confirm');
+        Route::put('auditplan/{auditplan}/confirm', 'AuditPlansController@confirm')->name('auditplan.confirm');
 
         Route::resource('temuanaudit', 'TemuanAuditsController');
+        Route::put('temuanaudit/{temuanaudit}/confirm', 'TemuanAuditsController@confirm')->name('temuanaudit.confirm');
     });
 });

@@ -27,76 +27,24 @@
             @include('auditplan.detail-team')
         </div>
         <div class="col-md-4">
-            @include('temuanaudit.details')
-        </div>
-        <div class="col-md-4">
-            {!! Form::open([
-                'route' => ['temuanaudit.update', $temuanaudit->id],
+            {!! Form::model($temuanaudit, [
+                'route' => ['temuanaudit.confirm', $temuanaudit->id],
                 'method' => 'PUT',
                 'autocomplete' => 'off'
             ]) !!}
-            <div class="card card-primary">
-                <div class="card-header">
-                    <h3 class="card-title">Approval</h3>
-                    <div class="card-tools">
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fas fa-minus"></i></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="form-group row">
-                        <div class="col-sm-3">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="approve_kadept" name="approve_kadept">
-                                <label class="custom-control-label" for="approve_kadept">Kadept</label>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="approve_auditee" name="approve_auditee">
-                                <label class="custom-control-label" for="approve_auditee">Auditee</label>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="approve_auditor" name="approve_auditor">
-                                <label class="custom-control-label" for="approve_auditor">Auditor</label>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="approve_auditor_leader" name="approve_auditor_leader">
-                                <label class="custom-control-label" for="approve_auditor_leader">Auditor Leader</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card card-primary">
-                <div class="card-header">
-                    <h3 class="card-title">Review</h3>
-                    <div class="card-tools">
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fas fa-minus"></i></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="form-group">
-                        {!! Form::textarea('review', old('review'), ['class' => 'form-control' . ($errors->has('review')? ' is-invalid': ''), 'id' => 'review', 'rows' => 4]) !!}
-                        <div id="error-review" class="invalid-feedback">{{ $errors->first('review') }}</div>
-                    </div>
-                </div>
-            </div>
+            @include('temuanaudit.form', ['disabled' => true])
+        </div>
+        <div class="col-md-4">
+
+            @include('temuanaudit.approve')
+            @include('temuanaudit.review')
+            @include('temuanaudit.status')
 
         </div>
     </div>
     <div class="row">
         <div class="col-12 mb-2">
-            <a href="{{ route('auditplan.index') }}" class="btn btn-secondary" style="width: 120px;">Cancel</a>
+            <a href="{{ route('temuanaudit.index') }}" class="btn btn-secondary" style="width: 120px;">Cancel</a>
             <input type="submit" value="Confirm" class="btn btn-success float-right mr-2" style="width: 120px;">
         </div>
     </div>
