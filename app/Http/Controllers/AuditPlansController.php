@@ -163,6 +163,12 @@ class AuditPlansController extends Controller
         return view('auditplan.confirm', compact(['auditPlan']));
     }
 
+    public function getDepartements($id)
+    {
+        $data = AuditPlan::where('departement_id', $id)->get();
+        return $data;
+    }
+
     public function confirm(Request $request, $id)
     {
 

@@ -36,105 +36,24 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="select_departement">Departement</label>
-                        <select name="select_departement" class="form-control select_departement" id="select_departement">
+                        <select name="select_departement" class="form-control" id="select_departement">
                             <option value=""></option>
-                            @foreach ($auditplans as $ap)
-                                <option value="{{ $ap->id }}" data-auditplan="{{ $ap }}">
-                                    {{ $ap->departement->name }}
+                            @foreach ($departement as $dept)
+                                <option value="{{ $dept->id }}">
+                                    {{ $dept->name }}
                                 </option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="select_objektif_audit">Objektif Audit</label>
-                        <select name="select_objektif_audit" class="form-control select_objektif_audit" id="select_objektif_audit">
-                            <option value=""></option>
-                            @foreach ($auditplans as $ap)
-                                <option value="{{ $ap->id }}" data-auditplan="{{ $ap }}">
-                                    {{ $ap->objektif_audit }}
-                                </option>
-                            @endforeach
+                        <label for="select_objektif">Objektif Audit</label>
+                        <select name="select_objektif" class="form-control" id="select_objektif">
+                            <option></option>
                         </select>
                     </div>
                 </div>
             </div>
 
-            <div class="card card-default">
-                <div class="card-header">
-                    <h3 class="card-title">Team Audit</h3>
-                    <div class="card-tools">
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fas fa-minus"></i></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="form-group">
-                        <label for="objektif_audit">Objektif Audit</label>
-                        {!! Form::textarea('objektif_audit',  null, ['class' => 'form-control', 'id' => 'objektif_audit', 'rows' => 3, 'disabled']) !!}
-                    </div>
-                    <div class="form-group">
-                        <label for="klausul">Klausul</label>
-                        {!! Form::text('klausul', null, ['class' => 'form-control', 'id' => 'klausul', 'disabled']) !!}
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <label for="departement_id">Departement</label>
-                                {!! Form::text('departement_id', null, ['class' => 'form-control', 'id' => 'departement_id', 'disabled']) !!}
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="departement_id">Kadept</label>
-                                {!! Form::text('kadept', null, ['class' => 'form-control', 'id' => 'kadept', 'disabled']) !!}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <label for="tanggal">Tanggal</label>
-                                <div class="input-group">
-                                    <div class="input-group-append">
-                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                    </div>
-                                    {!! Form::text('tanggal', null, ['class' => 'form-control', 'id' => 'tanggal', 'disabled']) !!}
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <label for="waktu">Waktu</label>
-                                <div class="input-group">
-                                    <div class="input-group-append">
-                                        <div class="input-group-text"><i class="fa fa-clock"></i></div>
-                                    </div>
-                                    {!! Form::text('waktu', null, ['class' => 'form-control', 'id' => 'waktu', 'disabled']) !!}
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <label for="approval">Approval Status</label>
-                                {!! Form::text('approval', null, ['class' => 'form-control', 'id' => 'approval', 'disabled']) !!}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <label for="auditee_id">Auditee</label>
-                                {!! Form::text('auditee_id', null, ['class' => 'form-control', 'id' => 'auditee_id', 'disabled']) !!}
-                            </div>
-                            <div class="col-sm-4">
-                                <label for="auditor_id">Auditor</label>
-                                {!! Form::text('auditor_id', null, ['class' => 'form-control', 'id' => 'auditor_id', 'disabled']) !!}
-                            </div>
-                            <div class="col-sm-4">
-                                <label for="auditor_leader_id">Auditor Leader</label>
-                                {!! Form::text('auditor_leader_id', null, ['class' => 'form-control', 'id' => 'auditor_leader_id', 'disabled']) !!}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /.card -->
         </div>
         <div class="col-md-6">
             {!! Form::model($model, [
@@ -282,9 +201,26 @@ $(document).ready(function(){
         width:'100%',
         placeholder: 'Please select departement',
     });
-    $('#select_objektif_audit').select2({
-        width:'100%',
-        placeholder: 'Please select objektif audit',
+    $('#select_objektif').select2({
+        placeholder: 'Please select objektif plan',
+    });
+
+    $('#select_departement').on('change', function() {
+        var departement_id = $(this).val();
+        var url = '{{ route("auditplan.departement", ":id") }}'.replace(':id', departement_id);
+
+        $.get(url, function(data) {
+
+            $.each(data, function(index, value) {
+                var option = new Option(value.objektif_audit, value.id);
+                $("#select_objektif").append(option);
+
+            });
+
+        });
+
+        $("#select_objektif option[value]").remove();
+        $("#select_objektif").val("").trigger("change");
     });
 
     // datetimepicker due date perbaikan

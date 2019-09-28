@@ -22,12 +22,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('password/change', 'PasswordController@update')->name('password.change');
 
     Route::group(['middleware' => ['role:admin']], function () {
+        // route datatable
         Route::get('table/users', 'UsersController@dataTable')->name('table.users');
         Route::get('table/roles', 'RolesController@dataTable')->name('table.roles');
         Route::get('table/departements', 'DepartementsController@dataTable')->name('table.departements');
         Route::get('table/kompetensi', 'KompetensiAuditorsController@dataTable')->name('table.kompetensi');
         Route::get('table/auditplans', 'AuditPlansController@dataTable')->name('table.auditplans');
         Route::get('table/temuanaudits', 'TemuanAuditsController@dataTable')->name('table.temuanaudits');
+
+        // route fetch data
+        Route::get('auditplan/departement/{id}', 'AuditPlansController@getDepartements')->name('auditplan.departement');
 
         Route::resource('roles', 'RolesController')->only([
             'index', 'create', 'store', 'destroy'
