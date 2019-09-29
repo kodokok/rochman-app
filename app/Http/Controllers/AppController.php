@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\AuditPlan;
+use App\Departement;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AppController extends Controller
 {
@@ -23,6 +27,11 @@ class AppController extends Controller
      */
     public function index()
     {
-        return view('index');
+        // $user = auth()->user();
+        $auditplans = AuditPlan::all();
+        // dd($auditplans);
+        return view('index', compact([
+            'auditplans'
+        ]));
     }
 }
