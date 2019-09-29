@@ -185,11 +185,8 @@ class TemuanAuditsController extends Controller
 
         $status = 0;
 
-        if ($approve_kadept || $approve_auditee || $approve_auditor || $approve_auditor_leader) {
-            $status = 1;
-        }
         if ($approve_kadept && $approve_auditee && $approve_auditor && $approve_auditor_leader) {
-            $status = 3;
+            $status = 1;
         }
 
         if ($request->has('status')) {

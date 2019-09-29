@@ -11,7 +11,7 @@ class TemuanAudit extends Model
 {
     protected $guarded = [];
 
-    protected $statusList = ['tindakan', 'perbaikan', 'pencegahan', 'selesai'];
+    protected $statusList = ['open', 'closed'];
 
     protected $casts = [
         'approve_kadept' => 'boolean',
