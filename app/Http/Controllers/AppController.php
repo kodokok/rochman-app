@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\AuditPlan;
 use App\Departement;
+use App\TemuanAudit;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -29,9 +30,10 @@ class AppController extends Controller
     {
         // $user = auth()->user();
         $auditplans = AuditPlan::all();
+        $temuanaudits = TemuanAudit::all();
         // dd($auditplans);
         return view('index', compact([
-            'auditplans'
+            'auditplans','temuanaudits'
         ]));
     }
 }
