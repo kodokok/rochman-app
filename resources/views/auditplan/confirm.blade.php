@@ -126,7 +126,7 @@
     </div>
     <div class="row">
         <div class="col-12 mb-2">
-            <a href="{{ route('auditplan.index') }}" class="btn btn-secondary">Cancel</a>
+            <a href="{{ url()->previous() }}" class="btn btn-secondary">Cancel</a>
             <input type="submit" value="Confirm" class="btn btn-success float-right mr-2" style="width: 120px;">
         </div>
     </div>

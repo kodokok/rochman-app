@@ -83,6 +83,11 @@
             </div>
         <!-- ./col -->
         </div>
+        <div class="row">
+            <div class="col-lg-6">
+                @include('dashboard.auditplan-list')
+            </div>
+        </div>
     </div>
 </section>
 

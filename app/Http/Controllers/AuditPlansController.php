@@ -144,7 +144,7 @@ class AuditPlansController extends Controller
             'alert-type' => 'info'
         ];
 
-        return redirect()->route('auditplan.index')->with($notification);
+        return redirect()->back()->with($notification);
     }
 
     /**
@@ -165,9 +165,11 @@ class AuditPlansController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $auditplan = AuditPlan::findOrFail($id);
+        $request->session()->put('url.intended', url()->previous());
+
         return view('auditplan.confirm', compact(['auditplan']));
     }
 
@@ -231,7 +233,10 @@ class AuditPlansController extends Controller
             'alert-type' => 'info'
         ];
 
-        return redirect()->route('auditplan.index')->with($notification);
+        if ($request->session()->has('url.intended')) {
+            return redirect($request->session()->get('url.intended'))->with($notification);
+        }
+        return redirect()->back()->with($notification);
     }
 
     public function dataTable()

@@ -33,6 +33,11 @@ class AuditPlan extends Model
         return Carbon::parse($value)->format('H:i:s');
     }
 
+    public function getSchedule()
+    {
+        return new Carbon($this->attributes['tanggal'] . ' ' . $this->attributes['waktu']);
+    }
+
     public function departement()
     {
         return $this->belongsTo(Departement::class);
