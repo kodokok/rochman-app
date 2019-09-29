@@ -1,91 +1,109 @@
-<div class="invoice p-3 mb-3">
+<div class="card p-3 mb-3">
     <!-- title row -->
     <div class="row">
         <div class="col-12">
             <h4>
-                <i class="fas fa-globe"></i> AdminLTE, Inc.
-                <small class="float-right">Date: 2/10/2014</small>
+                <i class="fas fa-calendar-alt mr-2"></i>Audit Plan Report
+                <small class="float-right">Date: {{ date('Y-m-d') }}</small>
             </h4>
         </div>
         <!-- /.col -->
     </div>
     <!-- info row -->
-    <div class="row invoice-info">
-        <div class="col-sm-4 invoice-col">
-            From
-            <address>
-                <strong>Admin, Inc.</strong><br>
-                795 Folsom Ave, Suite 600<br>
-                San Francisco, CA 94107<br>
-                Phone: (804) 123-5432<br>
-                Email: info@almasaeedstudio.com
-            </address>
+    <div class="report-header row pt-2 my-md-2 pt-md-2 mb-2 border-top">
+        <div class="col-sm-4">
+            <div class="row">
+                <div class="col-sm-4 font-weight-bold">Nomor Audit<span class="float-right">:</span></div>
+                <div class="col-sm-8">{{ $auditplan->id }}</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 font-weight-bold">Objektif Audit<span class="float-right">:</span></div>
+                <div class="col-sm-8">{{ $auditplan->objektif_audit }}</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 font-weight-bold">Klausul<span class="float-right">:</span></div>
+                <div class="col-sm-8">{{ $auditplan->klausul }}</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 font-weight-bold">Tanggal Audit<span class="float-right">:</span></div>
+                <div class="col-sm-8">{{ $auditplan->getSchedule() }}</div>
+            </div>
         </div>
-        <!-- /.col -->
-        <div class="col-sm-4 invoice-col">
-            To
-            <address>
-                <strong>John Doe</strong><br>
-                795 Folsom Ave, Suite 600<br>
-                San Francisco, CA 94107<br>
-                Phone: (555) 539-1037<br>
-                Email: john.doe@example.com
-            </address>
+        <div class="col-sm-4">
+            <div class="row">
+                <div class="col-sm-4 font-weight-bold">Departement<span class="float-right">:</span></div>
+                <div class="col-sm-8">{{ $auditplan->departement->name }}</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 font-weight-bold">Kadept<span class="float-right">:</span></div>
+                <div class="col-sm-8">{{ $auditplan->departement->user->name }}</div>
+            </div>
         </div>
-        <!-- /.col -->
-        <div class="col-sm-4 invoice-col">
-            <b>Invoice #007612</b><br>
-            <br>
-            <b>Order ID:</b> 4F3S8J<br>
-            <b>Payment Due:</b> 2/22/2014<br>
-            <b>Account:</b> 968-34567
+        <div class="col-sm-4">
+            <div class="row">
+                <div class="col-sm-4 font-weight-bold">Auditee<span class="float-right">:</span></div>
+                <div class="col-sm-8">{{ $auditplan->auditee->name }}</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 font-weight-bold">Auditor<span class="float-right">:</span></div>
+                <div class="col-sm-8">{{ $auditplan->auditor->name }}</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 font-weight-bold">Auditor Leader<span class="float-right">:</span></div>
+                <div class="col-sm-8">{{ $auditplan->auditorLeader->name }}</div>
+            </div>
         </div>
         <!-- /.col -->
     </div>
     <!-- /.row -->
-
+    <div class="row pt-2 my-md-2 pt-md-2 border-top">
+        <div class="col-12">Temuan audit:</div>
+    </div>
     <!-- Table row -->
     <div class="row">
         <div class="col-12 table-responsive">
-            <table class="table table-striped">
+            <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>Qty</th>
-                        <th>Product</th>
-                        <th>Serial #</th>
-                        <th>Description</th>
-                        <th>Subtotal</th>
+                        <th rowspan="2">Nomor</th>
+                        <th rowspan="2">Ketidaksesuaian</th>
+                        <th rowspan="2">Akar Masalah</th>
+                        <th colspan="2">Perbaikan</th>
+                        <th colspan="2">Pencegahan</th>
+                        <th colspan="4">Approve</th>
+                        <th rowspan="2">Status</th>
+                        <th rowspan="2">Review</th>
+                    </tr>
+                    <tr>
+                        <th>Tindakan</th>
+                        <th>Due Date</th>
+                        <th>Tindakan</th>
+                        <th>Due Date</th>
+                        <th>Kadept</th>
+                        <th>Auditee</th>
+                        <th>Auditor</th>
+                        <th>Auditor Leader</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Call of Duty</td>
-                        <td>455-981-221</td>
-                        <td>El snort testosterone trophy driving gloves handsome</td>
-                        <td>$64.50</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Need for Speed IV</td>
-                        <td>247-925-726</td>
-                        <td>Wes Anderson umami biodiesel</td>
-                        <td>$50.00</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Monsters DVD</td>
-                        <td>735-845-642</td>
-                        <td>Terry Richardson helvetica tousled street art master</td>
-                        <td>$10.70</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Grown Ups Blue Ray</td>
-                        <td>422-568-642</td>
-                        <td>Tousled lomo letterpress</td>
-                        <td>$25.99</td>
-                    </tr>
+                    @foreach ($temuanaudits as $key => $temuanaudit)
+                        <tr>
+                            <td>{{ $key+1 }}</td>
+                            <td>{{ $temuanaudit->ketidaksesuaian }}</td>
+                            <td>{{ $temuanaudit->akar_masalah }}</td>
+                            <td>{{ $temuanaudit->tindakan_perbaikan }}</td>
+                            <td>{{ $temuanaudit->duedate_perbaikan }}</td>
+                            <td>{{ $temuanaudit->tindakan_pencegahan }}</td>
+                            <td>{{ $temuanaudit->duedate_pencegahan }}</td>
+                            <td><i class="{{ $temuanaudit->approve_kadept ? 'ion ion-android-done' : '' }}"></i></td>
+                            <td><i class="{{ $temuanaudit->approve_auditee ? 'ion ion-android-done' : '' }}"></i></td>
+                            <td><i class="{{ $temuanaudit->approve_auditor ? 'ion ion-android-done' : '' }}"></i></td>
+                            <td><i class="{{ $temuanaudit->approve_auditor_leader ? 'ion ion-android-done' : '' }}"></i></td>
+                            <td>{{ strtoupper($temuanaudit->status) }}</td>
+                            <td>{{ $temuanaudit->review }}</td>
+                        </tr>
+                    @endforeach
+
                 </tbody>
             </table>
         </div>
@@ -93,45 +111,34 @@
     </div>
     <!-- /.row -->
 
-    <div class="row">
-        <!-- accepted payments column -->
-        <div class="col-6">
-            <p class="lead">Payment Methods:</p>
-            <img src="../../dist/img/credit/visa.png" alt="Visa">
-            <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
-            <img src="../../dist/img/credit/american-express.png" alt="American Express">
-            <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
-
-            <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango
-                imeem
-                plugg
-                dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
-            </p>
+    <div class="report-footer">
+        <div class="row pt-2 my-md-2 pt-md-2 mt-2 border-top align-items-end">
+            <div class="col-sm-4">
+                <div class="row col-sm-4 font-weight-bold">Remarks:</div>
+                <div class="row col-sm-8">
+                    {{ $auditplan->remarks }}
+                </div>
+            </div>
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4"></div>
         </div>
-        <!-- /.col -->
-        <div class="col-6">
-            <p class="lead">Amount Due 2/22/2014</p>
-
-            <div class="table-responsive">
-                <table class="table">
-                    <tr>
-                        <th style="width:50%">Subtotal:</th>
-                        <td>$250.30</td>
-                    </tr>
-                    <tr>
-                        <th>Tax (9.3%)</th>
-                        <td>$10.34</td>
-                    </tr>
-                    <tr>
-                        <th>Shipping:</th>
-                        <td>$5.80</td>
-                    </tr>
-                    <tr>
-                        <th>Total:</th>
-                        <td>$265.24</td>
-                    </tr>
-                </table>
+        <div class="row"><div class="col-12"><p></p></div></div>
+        <div class="row"><div class="col-12"><p></p></div></div>
+        <div class="row"><div class="col-12"><p></p></div></div>
+        <div class="row">
+            <div class="col-sm-8"></div>
+            <div class="col-sm-4">
+                    <div class="row justify-content-end text-center">
+                        <div class="col-sm-3 border-top border-dark m-2">
+                            {{ $auditplan->auditee->name }}
+                        </div>
+                        <div class="col-sm-3 border-top border-dark m-2">
+                            {{ $auditplan->auditor->name }}
+                        </div>
+                        <div class="col-sm-3 border-top border-dark m-2">
+                            {{ $auditplan->auditorLeader->name }}
+                        </div>
+                    </div>
             </div>
         </div>
         <!-- /.col -->

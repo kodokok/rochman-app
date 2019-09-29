@@ -24,14 +24,16 @@
         <div class="row">
             <div class="col-12">
                 <!-- this row will not appear when printing -->
-                <div class="row no-print mb-3">
-                    <div class="col-12">
-                        <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                            <i class="fas fa-download"></i> Generate PDF
-                        </button>
-                        <button type="button" class="btn btn-default float-right" style="margin-right: 5px;">
-                            <i class="fas fa-print"></i> Print
-                        </button>
+                <div class="card">
+                    <div class="card-body">
+                        {{-- <div class="col-12"> --}}
+                            <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+                                <i class="fas fa-file-pdf mr-2"></i>Generate PDF
+                            </button>
+                            <button type="button" class="btn btn-secondary float-right" style="margin-right: 5px;">
+                                <i class="fas fa-print mr-2"></i>Print
+                            </button>
+                        {{-- </div> --}}
                     </div>
                 </div><!-- Main content -->
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\AuditPlan;
 use App\Departement;
+use App\TemuanAudit;
 use App\User;
 use Carbon\Carbon;
 use DataTables;
@@ -240,7 +241,9 @@ class AuditPlansController extends Controller
 
     public function report(Request $request, AuditPlan $auditplan)
     {
-        return view('auditplan.report.index', compact(['auditplan']));
+        $temuanaudits = TemuanAudit::where('audit_plan_id', $auditplan->id)->get();
+
+        return view('auditplan.report.index', compact(['auditplan', 'temuanaudits']));
     }
 
     public function printPDF()
