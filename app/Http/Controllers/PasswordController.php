@@ -33,5 +33,7 @@ class PasswordController extends Controller
         $user->update([
             'password' => Hash::make($data['new_password'])
         ]);
+
+        redirect()->back();
     }
 }

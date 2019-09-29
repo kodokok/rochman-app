@@ -16,10 +16,10 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/', 'AppController@index')->name('app');
 
-    Route::get('profile/{id}', 'ProfileController@show')->name('profile.show');
-    Route::put('profile/{id}', 'ProfileController@update')->name('profile.update');
-    Route::get('password', 'PasswordController@index')->name('password');
-    Route::put('password/change', 'PasswordController@update')->name('password.change');
+    Route::get('profile/{user}', 'ProfileController@show')->name('profile.show');
+    Route::put('profile/{user}', 'ProfileController@update')->name('profile.update');
+    Route::get('profile/{user}/password', 'ProfileController@editPassword')->name('password.edit');
+    Route::put('profile/{user}/password', 'ProfileController@changePassword')->name('password.change');
 
     Route::group(['middleware' => ['role:admin']], function () {
         // route datatable

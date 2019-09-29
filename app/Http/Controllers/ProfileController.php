@@ -4,18 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
-    public function show()
+    public function show(User $user)
     {
-        $user = auth()->user();
-        return view('users.profile.index', compact('user'));
+        // $user = auth()->user();
+        return view('profile.index', compact('user'));
     }
 
-    public function update(Request $request)
+    public function update(Request $request, User $user)
     {
-        $user = auth()->user();
+        // $user = auth()->user();
 
         $this->validate($request, [
             'name' => 'required|string|max:100',
@@ -43,5 +44,39 @@ class ProfileController extends Controller
         ];
 
         return redirect()->back()->with($notification);
+    }
+
+    public function editPassword(Request $request, User $user)
+    {
+        return view('profile.password.index', compact(['user']));
+    }
+
+    public function changePassword(Request $request, User $user)
+    {
+        $request->only('old_password', 'new_password', 'confirm_password');
+        // dd($user);
+        $data = $this->validate($request, [
+            'old_password' => [
+                'required',
+                function ($attribute, $value, $fail) use ($user) {
+                    if (!\Hash::check($value, $user->password)) {
+                        return $fail(__('The current password is incorrect.'));
+                    }
+                },
+            ],
+            'new_password' => 'required|min:6',
+            'confirm_password' => 'required|same:new_password',
+        ]);
+
+        $user->update([
+            'password' => Hash::make($data['new_password'])
+        ]);
+
+        $notification = [
+            'message' => 'Password successfully updated!',
+            'alert-type' => 'info'
+        ];
+
+        return redirect()->back('app')->with($notification);
     }
 }

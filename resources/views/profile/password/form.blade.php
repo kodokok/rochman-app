@@ -1,27 +1,27 @@
-{!! Form::open([
-'route' => 'password.change',
-'method' => 'PUT'
+{!! Form::model($user, [
+    'route' => ['password.change', $user->id],
+    'method' => 'PUT'
 ]) !!}
 
 <div class="form-group row">
     <label for="old_password" class="col-sm-4 col-form-label">Current Password</label>
     <div class="col-sm-8">
-        {!! Form::password('old_password', ['class' => 'form-control', 'id' => 'old_password']) !!}
-        <div id="error-old-password" class="invalid-feedback"></div>
+        {!! Form::password('old_password', ['class' => 'form-control'. ($errors->has('old_password') ? ' is-invalid': ''), 'id' => 'old_password']) !!}
+        <div id="error-confirm_password" class="invalid-feedback">{{ $errors->first('old_password') }}</div>
     </div>
 </div>
 <div class="form-group row">
     <label for="new_password" class="col-sm-4 col-form-label">New Password</label>
     <div class="col-sm-8">
-        {!! Form::password('new_password', ['class' => 'form-control', 'id' => 'new_password']) !!}
-        <div id="error-new-password" class="invalid-feedback"></div>
+        {!! Form::password('new_password', ['class' => 'form-control'. ($errors->has('new_password') ? ' is-invalid': ''), 'id' => 'new_password']) !!}
+        <div id="error-confirm_password" class="invalid-feedback">{{ $errors->first('new_password') }}</div>
     </div>
 </div>
 <div class="form-group row">
     <label for="confirm_password" class="col-sm-4 col-form-label">Confirm Password</label>
     <div class="col-sm-8">
-        {!! Form::password('confirm_password', ['class' => 'form-control', 'id' => 'confirm_password']) !!}
-        <div id="error-confirm-password" class="invalid-feedback"></div>
+        {!! Form::password('confirm_password', ['class' => 'form-control'. ($errors->has('confirm_password') ? ' is-invalid': ''), 'id' => 'confirm_password']) !!}
+        <div id="error-confirm_password" class="invalid-feedback">{{ $errors->first('confirm_password') }}</div>
     </div>
 </div>
 <div class="form-group row">

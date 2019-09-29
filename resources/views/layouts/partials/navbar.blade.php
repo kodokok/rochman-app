@@ -38,8 +38,8 @@
                         <!-- Message End -->
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="{{ route('profile') }}" class="dropdown-item dropdown-footer">PROFILE</a>
-                    <a href="{{ route('password') }}" class="dropdown-item dropdown-footer">CHANGE PASSWORD</a>
+                    <a href="{{ route('profile.show', auth()->user()->id) }}" class="dropdown-item dropdown-footer">PROFILE</a>
+                    <a href="{{ route('password.edit', auth()->user()->id) }}" class="dropdown-item dropdown-footer">CHANGE PASSWORD</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item dropdown-footer" href="{{ route('logout') }}"
                     onclick="event.preventDefault();

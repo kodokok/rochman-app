@@ -29,7 +29,7 @@
                         <div class="card-title">Change Password</div>
                     </div>
                     <div class="card-body">
-                        @include('users.password.form')
+                        @include('profile.password.form')
                     </div><!-- /.card-body -->
                 </div>
                 <!-- /.nav-tabs-custom -->
