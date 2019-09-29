@@ -16,25 +16,25 @@
                     <tr>
                         <th>ID</th>
                         <th>Departement</th>
-                        <th>Objektif Audit</th>
-                        <th>Klausul</th>
-                        <th>Schedule</th>
+                        <th>Audit Plan</th>
+                        <th>Ketidaksesuaian</th>
+                        <th>Akar Masalah</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @if (isset($auditplans))
-                        @foreach ($auditplans as $auditplan)
+                    @if (isset($temuanaudits))
+                        @foreach ($temuanaudits as $temuanaudit)
                         <tr>
-                            <td>{{ $auditplan->id }}</td>
-                            <td>{{ $auditplan->departement->name }}</td>
-                            <td>{{ $auditplan->objektif_audit }}</td>
-                            <td>{{ $auditplan->klausul }}</td>
-                            <td>{{ $auditplan->getSchedule() }}</td>
-                            <td>{{ strtoupper($auditplan->approval) }}</td>
+                            <td>{{ $temuanaudit->id }}</td>
+                            <td>{{ $temuanaudit->audit_plan->departement->name }}</td>
+                            <td>{{ $temuanaudit->audit_plan->objektif_audit }}</td>
+                            <td>{{ mb_strimwidth($temuanaudit->ketidaksesuaian,0,20,'...') }}</td>
+                            <td>{{ mb_strimwidth($temuanaudit->akar_masalah,0,20,'...') }}</td>
+                            <td>{{ strtoupper($temuanaudit->status) }}</td>
                             <td>
-                                <a href="{{ route('auditplan.show', $auditplan->id) }}" class="btn btn-sm btn-success float-left"><i class="fas fa-check"></i></a>
+                                <a href="{{ route('temuanaudit.show', $temuanaudit->id) }}" class="btn btn-sm btn-success float-left"><i class="fas fa-check"></i></a>
                             </td>
                         </tr>
                         @endforeach
@@ -46,7 +46,7 @@
     </div>
     <!-- /.card-body -->
     <div class="card-footer clearfix">
-        {{ $auditplans->appends(request()->query())->links() }}
+        {{ $temuanaudits->appends(request()->query())->links() }}
     </div>
     <!-- /.card-footer -->
 </div>

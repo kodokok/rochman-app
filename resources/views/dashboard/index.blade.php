@@ -39,6 +39,9 @@
             <div class="col-lg-6">
                 @include('dashboard.list.auditplan')
             </div>
+            <div class="col-lg-6">
+                @include('dashboard.list.temuanaudit')
+            </div>
         </div>
     </div>
 </section>

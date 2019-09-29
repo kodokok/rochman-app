@@ -29,8 +29,8 @@ class AppController extends Controller
     public function index()
     {
         // $user = auth()->user();
-        $auditplans = AuditPlan::paginate(4);
-        $temuanaudits = TemuanAudit::all();
+        $auditplans = AuditPlan::paginate(4, ['*'], 'auditplans');
+        $temuanaudits = TemuanAudit::paginate(4, ['*'], 'temuanaudits');
         // dd($auditplans);
         return view('index', compact([
             'auditplans','temuanaudits'
