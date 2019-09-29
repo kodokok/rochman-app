@@ -24,10 +24,10 @@ class CreateTemuanAuditsTable extends Migration
             $table->string('tindakan_pencegahan');
             $table->date('duedate_pencegahan');
             $table->text('review')->nullable();
-            $table->unsignedTinyInteger('approve_dept')->default(0);
+            $table->unsignedTinyInteger('approve_kadept')->default(0);
             $table->unsignedTinyInteger('approve_auditee')->default(0);
             $table->unsignedTinyInteger('approve_auditor')->default(0);
-            $table->unsignedTinyInteger('approve_auditor_lead')->default(0);
+            $table->unsignedTinyInteger('approve_auditor_leader')->default(0);
             $table->timestamps();
         });
     }

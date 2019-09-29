@@ -64,6 +64,7 @@ class TemuanAuditsController extends Controller
             'duedate_perbaikan' => $duedate_perbaikan,
             'tindakan_pencegahan' => $request->tindakan_pencegahan,
             'duedate_pencegahan' => $duedate_pencegahan,
+            'status' => 0
         ]);
 
         $route = 'temuanaudit.index';
@@ -149,7 +150,57 @@ class TemuanAuditsController extends Controller
 
         $notification = [
             'message' => 'Temuan Audit successfully updated!',
-            'alert-type' => 'success'
+            'alert-type' => 'info'
+        ];
+
+        return redirect()->route('temuanaudit.index')->with($notification);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\TemuanAudit  $temuanaudit
+     * @return \Illuminate\Http\Response
+     */
+    public function confirm(Request $request, TemuanAudit $temuanaudit)
+    {
+        // dd($request->all());
+        $this->validate($request, [
+            'review' => 'required',
+        ]);
+
+        $approve_kadept = $request->approve_kadept ? true : false;
+        $approve_auditee = $request->approve_auditee ? true : false;
+        $approve_auditor = $request->approve_auditor ? true : false;
+        $approve_auditor_leader = $request->approve_auditor_leader ? true : false;
+
+        $data = [
+            'review' => $request->review,
+            'approve_kadept' => $approve_kadept,
+            'approve_auditee' => $approve_auditee,
+            'approve_auditor' => $approve_auditor,
+            'approve_auditor_leader' => $approve_auditor_leader,
+        ];
+
+        $status = 0;
+
+        if ($approve_kadept || $approve_auditee || $approve_auditor || $approve_auditor_leader) {
+            $status = 1;
+        }
+        if ($approve_kadept && $approve_auditee && $approve_auditor && $approve_auditor_leader) {
+            $status = 3;
+        }
+
+        if ($request->has('status')) {
+            $data['status'] = $status;
+        }
+
+        $temuanaudit->update($data);
+
+        $notification = [
+            'message' => 'Temuan Audit successfully confirm!',
+            'alert-type' => 'info'
         ];
 
         return redirect()->route('temuanaudit.index')->with($notification);

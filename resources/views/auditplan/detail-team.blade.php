@@ -20,7 +20,7 @@
                     {!! Form::text('auditor_id', $auditplan->auditor->name, ['class' => 'form-control', 'id' => 'auditor_id', 'disabled']) !!}
                 </div>
                 <div class="col-sm-4">
-                    <label for="auditor_leader_id">Leader</label>
+                    <label for="auditor_leader_id">Auditor Leader</label>
                     {!! Form::text('auditor_leader_id', $auditplan->auditorLeader->name, ['class' => 'form-control', 'id' => 'auditor_leader_id', 'disabled']) !!}
                 </div>
             </div>

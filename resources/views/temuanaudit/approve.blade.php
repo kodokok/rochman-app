@@ -12,25 +12,29 @@
         <div class="form-group row">
             <div class="col-sm-3">
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="approve_kadept" name="approve_kadept">
+                    <input type="checkbox" class="custom-control-input" id="approve_kadept" name="approve_kadept"
+                        {{ $temuanaudit->approve_kadept ? 'checked' : '' }}>
                     <label class="custom-control-label" for="approve_kadept">Kadept</label>
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="approve_auditee" name="approve_auditee">
+                    <input type="checkbox" class="custom-control-input" id="approve_auditee" name="approve_auditee"
+                        {{ $temuanaudit->approve_auditee ? 'checked' : '' }}>
                     <label class="custom-control-label" for="approve_auditee">Auditee</label>
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="approve_auditor" name="approve_auditor">
+                    <input type="checkbox" class="custom-control-input" id="approve_auditor" name="approve_auditor"
+                        {{ $temuanaudit->approve_auditor ? 'checked' : '' }}>
                     <label class="custom-control-label" for="approve_auditor">Auditor</label>
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="approve_auditor_leader" name="approve_auditor_leader">
+                    <input type="checkbox" class="custom-control-input" id="approve_auditor_leader" name="approve_auditor_leader"
+                        {{ $temuanaudit->approve_auditor_leader ? 'checked' : '' }}>
                     <label class="custom-control-label" for="approve_auditor_leader">Auditor Leader</label>
                 </div>
             </div>

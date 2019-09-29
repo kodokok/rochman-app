@@ -13,6 +13,13 @@ class TemuanAudit extends Model
 
     protected $statusList = ['tindakan', 'perbaikan', 'pencegahan', 'selesai'];
 
+    protected $casts = [
+        'approve_kadept' => 'boolean',
+        'approve_auditee' => 'boolean',
+        'approve_auditor' => 'boolean',
+        'approve_auditor_leader' => 'boolean',
+    ];
+
     public function getStatusAttribute($value)
     {
         return Arr::get($this->statusList, $value);

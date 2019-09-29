@@ -22,10 +22,10 @@ class TemuanAuditTableSeeder extends Seeder
             'duedate_perbaikan' => Carbon::now()->addDay(1),
             'tindakan_pencegahan' => 'auditplan 1, tindakan penceganan pertama',
             'duedate_pencegahan' => Carbon::now()->addDay(2),
-            'approve_dept' => 0,
+            'approve_kadept' => 0,
             'approve_auditee' => 0,
             'approve_auditor' => 0,
-            'approve_auditor_lead' => 0,
+            'approve_auditor_leader' => 0,
         ]);
         TemuanAudit::create([
             'audit_plan_id' => 1,
@@ -36,10 +36,10 @@ class TemuanAuditTableSeeder extends Seeder
             'duedate_perbaikan' => Carbon::now()->addDay(1),
             'tindakan_pencegahan' => 'auditplan 1, tindakan penceganan kedua',
             'duedate_pencegahan' => Carbon::now()->addDay(2),
-            'approve_dept' => 1,
+            'approve_kadept' => 1,
             'approve_auditee' => 1,
             'approve_auditor' => 1,
-            'approve_auditor_lead' => 1,
+            'approve_auditor_leader' => 1,
         ]);
 
         TemuanAudit::create([
@@ -51,10 +51,10 @@ class TemuanAuditTableSeeder extends Seeder
             'duedate_perbaikan' => Carbon::now()->addDay(2),
             'tindakan_pencegahan' => 'auditplan 2, tindakan penceganan pertama',
             'duedate_pencegahan' => Carbon::now()->addDay(3),
-            'approve_dept' => 1,
+            'approve_kadept' => 1,
             'approve_auditee' => 1,
             'approve_auditor' => 0,
-            'approve_auditor_lead' => 0,
+            'approve_auditor_leader' => 0,
         ]);
         TemuanAudit::create([
             'audit_plan_id' => 2,
@@ -65,10 +65,10 @@ class TemuanAuditTableSeeder extends Seeder
             'duedate_perbaikan' => Carbon::now()->addDay(4),
             'tindakan_pencegahan' => 'auditplan 2, tindakan penceganan kedua',
             'duedate_pencegahan' => Carbon::now()->addDay(5),
-            'approve_dept' => 0,
+            'approve_kadept' => 0,
             'approve_auditee' => 0,
             'approve_auditor' => 0,
-            'approve_auditor_lead' => 0,
+            'approve_auditor_leader' => 0,
         ]);
     }
 }

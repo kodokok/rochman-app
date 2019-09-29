@@ -38,7 +38,6 @@
 
             @include('temuanaudit.approve')
             @include('temuanaudit.review')
-            @include('temuanaudit.status')
 
         </div>
     </div>
