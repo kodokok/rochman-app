@@ -19,6 +19,7 @@
                         <th>Objektif Audit</th>
                         <th>Klausul</th>
                         <th>Schedule</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -31,6 +32,7 @@
                             <td>{{ $auditplan->objektif_audit }}</td>
                             <td>{{ $auditplan->klausul }}</td>
                             <td>{{ $auditplan->getSchedule() }}</td>
+                            <td>{{ strtoupper($auditplan->approval) }}</td>
                             <td>
                                 <a href="{{ route('auditplan.show', $auditplan->id) }}" class="btn btn-sm btn-success float-left"><i class="fas fa-check"></i></a>
                             </td>
@@ -44,8 +46,16 @@
     </div>
     <!-- /.card-body -->
     <div class="card-footer clearfix">
-        <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>
-        <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a>
+        {{-- @if (isset($auditplans)) --}}
+            {{ $auditplans->links() }}
+        {{-- @endif --}}
+        {{-- <ul class="pagination pagination-sm m-0 float-right">
+            <li class="page-item"><a class="page-link" href="#">«</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">»</a></li>
+        </ul> --}}
     </div>
     <!-- /.card-footer -->
 </div>

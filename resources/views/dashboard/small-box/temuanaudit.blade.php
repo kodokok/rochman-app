@@ -6,7 +6,7 @@
         <p>Temuan Audit</p>
     </div>
     <div class="icon">
-        <i class="ion ion-create"></i>
+        <i class="ion ion-android-clipboard"></i>
     </div>
     <a href="{{ route('temuanaudit.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
 </div>

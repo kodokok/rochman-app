@@ -29,7 +29,7 @@ class AppController extends Controller
     public function index()
     {
         // $user = auth()->user();
-        $auditplans = AuditPlan::all();
+        $auditplans = AuditPlan::paginate(4);
         $temuanaudits = TemuanAudit::all();
         // dd($auditplans);
         return view('index', compact([
