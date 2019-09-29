@@ -3,7 +3,7 @@
 @section('content')
 
 <section class="content">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
 
                 @include('auditplan.report.content')

@@ -1,18 +1,15 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-@include('layouts.partials.print-header')
-<style>
-html {
-    font-size: 14px;
-}
-</style>
+    @include('layouts.partials.print-header')
 </head>
+
 <body>
 
-@yield('content')
+    @yield('content')
 
-@include('layouts.partials.print-scripts')
+    @include('layouts.partials.print-scripts')
 </body>
 
 </html>

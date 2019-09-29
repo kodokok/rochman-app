@@ -256,9 +256,10 @@ class AuditPlansController extends Controller
 
     public function pdf(AuditPlan $auditplan)
     {
+        // dd(storage_path('fonts/'));
         $temuanaudits = TemuanAudit::where('audit_plan_id', $auditplan->id)->get();
-        $pdf = PDF::loadView('auditplan.report.print', compact(['auditplan', 'temuanaudits']));
-        $pdfname = $auditplan->objektif_audit . '.pdf';
+        $pdf = PDF::loadView('auditplan.report.print', compact(['auditplan', 'temuanaudits']))->setPaper('a4', 'landscape');;
+        $pdfname = $auditplan->objektif_audit . '_' . Carbon::now() . '.pdf';
 
         return $pdf->stream($pdfname);
     }
