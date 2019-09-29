@@ -47,6 +47,8 @@ Route::group(['middleware' => ['auth']], function () {
         ]);
         Route::resource('auditplan', 'AuditPlansController');
         Route::put('auditplan/{auditplan}/confirm', 'AuditPlansController@confirm')->name('auditplan.confirm');
+        Route::get('auditplan/{auditplan}/report', 'AuditPlansController@report')->name('auditplan.report');
+        Route::get('auditplan/{auditplan}/pdf', 'AuditPlansController@printPDF')->name('auditplan.pdf');
 
         Route::resource('temuanaudit', 'TemuanAuditsController');
         Route::put('temuanaudit/{temuanaudit}/confirm', 'TemuanAuditsController@confirm')->name('temuanaudit.confirm');

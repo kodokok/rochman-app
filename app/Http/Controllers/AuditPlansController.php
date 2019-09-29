@@ -238,6 +238,16 @@ class AuditPlansController extends Controller
         return redirect()->back('app')->with($notification);
     }
 
+    public function report(Request $request, AuditPlan $auditplan)
+    {
+        return view('auditplan.report.index', compact(['auditplan']));
+    }
+
+    public function printPDF()
+    {
+
+    }
+
     public function dataTable()
     {
         $model = AuditPlan::all();
@@ -261,6 +271,7 @@ class AuditPlansController extends Controller
             ->addColumn('action', function ($model) {
                 return view('auditplan.action', [
                     'model' => $model,
+                    'url_print' => route('auditplan.report', $model->id),
                     'url_show' => route('auditplan.show', $model->id),
                     'url_edit' => route('auditplan.edit', $model->id),
                     'url_destroy' => route('auditplan.destroy', $model->id),
