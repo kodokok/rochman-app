@@ -261,7 +261,7 @@ class AuditPlansController extends Controller
         $pdf = PDF::loadView('auditplan.report.print', compact(['auditplan', 'temuanaudits']))->setPaper('a4', 'landscape');;
         $pdfname = $auditplan->objektif_audit . '_' . Carbon::now() . '.pdf';
 
-        return $pdf->stream($pdfname);
+        return $pdf->download($pdfname);
     }
 
     public function dataTable()
