@@ -9,6 +9,7 @@ use App\User;
 use Carbon\Carbon;
 use DataTables;
 use Illuminate\Http\Request;
+use PDF;
 
 class AuditPlansController extends Controller
 {
@@ -246,9 +247,20 @@ class AuditPlansController extends Controller
         return view('auditplan.report.index', compact(['auditplan', 'temuanaudits']));
     }
 
-    public function printPDF()
+    public function print(AuditPlan $auditplan)
     {
+        $temuanaudits = TemuanAudit::where('audit_plan_id', $auditplan->id)->get();
 
+        return view('auditplan.report.print', compact(['auditplan', 'temuanaudits']));
+    }
+
+    public function pdf(AuditPlan $auditplan)
+    {
+        $temuanaudits = TemuanAudit::where('audit_plan_id', $auditplan->id)->get();
+        $pdf = PDF::loadView('auditplan.report.print', compact(['auditplan', 'temuanaudits']));
+        $pdfname = $auditplan->objektif_audit . '.pdf';
+
+        return $pdf->stream($pdfname);
     }
 
     public function dataTable()

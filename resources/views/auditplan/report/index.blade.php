@@ -27,12 +27,10 @@
                 <div class="card">
                     <div class="card-body">
                         {{-- <div class="col-12"> --}}
-                            <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                                <i class="fas fa-file-pdf mr-2"></i>Generate PDF
-                            </button>
-                            <button type="button" class="btn btn-secondary float-right" style="margin-right: 5px;">
-                                <i class="fas fa-print mr-2"></i>Print
-                            </button>
+                            <a href="{{ route('auditplan.pdf', $auditplan->id) }}" target="_blank" class="btn btn-primary float-right" style="margin-right: 5px;">
+                                <i class="fas fa-file-pdf mr-2"></i>Generate PDF</a>
+                            <a href="{{ route('auditplan.print', $auditplan->id) }}" target="_blank" class="btn btn-secondary float-right" style="margin-right: 5px;">
+                                <i class="fas fa-print mr-2"></i>Print</a>
                         {{-- </div> --}}
                     </div>
                 </div><!-- Main content -->

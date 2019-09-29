@@ -31,7 +31,7 @@
         </div>
         <div class="col-sm-4">
             <div class="row">
-                <div class="col-sm-4 font-weight-bold">Departement<span class="float-right">:</span></div>
+                <div class="col-sm-4 font-weight-bold text-muted">Departement<span class="float-right">:</span></div>
                 <div class="col-sm-8">{{ $auditplan->departement->name }}</div>
             </div>
             <div class="row">
@@ -61,8 +61,8 @@
     </div>
     <!-- Table row -->
     <div class="row">
-        <div class="col-12 table-responsive">
-            <table class="table table-striped table-hover">
+        <div class="col-12">
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th rowspan="2">Nomor</th>
