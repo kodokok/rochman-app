@@ -88,10 +88,7 @@ class TemuanAuditsController extends Controller
      */
     public function show(Request $request, TemuanAudit $temuanaudit)
     {
-        // dd($temuanaudit);
-        // $model = $temuanaudit;
         $auditplan = AuditPlan::findOrFail($temuanaudit->audit_plan_id);
-        $request->session()->put('url.intended', url()->previous());
         return view('temuanaudit.confirm', compact(['temuanaudit', 'auditplan']));
     }
 
@@ -106,8 +103,7 @@ class TemuanAuditsController extends Controller
         $model = $temuanaudit;
         $departement = Departement::pluck('name', 'id');
         $auditplan = AuditPlan::findOrFail($temuanaudit->audit_plan_id);
-        // dd($auditplans);
-        // dd($temuanaudit);
+
         return view('temuanaudit.create', compact(['temuanaudit', 'auditplan', 'departement']));
     }
 
@@ -201,10 +197,10 @@ class TemuanAuditsController extends Controller
             'alert-type' => 'info'
         ];
 
-        if ($request->session()->has('url.intended')) {
-            return redirect($request->session()->get('url.intended'))->with($notification);
+        if ($request->has('redirect_to')) {
+            return redirect($request->redirect_to)->with($notification);
         }
-        return redirect()->route('app')->with($notification);
+        return redirect()->route('temuanaudit.index')->with($notification);
     }
 
     /**

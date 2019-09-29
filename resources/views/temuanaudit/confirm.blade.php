@@ -32,6 +32,7 @@
                 'method' => 'PUT',
                 'autocomplete' => 'off'
             ]) !!}
+            {!! Form::hidden('redirect_to', old('redirect_to', url()->previous())) !!}
             @include('temuanaudit.form', ['disabled' => true])
         </div>
         <div class="col-md-4">
@@ -43,7 +44,7 @@
     </div>
     <div class="row">
         <div class="col-12 mb-2">
-            <a href="{{ route('temuanaudit.index') }}" class="btn btn-secondary" style="width: 120px;">Cancel</a>
+            <a href="{{ old('redirect_to', url()->previous()) }}" class="btn btn-secondary" style="width: 120px;">Cancel</a>
             <input type="submit" value="Confirm" class="btn btn-success float-right mr-2" style="width: 120px;">
         </div>
     </div>

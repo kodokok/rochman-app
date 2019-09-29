@@ -36,6 +36,7 @@
                 'method' => 'PUT',
                 'autocomplete' => 'off'
             ]) !!}
+            {!! Form::hidden('redirect_to', old('redirect_to', url()->previous())) !!}
             <div class="card card-primary">
                 <div class="card-header">
                     <h3 class="card-title">Change Approval Status</h3>
@@ -126,7 +127,7 @@
     </div>
     <div class="row">
         <div class="col-12 mb-2">
-            <a href="{{ url()->previous() }}" class="btn btn-secondary">Cancel</a>
+            <a href="{{ old('redirect_to', url()->previous()) }}" class="btn btn-secondary">Cancel</a>
             <input type="submit" value="Confirm" class="btn btn-success float-right mr-2" style="width: 120px;">
         </div>
     </div>

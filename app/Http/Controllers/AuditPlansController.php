@@ -168,7 +168,6 @@ class AuditPlansController extends Controller
     public function show(Request $request, $id)
     {
         $auditplan = AuditPlan::findOrFail($id);
-        $request->session()->put('url.intended', url()->previous());
 
         return view('auditplan.confirm', compact(['auditplan']));
     }
@@ -233,8 +232,8 @@ class AuditPlansController extends Controller
             'alert-type' => 'info'
         ];
 
-        if ($request->session()->has('url.intended')) {
-            return redirect($request->session()->get('url.intended'))->with($notification);
+        if ($request->has('redirect_to')) {
+            return redirect($request->redirect_to)->with($notification);
         }
         return redirect()->back('app')->with($notification);
     }
