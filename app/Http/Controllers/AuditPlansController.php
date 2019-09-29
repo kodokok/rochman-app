@@ -236,7 +236,7 @@ class AuditPlansController extends Controller
         if ($request->session()->has('url.intended')) {
             return redirect($request->session()->get('url.intended'))->with($notification);
         }
-        return redirect()->back()->with($notification);
+        return redirect()->back('app')->with($notification);
     }
 
     public function dataTable()

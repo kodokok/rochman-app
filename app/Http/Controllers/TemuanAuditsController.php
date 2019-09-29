@@ -86,11 +86,12 @@ class TemuanAuditsController extends Controller
      * @param  \App\TemuanAudit  $temuanaudit
      * @return \Illuminate\Http\Response
      */
-    public function show(TemuanAudit $temuanaudit)
+    public function show(Request $request, TemuanAudit $temuanaudit)
     {
         // dd($temuanaudit);
         // $model = $temuanaudit;
         $auditplan = AuditPlan::findOrFail($temuanaudit->audit_plan_id);
+        $request->session()->put('url.intended', url()->previous());
         return view('temuanaudit.confirm', compact(['temuanaudit', 'auditplan']));
     }
 
@@ -200,7 +201,10 @@ class TemuanAuditsController extends Controller
             'alert-type' => 'info'
         ];
 
-        return redirect()->route('temuanaudit.index')->with($notification);
+        if ($request->session()->has('url.intended')) {
+            return redirect($request->session()->get('url.intended'))->with($notification);
+        }
+        return redirect()->route('app')->with($notification);
     }
 
     /**
