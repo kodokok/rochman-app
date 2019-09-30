@@ -21,6 +21,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('profile/{user}/password', 'ProfileController@editPassword')->name('password.edit');
     Route::put('profile/{user}/password', 'ProfileController@changePassword')->name('password.change');
 
+    Route::get('monitoring', 'MonitoringController@index')->name('monitoring.index');
+
     Route::group(['middleware' => ['role:admin']], function () {
         // route datatable
         Route::get('table/users', 'UsersController@dataTable')->name('table.users');

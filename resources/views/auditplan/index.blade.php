@@ -24,7 +24,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{ route('auditplan.create') }}" class="btn btn-success title="Create Audit Plan">
+                    <a href="{{ route('auditplan.create') }}" class="btn btn-success" title="Create Audit Plan">
                         <i class="fas fa-plus mr-2"></i>Create Audit Plan
                     </a>
                 </div>
