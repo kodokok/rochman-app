@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use App\User;
 use App\AuditPlan;
 
-class Departement extends Model
+class Departemen extends Model
 {
+    protected $table = 'departemen';
     protected $guarded = [];
 
     public function user()

@@ -16,6 +16,8 @@ class User extends Authenticatable
 {
     use Notifiable, HasRoles;
 
+    protected $table = 'user';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -35,23 +37,20 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime'
-    ];
+    public function getTanggalMasukAttribute($value)
+    {
+        // dd($value);
+        return Carbon::parse($value)->format('m-d-Y');
+    }
 
     /**
      * Delete the post image from database
      *
      * @return void
      */
-    public function deleteImage()
+    public function deleteFoto()
     {
-        Storage::delete($this->image);
+        Storage::delete($this->foto);
     }
 
     public function isOnline()

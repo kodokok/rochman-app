@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDepartementsTable extends Migration
+class CreateKompetensiAuditorTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateDepartementsTable extends Migration
      */
     public function up()
     {
-        Schema::create('departements', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('lokasi')->nullable();
-            $table->unsignedBigInteger('user_id')->nullable();
+        Schema::create('kompetensi_auditor', function (Blueprint $table) {
+            $table->increments('id')->unsigned();
+            $table->unsignedInteger('user_id');
+            $table->string('pelatihan', 50)->nullable();
+            $table->tinyInteger('nilai')->default(0);
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateDepartementsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('departements');
+        Schema::dropIfExists('kompetensi_auditor');
     }
 }

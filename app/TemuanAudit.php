@@ -12,7 +12,7 @@ class TemuanAudit extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'approve_kadept' => 'boolean',
+        'approval_kadept' => 'boolean',
         'approve_auditee' => 'boolean',
         'approve_auditor' => 'boolean',
         'approve_auditor_leader' => 'boolean',
