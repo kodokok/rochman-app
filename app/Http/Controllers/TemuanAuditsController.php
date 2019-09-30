@@ -137,11 +137,8 @@ class TemuanAuditsController extends Controller
             'duedate_perbaikan' => $duedate_perbaikan,
             'tindakan_pencegahan' => $request->tindakan_pencegahan,
             'duedate_pencegahan' => $duedate_pencegahan,
+            'status' => $request->has('status') ? true : false,
         ];
-
-        if ($request->has('status')) {
-            $data['status'] = $request->status;
-        }
 
         $temuanaudit->update($data);
 

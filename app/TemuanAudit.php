@@ -11,18 +11,17 @@ class TemuanAudit extends Model
 {
     protected $guarded = [];
 
-    protected $statusList = ['open', 'closed'];
-
     protected $casts = [
         'approve_kadept' => 'boolean',
         'approve_auditee' => 'boolean',
         'approve_auditor' => 'boolean',
         'approve_auditor_leader' => 'boolean',
+        'status' => 'boolean'
     ];
 
     public function getStatusAttribute($value)
     {
-        return Arr::get($this->statusList, $value);
+        return $value ? 'Closed' : 'Open';
     }
 
     public function getDuedatePerbaikanAttribute($value)

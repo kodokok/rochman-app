@@ -1,6 +1,6 @@
 <div class="card card-primary">
     <div class="card-header">
-        <h3 class="card-title">Change Status</h3>
+        <h3 class="card-title">Status</h3>
         <div class="card-tools">
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -8,14 +8,17 @@
             </div>
         </div>
     </div>
-    <div class="card-body text-center">
-        <div class="custom-control custom-radio custom-control-inline {{ $temuanaudit->status === 'open' ? 'd-none': '' }}">
-            <input type="radio" id="customRadioInline1" name="status" class="custom-control-input" value="0" {{ old('action') ? 'checked': '' }}>
-            <label class="custom-control-label" for="customRadioInline1">Open</label>
-        </div>
-        <div class="custom-control custom-radio custom-control-inline {{ $temuanaudit->status === 'closed' ? 'd-none': '' }}">
-            <input type="radio" id="customRadioInline2" name="status" class="custom-control-input" value="1" {{ old('action') ? 'checked': '' }}>
-            <label class="custom-control-label" for="customRadioInline2">Closed</label>
+    <div class="card-body">
+        <div class="form-group row">
+            <div class="col-sm-3">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="status" name="status"
+                        {{ old('status') ? 'checked' : '' }}
+                        {{ $temuanaudit->status === 'Closed' ? 'checked' : '' }}
+                    >
+                    <label class="custom-control-label" for="approve_kadept">{{ Closed }}</label>
+                </div>
+            </div>
         </div>
     </div>
     <!-- /.card-body -->

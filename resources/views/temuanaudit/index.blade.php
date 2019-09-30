@@ -78,11 +78,7 @@ $(document).ready(function() {
             {data: 'duedate_perbaikan', name: 'duedate_perbaikan'},
             {data: 'tindakan_pencegahan', name: 'tindakan_pencegahan'},
             {data: 'duedate_pencegahan', name: 'duedate_pencegahan'},
-            {data: 'status', name: 'status',
-                render: function ( data, type, row ) {
-                    return data.toUpperCase();
-                }
-            },
+            {data: 'status', name: 'status'},
             {data: 'review', name: 'review'},
             {data: 'action', name: 'action', 'searchable': false, 'orderable': false, 'className': 'text-center'}
         ]
