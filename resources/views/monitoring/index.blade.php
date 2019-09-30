@@ -53,12 +53,12 @@
                                 <th rowspan="2">Objektif</th>
                                 <th rowspan="2">Klausul</th>
                                 <th rowspan="2">Tanggal</th>
-                                <th rowspan="2">Approval</th>
                                 <th rowspan="2">Ketidaksesuaian</th>
                                 <th rowspan="2">Akar Masalah</th>
                                 <th colspan="2">Perbaikan</th>
                                 <th colspan="2">Pencegahan</th>
                                 <th rowspan="2">Status</th>
+                                <th rowspan="2">Review</th>
                             </tr>
                             <tr>
                                 <th>Tindakan</th>

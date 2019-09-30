@@ -41,8 +41,6 @@
                                 <th>Due Date Pebaikan</th>
                                 <th>Tindakan Pencegahan</th>
                                 <th>Due Date Pencegahan</th>
-                                <th>Status</th>
-                                <th>Review</th>
                                 <th style="width: 20%"></th>
                             </tr>
                         </thead>
@@ -78,8 +76,6 @@ $(document).ready(function() {
             {data: 'duedate_perbaikan', name: 'duedate_perbaikan'},
             {data: 'tindakan_pencegahan', name: 'tindakan_pencegahan'},
             {data: 'duedate_pencegahan', name: 'duedate_pencegahan'},
-            {data: 'status', name: 'status'},
-            {data: 'review', name: 'review'},
             {data: 'action', name: 'action', 'searchable': false, 'orderable': false, 'className': 'text-center'}
         ]
     });

@@ -137,7 +137,6 @@ class TemuanAuditsController extends Controller
             'duedate_perbaikan' => $duedate_perbaikan,
             'tindakan_pencegahan' => $request->tindakan_pencegahan,
             'duedate_pencegahan' => $duedate_pencegahan,
-            'status' => $request->has('status') ? true : false,
         ];
 
         $temuanaudit->update($data);
@@ -224,7 +223,6 @@ class TemuanAuditsController extends Controller
             ->addColumn('action', function ($model) {
                 return view('temuanaudit.action', [
                     'model' => $model,
-                    'url_show' => route('temuanaudit.show', $model->id),
                     'url_edit' => route('temuanaudit.edit', $model->id),
                     'url_destroy' => route('temuanaudit.destroy', $model->id),
                 ]);

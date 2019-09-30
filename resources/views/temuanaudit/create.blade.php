@@ -42,10 +42,6 @@
             ]) !!}
 
             @include('temuanaudit.form', ['disabled' => false])
-
-            @if ($temuanaudit->exists)
-                @include('temuanaudit.status')
-            @endif
         </div>
     </div>
     <div class="row">
