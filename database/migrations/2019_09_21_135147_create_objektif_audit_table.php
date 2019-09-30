@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateKlausulTable extends Migration
+class CreateObjektifAuditTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateKlausulTable extends Migration
      */
     public function up()
     {
-        Schema::create('klausul', function (Blueprint $table) {
+        Schema::create('objektif_audit', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->unsignedInteger('objektif_audit_id');
-            $table->string('nama', 150);
+            $table->string('nama', 50);
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateKlausulTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('klausul');
+        Schema::dropIfExists('objektif_audit');
     }
 }
