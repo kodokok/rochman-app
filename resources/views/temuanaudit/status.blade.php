@@ -16,7 +16,7 @@
                         {{ old('status') ? 'checked' : '' }}
                         {{ $temuanaudit->status === 'Closed' ? 'checked' : '' }}
                     >
-                    <label class="custom-control-label" for="approve_kadept">{{ Closed }}</label>
+                    <label class="custom-control-label" for="approve_kadept">Closed</label>
                 </div>
             </div>
         </div>
