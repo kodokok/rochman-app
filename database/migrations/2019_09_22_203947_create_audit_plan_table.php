@@ -17,11 +17,11 @@ class CreateAuditPlanTable extends Migration
             $table->increments('id')->unsigned();
             $table->unsignedInteger('departement_id');
             $table->unsignedTinyInteger('approval_kadept')->default(0);
+            $table->date('tanggal');
+            $table->time('waktu');
             $table->unsignedInteger('auditee_user_id');
             $table->unsignedInteger('auditor_user_id');
             $table->unsignedInteger('auditor_lead_user_id');
-            $table->date('tanggal');
-            $table->time('waktu');
             $table->text('catatan', 255)->nullable();
             $table->timestamps();
         });

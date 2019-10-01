@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
-use App\Departement;
+use App\Departemen;
 use App\AuditPlan;
 use App\Klausul;
 use Faker\Factory as Faker;
@@ -17,41 +17,27 @@ class AuditPlanTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create('id_ID');
+        $auditor = User::role('auditor')->pluck('id');
+        $auditor_lead = User::role('auditor_lead')->pluck('id');
+        $klausuls = Klausul::all();
 
-        for ($i=1; $i < 30; $i++) {
+        for ($i=0; $i < 20; $i++) {
             AuditPlan::create([
-                // 'departement_id' => Departement::all()->random()->id,
-                // 'klausul_id' => Klausul::all()->random()->id,
-                // 'approval' => 1,
-                // 'auditee_id' => $admin->id,
-                // 'auditor_id' => $auditor->id,
-                // 'auditor_leader_id' => $auditor_leader->id,
-                // 'tanggal' => date('Y-m-d'),
-                // 'waktu' => date('H:i:s'),
+                'departement_id' => Departemen::all()->random()->id,
+                'approval_kadept' => $faker->numberBetween(0, 1),
+                'tanggal' => $faker->date('Y-m-d', 'now'),
+                'waktu' => $faker->time('H:i:s','now'),
+                'auditee_user_id' => User::all()->random()->id,
+                'auditor_user_id' => $auditor ? $faker->randomElement($auditor) : $faker->randomElement($auditor),
+                'auditor_lead_user_id' => $faker->randomElement($auditor_lead),
+                'catatan' => $faker->realText(255, 2),
             ]);
         }
-        // $admin = User::findOrFail(1);
-        // $auditee = User::findOrFail(2);
-        // $auditor = User::findOrFail(3);
-        // $auditor_leader = User::findOrFail(4);
-        // $dept1 = Departement::findOrFail(1);
-        // $dept2 = Departement::findOrFail(2);
-        // $dept3 = Departement::findOrFail(3);
 
-        // $data = [
-        //     ['objektif_audit_id' => 1, ]
-        // ];
-
-        // AuditPlan::create([
-        //     'objektif_audit' => 'Review SOP ' . $dept1->name,
-        //     'klausul' => 'ISO 1009',
-        //     'departement_id' => $dept1->id,
-        //     'approval' => 1,
-        //     'auditee_id' => $admin->id,
-        //     'auditor_id' => $auditor->id,
-        //     'auditor_leader_id' => $auditor_leader->id,
-        //     'tanggal' => date('Y-m-d'),
-        //     'waktu' => date('H:i:s'),
-        // ]);
+        AuditPlan::all()->each(function ($auditplan) use ($klausuls){
+            $auditplan->klausuls()->attach(
+                $klausuls->random(rand(1, 3))->pluck('id')->toArray()
+            );
+        });
     }
 }

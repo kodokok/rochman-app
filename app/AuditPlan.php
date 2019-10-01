@@ -8,9 +8,11 @@ use App\User;
 use App\TemuanAudit;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
+use App\Klausul;
 
 class AuditPlan extends Model
 {
+    protected $table = 'audit_plan';
     protected $guarded = [];
     protected $dates = ['tanggal'];
     protected $times = ['waktu'];
@@ -38,28 +40,8 @@ class AuditPlan extends Model
         return new Carbon($this->attributes['tanggal'] . ' ' . $this->attributes['waktu']);
     }
 
-    public function departement()
+    public function klausuls()
     {
-        return $this->belongsTo(Departement::class);
-    }
-
-    public function auditee()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function auditor()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function auditorLeader()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function temuanAudits()
-    {
-        return $this->hasMany(TemuanAudit::class);
+        return $this->belongsToMany(Klausul::class, 'audit_plan_klausul', 'audit_plan_id', 'klausul_id');
     }
 }

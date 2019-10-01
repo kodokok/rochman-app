@@ -17,7 +17,7 @@ class UserTableSeeder extends Seeder
     {
         $faker = Faker::create('id_ID');
         $pendidikan = ['SMA', 'STM', 'SMK', 'D3', 'D4', 'S1', 'S2', 'S3'];
-        $roles = Role::all()->pluck('name');
+        $roles = Role::all();
         $admin = User::create([
             'nama' => 'Rochman Hidayat',
             'email' => 'admin@gmail.com',
@@ -30,7 +30,7 @@ class UserTableSeeder extends Seeder
         $admin->assignRole(['admin']);
 
         for ($i=0; $i < 20; $i++) {
-            $user = User::create([
+            User::create([
                 'nama' => $faker->name,
                 'email' => $faker->safeEmail,
                 'password' => Hash::make('123456'),
@@ -39,9 +39,12 @@ class UserTableSeeder extends Seeder
                 'pendidikan' => $faker->randomElement($pendidikan),
                 'tanggal_masuk' => Carbon::now()->subYears($faker->numberBetween(1, 10))->format('Y-m-d'),
             ]);
-
-            $user->assignRole($faker->randomElement($roles));
         }
 
+        User::all()->each(function ($user) use ($roles) {
+            $user->assignRole(
+                $roles->random(rand(1, 3))->pluck('name')->toArray()
+            );
+        });
     }
 }
