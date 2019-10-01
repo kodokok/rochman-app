@@ -6,13 +6,13 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>{{ $model->exists ? 'Edit: ' . $model->name : 'Create New User' }}</h1>
+                <h1>{{ $model->exists ? 'Ubah: ' . $model->nama : 'Tambah User Baru' }}</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="{{ route('app') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Users</a></li>
-                    <li class="breadcrumb-item active">{{ $model->exists ? 'Edit' : 'Create' }}</li>
+                    <li class="breadcrumb-item"><a href="{{ route('app') }}">Beranda</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('user.index') }}">User</a></li>
+                    <li class="breadcrumb-item active">{{ $model->exists ? 'Ubah' : 'Tambah' }}</li>
                 </ol>
             </div>
         </div>
@@ -21,7 +21,7 @@
 
 <!-- Main content -->
 <section class="content">
-    @include('users.form', $model)
+    @include('user.form', $model)
 </section>
 <!-- /.content -->
 

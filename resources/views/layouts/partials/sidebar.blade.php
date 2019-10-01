@@ -42,9 +42,9 @@
                 @hasanyrole('admin')
                 <li class="nav-header">DATA</li>
                 <li class="nav-item">
-                    <a href="{{ route('users.index') }}" class="nav-link {{ active(['users.*']) }}">
+                    <a href="{{ route('user.index') }}" class="nav-link {{ active(['user.*']) }}">
                         <i class="nav-icon fas fa-users"></i>
-                        <p>Users</p>
+                        <p>User</p>
                     </a>
                 </li>
                 <li class="nav-item">

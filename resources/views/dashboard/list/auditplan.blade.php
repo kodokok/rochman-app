@@ -24,21 +24,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (isset($auditplans))
-                        @foreach ($auditplans as $auditplan)
-                        <tr>
-                            <td>{{ $auditplan->id }}</td>
-                            <td>{{ $auditplan->departement->name }}</td>
-                            <td>{{ $auditplan->objektif_audit }}</td>
-                            <td>{{ $auditplan->klausul }}</td>
-                            <td>{{ $auditplan->getSchedule() }}</td>
-                            <td>{{ strtoupper($auditplan->approval) }}</td>
-                            <td>
-                                <a href="{{ route('auditplan.show', $auditplan->id) }}" class="btn btn-sm btn-success float-left"><i class="fas fa-check"></i></a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    @endif
+
                 </tbody>
             </table>
         </div>

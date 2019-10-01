@@ -13,7 +13,7 @@
             <!-- User Status Dropdown Menu -->
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link" data-toggle="dropdown">
-                        {{ auth()->user()->name }}
+                        {{ auth()->user()->nama }}
                         <img src="{{ auth()->user()->image ? asset('storage/' . auth()->user()->image) : asset('img/avatar.png') }}"
                         width="30"
                         height="30"

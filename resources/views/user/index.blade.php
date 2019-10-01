@@ -6,12 +6,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Users</h1>
+                <h1>Daftar User</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="{{ route('app') }}">Home</a></li>
-                    <li class="breadcrumb-item active">Users</li>
+                    <li class="breadcrumb-item"><a href="{{ route('app') }}">Beranda</a></li>
+                    <li class="breadcrumb-item active">Daftar User</li>
                 </ol>
             </div>
         </div>
@@ -24,22 +24,21 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{ route('users.create') }}" class="btn btn-success" title="Create New User">
-                        <i class="fas fa-plus mr-2"></i>Create New User
+                    <a href="{{ route('user.create') }}" class="btn btn-success" title="New User">
+                        <i class="fas fa-plus mr-2"></i>Tambah User
                     </a>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <table id="datatables" class="table table-bordered table-striped" style="width:100%">
+                    <table id="datatable" class="table table-bordered table-striped" style="width:100%">
                         <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Address</th>
+                                <th>Alamat</th>
                                 <th>Phone</th>
                                 <th>Roles</th>
-                                <th>Status</th>
                                 <th style="width: 20%"></th>
                             </tr>
                         </thead>
@@ -61,19 +60,18 @@
 @push('scripts')
 <script>
     $(document).ready(function() {
-        $('#datatables').DataTable({
+        $('#datatable').DataTable({
             responsive: true,
             processing: true,
             serverSide: true,
-            ajax: "{{ route('table.users') }}",
+            ajax: "{{ route('user.datatable') }}",
             columns: [
                 {data: 'DT_RowIndex', name: 'id'},
-                {data: 'name', name: 'name'},
+                {data: 'nama', name: 'nama'},
                 {data: 'email', name: 'email'},
-                {data: 'address', name: 'address'},
+                {data: 'alamat', name: 'alamat'},
                 {data: 'phone', name: 'phone'},
                 {data: 'roles', name: 'roles'},
-                {data: 'status', name: 'status', 'className': 'text-center'},
                 {data: 'action', name: 'action', 'searchable': false, 'orderable': false, 'className': 'text-center'}
             ]
         });

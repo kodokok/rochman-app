@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Departement;
 use App\KompetensiAuditor;
 use App\AuditPlan;
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
@@ -23,9 +24,6 @@ class User extends Authenticatable
      *
      * @var array
      */
-    // protected $fillable = [
-    //     'name', 'email', 'image', 'password',
-    // ];
     protected $guarded = [];
 
     /**

@@ -8,7 +8,7 @@ use DataTables;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 
-class UsersController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class UsersController extends Controller
     public function index()
     {
         // dd(User::findOrFail(1)->isOnline());
-        return view('users.index');
+        return view('user.index');
     }
 
     /**
@@ -31,7 +31,7 @@ class UsersController extends Controller
         $model = new User();
         $roles = Role::pluck('name','id')->all();
 
-        return view('users.create', compact(['model','roles']));
+        return view('user.create', compact(['model','roles']));
     }
 
     /**
@@ -42,27 +42,28 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request);
         $this->validate($request, [
-            'name' => 'required|string|max:100',
-            'email' => 'required|string|max:100|unique:users,email',
-            'image' => 'nullable|image',
+            'nama' => 'required|string|max:50',
+            'email' => 'required|string|max:50|unique:user,email',
+            'foto' => 'nullable|image',
             'password' => 'required|min:6',
         ]);
 
         $model = User::create([
-            'name' => $request->name,
+            'nama' => $request->nama,
             'email' => $request->email,
-            'address' => $request->address,
+            'alamat' => $request->alamat,
             'phone' => $request->phone,
             'password' => Hash::make($request->password),
         ]);
 
         // upload image to the storage
         if ($request->hasFile('image')) {
-            $image = $request->image->store('img\users');
+            $image = $request->image->store('img\user');
 
             $model->update([
-                'image' => $image
+                'foto' => $image
             ]);
         }
 
@@ -75,11 +76,11 @@ class UsersController extends Controller
         }
 
         $notification = [
-            'message' => 'User successfully created!',
+            'message' => 'User berhasil di buat!',
             'alert-type' => 'success'
         ];
 
-        return redirect()->route('users.index')->with($notification);
+        return redirect()->route('user.index')->with($notification);
     }
 
     /**
@@ -92,7 +93,7 @@ class UsersController extends Controller
     {
         $model = User::findOrFail($user->id);
         $roles = Role::pluck('name','id')->all();
-        return view('users.create', compact(['model', 'roles']));
+        return view('user.create', compact(['model', 'roles']));
     }
 
     /**
@@ -104,20 +105,17 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
-
-        // grab data
-        // dd($request->all());
-        $data = $request->only(['name', 'email', 'address', 'phone']);
+        $data = $request->only(['nama', 'email', 'alamat', 'phone']);
 
         $this->validate($request, [
-            'name' => 'required|string|max:100',
-            'email' => 'required|string|max:100|unique:users,email,' . $user->id
+            'nama' => 'required|string|max:100',
+            'email' => 'required|string|max:100|unique:user,email,' . $user->id
         ]);
 
         // check if new image
         if ($request->hasFile('image')) {
             // upload image
-            $image = $request->image->store('users');
+            $image = $request->image->store('user');
 
             // delete image
             $user->deleteImage();
@@ -126,7 +124,7 @@ class UsersController extends Controller
             $data['image'] = $image;
         }
 
-        // update users
+        // update user
         $user->update($data);
 
         // get roles from input
@@ -137,11 +135,11 @@ class UsersController extends Controller
         }
 
         $notification = [
-            'message' => 'User successfully updated!',
+            'message' => 'User berhasil di perbaharui!',
             'alert-type' => 'info'
         ];
 
-        return redirect()->route('users.index')->with($notification);
+        return redirect()->route('user.index')->with($notification);
     }
 
     /**
@@ -157,7 +155,7 @@ class UsersController extends Controller
         $user->delete();
     }
 
-    public function dataTable()
+    public function datatable()
     {
         $model = User::all();
 
@@ -168,22 +166,16 @@ class UsersController extends Controller
                     return '<span class="badge badge-primary mr-2">'. $role .'</span>';
                 }, $roles));
             })
-            ->addColumn('status', function (User $user) {
-                if ($user->isOnline()) {
-                    return '<span class="badge badge-success">Online</span>';
-                }
-                return '<span class="badge badge-secondary">Offline</span>';
-            })
             ->addColumn('action', function ($model) {
-                return view('users.action', [
+                return view('user.action', [
                     'model' => $model,
                     'url_show' => null,
-                    'url_edit' => route('users.edit', $model->id),
-                    'url_destroy' => route('users.destroy', $model->id),
+                    'url_edit' => route('user.edit', $model->id),
+                    'url_destroy' => route('user.destroy', $model->id),
                 ]);
             })
             ->addIndexColumn()
-            ->rawColumns(['roles', 'status', 'action'])
+            ->rawColumns(['roles', 'action'])
             ->make(true);
     }
 }

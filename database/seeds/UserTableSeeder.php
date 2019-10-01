@@ -20,7 +20,7 @@ class UserTableSeeder extends Seeder
         $roles = Role::all();
         $admin = User::create([
             'nama' => 'Rochman Hidayat',
-            'email' => 'admin@gmail.com',
+            'email' => 'admin@mail.com',
             'password' => Hash::make('admin'),
             'alamat' => $faker->address,
             'phone' => '000-000-0000',
