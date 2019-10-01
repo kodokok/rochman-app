@@ -20,7 +20,6 @@ class CreateTemuanAuditTable extends Migration
             $table->string('akar_masalah', 100);
             $table->string('tindakan_perbaikan_pencegahan');
             $table->date('tanggal_perbaikan_pencegahan');
-            $table->string('tindakan_pencegahan');
             $table->unsignedTinyInteger('status')->default(0);
             $table->unsignedTinyInteger('klasifikasi_temuan')->default(0);
             $table->text('review', 255)->nullable();
