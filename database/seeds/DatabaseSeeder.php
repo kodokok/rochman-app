@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(DepartemenTableSeeder::class);
         $this->call(KlausulTableSeeder::class);
         $this->call(KompetensiAuditorTableSeeder::class);
-        // $this->call(AuditPlansTableSeeder::class);
+        // $this->call(AuditPlanTableSeeder::class);
         // $this->call(TemuanAuditTableSeeder::class);
     }
 }
