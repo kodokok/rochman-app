@@ -15,7 +15,7 @@ class CreateKlausulTable extends Migration
     {
         Schema::create('klausul', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->unsignedInteger('objektif_audit_id');
+            $table->string('objektif_audit', 50);
             $table->string('nama', 150);
             $table->timestamps();
         });
