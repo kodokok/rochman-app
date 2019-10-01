@@ -51,11 +51,6 @@ class User extends Authenticatable
         Storage::delete($this->foto);
     }
 
-    public function isOnline()
-    {
-        return Cache::has('user-is-online-' . $this->id);
-    }
-
     public function departements()
     {
         return $this->hasMany(Departement::class);
