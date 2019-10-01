@@ -1,8 +1,10 @@
 <?php
 
+use App\AuditPlan;
 use Illuminate\Database\Seeder;
 use App\TemuanAudit;
 use Carbon\Carbon;
+use Faker\Factory as Faker;
 
 class TemuanAuditTableSeeder extends Seeder
 {
@@ -13,62 +15,24 @@ class TemuanAuditTableSeeder extends Seeder
      */
     public function run()
     {
-        TemuanAudit::create([
-            'audit_plan_id' => 1,
-            'status' => 0,
-            'ketidaksesuaian' => 'auditplan 1, ini tidak sesuai ini pertama',
-            'akar_masalah' => 'auditplan 1, ini akar masalah pertama',
-            'tindakan_perbaikan' => 'auditplan 1, tindakan perbaikan pertama',
-            'duedate_perbaikan' => Carbon::now()->addDay(1),
-            'tindakan_pencegahan' => 'auditplan 1, tindakan penceganan pertama',
-            'duedate_pencegahan' => Carbon::now()->addDay(2),
-            'approve_kadept' => 0,
-            'approve_auditee' => 0,
-            'approve_auditor' => 0,
-            'approve_auditor_leader' => 0,
-        ]);
-        TemuanAudit::create([
-            'audit_plan_id' => 1,
-            'status' => 1,
-            'ketidaksesuaian' => 'auditplan 1, ini tidak sesuai ini kedua',
-            'akar_masalah' => 'auditplan 1, ini akar masalah kedua',
-            'tindakan_perbaikan' => 'auditplan 1, tindakan perbaikan kedua',
-            'duedate_perbaikan' => Carbon::now()->addDay(1),
-            'tindakan_pencegahan' => 'auditplan 1, tindakan penceganan kedua',
-            'duedate_pencegahan' => Carbon::now()->addDay(2),
-            'approve_kadept' => 1,
-            'approve_auditee' => 1,
-            'approve_auditor' => 1,
-            'approve_auditor_leader' => 1,
-        ]);
+        $faker = Faker::create('id_ID');
+        $auditplans = AuditPlan::where('approval_kadept', 1)->get();
 
-        TemuanAudit::create([
-            'audit_plan_id' => 2,
-            'status' => 1,
-            'ketidaksesuaian' => 'auditplan 2, ini tidak sesuai ini pertama',
-            'akar_masalah' => 'auditplan 2, ini akar masalah pertama',
-            'tindakan_perbaikan' => 'auditplan 2, tindakan perbaikan pertama',
-            'duedate_perbaikan' => Carbon::now()->addDay(2),
-            'tindakan_pencegahan' => 'auditplan 2, tindakan penceganan pertama',
-            'duedate_pencegahan' => Carbon::now()->addDay(3),
-            'approve_kadept' => 1,
-            'approve_auditee' => 1,
-            'approve_auditor' => 0,
-            'approve_auditor_leader' => 0,
-        ]);
-        TemuanAudit::create([
-            'audit_plan_id' => 2,
-            'status' => 0,
-            'ketidaksesuaian' => 'auditplan 2, ini tidak sesuai ini kedua',
-            'akar_masalah' => 'auditplan 2, ini akar masalah kedua',
-            'tindakan_perbaikan' => 'auditplan 2, tindakan perbaikan kedua',
-            'duedate_perbaikan' => Carbon::now()->addDay(4),
-            'tindakan_pencegahan' => 'auditplan 2, tindakan penceganan kedua',
-            'duedate_pencegahan' => Carbon::now()->addDay(5),
-            'approve_kadept' => 0,
-            'approve_auditee' => 0,
-            'approve_auditor' => 0,
-            'approve_auditor_leader' => 0,
-        ]);
+        for ($i=0; $i < 20; $i++) {
+            TemuanAudit::create([
+                'audit_plan_id' => $auditplans->random()->id,
+                'status' => rand(0,1),
+                'klasifikasi_temuan' => rand(0,1),
+                'ketidaksesuaian' => $faker->realText(100, 2),
+                'akar_masalah' => $faker->realText(100, 2),
+                'tindakan_perbaikan_pencegahan' => $faker->realText(100, 2),
+                'tanggal_perbaikan_pencegahan' => Carbon::now()->addDay(rand(10, 30)),
+                'approval_kadept' => rand(0,1),
+                'approval_auditee' => rand(0,1),
+                'approval_auditor' => rand(0,1),
+                'approval_auditor_lead' => rand(0,1),
+                'review' => $faker->realText(255, 2),
+            ]);
+        }
     }
 }

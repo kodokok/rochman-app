@@ -18,6 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(KlausulTableSeeder::class);
         $this->call(KompetensiAuditorTableSeeder::class);
         $this->call(AuditPlanTableSeeder::class);
-        // $this->call(TemuanAuditTableSeeder::class);
+        $this->call(TemuanAuditTableSeeder::class);
     }
 }

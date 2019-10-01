@@ -20,30 +20,9 @@ class KompetensiAuditorTableSeeder extends Seeder
         for ($i=0; $i < 15; $i++) {
             KompetensiAuditor::create([
                 'user_id' => $user->random()->id,
-                'pelatihan' => $faker->sentence(3, true),
+                'pelatihan' => $faker->realText(100, 2),
                 'nilai' => $faker->numberBetween(45, 100),
             ]);
         }
-        // $user1 = User::findOrFail(1);
-        // $user2 = User::findOrFail(8);
-        // $user3 = User::findOrFail(8);
-
-        // $data = [
-        //     ['user_id' => $user1->id, 'pelatihan' => 'Pelatihan #1', 'nilai' => 80],
-        //     ['user_id' => $user1->id, 'pelatihan' => 'Pelatihan #2', 'nilai' => 70],
-        //     ['user_id' => $user1->id, 'pelatihan' => 'Pelatihan #3', 'nilai' => 90],
-        //     ['user_id' => $user1->id, 'pelatihan' => 'Pelatihan #4', 'nilai' => 100],
-        //     ['user_id' => $user2->id, 'pelatihan' => 'Pelatihan Standarisasi #1', 'nilai' => 100],
-        //     ['user_id' => $user2->id, 'pelatihan' => 'Pelatihan Standarisasi #2', 'nilai' => 100],
-        //     ['user_id' => $user2->id, 'pelatihan' => 'Pelatihan Standarisasi #3', 'nilai' => 100],
-        //     ['user_id' => $user2->id, 'pelatihan' => 'Pelatihan Standarisasi #4', 'nilai' => 100],
-        //     ['user_id' => $user3->id, 'pelatihan' => 'Pelatihan Standarisasi #1', 'nilai' => 75],
-        //     ['user_id' => $user3->id, 'pelatihan' => 'Pelatihan Standarisasi #2', 'nilai' => 70],
-        //     ['user_id' => $user3->id, 'pelatihan' => 'Pelatihan Standarisasi #3', 'nilai' => 90],
-        // ];
-
-        // foreach ($data as $ka) {
-        //     KompetensiAuditor::create($ka);
-        // }
     }
 }

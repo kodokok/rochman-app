@@ -9,13 +9,14 @@ use Illuminate\Support\Arr;
 
 class TemuanAudit extends Model
 {
+    protected $table = 'temuan_audit';
     protected $guarded = [];
 
     protected $casts = [
         'approval_kadept' => 'boolean',
-        'approve_auditee' => 'boolean',
-        'approve_auditor' => 'boolean',
-        'approve_auditor_leader' => 'boolean',
+        'approval_auditee' => 'boolean',
+        'approval_auditor' => 'boolean',
+        'approval_auditor_lead' => 'boolean',
         'status' => 'boolean'
     ];
 
