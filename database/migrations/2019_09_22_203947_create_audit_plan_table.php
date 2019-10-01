@@ -14,7 +14,8 @@ class CreateAuditPlanTable extends Migration
     public function up()
     {
         Schema::create('audit_plan', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id')->unsigned();
+            $table->unsignedInteger('objektif_audit_id');
             $table->unsignedInteger('klausul_id');
             $table->unsignedInteger('departement_id');
             $table->unsignedTinyInteger('approval_kadept')->default(0);
