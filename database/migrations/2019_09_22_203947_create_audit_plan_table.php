@@ -15,9 +15,8 @@ class CreateAuditPlanTable extends Migration
     {
         Schema::create('audit_plan', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->unsignedInteger('objektif_audit_id');
-            $table->unsignedInteger('klausul_id');
             $table->unsignedInteger('departement_id');
+            $table->unsignedInteger('klausul_id');
             $table->unsignedTinyInteger('approval_kadept')->default(0);
             $table->unsignedInteger('auditee_user_id');
             $table->unsignedInteger('auditor_user_id');

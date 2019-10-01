@@ -19,7 +19,7 @@ class CreateUserTable extends Migration
             $table->string('email', 50)->unique();
             $table->string('password');
             $table->string('alamat', 100)->nullable();
-            $table->string('phone', 15)->nullable();
+            $table->string('phone', 30)->nullable();
             $table->string('pendidikan', 20)->nullable();
             $table->date('tanggal_masuk')->nullable();
             $table->string('foto', 100)->nullable();
