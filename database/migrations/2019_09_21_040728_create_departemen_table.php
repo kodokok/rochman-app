@@ -18,7 +18,7 @@ class CreateDepartemenTable extends Migration
             $table->string('kode', 10);
             $table->string('nama', 50);
             $table->string('lokasi', 50)->nullable();
-            $table->unsignedInteger('user_id')->nullable();
+            $table->unsignedInteger('kadept_user_id')->nullable();
             $table->timestamps();
         });
     }

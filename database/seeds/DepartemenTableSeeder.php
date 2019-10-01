@@ -22,49 +22,46 @@ class DepartemenTableSeeder extends Seeder
             'kode' => 'QA',
             'nama' => 'Quality Assurance',
             'lokasi' => 'Office QA Departement',
-            'user_id' => $user1->id
+            'kadept_user_id' => $user1->id
         ]);
         Departemen::create([
             'kode' => 'DI',
             'nama' => 'Digital Infrastructure',
             'lokasi' => 'Office DI Departement',
-            'user_id' => $user8->id
+            'kadept_user_id' => $user8->id
         ]);
         Departemen::create([
             'kode' => 'MS',
             'nama' => 'Management Service',
             'lokasi' => 'Office MS Departement R1',
-            'user_id' => $user8->id
+            'kadept_user_id' => $user8->id
         ]);
         Departemen::create([
             'kode' => 'HRI',
             'nama' => 'Human Resource & Infrastructure',
             'lokasi' => 'Office MS Departement R2',
-            'user_id' => $user8->id
         ]);
         Departemen::create([
             'kode' => 'PS',
             'nama' => 'Production Support',
             'lokasi' => 'Office Factory Departement',
-            'user_id' => $user6->id
+            'kadept_user_id' => $user6->id
         ]);
         Departemen::create([
             'kode' => 'FA',
             'nama' => 'Factory',
             'lokasi' => 'Office Factory Departement',
-            'user_id' => $user6->id
         ]);
         Departemen::create([
             'kode' => 'MK',
             'nama' => 'Marketing & Sales Support',
             'lokasi' => 'Office Marketing Departement',
-            'user_id' => $user7->id
+            'kadept_user_id' => $user7->id
         ]);
         Departemen::create([
             'kode' => 'SA',
             'nama' => 'Sales',
             'lokasi' => 'Office Sales Departement',
-            'user_id' => $user7->id
         ]);
     }
 }
