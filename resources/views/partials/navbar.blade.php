@@ -4,9 +4,10 @@
     <ul class="navbar-nav">
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
-
         </li>
     </ul>
+
+    @yield('breadcrumbs')
 
     <!-- Right navbar links -->
     @if (auth()->check())

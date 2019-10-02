@@ -5,7 +5,7 @@
                 <h1>@yield('page-title')</h1>
             </div>
             <div class="col-sm-6">
-                @yield('breadcrumbs')
+                @yield('action')
             </div>
         </div>
     </div><!-- /.container-fluid -->

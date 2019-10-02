@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="card-header">
                     <a href="{{ route('user.create') }}" class="btn btn-success" title="New User">
-                        <i class="fas fa-plus mr-2"></i>Tambah User
+                        <i class="fas fa-plus mr-2"></i>New User
                     </a>
                 </div>
 
