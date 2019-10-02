@@ -28,23 +28,23 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="nama">Nama</label>
-                    {!! Form::text('nama', null, ['class' => 'form-control', 'id' => 'nama']) !!}
-                    <div id="error-nama" class="invalid-feedback"></div>
+                    {!! Form::text('nama', null, ['class' => 'form-control'. ($errors->has('nama') ? ' is-invalid': ''), 'id' => 'nama']) !!}
+                    <div id="error-nama" class="invalid-feedback">{{ $errors->first('nama') }}</div>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    {!! Form::email('email', null, ['class' => 'form-control', 'id' => 'email']) !!}
-                    <div id="error-email" class="invalid-feedback"></div>
+                    {!! Form::email('email', null, ['class' => 'form-control'. ($errors->has('email') ? ' is-invalid': ''), 'id' => 'email']) !!}
+                    <div id="error-email" class="invalid-feedback">{{ $errors->first('email') }}</div>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    {!! Form::password('password', ['class' => 'form-control', 'id' => 'password']) !!}
-                    <div id="error-password" class="invalid-feedback"></div>
+                    {!! Form::password('password', ['class' => 'form-control' . ($errors->has('password') ? ' is-invalid': ''), 'id' => 'password']) !!}
+                    <div id="error-password" class="invalid-feedback">{{ $errors->first('password') }}</div>
                 </div>
                 <div class="form-group">
-                    <label for="password">Roles</label>
-                    {!! Form::select('roles[]',$roles ,null, ['class' => 'form-control', 'id' => 'roles', 'multiple']) !!}
-                    <div id="error-password" class="invalid-feedback"></div>
+                    <label for="roles">Roles</label>
+                    {!! Form::select('roles[]',$roles ,null, ['class' => 'form-control' . ($errors->has('roles') ? ' is-invalid': ''), 'id' => 'roles', 'multiple', 'style' => "width: 100%"]) !!}
+                    <div id="error-roles" class="invalid-feedback">{{ $errors->first('roles') }}</div>
                 </div>
             </div>
             <!-- /.card-body -->
@@ -73,7 +73,7 @@
                 </div>
                 <div class="form-group">
                     <label for="pendidikan">Pendidikan</label>
-                    {!! Form::select('pendidikan', $pendidikan, null, ['class' => 'form-control', 'id' => 'pendidikan']) !!}
+                    {!! Form::select('pendidikan', $pendidikan, null, ['class' => 'form-control', 'id' => 'pendidikan', 'placeholder' => 'Pilih pendidikan', 'style' => "width: 100%"]) !!}
                     <div id="error-pendidikan" class="invalid-feedback"></div>
                 </div>
                 <div class="form-group">
@@ -104,7 +104,7 @@
             </div>
         <div class="card-body">
             <div class="col-sm-12 text-center mb-3">
-                <img id="display-foto" src="{{ asset('img/avatar.png') }}" class="img-fluid img-responsive img-circle" alt="..." style="width:300px;height:300px;">
+                <img id="display-foto" src="{{ asset('img/avatar.png') }}" class="img-fluid img-fluid" alt="foto" width="307" height="240">
             </div>
             <div class="form-group">
                 <div class="input-group">
@@ -135,8 +135,8 @@
 
 <script>
 $(document).ready(function(){
-    $('#roles').select2({placeholder: 'pilih role'});
-    $('#pendidikan').select2({placeholder: 'pilih pendidikan'});
+    $('#roles').select2({placeholder: 'Pilih role', width: 'resolve'});
+    $('#pendidikan').select2({placeholder: 'Pilih pendidikan', width: 'resolve'});
 
     $('#tanggal_masuk').datetimepicker({
         format: 'MM-DD-YYYY',

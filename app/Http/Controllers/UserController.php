@@ -48,16 +48,17 @@ class UserController extends Controller
         $this->validate($request, [
             'nama' => 'required|string|max:50',
             'email' => 'required|string|max:50|unique:user,email',
-            'foto' => 'nullable|image',
             'password' => 'required|min:6',
         ]);
 
         $model = User::create([
             'nama' => $request->nama,
             'email' => $request->email,
+            'password' => Hash::make($request->password),
             'alamat' => $request->alamat,
             'phone' => $request->phone,
-            'password' => Hash::make($request->password),
+            'pendidikan' => $request->pendidikan,
+            'tanggal_masuk' =>  Carbon::createFromFormat('m-d-Y', $request->tanngal_masuk)->format('Y-m-d'),
         ]);
 
         // upload image to the storage

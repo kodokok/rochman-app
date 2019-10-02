@@ -35,10 +35,17 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $dates = ['tanggal_masuk'];
+
     public function getTanggalMasukAttribute($value)
     {
         // dd($value);
         return Carbon::parse($value)->format('m-d-Y');
+    }
+
+    public function getMasaKerja()
+    {
+        return Carbon::parse($this->tanggal_masuk)->age;
     }
 
     /**
