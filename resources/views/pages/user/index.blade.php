@@ -1,43 +1,37 @@
 @extends('layouts.app')
 
-@section('page-title', 'User List'))
 @section('breadcrumbs', Breadcrumbs::render('user'))
+@section('page-title', 'User List')
+@section('page-action')
+<a href="{{ route('user.create') }}" class="btn btn-success float-right" style="margin-right: 5px;"><i class="fas fa-plus mr-2"></i>New User</a>
+@endsection
 
 @section('content')
-<section class="content">
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <a href="{{ route('user.create') }}" class="btn btn-success" title="New User">
-                        <i class="fas fa-plus mr-2"></i>New User
-                    </a>
-                </div>
-
-                <div class="card-body">
-                    <table id="datatable" class="table table-bordered table-striped" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Alamat</th>
-                                <th>Phone</th>
-                                <th>Roles</th>
-                                <th style="width: 20%"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
-
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <table id="datatable" class="table table-bordered table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Alamat</th>
+                            <th>Phone</th>
+                            <th>Roles</th>
+                            <th style="width: 20%"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
 
         </div>
-    </div>
 
-</section>
+    </div>
+</div>
 @endsection
 
 @push('scripts')

@@ -15,8 +15,12 @@
         @include('partials.sidebar')
 
         <div class="content-wrapper">
+
             @include('partials.header')
-            @yield('content')
+
+            <section class="content">
+                @yield('content')
+            </section>
         </div>
 
         <footer class="main-footer">

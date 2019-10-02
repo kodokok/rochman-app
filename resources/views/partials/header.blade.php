@@ -5,7 +5,11 @@
                 <h1>@yield('page-title')</h1>
             </div>
             <div class="col-sm-6">
-                @yield('action')
+                <div class="row">
+                    <div class="col-12">
+                        @yield('page-action')
+                    </div>
+                </div>
             </div>
         </div>
     </div><!-- /.container-fluid -->
