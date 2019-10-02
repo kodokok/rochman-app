@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    protected $list_pendidikan = ['SD', 'SMP', 'SMA', 'SMK', 'MA', 'Diploma 3 (D3)', 'Diploma 4 (D4)', 'Strata 1 (S1)', 'Strata 2 (S2)', 'Strata 3 (S3)'];
     /**
      * Display a listing of the resource.
      *
@@ -30,8 +31,9 @@ class UserController extends Controller
     {
         $model = new User();
         $roles = Role::pluck('name','id')->all();
+        $pendidikan = $this->list_pendidikan;
 
-        return view('user.create', compact(['model','roles']));
+        return view('pages.user.create', compact(['model','roles', 'pendidikan']));
     }
 
     /**
@@ -42,7 +44,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        // dd($request);
         $this->validate($request, [
             'nama' => 'required|string|max:50',
             'email' => 'required|string|max:50|unique:user,email',
@@ -59,7 +61,7 @@ class UserController extends Controller
         ]);
 
         // upload image to the storage
-        if ($request->hasFile('image')) {
+        if ($request->hasFile('foto')) {
             $image = $request->image->store('img\user');
 
             $model->update([
@@ -113,7 +115,7 @@ class UserController extends Controller
         ]);
 
         // check if new image
-        if ($request->hasFile('image')) {
+        if ($request->hasFile('foto')) {
             // upload image
             $image = $request->image->store('user');
 
@@ -121,7 +123,7 @@ class UserController extends Controller
             $user->deleteImage();
 
             // save new image to array
-            $data['image'] = $image;
+            $data['foto'] = $image;
         }
 
         // update user
@@ -167,7 +169,7 @@ class UserController extends Controller
                 }, $roles));
             })
             ->addColumn('action', function ($model) {
-                return view('user.action', [
+                return view('partials.table-action.user', [
                     'model' => $model,
                     'url_show' => null,
                     'url_edit' => route('user.edit', $model->id),

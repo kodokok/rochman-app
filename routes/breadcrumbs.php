@@ -2,7 +2,7 @@
 
 
 Breadcrumbs::register('home', function ($breadcrumbs) {
-    $breadcrumbs->push('Home', route('home'));
+    $breadcrumbs->push('home', route('home'));
 });
 
 Breadcrumbs::register('dashboard', function ($breadcrumbs) {
@@ -12,5 +12,10 @@ Breadcrumbs::register('dashboard', function ($breadcrumbs) {
 
 Breadcrumbs::register('user', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
-    $breadcrumbs->push('User', route('user.index'));
+    $breadcrumbs->push('user', route('user.index'));
+});
+
+Breadcrumbs::register('user.create', function ($breadcrumbs) {
+    $breadcrumbs->parent('user');
+    $breadcrumbs->push('create', route('user.create'));
 });
