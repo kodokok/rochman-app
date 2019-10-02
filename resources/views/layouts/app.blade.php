@@ -1,35 +1,32 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
 <head>
-    @include('layouts.partials.htmlheader')
-</head>
+    @include('partials.head')
 
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    @include('partials.styles')
+
+</head>
 <body class="hold-transition sidebar-mini">
 
     <div class="wrapper">
-        @include('layouts.partials.navbar')
+        @include('partials.navbar')
+        @include('partials.sidebar')
 
-        @include('layouts.partials.sidebar')
-
-        <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-
+            @include('partials.header')
             @yield('content')
-
         </div>
-        <!-- /.content-wrapper -->
 
-        @include('layouts.partials.footer')
-
+        <footer class="main-footer">
+            @include('partials.footer')
+        </footer>
     </div>
 
-    @include('layouts.partials._modal')
+    @include('partials.scripts')
 
-    @include('layouts.partials.scripts')
-
-    @stack('scripts')
-
+    @push('scripts')
     <script>
         @if(Session::has('message'))
             var type = "{{ Session::get('alert-type', 'info') }}";
@@ -49,6 +46,6 @@
             }
         @endif
     </script>
+    @endpush
 </body>
-
 </html>

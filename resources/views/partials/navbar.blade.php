@@ -4,6 +4,7 @@
     <ul class="navbar-nav">
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+
         </li>
     </ul>
 
@@ -30,8 +31,6 @@
                                     {{ auth()->user()->email }}
                                     <span class="float-right text-sm text-muted"><i class="fas fa-info"></i></span>
                                 </h3>
-
-                                <p class="text-sm">{{ auth()->user()->isOnline() ? 'Online': 'Offline' }}</p>
                                 @endif
                             </div>
                         </div>

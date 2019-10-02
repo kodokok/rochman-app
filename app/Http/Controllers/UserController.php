@@ -18,7 +18,7 @@ class UserController extends Controller
     public function index()
     {
         // dd(User::findOrFail(1)->isOnline());
-        return view('user.index');
+        return view('pages.user.index');
     }
 
     /**
