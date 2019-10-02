@@ -36,4 +36,9 @@ class AppController extends Controller
             'auditplans','temuanaudits'
         ]));
     }
+
+    public function home()
+    {
+        return view('home');
+    }
 }
