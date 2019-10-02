@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use DataTables;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -49,7 +50,10 @@ class UserController extends Controller
             'nama' => 'required|string|max:50',
             'email' => 'required|string|max:50|unique:user,email',
             'password' => 'required|min:6',
+            'tanggal_masuk' => 'nullable|date_format:m-d-Y',
         ]);
+
+        $tanggal_masuk = Carbon::createFromFormat('m-d-Y', $request->tanggal_masuk)->format('Y-m-d');
 
         $model = User::create([
             'nama' => $request->nama,
@@ -58,7 +62,7 @@ class UserController extends Controller
             'alamat' => $request->alamat,
             'phone' => $request->phone,
             'pendidikan' => $request->pendidikan,
-            'tanggal_masuk' =>  Carbon::createFromFormat('m-d-Y', $request->tanngal_masuk)->format('Y-m-d'),
+            'tanggal_masuk' =>  $tanggal_masuk,
         ]);
 
         // upload image to the storage
