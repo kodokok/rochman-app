@@ -77,8 +77,8 @@ $(document).ready(function() {
         var csrf_token = $('meta[name="csrf-token"]').attr('content');
 
         Swal.fire({
-            title: 'Are you sure want to delete ' + title + '?',
-            text: "You won't be able to revert this!",
+            title: 'Apakah and ingin menghapus ' + title + '?',
+            text: "Data yang terhapus tidak bisa dikembalikan!",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -94,12 +94,13 @@ $(document).ready(function() {
                         '_token': csrf_token
                     },
                     success: function(response) {
-                        $('#datatables').DataTable().ajax.reload();
-                        Swal.fire(
-                            'Deleted!',
-                            'Data has been deleted.',
-                            'success'
-                        );
+                        $('#datatable').DataTable().ajax.reload();
+                        toastr.warning('Deleted!', 'Data telah dihapus.');
+                        // Swal.fire(
+                        //     'Deleted!',
+                        //     'Data has been deleted.',
+                        //     'success'
+                        // );
                     }
                 });
             }

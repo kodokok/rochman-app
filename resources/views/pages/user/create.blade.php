@@ -38,7 +38,7 @@
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    {!! Form::password('password', ['class' => 'form-control' . ($errors->has('password') ? ' is-invalid': ''), 'id' => 'password', 'autocomplete'=>"new-password"]) !!}
+                    {!! Form::text('password', null, ['class' => 'form-control password' . ($errors->has('password') ? ' is-invalid': ''), 'id' => 'password', 'oninput'=>"turnOnPasswordStyle()"]) !!}
                     <div id="error-password" class="invalid-feedback">{{ $errors->first('password') }}</div>
                 </div>
                 <div class="form-group">
@@ -103,13 +103,13 @@
                 </div>
             </div>
         <div class="card-body">
-            <div class="col-sm-12 text-center mb-3">
-                <img id="display-foto" src="{{ asset('img/avatar.png') }}" class="img-fluid img-fluid" alt="foto" width="307" height="240">
+            <div class="col-sm-12 borders border-primary text-center mb-3">
+                <img id="display-foto" src="{{ asset('img/avatar.png') }}" class="img-fluid" alt="foto" style="width: 200px; height: 200px;">
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="foto" aria-describedby="inputGroupFileAddon04">
+                        <input type="file" class="custom-file-input" accept="image/*" name="foto" id="foto" aria-describedby="inputGroupFileAddon04">
                         <label class="custom-file-label" for="foto">Pilih foto</label>
                     </div>
                 </div>
@@ -125,9 +125,16 @@
 @push('scripts')
 <script>
 $(document).ready(function(){
-    
+    $('#password').bind("cut copy paste", function(e) {
+        e.preventDefault();
+        //  alert("You cannot paste into this text field.");
+        $('#password').bind("contextmenu", function(e) {
+            e.preventDefault();
+        });
+    });
+
     $('#roles').select2({placeholder: 'Pilih role', width: 'resolve'});
-    $('#pendidikan').select2({placeholder: 'Pilih pendidikan', width: 'resolve'});
+    // $('#pendidikan').select2({placeholder: 'Pilih pendidikan', width: 'resolve'});
 
     $('#tanggal_masuk').datetimepicker({
         format: 'MM-DD-YYYY',
@@ -155,6 +162,10 @@ function readURL(input) {
 
         reader.readAsDataURL(input.files[0]);
     }
+}
+
+function turnOnPasswordStyle() {
+  $('#password').attr('type', "password");
 }
 
 </script>

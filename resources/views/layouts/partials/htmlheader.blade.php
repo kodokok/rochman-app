@@ -28,3 +28,4 @@
 
 <!-- Theme style -->
 <link rel="stylesheet" href="{{ asset('plugins/adminlte/css/adminlte.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/app.css') }}">

@@ -11,7 +11,6 @@ use Carbon\Carbon;
 
 class UserController extends Controller
 {
-    protected $list_pendidikan = ['SD', 'SMP', 'SMA', 'SMK', 'MA', 'Diploma 3 (D3)', 'Diploma 4 (D4)', 'Strata 1 (S1)', 'Strata 2 (S2)', 'Strata 3 (S3)'];
     /**
      * Display a listing of the resource.
      *
@@ -32,7 +31,7 @@ class UserController extends Controller
     {
         $model = new User();
         $roles = Role::pluck('name','id')->all();
-        $pendidikan = $this->list_pendidikan;
+        $pendidikan = array();
 
         return view('pages.user.create', compact(['model','roles', 'pendidikan']));
     }
@@ -45,7 +44,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
+        // dd($request->all());
         $this->validate($request, [
             'nama' => 'required|string|max:50',
             'email' => 'required|string|max:50|unique:user,email',
@@ -62,26 +61,26 @@ class UserController extends Controller
             'pendidikan' => $request->pendidikan,
         ];
 
-        if (!empty($request->has('tanggal_masuk'))) {
+        if (!empty($request->tanggal_masuk)) {
             $tanggal_masuk = Carbon::createFromFormat('m-d-Y', $request->tanggal_masuk)->format('Y-m-d');
             $data['tanggal_masuk'] = $tanggal_masuk;
         }
 
         // upload image to the storage
         if ($request->hasFile('foto')) {
-            $foto = $request->image->store('img\user');
+            $foto = $request->foto->store('img\user');
 
             $data['foto'] = $foto;
         }
 
-        User::create($data);
+        $user = User::create($data);
 
         //Retrieving the roles field
         $roles = $request['roles'];
         //Checking if a role was selected
         if (isset($roles)) {
             //Assigning role to user
-            $model->assignRole($roles);
+            $user->assignRole($roles);
         }
 
         $notification = [
@@ -160,7 +159,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->roles()->detach();
-        $user->deleteImage();
+        $user->deleteFoto();
         $user->delete();
     }
 
