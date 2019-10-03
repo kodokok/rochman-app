@@ -5,13 +5,13 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Cache;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Facades\Storage;
 use App\Departement;
 use App\KompetensiAuditor;
 use App\AuditPlan;
 use Carbon\Carbon;
+
 
 class User extends Authenticatable
 {

@@ -29,11 +29,11 @@ class UserController extends Controller
      */
     public function create()
     {
-        $model = new User();
+        $user = new User();
         $roles = Role::pluck('name','id')->all();
         $pendidikan = array();
 
-        return view('pages.user.create', compact(['model','roles', 'pendidikan']));
+        return view('pages.user.create', compact(['user','roles', 'pendidikan']));
     }
 
     /**
@@ -99,9 +99,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $model = User::findOrFail($user->id);
         $roles = Role::pluck('name','id')->all();
-        return view('user.create', compact(['model', 'roles']));
+        return view('pages.user.create', compact(['user', 'roles']));
     }
 
     /**
@@ -113,23 +112,51 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $data = $request->only(['nama', 'email', 'alamat', 'phone']);
-
+        // dd($request->all());
         $this->validate($request, [
-            'nama' => 'required|string|max:100',
-            'email' => 'required|string|max:100|unique:user,email,' . $user->id
+            'nama' => 'required|string|max:50',
+            'email' => 'required|string|max:50|unique:user,email,' . $user->id,
+            'password' => 'nullable|min:6',
+            'tanggal_masuk' => 'nullable|date_format:m-d-Y',
         ]);
+
+        $data = [
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'alamat' => $request->alamat,
+            'phone' => $request->phone,
+            'pendidikan' => $request->pendidikan,
+        ];
+
+        if ($request->has('password') && !empty($request->password)) {
+
+            dd($request->all());
+            $data['password'] = Hash::make($data['password']);
+        };
+
+        if ($request->has('tanggal_masuk') && !empty($request->tanggal_masuk)) {
+            $tanggal_masuk = Carbon::createFromFormat('m-d-Y', $request->tanggal_masuk)->format('Y-m-d');
+            $data['tanggal_masuk'] = $tanggal_masuk;
+        }
+
+        // $data = $request->only(['nama', 'email', 'alamat', 'phone']);
+
+        // $this->validate($request, [
+        //     'nama' => 'required|string|max:100',
+        //     'email' => 'required|string|max:100|unique:user,email,' . $user->id
+        // ]);
 
         // check if new image
         if ($request->hasFile('foto')) {
             // upload image
-            $image = $request->image->store('user');
+            $foto = $request->foto->store('user');
 
             // delete image
-            $user->deleteImage();
+            $user->deleteFoto();
 
             // save new image to array
-            $data['foto'] = $image;
+            $data['foto'] = $foto;
         }
 
         // update user

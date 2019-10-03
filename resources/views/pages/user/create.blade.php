@@ -1,22 +1,26 @@
 @extends('layouts.app')
 
-@section('breadcrumbs', Breadcrumbs::render('user.create'))
-@section('page-title', 'Creat New User')
+@section('breadcrumbs')
+{{ $user->exists ? Breadcrumbs::render('user.edit') : Breadcrumbs::render('user.create') }}
+@endsection
+@section('page-title', $user->exists ? 'Edit: ' . $user->nama : 'Create New User')
 
 @section('page-action')
-    <input id="save" type="submit" value="Save" class="btn btn-success float-right" style="margin-right: 5px; width: 120px;">
+    <input id="save" type="submit" value="Simpan" class="btn btn-success float-right" style="margin-right: 5px; width: 120px;">
+    <a href="{{ old('redirect_to', url()->previous()) }}" class="btn btn-secondary float-right" style="margin-right: 5px; width: 120px;">Cancel</a>
 @endsection
 
 @section('content')
 <div class="row">
     <div class="col-md-4">
-    {!! Form::model($model, [
-        'route' => $model->exists ? ['user.update', $model->id] : 'user.store',
-        'method' => $model->exists ? 'PUT' : 'POST',
+    {!! Form::model($user, [
+        'route' => $user->exists ? ['user.update', $user->id] : 'user.store',
+        'method' => $user->exists ? 'PUT' : 'POST',
         'files' => true,
         'autocomplete' => 'off',
         'id' => 'current-from'
     ]) !!}
+    {!! Form::hidden('redirect_to', old('redirect_to', url()->previous())) !!}
         <div class="card card-primary">
             <div class="card-header">
                 <h3 class="card-title">General</h3>
@@ -38,7 +42,7 @@
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    {!! Form::text('password', null, ['class' => 'form-control password' . ($errors->has('password') ? ' is-invalid': ''), 'id' => 'password', 'oninput'=>"turnOnPasswordStyle()"]) !!}
+                    {!! Form::text('password', ($user->exists ? '' : null), ['class' => 'form-control password' . ($errors->has('password') ? ' is-invalid': ''), 'id' => 'password', 'oninput'=>"turnOnPasswordStyle()"]) !!}
                     <div id="error-password" class="invalid-feedback">{{ $errors->first('password') }}</div>
                 </div>
                 <div class="form-group">
@@ -80,7 +84,9 @@
                     <label for="tanggal_masuk">Tanggal Masuk</label>
                     <div class="form-group">
                         <div class="input-group date" id="tanggal_masuk" data-target-input="nearest">
-                            <input type="text" class="form-control datetimepicker-input" name="tanggal_masuk" data-target="#tanggal_masuk"/>
+                            <input type="text" class="form-control datetimepicker-input" name="tanggal_masuk" data-target="#tanggal_masuk"
+                                value="{{ $user->exists ? $user->tanggal_masuk : old('tanggal_masuk') }}"
+                            />
                             <div class="input-group-append" data-target="#tanggal_masuk" data-toggle="datetimepicker">
                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                             </div>
@@ -104,7 +110,7 @@
             </div>
         <div class="card-body">
             <div class="col-sm-12 borders border-primary text-center mb-3">
-                <img id="display-foto" src="{{ asset('img/avatar.png') }}" class="img-fluid" alt="foto" style="width: 200px; height: 200px;">
+                <img id="display-foto" src="{{ $user->foto ? asset('storage/' . $user->foto) : asset('img/avatar.png') }}" class="img-fluid" alt="foto" style="width: 200px; height: 200px;">
             </div>
             <div class="form-group">
                 <div class="input-group">

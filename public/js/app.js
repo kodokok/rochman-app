@@ -83,7 +83,7 @@ $(document).ready(function() {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Ya, hapus!'
         }).then((result) => {
             if (result.value) {
                 $.ajax({
@@ -94,7 +94,7 @@ $(document).ready(function() {
                         '_token': csrf_token
                     },
                     success: function(response) {
-                        $('#datatable').DataTable().ajax.reload();
+                        $('#datatable').DataTable().ajax.reload(null, false);
                         toastr.warning('Deleted!', 'Data telah dihapus.');
                         // Swal.fire(
                         //     'Deleted!',

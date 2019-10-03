@@ -39,6 +39,7 @@
 <script>
     $(document).ready(function() {
         $('#datatable').DataTable({
+            stateSave: true,
             responsive: true,
             processing: true,
             serverSide: true,
