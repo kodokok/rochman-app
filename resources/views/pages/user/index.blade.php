@@ -11,7 +11,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <table id="datatable" class="table table-bordered table-striped" style="width:100%">
+                <table id="datatable" class="table table-responsive" style="width:100%">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -19,6 +19,8 @@
                             <th>Email</th>
                             <th>Alamat</th>
                             <th>Phone</th>
+                            <th>Pendidikan</th>
+                            <th>Tanggal Masuk</th>
                             <th>Roles</th>
                             <th style="width: 20%"></th>
                         </tr>
@@ -50,6 +52,8 @@
                 {data: 'email', name: 'email'},
                 {data: 'alamat', name: 'alamat'},
                 {data: 'phone', name: 'phone'},
+                {data: 'pendidikan', name: 'pendidikan'},
+                {data: 'tanggal_masuk', name: 'tanggal_masuk'},
                 {data: 'roles', name: 'roles'},
                 {data: 'action', name: 'action', 'searchable': false, 'orderable': false, 'className': 'text-center'}
             ]
