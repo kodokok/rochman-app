@@ -29,20 +29,18 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('user', 'UserController')->except(['show']);
         Route::get('user/datatable', 'UserController@datatable')->name('user.datatable');
         Route::resource('roles', 'RolesController')->only(['index', 'create', 'store', 'destroy']);
-        Route::get('roles/datatable', 'RolesController@dataTable')->name('roles.datatable');
+        Route::get('roles/datatable', 'RolesController@datatable')->name('roles.datatable');
+        Route::get('departemen/datatable', 'DepartemenController@datatable')->name('departemen.datatable');
+        Route::resource('departemen', 'DepartemenController')->except(['show'])->parameters(['departemen' => 'departemen']);
 
-        Route::get('table/departements', 'DepartementsController@dataTable')->name('table.departements');
         Route::get('table/kompetensi', 'KompetensiAuditorsController@dataTable')->name('table.kompetensi');
         Route::get('table/auditplans', 'AuditPlansController@dataTable')->name('table.auditplans');
         Route::get('table/temuanaudits', 'TemuanAuditsController@dataTable')->name('table.temuanaudits');
-
-        // route fetch data
         Route::get('auditplan/departement/{id}', 'AuditPlansController@getDepartements')->name('auditplan.departement');
 
+        // route fetch data
 
-        Route::resource('departements', 'DepartementsController')->except([
-            'show'
-        ]);
+
         Route::resource('kompetensi', 'KompetensiAuditorsController')->except([
             'show'
         ]);

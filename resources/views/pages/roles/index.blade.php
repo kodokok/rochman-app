@@ -1,9 +1,10 @@
 @extends('layouts.app')
+
 @section('breadcrumbs', Breadcrumbs::render('roles'))
 @section('page-title', 'Role List')
 @section('page-action')
 <a href="{{ route('roles.create') }}" class="btn btn-success float-right modal-show" title="Create New Role" style="margin-right: 5px;">
-    <i class="fas fa-plus mr-2"></i>Create New Role
+    <i class="fas fa-plus mr-2"></i>Create New
 </a>
 @endsection
 

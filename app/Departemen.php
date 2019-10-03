@@ -11,9 +11,9 @@ class Departemen extends Model
     protected $table = 'departemen';
     protected $guarded = [];
 
-    public function user()
+    public function kadept()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'id');
     }
 
     public function auditplans()

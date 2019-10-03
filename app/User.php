@@ -7,7 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Facades\Storage;
-use App\Departement;
+use App\Departemen;
 use App\KompetensiAuditor;
 use App\AuditPlan;
 use Carbon\Carbon;
@@ -58,9 +58,9 @@ class User extends Authenticatable
         Storage::delete($this->foto);
     }
 
-    public function departements()
+    public function departemen()
     {
-        return $this->hasMany(Departement::class);
+        return $this->hasMany(Departemen::class, 'id');
     }
 
     public function kompetensi_auditors()

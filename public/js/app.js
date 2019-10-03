@@ -51,6 +51,8 @@ $(document).ready(function() {
             success: function(response) {
                 form.trigger("reset");
                 $("#modal").modal("hide");
+                toastr.success('Simpan!', 'Data telah berhasil disimpan.');
+                $('#datatable').DataTable().ajax.reload(null, false);
             },
             error: function(xhr) {
                 var res = xhr.responseJSON;
@@ -61,9 +63,6 @@ $(document).ready(function() {
                         $("#error-" + key).html(value);
                     });
                 }
-            },
-            complete: function() {
-                location.reload();
             }
         });
     });
@@ -95,7 +94,7 @@ $(document).ready(function() {
                     },
                     success: function(response) {
                         $('#datatable').DataTable().ajax.reload(null, false);
-                        toastr.warning('Deleted!', 'Data telah dihapus.');
+                        toastr.warning('Deleted!', 'Data telah berhasil dihapus.');
                         // Swal.fire(
                         //     'Deleted!',
                         //     'Data has been deleted.',

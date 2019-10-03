@@ -29,3 +29,8 @@ Breadcrumbs::register('roles', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
     $breadcrumbs->push('roles', route('roles.index'));
 });
+
+Breadcrumbs::register('departemen', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('departemen', route('departemen.index'));
+});

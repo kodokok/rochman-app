@@ -60,9 +60,9 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('departements.index') }}" class="nav-link {{ active(['departements.*']) }}">
+                    <a href="{{ route('departemen.index') }}" class="nav-link {{ active(['departemen.*']) }}">
                         <i class="nav-icon fas fa-map-marked-alt"></i>
-                        <p>Departements</p>
+                        <p>Departemen</p>
                     </a>
                 </li>
                 @endhasanyrole

@@ -42,7 +42,7 @@ class RolesController extends Controller
         $role->delete();
     }
 
-    public function dataTable()
+    public function datatable()
     {
         $model = Role::all();
         return DataTables::of($model)
