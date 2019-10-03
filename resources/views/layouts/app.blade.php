@@ -30,7 +30,7 @@
 
     @include('partials.scripts')
 
-    @push('scripts')
+    {{--  @push('scripts')  --}}
     <script>
         @if(Session::has('message'))
             var type = "{{ Session::get('alert-type', 'info') }}";
@@ -50,6 +50,6 @@
             }
         @endif
     </script>
-    @endpush
+    {{--  @endpush  --}}
 </body>
 </html>

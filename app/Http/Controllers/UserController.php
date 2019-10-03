@@ -53,26 +53,28 @@ class UserController extends Controller
             'tanggal_masuk' => 'nullable|date_format:m-d-Y',
         ]);
 
-        $tanggal_masuk = Carbon::createFromFormat('m-d-Y', $request->tanggal_masuk)->format('Y-m-d');
-
-        $model = User::create([
+        $data = [
             'nama' => $request->nama,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'alamat' => $request->alamat,
             'phone' => $request->phone,
             'pendidikan' => $request->pendidikan,
-            'tanggal_masuk' =>  $tanggal_masuk,
-        ]);
+        ];
+
+        if (!empty($request->has('tanggal_masuk'))) {
+            $tanggal_masuk = Carbon::createFromFormat('m-d-Y', $request->tanggal_masuk)->format('Y-m-d');
+            $data['tanggal_masuk'] = $tanggal_masuk;
+        }
 
         // upload image to the storage
         if ($request->hasFile('foto')) {
-            $image = $request->image->store('img\user');
+            $foto = $request->image->store('img\user');
 
-            $model->update([
-                'foto' => $image
-            ]);
+            $data['foto'] = $foto;
         }
+
+        User::create($data);
 
         //Retrieving the roles field
         $roles = $request['roles'];

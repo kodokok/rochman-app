@@ -32,13 +32,13 @@
                     <div id="error-nama" class="invalid-feedback">{{ $errors->first('nama') }}</div>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    {!! Form::email('email', null, ['class' => 'form-control'. ($errors->has('email') ? ' is-invalid': ''), 'id' => 'email']) !!}
-                    <div id="error-email" class="invalid-feedback">{{ $errors->first('email') }}</div>
+                    <label for="new-email">Email</label>
+                    {!! Form::email('email', null, ['class' => 'form-control'. ($errors->has('email') ? ' is-invalid': ''), 'id' => 'email', 'autocomplete'=>"new-password"]) !!}
+                    <div id="error-new-email" class="invalid-feedback">{{ $errors->first('email') }}</div>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    {!! Form::password('password', ['class' => 'form-control' . ($errors->has('password') ? ' is-invalid': ''), 'id' => 'password']) !!}
+                    {!! Form::password('password', ['class' => 'form-control' . ($errors->has('password') ? ' is-invalid': ''), 'id' => 'password', 'autocomplete'=>"new-password"]) !!}
                     <div id="error-password" class="invalid-feedback">{{ $errors->first('password') }}</div>
                 </div>
                 <div class="form-group">
@@ -73,7 +73,7 @@
                 </div>
                 <div class="form-group">
                     <label for="pendidikan">Pendidikan</label>
-                    {!! Form::select('pendidikan', $pendidikan, null, ['class' => 'form-control', 'id' => 'pendidikan', 'placeholder' => 'Pilih pendidikan', 'style' => "width: 100%"]) !!}
+                    {!! Form::text('pendidikan', null, ['class' => 'form-control', 'id' => 'pendidikan']) !!}
                     <div id="error-pendidikan" class="invalid-feedback"></div>
                 </div>
                 <div class="form-group">
@@ -122,19 +122,10 @@
 {!! Form::close() !!}
 @endsection
 
-@push('styles')
-<link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
-<link rel="stylesheet" href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
-@endpush
-
 @push('scripts')
-<script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
-<script src="{{ asset('plugins/select2/js/select2.min.js') }}"></script>
-<script src="{{ asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
-<script src="{{ asset('plugins/bs-custom-file-input/dist/bs-custom-file-input.min.js') }}"></script>
-
 <script>
 $(document).ready(function(){
+    
     $('#roles').select2({placeholder: 'Pilih role', width: 'resolve'});
     $('#pendidikan').select2({placeholder: 'Pilih pendidikan', width: 'resolve'});
 

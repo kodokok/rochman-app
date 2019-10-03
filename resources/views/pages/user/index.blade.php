@@ -34,13 +34,8 @@
 </div>
 @endsection
 
-@push('styles')
-<link rel="stylesheet" href="{{ asset('plugins/datatables/dataTables.bootstrap4.css') }}">
-@endpush
 
 @push('scripts')
-<script src="{{ asset('plugins/datatables/jquery.dataTables.js') }}"></script>
-<script src="{{ asset('plugins/datatables/dataTables.bootstrap4.js') }}"></script>
 <script>
     $(document).ready(function() {
         $('#datatable').DataTable({
