@@ -7,8 +7,6 @@
         </li>
     </ul>
 
-    @yield('breadcrumbs')
-
     <!-- Right navbar links -->
     @if (auth()->check())
         <ul class="navbar-nav ml-auto">
@@ -32,6 +30,8 @@
                                     {{ auth()->user()->email }}
                                     <span class="float-right text-sm text-muted"><i class="fas fa-info"></i></span>
                                 </h3>
+
+                                <p class="text-sm">{{ auth()->user()->isOnline() ? 'Online': 'Offline' }}</p>
                                 @endif
                             </div>
                         </div>
