@@ -30,8 +30,6 @@
                                     {{ auth()->user()->email }}
                                     <span class="float-right text-sm text-muted"><i class="fas fa-info"></i></span>
                                 </h3>
-
-                                <p class="text-sm">{{ auth()->user()->isOnline() ? 'Online': 'Offline' }}</p>
                                 @endif
                             </div>
                         </div>
