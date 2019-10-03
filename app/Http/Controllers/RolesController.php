@@ -11,7 +11,7 @@ class RolesController extends Controller
 {
     public function index()
     {
-        return view('roles.index');
+        return view('pages.roles.index');
     }
 
     public function create()
@@ -21,7 +21,7 @@ class RolesController extends Controller
         foreach ($auth_guard as $key => $value) {
             $guards[$value] = $value;
         }
-        return view('roles.form', compact(['guards']));
+        return view('pages.roles.form', compact(['guards']));
     }
 
     public function store(Request $request)
@@ -50,7 +50,7 @@ class RolesController extends Controller
                 return User::role($model->name)->count();
             })
             ->addColumn('action', function ($model) {
-                return view('layouts.partials._action', [
+                return view('partials.table-action.roles', [
                     'model' => $model,
                     'url_show' => null,
                     'url_edit' => null,

@@ -28,8 +28,9 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::resource('user', 'UserController')->except(['show']);
         Route::get('user/datatable', 'UserController@datatable')->name('user.datatable');
+        Route::resource('roles', 'RolesController')->only(['index', 'create', 'store', 'destroy']);
+        Route::get('roles/datatable', 'RolesController@dataTable')->name('roles.datatable');
 
-        Route::get('table/roles', 'RolesController@dataTable')->name('table.roles');
         Route::get('table/departements', 'DepartementsController@dataTable')->name('table.departements');
         Route::get('table/kompetensi', 'KompetensiAuditorsController@dataTable')->name('table.kompetensi');
         Route::get('table/auditplans', 'AuditPlansController@dataTable')->name('table.auditplans');
@@ -38,9 +39,6 @@ Route::group(['middleware' => ['auth']], function () {
         // route fetch data
         Route::get('auditplan/departement/{id}', 'AuditPlansController@getDepartements')->name('auditplan.departement');
 
-        Route::resource('roles', 'RolesController')->only([
-            'index', 'create', 'store', 'destroy'
-        ]);
 
         Route::resource('departements', 'DepartementsController')->except([
             'show'

@@ -7,7 +7,7 @@ Breadcrumbs::register('home', function ($breadcrumbs) {
 
 Breadcrumbs::register('dashboard', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
-    $breadcrumbs->push('Dashboard', route('home'));
+    $breadcrumbs->push('dashboard', route('home'));
 });
 
 Breadcrumbs::register('user', function ($breadcrumbs) {
@@ -23,4 +23,9 @@ Breadcrumbs::register('user.create', function ($breadcrumbs) {
 Breadcrumbs::register('user.edit', function ($breadcrumbs) {
     $breadcrumbs->parent('user');
     $breadcrumbs->push('edit');
+});
+
+Breadcrumbs::register('roles', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('roles', route('roles.index'));
 });
