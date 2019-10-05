@@ -68,7 +68,7 @@ class KompetensiAuditorController extends Controller
         $kompetensi->delete();
     }
 
-    public function dataTable()
+    public function datatable()
     {
         $model = KompetensiAuditor::all();
         // dd($model);

@@ -23,7 +23,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('monitoring', 'MonitoringController@index')->name('monitoring.index');
 
-    Route::group(['middleware' => ['role:admin']], function () {
+    Route::group(['middleware' => ['role:admin,auditor,auditor_lead']], function () {
         // route datatable
 
         Route::resource('user', 'UserController')->except(['show']);
@@ -34,15 +34,15 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('departemen', 'DepartemenController')->except(['show'])->parameters(['departemen' => 'departemen']);
         Route::get('kompetensi/datatable', 'KompetensiAuditorController@datatable')->name('kompetensi.datatable');
         Route::resource('kompetensi', 'KompetensiAuditorController')->except(['show'])->parameters(['kompetensiAuditor' => 'kompetensi']);
+        Route::get('auditplan/datatable', 'AuditPlanController@datatable')->name('auditplan.datatable');
+        Route::resource('auditplan', 'AuditPlanController');
 
-        Route::get('table/auditplans', 'AuditPlansController@dataTable')->name('table.auditplans');
         Route::get('table/temuanaudits', 'TemuanAuditsController@dataTable')->name('table.temuanaudits');
         Route::get('auditplan/departement/{id}', 'AuditPlansController@getDepartements')->name('auditplan.departement');
 
         // route fetch data
 
 
-        Route::resource('auditplan', 'AuditPlansController');
         Route::put('auditplan/{auditplan}/confirm', 'AuditPlansController@confirm')->name('auditplan.confirm');
         Route::get('auditplan/{auditplan}/report', 'AuditPlansController@report')->name('auditplan.report');
         Route::get('auditplan/{auditplan}/pdf', 'AuditPlansController@pdf')->name('auditplan.pdf');

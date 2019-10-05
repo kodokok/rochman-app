@@ -39,3 +39,13 @@ Breadcrumbs::register('kompetensi', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
     $breadcrumbs->push('kompetensi auditor', route('kompetensi.index'));
 });
+
+Breadcrumbs::register('auditplan', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('audit plan', route('auditplan.index'));
+});
+
+Breadcrumbs::register('auditplan.create', function ($breadcrumbs) {
+    $breadcrumbs->parent('auditplan');
+    $breadcrumbs->push('create');
+});

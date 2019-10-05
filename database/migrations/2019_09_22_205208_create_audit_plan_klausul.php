@@ -14,7 +14,6 @@ class CreateAuditPlanKlausul extends Migration
     public function up()
     {
         Schema::create('audit_plan_klausul', function (Blueprint $table) {
-            $table->increments('id')->unsigned();
             $table->unsignedInteger('audit_plan_id');
             $table->unsignedInteger('klausul_id');
             $table->timestamps();

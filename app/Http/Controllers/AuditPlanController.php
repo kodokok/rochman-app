@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\AuditPlan;
-use App\Departement;
+use App\Departemen;
+use App\Klausul;
 use App\TemuanAudit;
 use App\User;
 use Carbon\Carbon;
@@ -11,11 +12,10 @@ use DataTables;
 use Illuminate\Http\Request;
 use PDF;
 
-class AuditPlansController extends Controller
+class AuditPlanController extends Controller
 {
-    protected $auditeeRoles = ['auditee', 'auditor', 'auditor_leader', 'admin'];
-    protected $auditorRoles = ['auditor', 'auditor_leader', 'admin'];
-    protected $auditorLeaderRoles =  ['auditor_leader', 'admin'];
+    protected $auditorRoles = ['auditor', 'auditor_lead', 'admin'];
+    protected $auditorLeadRoles =  ['auditor_lead', 'admin'];
 
     /**
      * Display a listing of the resource.
@@ -24,7 +24,7 @@ class AuditPlansController extends Controller
      */
     public function index()
     {
-        return view('auditplan.index');
+        return view('pages.auditplan.index');
     }
 
     /**
@@ -35,12 +35,20 @@ class AuditPlansController extends Controller
     public function create()
     {
         $model = new AuditPlan();
-        $auditee = User::with('roles')->pluck('name', 'id');
-        $auditor = User::role($this->auditorRoles)->pluck('name', 'id');
-        $auditorLeader = User::role($this->auditorLeaderRoles)->pluck('name', 'id');
-        $departement = Departement::all();
+        $departemen = Departemen::pluck('kode','id');
+        $klausul = Klausul::all();
+        $auditee = User::pluck('nama', 'id');
+        $auditor = User::role($this->auditorRoles)->pluck('nama', 'id');
+        $auditorLead = User::role($this->auditorLeadRoles)->pluck('nama', 'id');
         // dd($departement);
-        return view('auditplan.create', compact(['model', 'departement', 'auditee', 'auditor', 'auditorLeader']));
+        return view('pages.auditplan.create', compact([
+            'model',
+            'departemen',
+            'klausul',
+            'auditee',
+            'auditor',
+            'auditorLead'
+        ]));
     }
 
     /**
@@ -56,9 +64,9 @@ class AuditPlansController extends Controller
             'objektif_audit' => 'required|string|max:255|unique:audit_plans,objektif_audit',
             'klausul' => 'required|string|max:100',
             'departement_id' => 'required',
-            'auditee_id' => 'required',
-            'auditor_id' => 'required|different:auditee_id',
-            'auditor_leader_id' => 'required|different:auditee_id',
+            'auditee_user_id' => 'required',
+            'auditor__user_id' => 'required|different:auditee_id',
+            'auditor_lead_user_id' => 'required|different:auditee_id',
             'tanggal' => 'required|date_format:m-d-Y',
             'waktu' => 'required|date_format:H:i:s',
         ]);
@@ -73,7 +81,7 @@ class AuditPlansController extends Controller
             'approval' => 0,
             'auditee_id' => $request->auditee_id,
             'auditor_id' => $request->auditor_id,
-            'auditor_leader_id' => $request->auditor_leader_id,
+            'auditor_lead_user_id' => $request->auditor_leader_id,
             'tanggal' => $tanggal,
             'waktu' => $waktu,
         ]);
@@ -237,7 +245,7 @@ class AuditPlansController extends Controller
         if ($request->has('redirect_to')) {
             return redirect($request->redirect_to)->with($notification);
         }
-        return redirect()->back('app')->with($notification);
+        return redirect()->back()->with($notification);
     }
 
     public function report(Request $request, AuditPlan $auditplan)
@@ -264,25 +272,30 @@ class AuditPlansController extends Controller
         return $pdf->download($pdfname);
     }
 
-    public function dataTable()
+    public function datatable()
     {
         $model = AuditPlan::all();
+        // $klausuls = $model->klausuls()->get();
+        // $model = Klausul::first();
+        
+        // dd($model->klausuls()->count());
+
 
         return DataTables::of($model)
-            ->addColumn('departement', function ($model) {
-                return $model->departement->name;
+            ->addColumn('departemen', function ($model) {
+                return $model->departemen->nama;
             })
             ->addColumn('auditee', function ($model) {
-                return $model->auditee->name;
+                return $model->auditee->nama;
             })
             ->addColumn('auditor', function ($model) {
-                return $model->auditor->name;
+                return $model->auditor->nama;
             })
-            ->addColumn('auditor_leader', function ($model) {
-                return $model->auditorLeader->name;
+            ->addColumn('auditor_lead', function ($model) {
+                return $model->auditorLead->nama;
             })
-            ->addColumn('temuan', function ($model) {
-                return $model->temuanaudits->count();
+            ->addColumn('klausul', function ($model) {
+                return $model->klausuls()->count();
             })
             ->addColumn('action', function ($model) {
                 return view('auditplan.action', [

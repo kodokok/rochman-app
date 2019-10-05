@@ -14,7 +14,7 @@
 
                     <p>
                         We could not find the page you were looking for.
-                        Meanwhile, you may <a href="{{ route('app') }}">back to app</a> or try using the search
+                        Meanwhile, you may <a href="{{ route('home') }}">back to app</a> or try using the search
                         form.
                     </p>
                 </div>

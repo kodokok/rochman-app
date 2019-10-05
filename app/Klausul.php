@@ -10,8 +10,8 @@ class Klausul extends Model
     protected $table = 'klausul';
     protected $guarded = [];
 
-    public function auditPlans()
+    public function auditplans()
     {
-        return $this->belongsToMany(AuditPlan::class, 'audit_plan_klausul', 'klausul_id', 'audit_plan_id');
+        return $this->belongsToMany(AuditPlan::class, 'audit_plan_klausul', 'audit_plan_id', 'klausul_id');
     }
 }
