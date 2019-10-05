@@ -34,3 +34,8 @@ Breadcrumbs::register('departemen', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
     $breadcrumbs->push('departemen', route('departemen.index'));
 });
+
+Breadcrumbs::register('kompetensi', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('kompetensi auditor', route('kompetensi.index'));
+});

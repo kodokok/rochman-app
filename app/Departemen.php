@@ -13,7 +13,7 @@ class Departemen extends Model
 
     public function kadept()
     {
-        return $this->belongsTo(User::class, 'id');
+        return $this->belongsTo(User::class, 'kadept_user_id', 'id');
     }
 
     public function auditplans()

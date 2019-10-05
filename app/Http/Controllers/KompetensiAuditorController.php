@@ -9,66 +9,58 @@ use Illuminate\Http\Request;
 
 class KompetensiAuditorController extends Controller
 {
-    protected $auditorRoles = ['auditor','auditor_leader','admin'];
+    protected $auditorRoles = ['auditor','auditor_lead','admin'];
 
     public function index()
     {
-        return view('kompetensi.index');
+        return view('pages.kompetensi.index');
     }
 
     public function create()
     {
         $model = new KompetensiAuditor();
-        $auditor = User::role($this->auditorRoles)->pluck('name', 'id');
+        $auditor = User::role($this->auditorRoles)->pluck('nama', 'id');
 
-        return view('kompetensi.form', compact(['model','auditor']));
+        return view('pages.kompetensi.form', compact(['model','auditor']));
     }
 
     public function store(Request $request)
     {
         $this->validate($request, [
             'user_id' => 'required',
-            'masa_kerja' => 'nullable|integer',
+            'nilai' => 'nullable|integer',
         ]);
 
         // dd($request->tanggal_pelatihan);
-        $model = KompetensiAuditor::create([
-            'user_id' => $request->user_id,
-            'pelatihan' => $request->pelatihan,
-            'pendidikan' => $request->pendidikan,
-            'masa_kerja' => $request->masa_kerja,
-        ]);
+        $model = KompetensiAuditor::create($request->all());
 
         return $model;
     }
 
-    public function edit($id)
+    public function edit(KompetensiAuditor $kompetensi)
     {
-        $model = KompetensiAuditor::findOrFail($id);
+        $model = $kompetensi;
 
         // dd($model->tanggal_pelatihan);
-        $auditor = User::role($this->auditorRoles)->pluck('name', 'id');
+        $auditor = User::role($this->auditorRoles)->pluck('nama', 'id');
 
-        return view('kompetensi.form', compact(['model','auditor']));
+        return view('pages.kompetensi.form', compact(['model','auditor']));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, KompetensiAuditor $kompetensi)
     {
         $this->validate($request, [
             'user_id' => 'required',
-            'masa_kerja' => 'nullable|integer'
+            'nilai' => 'nullable|integer'
         ]);
 
-        $model = KompetensiAuditor::findOrFail($id);
+        // $model = KompetensiAuditor::findOrFail($id);
         // dd($request->tanggal_pelatihan);
-        $model->update([
+        $kompetensi->update([
             'user_id' => $request->user_id,
             'pelatihan' => $request->pelatihan,
-            'pendidikan' => $request->pendidikan,
-            'masa_kerja' => $request->masa_kerja,
+            'nilai' => $request->nilai,
         ]);
-
-        return $model;
     }
 
     public function destroy(KompetensiAuditor $kompetensi)
@@ -82,8 +74,8 @@ class KompetensiAuditorController extends Controller
 
         return DataTables::of($model)
             ->addColumn('auditor', function($model) {
-                $user = KompetensiAuditor::find($model->id)->user;
-                return $user ? $user->name : '';
+                
+                return $model->user->nama;
             })
             ->addColumn('action', function ($model) {
                 return view('layouts.partials._action', [
