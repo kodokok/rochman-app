@@ -7,7 +7,7 @@ use App\User;
 use DataTables;
 use Illuminate\Http\Request;
 
-class KompetensiAuditorsController extends Controller
+class KompetensiAuditorController extends Controller
 {
     protected $auditorRoles = ['auditor','auditor_leader','admin'];
 
@@ -71,10 +71,9 @@ class KompetensiAuditorsController extends Controller
         return $model;
     }
 
-    public function destroy($id)
+    public function destroy(KompetensiAuditor $kompetensi)
     {
-        $model = KompetensiAuditor::findOrFail($id);
-        $model->delete();
+        $kompetensi->delete();
     }
 
     public function dataTable()

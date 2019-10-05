@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('page-title', 'Dashboard'))
+@section('page-title', 'Dashboard')
 @section('breadcrumbs', Breadcrumbs::render('dashboard'))
 
 @section('content')

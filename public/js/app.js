@@ -52,7 +52,7 @@ $(document).ready(function() {
                 form.trigger("reset");
                 $("#modal").modal("hide");
                 toastr.success('Simpan!', 'Data telah berhasil disimpan.');
-                $('#datatable').DataTable().ajax.reload(null, false);
+                $('#datatable').DataTable().ajax.reload();
             },
             error: function(xhr) {
                 var res = xhr.responseJSON;
@@ -74,7 +74,7 @@ $(document).ready(function() {
         var url = me.attr('href');
         var title = me.attr('title');
         var csrf_token = $('meta[name="csrf-token"]').attr('content');
-
+        
         Swal.fire({
             title: 'Apakah and ingin menghapus ' + title + '?',
             text: "Data yang terhapus tidak bisa dikembalikan!",
@@ -95,11 +95,6 @@ $(document).ready(function() {
                     success: function(response) {
                         $('#datatable').DataTable().ajax.reload(null, false);
                         toastr.warning('Deleted!', 'Data telah berhasil dihapus.');
-                        // Swal.fire(
-                        //     'Deleted!',
-                        //     'Data has been deleted.',
-                        //     'success'
-                        // );
                     }
                 });
             }
