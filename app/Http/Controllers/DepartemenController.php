@@ -56,10 +56,11 @@ class DepartemenController extends Controller
 
     public function datatable()
     {
-        $departemen = Departemen::with('kadept')->get();
+        $departemen = Departemen::all();
+        // dd($departemen->kadept->id);
         return DataTables::of($departemen)
             ->addColumn('kadept', function($departemen) {
-                return $departemen ? $departemen->kadept->nama : '';
+                return $departemen->kadept->nama;
             })
             ->addColumn('action', function ($departemen) {
                 return view('partials.table-action.departemen', [

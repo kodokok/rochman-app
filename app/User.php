@@ -60,7 +60,7 @@ class User extends Authenticatable
 
     public function departemen()
     {
-        return $this->hasMany(Departemen::class, 'id');
+        return $this->hasMany(Departemen::class, 'kadept_user_id');
     }
 
     public function kompetensi_auditors()

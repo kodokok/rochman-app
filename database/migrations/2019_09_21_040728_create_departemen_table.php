@@ -15,10 +15,10 @@ class CreateDepartemenTable extends Migration
     {
         Schema::create('departemen', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('kadept_user_id');
             $table->string('kode', 10);
             $table->string('nama', 50);
             $table->string('lokasi', 50)->nullable();
-            $table->unsignedInteger('kadept_user_id')->nullable();
             $table->timestamps();
         });
     }
