@@ -12,8 +12,6 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <!-- Add icons to the links using the .nav-icon class
-                   with font-awesome or any other icon font library -->
                 <li class="nav-item">
                     <a href="{{ route('home') }}" class="nav-link {{ active(['/']) }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -63,6 +61,12 @@
                     <a href="{{ route('departemen.index') }}" class="nav-link {{ active(['departemen.*']) }}">
                         <i class="nav-icon fas fa-map-marked-alt"></i>
                         <p>Departemen</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('klausul.index') }}" class="nav-link {{ active(['klausul.*']) }}">
+                        <i class="nav-icon fas fa-book-open"></i>
+                        <p>Klausul</p>
                     </a>
                 </li>
                 @endhasanyrole
