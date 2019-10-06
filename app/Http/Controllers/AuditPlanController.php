@@ -36,7 +36,7 @@ class AuditPlanController extends Controller
     {
         $model = new AuditPlan();
         $departemen = Departemen::pluck('kode','id');
-        $klausul = Klausul::all();
+        $klausul = Klausul::pluck('nama', 'id');
         $auditee = User::pluck('nama', 'id');
         $auditor = User::role($this->auditorRoles)->pluck('nama', 'id');
         $auditorLead = User::role($this->auditorLeadRoles)->pluck('nama', 'id');

@@ -3,7 +3,7 @@
 @section('breadcrumbs', Breadcrumbs::render('auditplan'))
 @section('page-title', 'Audit Plan')
 @section('page-action')
-<a href="{{ route('auditplan.create') }}" class="btn btn-success float-right modal-show" title="Create New" style="margin-right: 5px;">
+<a href="{{ route('auditplan.create') }}" class="btn btn-success float-right" title="Create New" style="margin-right: 5px;">
     <i class="fas fa-plus mr-2"></i>Create New
 </a>
 @endsection

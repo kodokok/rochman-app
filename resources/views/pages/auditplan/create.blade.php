@@ -3,10 +3,10 @@
 @section('breadcrumbs', Breadcrumbs::render('auditplan.create'))
 @section('page-title', 'Create New Audit Plan')
 @section('page-action')
-<a href="{{ route('auditplan.store') }}" class="btn btn-success float-right modal-show" 
-    title="Create New" style="margin-right: 5px;">
-    <i class="fas fa-plus mr-2"></i>Create
-</a>
+    <input id="save" type="submit" value="Simpan" class="btn btn-success float-right" 
+        style="width: 120px;">
+    <a href="{{ old('redirect_to', url()->previous()) }}" class="btn btn-secondary float-right" 
+        style="margin-right: 5px; width: 120px;">Batal</a>
 @endsection
 
 @section('content')
@@ -139,20 +139,15 @@
             </div>
             <div class="card-body">
                 <div class="row mb-3">
-                    <div class="input-group">
-                        <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
-                            <option selected>Klausul...</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
+                    <div class="input-group col-sm-12">
+                        {{ Form::select('klausul', $klausul, null, ['class' => 'form-control', 'id' => 'klausul', 'placeholder' => 'Pilih klausul']) }}
                         <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button">Button</button>
+                            <button id="add-row" class="btn btn-outline-success" type="button">Add</button>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <table class="table table-sm">
+                    <table id="table-klausul" class="table table-sm w100">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -163,9 +158,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
+                                <td></td>
                             </tr>
                         </tbody>
                     </table>
@@ -180,6 +173,19 @@
 @push('scripts')
 <script>
 $(function () {
+
+    $('#klausul').select2();
+
+    $('#add-row').click(function(){
+        
+        var klausul = $('#klausul').select2('data');
+
+        var row = '<tr><td id="'+ klausul[0].id + '">' + klausul[0].id + '</td><td>' 
+            + klausul[0].text + '</td></tr>';
+
+        $('#table-klausul tbody').append(row);
+        $('#klausul').val('').trigger('change');
+    });
 
     $('#datetimepicker4').datetimepicker({
         format: 'MM-DD-YYYY',
