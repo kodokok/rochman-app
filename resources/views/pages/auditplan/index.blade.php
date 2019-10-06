@@ -18,7 +18,7 @@
                     <table id="datatables" class="table table-bordered table-striped" style="width:100%">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>#</th>
                                 <th>Departement</th>
                                 <th>Tanggal</th>
                                 <th>Waktu</th>
@@ -52,7 +52,7 @@ $(document).ready(function() {
         scrollX: true,
         ajax: "{{ route('auditplan.datatable') }}",
         columns: [
-            {data: 'DT_RowIndex', name: 'id'},
+            {data: 'DT_RowIndex', name: 'id', 'searchable': false, 'orderable': false},
             {data: 'departemen', name: 'departemen'},
             {data: 'tanggal', name: 'tanggal'},
             {data: 'waktu', name: 'waktu'},

@@ -14,7 +14,7 @@
                 <table id="datatable" class="table table-responsive" style="width:100%">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>#</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Alamat</th>
@@ -47,7 +47,7 @@
             serverSide: true,
             ajax: "{{ route('user.datatable') }}",
             columns: [
-                {data: 'DT_RowIndex', name: 'id'},
+                {data: 'DT_RowIndex', name: 'id', 'searchable': false, 'orderable': false},
                 {data: 'nama', name: 'nama'},
                 {data: 'email', name: 'email'},
                 {data: 'alamat', name: 'alamat'},

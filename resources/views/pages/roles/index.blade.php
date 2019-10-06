@@ -17,7 +17,7 @@
                 <table id="datatable" class="table table-bordered table-striped table-responsive" style="width:100%">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>#</th>
                             <th style="width: 30%">Role</th>
                             <th style="width: 30%">Guard</th>
                             <th style="width: 30%">Users</th>
@@ -46,7 +46,7 @@ $(document).ready(function() {
         serverSide: true,
         ajax: "{{ route('roles.datatable') }}",
         columns: [
-            {data: 'DT_RowIndex', name: 'id'},
+            {data: 'DT_RowIndex', name: 'id', 'searchable': false, 'orderable': false},
             {data: 'name', name: 'name'},
             {data: 'guard_name', name: 'guard_name'},
             {data: 'users', name: 'users'},

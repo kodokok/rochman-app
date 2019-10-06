@@ -17,7 +17,7 @@
                     <table id="datatable" class="table table-responsive table-bordered table-striped" style="width:100%">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>#</th>
                                 <th style="width: 10%">Kode</th>
                                 <th style="width: 20%">Nama</th>
                                 <th style="width: 30%">Lokasi</th>
@@ -41,13 +41,13 @@
 <script>
 $(document).ready(function() {
     $('#datatable').DataTable({
-        // stateSave: true,
-        // responsive: true,
+        stateSave: true,
+        responsive: true,
         processing: true,
         serverSide: true,
         ajax: "{{ route('departemen.datatable') }}",
         columns: [
-            {data: 'DT_RowIndex', name: 'id'},
+            {data: 'DT_RowIndex', name: 'id', 'searchable': false, 'orderable': false},
             {data: 'kode', name: 'nama'},
             {data: 'nama', name: 'nama'},
             {data: 'lokasi', name: 'lokasi'},

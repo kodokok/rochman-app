@@ -17,7 +17,7 @@
                     <table id="datatable" class="table table-bordered table-striped table-responsive" style="width:100%">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>#</th>
                                 <th style="width:30%;">Auditor</th>
                                 <th style="width:40%;">Pelatihan</th>
                                 <th style="width:10%;">Nilai</th>
@@ -42,7 +42,7 @@
             serverSide: true,
             ajax: "{{ route('kompetensi.datatable') }}",
             columns: [
-                {data: 'DT_RowIndex', name: 'id'},
+                {data: 'DT_RowIndex', name: 'id', 'searchable': false, 'orderable': false},
                 {data: 'auditor', name: 'auditor'},
                 {data: 'pelatihan', name: 'pelatihan'},
                 {data: 'nilai', name: 'nilai'},

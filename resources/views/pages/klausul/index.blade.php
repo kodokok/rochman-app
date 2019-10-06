@@ -17,7 +17,7 @@
                 <table id="datatable" class="table table-responsive table-bordered table-striped" style="width:100%">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>#</th>
                             <th style="width: 20%">Objektif Audit</th>
                             <th style="width: 60%">Nama</th>
                             <th style="width: 20%"></th>
@@ -36,13 +36,13 @@
 <script>
 $(document).ready(function() {
     $('#datatable').DataTable({
-        // stateSave: true,
+        stateSave: true,
         responsive: true,
         processing: true,
         serverSide: true,
         ajax: "{{ route('klausul.datatable') }}",
         columns: [
-            {data: 'DT_RowIndex', name: 'id'},
+            {data: 'DT_RowIndex', name: 'id', 'searchable': false, 'orderable': false},
             {data: 'objektif_audit', name: 'objektif_audit'},
             {data: 'nama', name: 'nama'},
             {data: 'action', name: 'action', 'searchable': false, 'orderable': false, 'className': 'text-center'}
