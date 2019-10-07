@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use DataTables;
+use Illuminate\Support\Facades\Validator;
 
 class RolesController extends Controller
 {
@@ -26,15 +27,26 @@ class RolesController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $rules = [
             'name' => 'required|alpha_dash|max:20|unique:roles,name',
             'guard_name' => 'required'
-        ]);
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'fail' => true,
+                'errors' => $validator->errors(),
+            ]);
+        }
 
         Role::firstOrCreate([
             'name' => strtolower($request->name),
             'guard_name' => $request->guard_name
         ]);
+
+        return response()->json(['success' => 'success'], 200);
     }
 
     public function destroy(Role $role)
