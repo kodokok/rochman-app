@@ -50,7 +50,7 @@ $(document).ready(function() {
                     $("#modal-btn-save").text(buttonText);
                 } else {
                     $("#modal").modal("hide");
-                    $('#datatable').DataTable().ajax.reload();
+                    $('#datatable').DataTable().ajax.reload(null, false);
                     toastr.success('Saved', 'Data telah berhasil disimpan.');
                 }
             },
