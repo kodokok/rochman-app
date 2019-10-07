@@ -50,7 +50,6 @@ $(document).ready(function() {
             {data: 'nama', name: 'nama'},
             {data: 'action', name: 'action', 'searchable': false, 'orderable': false, 'className': 'text-center'}
         ],
-        order: [[2, 'asc']],
     });
 });
 </script>

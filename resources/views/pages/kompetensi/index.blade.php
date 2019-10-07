@@ -18,10 +18,10 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th style="width:30%;">Auditor</th>
-                                <th style="width:40%;">Pelatihan</th>
+                                <th style="width:20%;">Auditor</th>
+                                <th style="width:50%;">Pelatihan</th>
                                 <th style="width:10%;">Nilai</th>
-                                <th style="width: 20%"></th>
+                                <th style="width:20%;"></th>
                             </tr>
                         </thead>
                         <tbody>
