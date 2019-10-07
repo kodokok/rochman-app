@@ -1,3 +1,5 @@
+// https://www.codovel.com/complete-laravel-5-crud-ajax-popup-modal-form.html
+
 $(document).on('click', 'page-link', function (e) {
     e.preventDefault();
     ajaxLoad($(this).attr('href'));
