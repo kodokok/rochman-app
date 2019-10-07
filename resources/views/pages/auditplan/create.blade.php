@@ -3,9 +3,9 @@
 @section('breadcrumbs', Breadcrumbs::render('auditplan.create'))
 @section('page-title', 'Create New Audit Plan')
 @section('page-action')
-    <input id="save" type="submit" value="Simpan" class="btn btn-success float-right" 
+    <input id="save" type="submit" value="Simpan" class="btn btn-success float-right"
         style="width: 120px;">
-    <a href="{{ old('redirect_to', url()->previous()) }}" class="btn btn-secondary float-right" 
+    <a href="{{ old('redirect_to', url()->previous()) }}" class="btn btn-secondary float-right"
         style="margin-right: 5px; width: 120px;">Batal</a>
 @endsection
 
@@ -28,7 +28,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card-body">                
+            <div class="card-body">
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
@@ -97,11 +97,11 @@
                     </div>
                 </div>
                 <div class="card-body">
-    
+
                     <div class="form-group">
                         <label for="auditee_id">Auditee</label>
                         {!! Form::select('auditee_user_id', $auditee, old('auditee_user_id'),
-                            ['class' => 'form-control' . ($errors->has('auditee_user_id') ? ' is-invalid': ''), 
+                            ['class' => 'form-control' . ($errors->has('auditee_user_id') ? ' is-invalid': ''),
                             'id' => 'auditee_user_id', 'placeholder' => 'Pilih Auditee'])
                         !!}
                         <div id="error-auditee_user_id" class="invalid-feedback">{{ $errors->first('auditee_user_id') }}</div>
@@ -109,7 +109,7 @@
                     <div class="form-group">
                         <label for="auditor_user_id">Auditor</label>
                         {!! Form::select('auditor_user_id', $auditor, old('auditor_user_id'),
-                            ['class' => 'form-control' . ($errors->has('auditor_user_id') ? ' is-invalid': ''), 
+                            ['class' => 'form-control' . ($errors->has('auditor_user_id') ? ' is-invalid': ''),
                             'id' => 'auditor_user_id', 'placeholder' => 'Pilih Auditor'])
                         !!}
                         <div id="error-auditor_user_id" class="invalid-feedback">{{ $errors->first('auditor_id') }}</div>
@@ -117,7 +117,7 @@
                     <div class="form-group">
                         <label for="auditor_lead_user_id">Auditor Leader</label>
                         {!! Form::select('auditor_lead_user_id', $auditorLead, old('auditor_lead_user_id'),
-                            ['class' => 'form-control' . ($errors->has('auditor_lead_user_id') ? ' is-invalid': ''), 
+                            ['class' => 'form-control' . ($errors->has('auditor_lead_user_id') ? ' is-invalid': ''),
                             'id' => 'auditor_lead_user_id', 'placeholder' => 'Pilih Auditor Leader'])
                         !!}
                         <div id="error-auditor_lead_user_id" class="invalid-feedback">{{ $errors->first('auditor_lead_user_id') }}</div>
@@ -177,12 +177,19 @@ $(function () {
     $('#klausul').select2();
 
     $('#add-row').click(function(){
-        
+
         var klausul = $('#klausul').select2('data');
 
-        var row = '<tr><td id="'+ klausul[0].id + '">' + klausul[0].id + '</td><td>' 
+        var row = '<tr><td id="'+ klausul[0].id + '">' + klausul[0].id + '</td><td>'
             + klausul[0].text + '</td></tr>';
+        var tableItem = $('#table-klausul').find('tr');
+        $(tableItem).each(function() {
+            console.log($(this).text());
+        if ($(this).text() == klausul)
+            $(this).remove();
+        });
 
+        // console.log(tableItem);
         $('#table-klausul tbody').append(row);
         $('#klausul').val('').trigger('change');
     });
