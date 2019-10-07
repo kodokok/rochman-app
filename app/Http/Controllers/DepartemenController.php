@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Departemen;
 use DataTables;
 use App\User;
+use Illuminate\Support\Facades\Validator;
 
 class DepartemenController extends Controller
 {
@@ -23,14 +24,24 @@ class DepartemenController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $rules = [
             'kode' => 'required|alpha_dash|max:10|unique:departemen,kode',
             'nama' => 'required|string|max:50|unique:departemen,nama',
-        ]);
+            'kadept_user_id' => 'required',
+        ];
 
-        $departemen = Departemen::create($request->all());
+        $validator = Validator::make($request->all(), $rules);
 
-        return $departemen;
+        if ($validator->fails()) {
+            return response()->json([
+                'fail' => true,
+                'errors' => $validator->errors(),
+            ]);
+        }
+
+        Departemen::create($request->all());
+
+        return response()->json(['success' => 'success'], 200);
     }
 
     public function edit(Departemen $departemen)
@@ -41,12 +52,24 @@ class DepartemenController extends Controller
 
     public function update(Request $request, Departemen $departemen)
     {
-        $this->validate($request, [
+        $rules = [
             'kode' => 'required|alpha_dash|max:40|unique:departemen,kode,' . $departemen->id,
             'nama' => 'required|string|max:40|unique:departemen,nama,' . $departemen->id,
-        ]);
+            'kadept_user_id' => 'required',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'fail' => true,
+                'errors' => $validator->errors(),
+            ]);
+        }
 
         $departemen->update($request->all());
+
+        return response()->json(['success' => 'success'], 200);
     }
 
     public function destroy(Departemen $departemen)
