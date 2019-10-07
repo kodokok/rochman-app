@@ -173,7 +173,7 @@
 @push('scripts')
 <script>
 $(function () {
-
+    // http://jsfiddle.net/abdennour/MKfLU/27/
     $('#klausul').select2();
 
     $('#add-row').click(function(){
