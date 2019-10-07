@@ -6,6 +6,7 @@ use App\KompetensiAuditor;
 use App\User;
 use DataTables;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class KompetensiAuditorController extends Controller
 {
@@ -26,15 +27,23 @@ class KompetensiAuditorController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $rules = [
             'user_id' => 'required',
             'nilai' => 'nullable|integer',
-        ]);
+        ];
 
-        // dd($request->tanggal_pelatihan);
-        $model = KompetensiAuditor::create($request->all());
+        $validator = Validator::make($request->all(), $rules);
 
-        return $model;
+        if ($validator->fails()) {
+            return response()->json([
+                'fail' => true,
+                'errors' => $validator->errors(),
+            ]);
+        }
+
+        KompetensiAuditor::create($request->all());
+
+        return response()->json(['success' => 'success'], 200);
     }
 
     public function edit(KompetensiAuditor $kompetensi)
@@ -49,18 +58,27 @@ class KompetensiAuditorController extends Controller
 
     public function update(Request $request, KompetensiAuditor $kompetensi)
     {
-        $this->validate($request, [
+        $rules =  [
             'user_id' => 'required',
             'nilai' => 'nullable|integer'
-        ]);
+        ];
 
-        // $model = KompetensiAuditor::findOrFail($id);
-        // dd($request->tanggal_pelatihan);
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'fail' => true,
+                'errors' => $validator->errors(),
+            ]);
+        }
+
         $kompetensi->update([
             'user_id' => $request->user_id,
             'pelatihan' => $request->pelatihan,
             'nilai' => $request->nilai,
         ]);
+
+        return response()->json(['success' => 'success'], 200);
     }
 
     public function destroy(KompetensiAuditor $kompetensi)
