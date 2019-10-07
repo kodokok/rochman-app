@@ -43,7 +43,7 @@ $(document).ready(function() {
                 if (response.fail) {
 
                     for (const control in response.errors) {
-                        $('input[name='+control+']').addClass('is-invalid');
+                        $('#' + control).addClass('is-invalid');
                         $('#error-' + control).text(response.errors[control]);
                     }
 
