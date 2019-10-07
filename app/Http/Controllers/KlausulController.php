@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Klausul;
 use Illuminate\Http\Request;
 use DataTables;
+use Illuminate\Support\Facades\Validator;
+use Symfony\Component\Console\Input\Input;
 
 class KlausulController extends Controller
 {
@@ -15,20 +17,28 @@ class KlausulController extends Controller
 
     public function create()
     {
-        $klausul = new Klausul();
         return view('pages.klausul.form', compact(['klausul']));
     }
 
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $rules = [
             'objektif_audit' => 'required|string|max:50',
-            'nama' => 'required|string|max:50|unique:klausul,nama',
-        ]);
+            'nama' => 'required|string|max:150|unique:klausul,nama',
+        ];
 
-        $klausul = Klausul::create($request->all());
+        $validator = Validator::make($request->all(), $rules);
 
-        return $klausul;
+        if ($validator->fails()) {
+            return response()->json([
+                'fail' => true,
+                'errors' => $validator->errors(),
+            ]);
+        }
+
+        Klausul::create($request->all());
+
+        return response()->json(['success' => 'success'], 200);
     }
 
     public function edit(Klausul $klausul)
@@ -38,12 +48,27 @@ class KlausulController extends Controller
 
     public function update(Request $request, Klausul $klausul)
     {
-        $this->validate($request, [
+        // dd($request->all());
+        $rules = [
             'objektif_audit' => 'required|string|max:50',
             'nama' => 'required|string|max:150|unique:klausul,nama,' . $klausul->id,
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'fail' => true,
+                'errors' => $validator->errors(),
+            ]);
+        }
+
+        $klausul->update([
+            'objektif_audit' => $request->objektif_audit,
+            'nama' => $request->nama,
         ]);
 
-        $klausul->update($request->all());
+        return response()->json(['success' => 'success'], 200);
     }
 
     public function destroy(Klausul $klausul)

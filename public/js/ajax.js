@@ -1,15 +1,17 @@
 // https://www.codovel.com/complete-laravel-5-crud-ajax-popup-modal-form.html
 
-$(document).on('click', 'page-link', function (e) {
-    e.preventDefault();
-    ajaxLoad($(this).attr('href'));
-});
+// $(document).on('click', 'a.page-link', function (e) {
+//     e.preventDefault();
+//     ajaxLoad($(this).attr('href'));
+// });
 
 $(document).on('submit', 'form#frm', function (e) {
     e.preventDefault();
     var form = $(this);
     var data = new FormData($(this)[0]);
+
     var url = form.attr('action');
+
     $.ajax({
         type: form.attr('method'),
         url: url,
@@ -21,7 +23,7 @@ $(document).on('submit', 'form#frm', function (e) {
             $('.is-invalid').removeClass('.is-invalid');
             if (data.fail) {
                 for (control in data.errors) {
-                    $('input[name='+control+']').addClass('.is-invalid');
+                    $('input[name='+control+']').addClass('is-invalid');
                     $('#error-' + control).html(data.errors[control]);
                 }
             } else {
@@ -36,17 +38,14 @@ $(document).on('submit', 'form#frm', function (e) {
     return false;
 });
 
-function ajaxLoad(filename, content) {
-   content = typeof content !== undefined ? content : 'content';
-   $('.loadding').show();
-
+function ajaxLoad(url, content) {
+    content = typeof content !== undefined ? content : 'content';
     $.ajax({
         type: 'GET',
-        url: filename,
+        url: url,
         contentType: false,
         success: function (data) {
             $('#' + content).html(data);
-            $('.loading').hide();
         },
         error: function(xhr, status, error) {
             alert(xhr.responseText);
@@ -57,7 +56,7 @@ function ajaxLoad(filename, content) {
 function ajaxDelete(filename, token, content) {
     content = typeof content !== undefined ? content : 'content';
     $('.loading').show();
-    
+
     $.ajax({
         type: 'POST',
         data: {_method: 'DELETE', _token: token},
@@ -73,9 +72,17 @@ function ajaxDelete(filename, token, content) {
     });
 }
 
-$('#modalForm').on('show.bs.modal', function(e) {
+$('#modal').on('show.bs.modal', function(e) {
     var button = $(e.relatedTarget);
-    ajaxLoad(button.data('href'), 'modal_content');
+    var url = button.attr("href");
+    var title = button.attr("title");
+    var modal = $(this);
+
+    modal.find('#modal-title').text(title);
+    modal.find('#modal-btn-save').text(button.hasClass('edit') ? 'Update' : 'Create');
+
+    ajaxLoad(url, 'modal-body');
+    // console.log(url);
 });
 
 $('#modalDelete').on('show.bs.modal', function(e) {

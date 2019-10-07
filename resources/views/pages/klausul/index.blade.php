@@ -3,16 +3,13 @@
 @section('breadcrumbs', Breadcrumbs::render('klausul'))
 @section('page-title', 'Klausul List')
 @section('page-action')
-{{--  <a href="{{ route('klausul.create') }}" class="btn btn-success float-right modal-show" title="Create New" style="margin-right: 5px;">
+ <a href="{{ route('klausul.create') }}" class="btn btn-success float-right modal-show" title="Create New" style="margin-right: 5px;">
     <i class="fas fa-plus mr-2"></i>Create New
-</a>  --}}
-<a href="#modalForm" data-toggle="modal" data-href="{{ route('klausul.create') }}"
-    class="btn btn-primary">New</a>
+</a>
 @endsection
 
 @section('content')
-{{--  @include('partials.modal')  --}}
-@include('pages.klausul.modal')
+
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -33,10 +30,12 @@
         </div>
     </div>
 </div>
+@include('partials.modal')
+{{-- @include('pages.klausul.modal') --}}
 @endsection
 
 @push('scripts')
-<script src="{{ asset('js/ajax.js') }}"></script>
+{{-- <script src="{{ asset('js/ajax.js') }}"></script> --}}
 <script>
 $(document).ready(function() {
     $('#datatable').DataTable({
@@ -44,14 +43,14 @@ $(document).ready(function() {
         responsive: true,
         processing: true,
         serverSide: true,
-        order: [3, 'asc'],
         ajax: "{{ route('klausul.datatable') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'id', 'searchable': false, 'orderable': false},
             {data: 'objektif_audit', name: 'objektif_audit'},
             {data: 'nama', name: 'nama'},
             {data: 'action', name: 'action', 'searchable': false, 'orderable': false, 'className': 'text-center'}
-        ]
+        ],
+        order: [[2, 'asc']],
     });
 });
 </script>

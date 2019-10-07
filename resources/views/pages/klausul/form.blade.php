@@ -1,16 +1,15 @@
-{!! Form::model($klausul, [
-    'route' => $klausul->exists ? ['klausul.update', $klausul->id] : 'klausul.store',
-    'method' => $klausul->exists ? 'PUT' : 'POST',
-    'files' => true,
-    'autocomplete' => 'off'
-]) !!}
-<div class="modal-header">
-        <h5 class="modal-title">{{isset($customer)?'Edit':'New'}} Customer</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
+@if (isset($klausul))
+    {!! Form::model($klausul, [
+        'route' => ['klausul.update', $klausul->id],
+        'method' => 'PUT',
+        'autocomplete' => 'off',
+    ]) !!}
+@else
+    {!! Form::open([
+        'route' => 'klausul.store',
+        'autocomplete' => 'off',
+    ]) !!}
+@endif
 <div class="form-group row">
     <label for="kode" class="col-sm-4 col-form-label">Objektif Audit</label>
     <div class="col-sm-8">
@@ -25,9 +24,5 @@
         <div id="error-nama" class="invalid-feedback"></div>
     </div>
 </div>
-    </div>
-<div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal"> Close</button>
-        {!! Form::submit("Save",["class"=>"btn btn-primary"])!!}
-    </div>
+
 {!! Form::close() !!}

@@ -23,48 +23,42 @@ $(document).ready(function() {
     $("#modal-btn-save").click(function(event) {
         event.preventDefault();
 
-        var form = $("#modal-body form");
-        var data = form.serializeArray();
-        var url = form.attr("action");
-        var method = $("input[name=_method]").val() == undefined ? "POST" : "PUT";
+        var form = $('#modal-body form');
+        var data = new FormData(form.get(0));
+        // console.log(...data);
+        var url = form.attr('action');
 
-        if (form.attr("enctype") == "multipart/form-data") {
-            data = new FormData(form[0]);
-            method = "POST";
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                contentType: false,
-                processData: false
-            });
-        }
-
-        $(".invalid-feedback").hide();
-        $(".is-invalid").removeClass("is-invalid");
+        var buttonText = $("#modal-btn-save").text();
+        $("#modal-btn-save").text('Sending...');
 
         $.ajax({
             url: url,
-            method: method,
+            method: 'POST',
             data: data,
+            cache: false,
+            contentType: false,
+            processData: false,
             success: function(response) {
-                form.trigger("reset");
-                $("#modal").modal("hide");
-                toastr.success('Simpan!', 'Data telah berhasil disimpan.');
-                $('#datatable').DataTable().ajax.reload();
-            },
-            error: function(xhr) {
-                var res = xhr.responseJSON;
-                if ($.isEmptyObject(res) == false) {
-                    $.each(res.errors, function(key, value) {
-                        $("#" + key).addClass("is-invalid");
-                        $("#error-" + key).show();
-                        $("#error-" + key).html(value);
-                    });
+                $('.is-invalid').removeClass('is-invalid');
+                if (response.fail) {
+
+                    for (const control in response.errors) {
+                        $('input[name='+control+']').addClass('is-invalid');
+                        $('#error-' + control).text(response.errors[control]);
+                    }
+
+                    $("#modal-btn-save").text(buttonText);
+                } else {
+                    $("#modal").modal("hide");
+                    $('#datatable').DataTable().ajax.reload();
+                    toastr.success('Saved', 'Data telah berhasil disimpan.');
                 }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert("Error: " + errorThrown);
+                $("#modal-btn-save").text(buttonText);
             }
-        });
+        })
     });
 
     $("body").on("click", ".btn-delete", function(event) {
@@ -74,7 +68,7 @@ $(document).ready(function() {
         var url = me.attr('href');
         var title = me.attr('title');
         var csrf_token = $('meta[name="csrf-token"]').attr('content');
-        
+
         Swal.fire({
             title: 'Apakah and ingin menghapus ' + title + '?',
             text: "Data yang terhapus tidak bisa dikembalikan!",
