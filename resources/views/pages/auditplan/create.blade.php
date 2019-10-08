@@ -173,9 +173,9 @@ $(function () {
         var nama = klausul[0].text;
         var hiddenField = '<input type="hidden" name="klausul_id[]" value="' + id + '">';
         var row = '<tr><td>' + id + '</td><td>'  + hiddenField + nama + '</td></tr>';
-        var found = $('td:contains('+ id +')').length ? true : false;
-
-        if (found || id.length === 0) {
+        var exist = $('td:contains('+ id +')').length ? true : false;
+        // console.log(id);
+        if (exist || id.length == 0) {
             toastr.warning('Error', 'Silahkan pilih data klausul yang lain!')
         } else {
             $('#table-klausul tbody').append(row);
