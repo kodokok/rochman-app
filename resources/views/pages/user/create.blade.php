@@ -18,7 +18,7 @@
         'method' => $user->exists ? 'PUT' : 'POST',
         'files' => true,
         'autocomplete' => 'off',
-        'id' => 'current-from'
+        'id' => 'current-form'
     ]) !!}
     {!! Form::hidden('redirect_to', old('redirect_to', url()->previous())) !!}
         <div class="card card-primary">
@@ -150,7 +150,7 @@ $(document).ready(function(){
 
     $("#save").on('click', function(e){
         // e.preventDefault();
-        $("#current-from").submit(); // Submit the form
+        $("#current-form").submit(); // Submit the form
     });
 
     $("#foto").change(function(){
