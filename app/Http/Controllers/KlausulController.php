@@ -76,6 +76,11 @@ class KlausulController extends Controller
         $klausul->delete();
     }
 
+    public function select($id)
+    {
+        return Klausul::where('id', $id)->get();
+    }
+
     public function datatable()
     {
         $klausul = Klausul::all();

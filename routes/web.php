@@ -19,6 +19,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('profile/{user}', 'ProfileController@show')->name('profile.show');
     Route::put('profile/{user}', 'ProfileController@update')->name('profile.update');
     Route::put('profile/{user}/change-password', 'ProfileController@changePassword')->name('profile.change-password');
+    Route::get('klausul/select/{id}', 'KlausulController@select')->name('klausul.select');
 
     Route::get('monitoring', 'MonitoringController@index')->name('monitoring.index');
 
@@ -44,15 +45,15 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('auditplan', 'AuditPlanController');
 
         Route::get('table/temuanaudits', 'TemuanAuditsController@dataTable')->name('table.temuanaudits');
-        Route::get('auditplan/departement/{id}', 'AuditPlansController@getDepartements')->name('auditplan.departement');
+        Route::get('auditplan/departement/{id}', 'AuditPlanController@getDepartements')->name('auditplan.departement');
 
         // route fetch data
 
 
-        Route::put('auditplan/{auditplan}/confirm', 'AuditPlansController@confirm')->name('auditplan.confirm');
-        Route::get('auditplan/{auditplan}/report', 'AuditPlansController@report')->name('auditplan.report');
-        Route::get('auditplan/{auditplan}/pdf', 'AuditPlansController@pdf')->name('auditplan.pdf');
-        Route::get('auditplan/{auditplan}/print', 'AuditPlansController@print')->name('auditplan.print');
+        Route::put('auditplan/{auditplan}/confirm', 'AuditPlanController@confirm')->name('auditplan.confirm');
+        Route::get('auditplan/{auditplan}/report', 'AuditPlanController@report')->name('auditplan.report');
+        Route::get('auditplan/{auditplan}/pdf', 'AuditPlanController@pdf')->name('auditplan.pdf');
+        Route::get('auditplan/{auditplan}/print', 'AuditPlanController@print')->name('auditplan.print');
 
         Route::resource('temuanaudit', 'TemuanAuditsController');
         Route::put('temuanaudit/{temuanaudit}/confirm', 'TemuanAuditsController@confirm')->name('temuanaudit.confirm');

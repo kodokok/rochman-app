@@ -19,7 +19,6 @@ class KlausulTableSeeder extends Seeder
             ['objektif_audit' => $objektif_audit, 'nama' => '4.1 Memahami Organisasi dan Konteks Organisasi'],
             ['objektif_audit' => $objektif_audit, 'nama' => '4.2 Memahami Kebutuhan dan Harapan Pihak yang Berkepentingan'],
             ['objektif_audit' => $objektif_audit, 'nama' => '4.3 Menetapkan Ruang Lingkup Sistem Manajemen Mutu'],
-            ['objektif_audit' => $objektif_audit, 'nama' => '4.1 Memahami Organisasi dan Konteks Organisasi'],
             ['objektif_audit' => $objektif_audit, 'nama' => '4.4 Sistem Manajemen Mutu dan Proses'],
             ['objektif_audit' => $objektif_audit, 'nama' => '5.1 Kepemimpinan dan Komitmen'],
             ['objektif_audit' => $objektif_audit, 'nama' => '5.2 Kebijakan Mutu'],

@@ -138,10 +138,10 @@
                         <table id="table-klausul" class="table table-sm w100">
                             <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>Objektif Audit</th>
-                                    <th>Klausul</th>
-                                    <th style="width:20%;"></th>
+                                    <th style="width:5%;">#</th>
+                                    <th style="width:25%;">Objektif Audit</th>
+                                    <th style="width:50%;">Klausul</th>
+                                    <th class="text-center" style="width:10%;"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -155,7 +155,7 @@
     </div>
 
 </div>
-
+{{ route('klausul.select', 1)}}
 {!! Form::close() !!}
 @endsection
 
@@ -172,22 +172,50 @@ $(function () {
         var id = klausul[0].id;
         var nama = klausul[0].text;
         var hiddenField = '<input type="hidden" name="klausul_id[]" value="' + id + '">';
-        var row = '<tr><td>' + id + '</td><td>'  + hiddenField + nama + '</td></tr>';
-        var exist = $('td:contains('+ id +')').length ? true : false;
+        // var row = '<tr><td>' + id + '</td><td>'  + hiddenField + nama + '</td></tr>';
+        var exist = $('#table-klausul td:contains('+ nama +')').length ? true : false;
         // console.log(id);
         if (exist || id.length == 0) {
             toastr.warning('Error', 'Silahkan pilih data klausul yang lain!')
         } else {
-            $('#table-klausul tbody').append(row);
+
+            var url = '{{ url("klausul/select") }}/' +id;
+
+            $.get(url, function(data) {
+
+                // console.log(data);
+                $.each(data, function(key, value) {
+
+                    $('#table-klausul tbody').append('<tr><td>' + hiddenField + value.id
+                        + '</td><td>' + value.objektif_audit
+                        + '</td><td>' + value.nama
+                        + '</td><td><button id="btn-delete" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button></td></tr>'
+                    );
+                    // $('#table-klausul tbody').append(row);
+                })
+            });
         }
 
+
+
         $('#klausul').val('').trigger('change');
+    });
+
+    // $("button#btn-delete").on('click', function(e){
+    //     e.preventDefault();
+    //     console.log(e);
+    //     $(this).closest('tr').remove();
+    // });
+    $('#table-klausul').on('click', '#btn-delete', function(){
+        $(this).closest('tr').remove();
     });
 
     $("#save").on('click', function(e){
         // e.preventDefault();
         $("#current-form").submit(); // Submit the form
     });
+
+
 
     $('#datetimepicker4').datetimepicker({
         format: 'MM-DD-YYYY',
