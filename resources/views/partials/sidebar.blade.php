@@ -18,12 +18,6 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route('monitoring.index') }}" class="nav-link {{ active(['monitoring.*']) }}">
-                        <i class="nav-icon fas fa-binoculars"></i>
-                        <p>Monitoring</p>
-                    </a>
-                </li>
                 <li class="nav-header">APPLICATION</li>
                 <li class="nav-item">
                     <a href="{{ route('auditplan.index') }}" class="nav-link {{ active(['auditplan.*']) }}">
