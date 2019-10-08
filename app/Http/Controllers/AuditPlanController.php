@@ -59,10 +59,9 @@ class AuditPlanController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+        dd($request->all());
+
         $this->validate($request, [
-            'objektif_audit' => 'required|string|max:255|unique:audit_plans,objektif_audit',
-            'klausul' => 'required|string|max:100',
             'departement_id' => 'required',
             'auditee_user_id' => 'required',
             'auditor__user_id' => 'required|different:auditee_id',
@@ -277,7 +276,7 @@ class AuditPlanController extends Controller
         $model = AuditPlan::all();
         // $klausuls = $model->klausuls()->get();
         // $model = Klausul::first();
-        
+
         // dd($model->klausuls()->count());
 
 

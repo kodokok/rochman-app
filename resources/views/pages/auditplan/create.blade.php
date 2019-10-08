@@ -10,14 +10,17 @@
 @endsection
 
 @section('content')
-
+{!! Form::model($model, [
+    'route' => 'auditplan.store',
+    'method' => 'POST',
+    'autocomplete' => 'off',
+    'files' => true,
+    'id' => 'current-form'
+]) !!}
 <div class="row">
+
     <div class="col-md-4">
-    {!! Form::model($model, [
-        'route' => 'auditplan.store',
-        'method' => 'POST',
-        'autocomplete' => 'off'
-    ]) !!}
+
         <div class="card card-primary">
             <div class="card-header">
                 <h3 class="card-title">General</h3>
@@ -48,7 +51,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group row">
+                <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="tanggal">Tanggal</label>
@@ -81,50 +84,34 @@
                             </div>
                         </div>
                     </div>
-
+                </div>
+                <div class="form-group">
+                    <label for="auditee_id">Auditee</label>
+                    {!! Form::select('auditee_user_id', $auditee, old('auditee_user_id'),
+                        ['class' => 'form-control' . ($errors->has('auditee_user_id') ? ' is-invalid': ''),
+                        'id' => 'auditee_user_id', 'placeholder' => 'Pilih Auditee'])
+                    !!}
+                    <div id="error-auditee_user_id" class="invalid-feedback">{{ $errors->first('auditee_user_id') }}</div>
+                </div>
+                <div class="form-group">
+                    <label for="auditor_user_id">Auditor</label>
+                    {!! Form::select('auditor_user_id', $auditor, old('auditor_user_id'),
+                        ['class' => 'form-control' . ($errors->has('auditor_user_id') ? ' is-invalid': ''),
+                        'id' => 'auditor_user_id', 'placeholder' => 'Pilih Auditor'])
+                    !!}
+                    <div id="error-auditor_user_id" class="invalid-feedback">{{ $errors->first('auditor_id') }}</div>
+                </div>
+                <div class="form-group">
+                    <label for="auditor_lead_user_id">Auditor Leader</label>
+                    {!! Form::select('auditor_lead_user_id', $auditorLead, old('auditor_lead_user_id'),
+                        ['class' => 'form-control' . ($errors->has('auditor_lead_user_id') ? ' is-invalid': ''),
+                        'id' => 'auditor_lead_user_id', 'placeholder' => 'Pilih Auditor Leader'])
+                    !!}
+                    <div id="error-auditor_lead_user_id" class="invalid-feedback">{{ $errors->first('auditor_lead_user_id') }}</div>
                 </div>
             </div>
-            <!-- /.card-body -->
+
         </div>
-        <div class="card card-primary">
-                <div class="card-header">
-                    <h3 class="card-title">Team Audit</h3>
-                    <div class="card-tools">
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fas fa-minus"></i></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-
-                    <div class="form-group">
-                        <label for="auditee_id">Auditee</label>
-                        {!! Form::select('auditee_user_id', $auditee, old('auditee_user_id'),
-                            ['class' => 'form-control' . ($errors->has('auditee_user_id') ? ' is-invalid': ''),
-                            'id' => 'auditee_user_id', 'placeholder' => 'Pilih Auditee'])
-                        !!}
-                        <div id="error-auditee_user_id" class="invalid-feedback">{{ $errors->first('auditee_user_id') }}</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="auditor_user_id">Auditor</label>
-                        {!! Form::select('auditor_user_id', $auditor, old('auditor_user_id'),
-                            ['class' => 'form-control' . ($errors->has('auditor_user_id') ? ' is-invalid': ''),
-                            'id' => 'auditor_user_id', 'placeholder' => 'Pilih Auditor'])
-                        !!}
-                        <div id="error-auditor_user_id" class="invalid-feedback">{{ $errors->first('auditor_id') }}</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="auditor_lead_user_id">Auditor Leader</label>
-                        {!! Form::select('auditor_lead_user_id', $auditorLead, old('auditor_lead_user_id'),
-                            ['class' => 'form-control' . ($errors->has('auditor_lead_user_id') ? ' is-invalid': ''),
-                            'id' => 'auditor_lead_user_id', 'placeholder' => 'Pilih Auditor Leader'])
-                        !!}
-                        <div id="error-auditor_lead_user_id" class="invalid-feedback">{{ $errors->first('auditor_lead_user_id') }}</div>
-                    </div>
-                </div>
-                <!-- /.card-body -->
-            </div>
     </div>
     <div class="col-md-8">
         <div class="card card-primary">
@@ -139,59 +126,67 @@
             </div>
             <div class="card-body">
                 <div class="row mb-3">
-                    <div class="input-group col-sm-12">
-                        {{ Form::select('klausul', $klausul, null, ['class' => 'form-control', 'id' => 'klausul', 'placeholder' => 'Pilih klausul']) }}
+                    <div class="input-group col-12">
+                        {{ Form::select('klausul', $klausul, null, ['class' => 'form-control', 'id' => 'klausul', 'placeholder' => 'Pilih klausul...']) }}
                         <div class="input-group-append">
                             <button id="add-row" class="btn btn-outline-success" type="button">Add</button>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <table id="table-klausul" class="table table-sm w100">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Objektif Audit</th>
-                                <th>Klausul</th>
-                                <th style="width:20%;"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="form-group col-12">
+                        <table id="table-klausul" class="table table-sm w100">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Objektif Audit</th>
+                                    <th>Klausul</th>
+                                    <th style="width:20%;"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
+
 {!! Form::close() !!}
 @endsection
 
 @push('scripts')
 <script>
 $(function () {
-    // http://jsfiddle.net/abdennour/MKfLU/27/
-    $('#klausul').select2();
+    $('#klausul').select2({
+        placeholder: "Pilih klausul..."
+    });
 
     $('#add-row').click(function(){
 
         var klausul = $('#klausul').select2('data');
+        var id = klausul[0].id;
+        var nama = klausul[0].text;
+        var hiddenField = '<input type="hidden" name="klausul_id[]" value="' + id + '">';
+        var row = '<tr><td>' + id + '</td><td>'  + hiddenField + nama + '</td></tr>';
+        var found = $('td:contains('+ id +')').length ? true : false;
 
-        var row = '<tr><td id="'+ klausul[0].id + '">' + klausul[0].id + '</td><td>'
-            + klausul[0].text + '</td></tr>';
-        var tableItem = $('#table-klausul').find('tr');
-        $(tableItem).each(function() {
-            console.log($(this).text());
-        if ($(this).text() == klausul)
-            $(this).remove();
-        });
+        if (found || id.length === 0) {
+            toastr.warning('Error', 'Silahkan pilih data klausul yang lain!')
+        } else {
+            $('#table-klausul tbody').append(row);
+        }
 
-        // console.log(tableItem);
-        $('#table-klausul tbody').append(row);
         $('#klausul').val('').trigger('change');
+    });
+
+    $("#save").on('click', function(e){
+        // e.preventDefault();
+        $("#current-form").submit(); // Submit the form
     });
 
     $('#datetimepicker4').datetimepicker({
@@ -207,5 +202,6 @@ $(function () {
        $('#kadept').val(kadept);
     });
 });
+
 </script>
 @endpush
