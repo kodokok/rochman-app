@@ -31,9 +31,8 @@ class UserController extends Controller
     {
         $user = new User();
         $roles = Role::pluck('name','id')->all();
-        $pendidikan = array();
 
-        return view('pages.user.create', compact(['user','roles', 'pendidikan']));
+        return view('pages.user.create', compact(['user','roles']));
     }
 
     /**
@@ -84,7 +83,7 @@ class UserController extends Controller
         }
 
         $notification = [
-            'message' => 'User berhasil di buat!',
+            'message' => 'Data berhasil disimpan!',
             'alert-type' => 'success'
         ];
 
@@ -140,17 +139,10 @@ class UserController extends Controller
             $data['tanggal_masuk'] = $tanggal_masuk;
         }
 
-        // $data = $request->only(['nama', 'email', 'alamat', 'phone']);
-
-        // $this->validate($request, [
-        //     'nama' => 'required|string|max:100',
-        //     'email' => 'required|string|max:100|unique:user,email,' . $user->id
-        // ]);
-
         // check if new image
         if ($request->hasFile('foto')) {
             // upload image
-            $foto = $request->foto->store('user');
+            $foto = $request->foto->store('img\user');
 
             // delete image
             $user->deleteFoto();
@@ -170,7 +162,7 @@ class UserController extends Controller
         }
 
         $notification = [
-            'message' => 'User berhasil di perbaharui!',
+            'message' => 'Data berhasil disimpan!',
             'alert-type' => 'info'
         ];
 

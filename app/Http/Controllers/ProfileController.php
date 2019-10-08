@@ -43,9 +43,8 @@ class ProfileController extends Controller
         // update user
         $user->update($data);
 
-
         $notification = [
-            'message' => 'User berhasil di perbaharui!',
+            'message' => 'Data berhasil disimpan!',
             'alert-type' => 'info'
         ];
 
@@ -74,7 +73,7 @@ class ProfileController extends Controller
         ]);
 
         $notification = [
-            'message' => 'Password successfully updated!',
+            'message' => 'Password berhasil disimpan!',
             'alert-type' => 'info'
         ];
 
