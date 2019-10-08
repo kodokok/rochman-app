@@ -37,6 +37,11 @@ class User extends Authenticatable
 
     protected $dates = ['tanggal_masuk'];
 
+    // public function getRouteKeyName()
+    // {
+    //     return 'nama';
+    // }
+
     public function getTanggalMasukAttribute($value)
     {
         // dd($value);

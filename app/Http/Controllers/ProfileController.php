@@ -5,58 +5,59 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 class ProfileController extends Controller
 {
     public function show(User $user)
     {
-        // $user = auth()->user();
-        return view('profile.index', compact('user'));
+        if ($user->id === auth()->user()->id) {
+            return view('pages.profile.show', compact('user'));
+        } else {
+            return back();
+        }
     }
 
     public function update(Request $request, User $user)
     {
-        // $user = auth()->user();
-
         $this->validate($request, [
-            'name' => 'required|string|max:100',
-            'email' => 'required|string|max:100|unique:users,email,' . $user->id
+            'nama' => 'required|string|max:50',
+            'email' => 'required|string|max:50|unique:user,email,' . $user->id,
+            'tanggal_masuk' => 'nullable|date_format:m-d-Y',
         ]);
 
-        // check if new image
-        if ($request->hasFile('image')) {
-            // upload image
-            $image = $request->image->store('users');
+        $data = [
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'alamat' => $request->alamat,
+            'phone' => $request->phone,
+            'pendidikan' => $request->pendidikan,
+        ];
 
-            // delete image
-            $user->deleteImage();
 
-            // save new image to array
-            $request['image'] = $image;
+        if ($request->has('tanggal_masuk') && !empty($request->tanggal_masuk)) {
+            $tanggal_masuk = Carbon::createFromFormat('m-d-Y', $request->tanggal_masuk)->format('Y-m-d');
+            $data['tanggal_masuk'] = $tanggal_masuk;
         }
 
-        // update users
-        $user->update($request->all());
+        // update user
+        $user->update($data);
+
 
         $notification = [
-            'message' => 'User successfully updated!',
+            'message' => 'User berhasil di perbaharui!',
             'alert-type' => 'info'
         ];
 
         return redirect()->back()->with($notification);
     }
 
-    public function editPassword(Request $request, User $user)
-    {
-        return view('profile.password.index', compact(['user']));
-    }
-
     public function changePassword(Request $request, User $user)
     {
-        $request->only('old_password', 'new_password', 'confirm_password');
-        // dd($user);
+        $request->only('current_password', 'new_password', 'confirm_password');
+
         $data = $this->validate($request, [
-            'old_password' => [
+            'current_password' => [
                 'required',
                 function ($attribute, $value, $fail) use ($user) {
                     if (!\Hash::check($value, $user->password)) {

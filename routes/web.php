@@ -18,8 +18,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('profile/{user}', 'ProfileController@show')->name('profile.show');
     Route::put('profile/{user}', 'ProfileController@update')->name('profile.update');
-    Route::get('profile/{user}/password', 'ProfileController@editPassword')->name('password.edit');
-    Route::put('profile/{user}/password', 'ProfileController@changePassword')->name('password.change');
+    Route::put('profile/{user}/change-password', 'ProfileController@changePassword')->name('profile.change-password');
 
     Route::get('monitoring', 'MonitoringController@index')->name('monitoring.index');
 

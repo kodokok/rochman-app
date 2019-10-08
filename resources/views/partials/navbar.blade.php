@@ -22,23 +22,8 @@
                         alt="User Image">
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <a href="#" class="dropdown-item">
-                        <!-- Message Start -->
-                        <div class="media">
-                            <div class="media-body">
-                                @if (auth()->check())
-                                <h3 class="dropdown-item-title font-weight-bold">
-                                    {{ auth()->user()->email }}
-                                    <span class="float-right text-sm text-muted"><i class="fas fa-info"></i></span>
-                                </h3>
-                                @endif
-                            </div>
-                        </div>
-                        <!-- Message End -->
-                    </a>
-                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-item"></div>
                     <a href="{{ route('profile.show', auth()->user()->id) }}" class="dropdown-item dropdown-footer">PROFILE</a>
-                    <a href="{{ route('password.edit', auth()->user()->id) }}" class="dropdown-item dropdown-footer">CHANGE PASSWORD</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item dropdown-footer" href="{{ route('logout') }}"
                     onclick="event.preventDefault();

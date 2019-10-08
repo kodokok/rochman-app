@@ -25,6 +25,11 @@ Breadcrumbs::register('user.edit', function ($breadcrumbs) {
     $breadcrumbs->push('edit');
 });
 
+Breadcrumbs::register('user.profile', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('user profile');
+});
+
 Breadcrumbs::register('roles', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
     $breadcrumbs->push('roles', route('roles.index'));

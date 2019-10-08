@@ -42,7 +42,7 @@
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    {!! Form::text('password', ($user->exists ? '' : null), ['class' => 'form-control password' . ($errors->has('password') ? ' is-invalid': ''), 'id' => 'password', 'oninput'=>"turnOnPasswordStyle()"]) !!}
+                    {!! Form::text('password', ($user->exists ? '' : null), ['class' => 'form-control password' . ($errors->has('password') ? ' is-invalid': ''), 'id' => 'password', 'oninput' => "turnOnPasswordStyle()"]) !!}
                     <div id="error-password" class="invalid-feedback">{{ $errors->first('password') }}</div>
                 </div>
                 <div class="form-group">
