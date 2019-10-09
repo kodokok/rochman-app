@@ -234,6 +234,7 @@ $(function () {
             form.submit();
         },
         errorElement: 'div',
+        errorClass: 'invalid-feedback',
         errorPlacement: function (error, element) {
             if(element.parent('.input-group').length) {
                 error.insertAfter(element.parent());
