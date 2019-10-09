@@ -19,7 +19,7 @@
 ]) !!}
 <div class="row">
 
-    <div class="col-md-4">
+    <div class="col-md-5">
 
         <div class="card card-primary">
             <div class="card-header">
@@ -113,7 +113,7 @@
 
         </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-7">
         <div class="card card-primary">
             <div class="card-header">
                 <h3 class="card-title">Klausul</h3>
@@ -155,7 +155,6 @@
     </div>
 
 </div>
-{{ route('klausul.select', 1)}}
 {!! Form::close() !!}
 @endsection
 
@@ -179,7 +178,7 @@ $(function () {
             toastr.warning('Error', 'Silahkan pilih data klausul yang lain!')
         } else {
 
-            var url = '{{ url("klausul/select") }}/' +id;
+            var url = '{{ url("klausul/select") }}/' + id;
 
             $.get(url, function(data) {
 
@@ -189,24 +188,17 @@ $(function () {
                     $('#table-klausul tbody').append('<tr><td>' + hiddenField + value.id
                         + '</td><td>' + value.objektif_audit
                         + '</td><td>' + value.nama
-                        + '</td><td><button id="btn-delete" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button></td></tr>'
+                        + '</td><td><button id="delete-row" class="btn btn-sm btn-danger">'
+                        + '<i class="fas fa-times"></i></button></td></tr>'
                     );
-                    // $('#table-klausul tbody').append(row);
                 })
             });
-        }
 
-
-
-        $('#klausul').val('').trigger('change');
+            $('#klausul').val('').trigger('change');
+        }    
     });
 
-    // $("button#btn-delete").on('click', function(e){
-    //     e.preventDefault();
-    //     console.log(e);
-    //     $(this).closest('tr').remove();
-    // });
-    $('#table-klausul').on('click', '#btn-delete', function(){
+    $('#table-klausul').on('click', '#delete-row', function(){
         $(this).closest('tr').remove();
     });
 
@@ -214,8 +206,6 @@ $(function () {
         // e.preventDefault();
         $("#current-form").submit(); // Submit the form
     });
-
-
 
     $('#datetimepicker4').datetimepicker({
         format: 'MM-DD-YYYY',
