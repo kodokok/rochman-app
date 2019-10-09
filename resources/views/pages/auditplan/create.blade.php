@@ -139,7 +139,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-
+                                <tr>
+                                    <td><input type="hidden" name="klausul_id[]" value=""></td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -203,7 +205,7 @@ $(function () {
             });
 
             $('#klausul').val('').trigger('change');
-        }    
+        }
     });
 
     $('#table-klausul').on('click', '#delete-row', function(){
@@ -214,25 +216,24 @@ $(function () {
         // e.preventDefault();
         $("#current-form").submit(); // Submit the form
     });
-    
+
     // validation form
     $('#current-form').validate({
         rules: {
-            departemen_id: 'required',
-            tanggal: 'required',
-            waktu: 'required',
-            auditee_user_id: 'required',
-            auditor_user_id: 'required',
-            auditor_lead_user_id: 'required',
-            table_klausul: 'required',
+            departemen_id: {required: true},
+            tanggal: {required: true},
+            waktu: {required: true},
+            auditee_user_id: {required: true},
+            auditor_user_id: {required: true},
+            auditor_lead_user_id: {required: true},
         },
         messages: {
-            
+
         },
         submitHandler: function(form) {
             form.submit();
         },
-        errorElement: 'span',
+        errorElement: 'div',
         errorPlacement: function (error, element) {
             if(element.parent('.input-group').length) {
                 error.insertAfter(element.parent());
