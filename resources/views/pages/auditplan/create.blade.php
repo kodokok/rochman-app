@@ -129,7 +129,7 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-12">
-                        <table id="table-klausul" class="table table-sm w100">
+                        <table id="table-klausul" name="table_klausul" class="table table-sm w100">
                             <thead>
                                 <tr>
                                     <th style="width:5%;">#</th>
@@ -224,6 +224,7 @@ $(function () {
             auditee_user_id: 'required',
             auditor_user_id: 'required',
             auditor_lead_user_id: 'required',
+            table_klausul: 'required',
         },
         messages: {
             
@@ -233,8 +234,11 @@ $(function () {
         },
         errorElement: 'span',
         errorPlacement: function (error, element) {
-            error.addClass('invalid-feedback');
-            element.closest('.form-group').append(error);
+            if(element.parent('.input-group').length) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
+            }
         },
         highlight: function (element, errorClass, validClass) {
             $(element).addClass('is-invalid');
