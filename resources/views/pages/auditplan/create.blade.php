@@ -37,7 +37,6 @@
                         <div class="form-group">
                             <label for="departemen_id">Departemen</label>
                             {{ Form::select('departemen_id', $departemen, null, ['class' => 'form-control', 'id' => 'departemen_id', 'placeholder' => 'Pilih departemen']) }}
-                            <div id="error-departemen_id" class="invalid-feedback">{{ $errors->first('departemen_id') }}</div>
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -64,7 +63,6 @@
                                 <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
-                                <div id="error-tanggal" class="invalid-feedback">{{ $errors->first('tanggal') }}</div>
                             </div>
                         </div>
                     </div>
@@ -80,7 +78,6 @@
                                 <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fas fa-clock"></i></div>
                                 </div>
-                                <div id="error-waktu" class="invalid-feedback">{{ $errors->first('waktu') }}</div>
                             </div>
                         </div>
                     </div>
@@ -91,7 +88,6 @@
                         ['class' => 'form-control' . ($errors->has('auditee_user_id') ? ' is-invalid': ''),
                         'id' => 'auditee_user_id', 'placeholder' => 'Pilih Auditee'])
                     !!}
-                    <div id="error-auditee_user_id" class="invalid-feedback">{{ $errors->first('auditee_user_id') }}</div>
                 </div>
                 <div class="form-group">
                     <label for="auditor_user_id">Auditor</label>
@@ -99,7 +95,6 @@
                         ['class' => 'form-control' . ($errors->has('auditor_user_id') ? ' is-invalid': ''),
                         'id' => 'auditor_user_id', 'placeholder' => 'Pilih Auditor'])
                     !!}
-                    <div id="error-auditor_user_id" class="invalid-feedback">{{ $errors->first('auditor_id') }}</div>
                 </div>
                 <div class="form-group">
                     <label for="auditor_lead_user_id">Auditor Leader</label>
@@ -107,7 +102,6 @@
                         ['class' => 'form-control' . ($errors->has('auditor_lead_user_id') ? ' is-invalid': ''),
                         'id' => 'auditor_lead_user_id', 'placeholder' => 'Pilih Auditor Leader'])
                     !!}
-                    <div id="error-auditor_lead_user_id" class="invalid-feedback">{{ $errors->first('auditor_lead_user_id') }}</div>
                 </div>
             </div>
 
@@ -153,14 +147,28 @@
             </div>
         </div>
     </div>
-
 </div>
+{{ $model->exists ? old('klausul_id') : '' }}
 {!! Form::close() !!}
 @endsection
 
 @push('scripts')
+<script src="{{ asset('plugins/jquery-validation/jquery.validate.min.js') }}"></script>
 <script>
 $(function () {
+    $('#datetimepicker4').datetimepicker({
+        format: 'MM-DD-YYYY',
+    });
+
+    $('#datetimepicker3').datetimepicker({
+        format: 'HH:mm:ss'
+    });
+
+    $('#departemen_id').on('change', function(){
+       var kadept = $(this).children('option:selected').data('kadept');
+       $('#kadept').val(kadept);
+    });
+
     $('#klausul').select2({
         placeholder: "Pilih klausul..."
     });
@@ -206,18 +214,40 @@ $(function () {
         // e.preventDefault();
         $("#current-form").submit(); // Submit the form
     });
+    
+    // validation form
+    $('#current-form').validate({
+        rules: {
+            departemen_id: 'required',
+            tanggal: 'required',
+            waktu: 'required',
+            auditee_user_id: 'required',
+            auditor_user_id: 'required',
+            auditor_lead_user_id: 'required',
+        },
+        messages: {
+            
+        },
+        submitHandler: function(form) {
+            form.submit();
+        },
+        errorElement: "em",
+        errorPlacement: function ( error, element ) {
+            // Add the `invalid-feedback` class to the error element
+            error.addClass( "invalid-feedback" );
 
-    $('#datetimepicker4').datetimepicker({
-        format: 'MM-DD-YYYY',
-    });
-
-    $('#datetimepicker3').datetimepicker({
-        format: 'HH:mm:ss'
-    });
-
-    $('#departemen_id').on('change', function(){
-       var kadept = $(this).children('option:selected').data('kadept');
-       $('#kadept').val(kadept);
+            if ( element.prop( "type" ) === "checkbox" ) {
+                error.insertAfter( element.next( "label" ) );
+            } else {
+                error.insertAfter( element );
+            }
+        },
+        highlight: function ( element, errorClass, validClass ) {
+            $( element ).addClass( "is-invalid" ).removeClass( "is-valid" );
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $( element ).addClass( "is-valid" ).removeClass( "is-invalid" );
+        }
     });
 });
 
