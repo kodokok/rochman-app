@@ -22,7 +22,6 @@
                         alt="User Image">
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <div class="dropdown-item"></div>
                     <a href="{{ route('profile.show', auth()->user()->id) }}" class="dropdown-item dropdown-footer">PROFILE</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item dropdown-footer" href="{{ route('logout') }}"
