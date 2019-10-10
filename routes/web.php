@@ -20,6 +20,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('profile/{user}', 'ProfileController@update')->name('profile.update');
     Route::put('profile/{user}/change-password', 'ProfileController@changePassword')->name('profile.change-password');
     Route::get('klausul/select/{id}', 'KlausulController@select')->name('klausul.select');
+    Route::get('departemen/{id}/kadept', 'DepartemenController@kadept')->name('departemen.kadept');
 
     Route::get('monitoring', 'MonitoringController@index')->name('monitoring.index');
 

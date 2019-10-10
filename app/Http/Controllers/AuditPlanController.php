@@ -36,7 +36,6 @@ class AuditPlanController extends Controller
      */
     public function create()
     {
-        $model = new AuditPlan();
         $departemen = Departemen::pluck('kode','id');
         $klausul = Klausul::pluck('nama', 'id');
         $auditee = User::pluck('nama', 'id');
@@ -44,7 +43,6 @@ class AuditPlanController extends Controller
         $auditorLead = User::role($this->auditorLeadRoles)->pluck('nama', 'id');
         // dd($departement);
         return view('pages.auditplan.create', compact([
-            'model',
             'departemen',
             'klausul',
             'auditee',

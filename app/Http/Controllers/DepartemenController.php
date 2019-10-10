@@ -77,6 +77,12 @@ class DepartemenController extends Controller
         $departemen->delete();
     }
 
+    public function kadept($id)
+    {
+        $departemen = Departemen::with('kadept')->find($id);
+        return $departemen->kadept->nama;
+    }
+
     public function datatable()
     {
         $departemen = Departemen::all();
