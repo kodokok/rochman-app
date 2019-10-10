@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('breadcrumbs', Breadcrumbs::render('auditplan.create'))
-@section('page-title', 'Create New Audit Plan')
+@section('breadcrumbs', Breadcrumbs::render('auditplan.edit'))
+@section('page-title', 'Edit Audit Plan')
 @section('page-action')
-    <input id="save" type="submit" value="Create" class="btn btn-success float-right"
+    <input id="save" type="submit" value="Update" class="btn btn-success float-right"
         style="width: 120px;">
     <a id="cancel" href="{{ old('redirect_to', url()->previous()) }}" class="btn btn-secondary float-right"
         style="margin-right: 5px; width: 120px;">Cancel</a>
@@ -11,14 +11,12 @@
 
 @section('content')
 {!! Form::model($model, [
-    'route' => ['auditplan.update', $model->id],
+    'route' => 'auditplan.store',
     'method' => 'PUT',
     'autocomplete' => 'off',
-    'files' => true,
     'id' => 'current-form'
 ]) !!}
 <div class="row">
-
     <div class="col-md-5">
         <div class="card card-primary">
             <div class="card-header">
@@ -34,12 +32,12 @@
                 <div class="form-group row">
                     <div class="col-sm-6">
                         <label for="departemen_id">Departemen</label>
-                        {{ Form::select('departemen_id', $departemen, null, ['class' => 'form-control', 'id' => 'departemen_id', 'placeholder' => 'Pilih departemen']) }}
+                        {{ Form::select('departemen_id', $departemen, null, ['class' => 'form-control', 'id' => 'departemen_id', 'placeholder' => 'Pilih departemen...']) }}
                         <div id="error-departemen_id" class="invalid-feedback"></div>
                     </div>
                     <div class="col-sm-6">
                             <label for="kadept">Kadept</label>
-                            {!! Form::text('kadept', null, ['class' => 'form-control', 'id' => 'kadept', 'disabled']) !!}
+                            {!! Form::text('kadept', $kadept, ['class' => 'form-control', 'id' => 'kadept', 'disabled']) !!}
                     </div>
 
                 </div>
@@ -51,7 +49,8 @@
                                 <input id="tanggal" name="tanggal" type="text"
                                     class="form-control datetimepicker-input"
                                     data-target="#datetimepicker4"
-                                    value="{{ $model->exists ? $model->tanggal : old('tanggal') }}"
+                                    placeholder="mm-dd-yyyy"
+                                    value="{{ $model->tanggal }}"
                                 />
                                 <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -67,7 +66,8 @@
                                 <input id="waktu" name="waktu" type="text"
                                     class="form-control datetimepicker-input"
                                     data-target="#datetimepicker3"
-                                    value="{{ $model->exists ? $model->waktu : old('waktu') }}"
+                                    placeholder="HH:mm:ss"
+                                    value="{{ $model->waktu }}"
                                 />
                                 <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fas fa-clock"></i></div>
@@ -81,7 +81,7 @@
                     <label for="auditee_id">Auditee</label>
                     {!! Form::select('auditee_user_id', $auditee, null,
                         ['class' => 'form-control',
-                        'id' => 'auditee_user_id', 'placeholder' => 'Pilih Auditee'])
+                        'id' => 'auditee_user_id', 'placeholder' => 'Pilih auditee...'])
                     !!}
                     <div id="error-auditee_user_id" class="invalid-feedback"></div>
                 </div>
@@ -89,7 +89,7 @@
                     <label for="auditor_user_id">Auditor</label>
                     {!! Form::select('auditor_user_id', $auditor, null,
                         ['class' => 'form-control',
-                        'id' => 'auditor_user_id', 'placeholder' => 'Pilih Auditor'])
+                        'id' => 'auditor_user_id', 'placeholder' => 'Pilih auditor...'])
                     !!}
                     <div id="error-auditor_user_id" class="invalid-feedback"></div>
                 </div>
@@ -97,7 +97,7 @@
                     <label for="auditor_lead_user_id">Auditor Leader</label>
                     {!! Form::select('auditor_lead_user_id', $auditorLead, null,
                         ['class' => 'form-control',
-                        'id' => 'auditor_lead_user_id', 'placeholder' => 'Pilih Auditor Leader'])
+                        'id' => 'auditor_lead_user_id', 'placeholder' => 'Pilih auditor lead...'])
                     !!}
                     <div id="error-auditor_lead_user_id" class="invalid-feedback"></div>
                 </div>
@@ -137,6 +137,14 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($model->klausuls as $item)
+                                    <tr>
+                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $item->objektif_audit }}</td>
+                                        <td>{{ $item->nama }}</td>
+                                        <td><button id="delete-row" class="btn btn-sm btn-danger"><i class="fas fa-times"></i></button></td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -152,7 +160,6 @@
 @endsection
 
 @push('scripts')
-<script src="{{ asset('plugins/jquery-validation/jquery.validate.min.js') }}"></script>
 <script>
 $(function () {
     $('#datetimepicker4').datetimepicker({
@@ -163,13 +170,37 @@ $(function () {
         format: 'HH:mm:ss'
     });
 
-    $('#departemen_id').on('change', function(){
-       var kadept = $(this).children('option:selected').data('kadept');
-       $('#kadept').val(kadept);
+    $('#departemen_id').select2({
+        placeholder: "Pilih departemen...",
+        width: '100%',
+        containerCssClass: "error"
     });
+
+    $('#departemen_id').on('select2:select', function (e) {
+        var data = e.params.data;
+        var url = '{{ url("departemen/{id}/kadept") }}';
+        $.get(url.replace('{id}', data.id), function(response) {
+            $('#kadept').val(response);
+        });
+    }).trigger('change');
 
     $('#klausul').select2({
         placeholder: "Pilih klausul...",
+        width: '100%'
+    });
+
+    $('#auditee_user_id').select2({
+        placeholder: "Pilih auditee...",
+        width: '100%'
+    });
+
+    $('#auditor_user_id').select2({
+        placeholder: "Pilih auditor...",
+        width: '100%'
+    });
+
+    $('#auditor_lead_user_id').select2({
+        placeholder: "Pilih auditor lead...",
         width: '100%'
     });
 

@@ -111,15 +111,19 @@ class AuditPlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(AuditPlan $auditplan)
     {
-        $model = AuditPlan::findOrFail($id);
-        $auditee = User::with('roles')->pluck('name', 'id');
-        $auditor = User::role($this->auditorRoles)->pluck('name', 'id');
-        $auditorLeader = User::role($this->auditorLeaderRoles)->pluck('name', 'id');
-        $departement = Departement::all();
-        // dd($kadept);
-        return view('auditplan.create', compact(['model', 'departement', 'auditee', 'auditor', 'auditorLeader']));
+        $model = $auditplan;
+        $kadept = $auditplan->departemen->kadept->nama;
+        $auditee = User::with('roles')->pluck('nama', 'id');
+        $auditor = User::role($this->auditorRoles)->pluck('nama', 'id');
+        $auditorLead = User::role($this->auditorLeadRoles)->pluck('nama', 'id');
+        $departemen = Departemen::pluck('kode', 'id');
+        $klausul = Klausul::pluck('nama', 'id');
+        // dd($model->klausuls()->get());
+        return view('pages.auditplan.edit', compact([
+            'model', 'klausul', 'departemen', 'auditee', 'auditor', 'auditorLead', 'kadept'
+        ]));
     }
 
     /**
@@ -308,10 +312,10 @@ class AuditPlanController extends Controller
                 return $model->klausuls()->count();
             })
             ->addColumn('action', function ($model) {
-                return view('auditplan.action', [
+                return view('pages.auditplan.action', [
                     'model' => $model,
-                    'url_print' => route('auditplan.report', $model->id),
-                    'url_show' => route('auditplan.show', $model->id),
+                    // 'url_print' => route('auditplan.report', $model->id),
+                    // 'url_show' => route('auditplan.show', $model->id),
                     'url_edit' => route('auditplan.edit', $model->id),
                     'url_destroy' => route('auditplan.destroy', $model->id),
                 ]);

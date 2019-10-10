@@ -59,3 +59,8 @@ Breadcrumbs::register('auditplan.create', function ($breadcrumbs) {
     $breadcrumbs->parent('auditplan');
     $breadcrumbs->push('create');
 });
+
+Breadcrumbs::register('auditplan.edit', function ($breadcrumbs) {
+    $breadcrumbs->parent('auditplan');
+    $breadcrumbs->push('edit');
+});
