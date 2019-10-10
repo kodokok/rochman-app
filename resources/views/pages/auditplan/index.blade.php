@@ -47,9 +47,10 @@
 <script>
 $(document).ready(function() {
     $('#datatables').DataTable({
+        stateSave: true,
         responsive: true,
         processing: true,
-        scrollX: true,
+        serverSide: true,
         ajax: "{{ route('auditplan.datatable') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'id', 'searchable': false, 'orderable': false},

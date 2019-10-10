@@ -32,24 +32,17 @@
                 </div>
             </div>
             <div class="card-body">
-                <div class="row">
+                <div class="form-group row">
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="departemen_id">Departemen</label>
-                            {{ Form::select('departemen_id', $departemen, null, ['class' => 'form-control', 'id' => 'departemen_id', 'placeholder' => 'Pilih departemen']) }}
-                            <div id="error-departemen_id" class="invalid-feedback"></div>
-                        </div>
+                        <label for="departemen_id">Departemen</label>
+                        {{ Form::select('departemen_id', $departemen, null, ['class' => 'form-control', 'id' => 'departemen_id', 'placeholder' => 'Pilih departemen']) }}
+                        <div id="error-departemen_id" class="invalid-feedback"></div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="form-group">
                             <label for="kadept">Kadept</label>
-                            @if ($model->exists)
-                                {!! Form::text('kadept', ($model->exists ? $model->departemen->user->nama : null), ['class' => 'form-control', 'id' => 'kadept', 'disabled']) !!}
-                            @else
-                                {!! Form::text('kadept', null, ['class' => 'form-control', 'id' => 'kadept', 'disabled']) !!}
-                            @endif
-                        </div>
+                            {!! Form::text('kadept', null, ['class' => 'form-control', 'id' => 'kadept', 'disabled']) !!}
                     </div>
+
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
@@ -87,24 +80,24 @@
                 </div>
                 <div class="form-group">
                     <label for="auditee_id">Auditee</label>
-                    {!! Form::select('auditee_user_id', $auditee, old('auditee_user_id'),
-                        ['class' => 'form-control' . ($errors->has('auditee_user_id') ? ' is-invalid': ''),
+                    {!! Form::select('auditee_user_id', $auditee, null,
+                        ['class' => 'form-control',
                         'id' => 'auditee_user_id', 'placeholder' => 'Pilih Auditee'])
                     !!}
                     <div id="error-auditee_user_id" class="invalid-feedback"></div>
                 </div>
                 <div class="form-group">
                     <label for="auditor_user_id">Auditor</label>
-                    {!! Form::select('auditor_user_id', $auditor, old('auditor_user_id'),
-                        ['class' => 'form-control' . ($errors->has('auditor_user_id') ? ' is-invalid': ''),
+                    {!! Form::select('auditor_user_id', $auditor, null,
+                        ['class' => 'form-control',
                         'id' => 'auditor_user_id', 'placeholder' => 'Pilih Auditor'])
                     !!}
                     <div id="error-auditor_user_id" class="invalid-feedback"></div>
                 </div>
                 <div class="form-group">
                     <label for="auditor_lead_user_id">Auditor Leader</label>
-                    {!! Form::select('auditor_lead_user_id', $auditorLead, old('auditor_lead_user_id'),
-                        ['class' => 'form-control' . ($errors->has('auditor_lead_user_id') ? ' is-invalid': ''),
+                    {!! Form::select('auditor_lead_user_id', $auditorLead, null,
+                        ['class' => 'form-control',
                         'id' => 'auditor_lead_user_id', 'placeholder' => 'Pilih Auditor Leader'])
                     !!}
                     <div id="error-auditor_lead_user_id" class="invalid-feedback"></div>

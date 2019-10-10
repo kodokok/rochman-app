@@ -67,7 +67,7 @@ class AuditPlanController extends Controller
             'auditee_user_id' => 'required',
             'auditor_user_id' => 'required|different:auditee_user_id',
             'auditor_lead_user_id' => 'required|different:auditee_user_id',
-            'tanggal' => 'required|date_format:m-d-Y',
+            'tanggal' => 'required|date_format:m-d-Y|after_or_equal:today',
             'waktu' => 'required|date_format:H:i:s',
             'klausul_id' => 'required'
         ];
