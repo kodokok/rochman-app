@@ -23,7 +23,7 @@ class AuditPlanTableSeeder extends Seeder
 
         for ($i=0; $i < 20; $i++) {
             AuditPlan::create([
-                'departement_id' => Departemen::all()->random()->id,
+                'departemen_id' => Departemen::all()->random()->id,
                 'approval_kadept' => $faker->numberBetween(0, 1),
                 'tanggal' => $faker->date('Y-m-d', 'now'),
                 'waktu' => $faker->time('H:i:s','now'),

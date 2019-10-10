@@ -42,19 +42,19 @@ class AuditPlan extends Model
 
     public function klausuls()
     {
-        return $this->belongsToMany(Klausul::class, 'audit_plan_klausul', 'klausul_id', 'audit_plan_id');
+        return $this->belongsToMany(Klausul::class, 'audit_plan_klausul', 'audit_plan_id', 'klausul_id')->withTimestamps();
     }
 
     public function departemen()
     {
-        return $this->belongsTo(Departemen::class, 'departement_id');
+        return $this->belongsTo(Departemen::class, 'departemen_id');
     }
 
     public function auditee()
     {
         return $this->belongsTo(User::class, 'auditee_user_id');
     }
-    
+
     public function auditor()
     {
         return $this->belongsTo(User::class, 'auditor_user_id');
@@ -64,5 +64,5 @@ class AuditPlan extends Model
     {
         return $this->belongsTo(User::class, 'auditor_lead_user_id');
     }
-    
+
 }

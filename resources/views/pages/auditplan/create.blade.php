@@ -3,10 +3,10 @@
 @section('breadcrumbs', Breadcrumbs::render('auditplan.create'))
 @section('page-title', 'Create New Audit Plan')
 @section('page-action')
-    <input id="save" type="submit" value="Simpan" class="btn btn-success float-right"
+    <input id="save" type="submit" value="Create" class="btn btn-success float-right"
         style="width: 120px;">
-    <a href="{{ old('redirect_to', url()->previous()) }}" class="btn btn-secondary float-right"
-        style="margin-right: 5px; width: 120px;">Batal</a>
+    <a id="cancel" href="{{ old('redirect_to', url()->previous()) }}" class="btn btn-secondary float-right"
+        style="margin-right: 5px; width: 120px;">Cancel</a>
 @endsection
 
 @section('content')
@@ -37,6 +37,7 @@
                         <div class="form-group">
                             <label for="departemen_id">Departemen</label>
                             {{ Form::select('departemen_id', $departemen, null, ['class' => 'form-control', 'id' => 'departemen_id', 'placeholder' => 'Pilih departemen']) }}
+                            <div id="error-departemen_id" class="invalid-feedback"></div>
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -56,13 +57,14 @@
                             <label for="tanggal">Tanggal</label>
                             <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
                                 <input id="tanggal" name="tanggal" type="text"
-                                    class="form-control datetimepicker-input {{ $errors->has('tanggal') ? ' is-invalid': '' }}"
+                                    class="form-control datetimepicker-input"
                                     data-target="#datetimepicker4"
                                     value="{{ $model->exists ? $model->tanggal : old('tanggal') }}"
                                 />
                                 <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
+                                <div id="error-tanggal" class="invalid-feedback"></div>
                             </div>
                         </div>
                     </div>
@@ -71,13 +73,14 @@
                             <label for="waktu">Waktu</label>
                             <div class="input-group date" id="datetimepicker3" data-target-input="nearest">
                                 <input id="waktu" name="waktu" type="text"
-                                    class="form-control datetimepicker-input {{ $errors->has('waktu') ? ' is-invalid': '' }}"
+                                    class="form-control datetimepicker-input"
                                     data-target="#datetimepicker3"
                                     value="{{ $model->exists ? $model->waktu : old('waktu') }}"
                                 />
                                 <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fas fa-clock"></i></div>
                                 </div>
+                                <div id="error-waktu" class="invalid-feedback"></div>
                             </div>
                         </div>
                     </div>
@@ -88,6 +91,7 @@
                         ['class' => 'form-control' . ($errors->has('auditee_user_id') ? ' is-invalid': ''),
                         'id' => 'auditee_user_id', 'placeholder' => 'Pilih Auditee'])
                     !!}
+                    <div id="error-auditee_user_id" class="invalid-feedback"></div>
                 </div>
                 <div class="form-group">
                     <label for="auditor_user_id">Auditor</label>
@@ -95,6 +99,7 @@
                         ['class' => 'form-control' . ($errors->has('auditor_user_id') ? ' is-invalid': ''),
                         'id' => 'auditor_user_id', 'placeholder' => 'Pilih Auditor'])
                     !!}
+                    <div id="error-auditor_user_id" class="invalid-feedback"></div>
                 </div>
                 <div class="form-group">
                     <label for="auditor_lead_user_id">Auditor Leader</label>
@@ -102,6 +107,7 @@
                         ['class' => 'form-control' . ($errors->has('auditor_lead_user_id') ? ' is-invalid': ''),
                         'id' => 'auditor_lead_user_id', 'placeholder' => 'Pilih Auditor Leader'])
                     !!}
+                    <div id="error-auditor_lead_user_id" class="invalid-feedback"></div>
                 </div>
             </div>
 
@@ -119,12 +125,12 @@
                 </div>
             </div>
             <div class="card-body">
-                <div class="row mb-3">
-                    <div class="input-group col-12">
+                <div class="form group row mb-3">
+                    <div class="col-10">
                         {{ Form::select('klausul', $klausul, null, ['class' => 'form-control', 'id' => 'klausul', 'placeholder' => 'Pilih klausul...']) }}
-                        <div class="input-group-append">
-                            <button id="add-row" class="btn btn-outline-success" type="button">Add</button>
-                        </div>
+                    </div>
+                    <div class="col-2">
+                        <button id="add-row" class="btn btn-outline-success btn-block" type="button" style="width=100%;">Add</button>
                     </div>
                 </div>
                 <div class="row">
@@ -139,18 +145,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><input type="hidden" name="klausul_id[]" value=""></td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
+
+                <div id="error-klausul" class="small form-text text-danger d-none"></div>
             </div>
         </div>
     </div>
 </div>
-{{ $model->exists ? old('klausul_id') : '' }}
+
 {!! Form::close() !!}
 @endsection
 
@@ -172,7 +177,8 @@ $(function () {
     });
 
     $('#klausul').select2({
-        placeholder: "Pilih klausul..."
+        placeholder: "Pilih klausul...",
+        width: '100%'
     });
 
     $('#add-row').click(function(){
@@ -181,9 +187,7 @@ $(function () {
         var id = klausul[0].id;
         var nama = klausul[0].text;
         var hiddenField = '<input type="hidden" name="klausul_id[]" value="' + id + '">';
-        // var row = '<tr><td>' + id + '</td><td>'  + hiddenField + nama + '</td></tr>';
         var exist = $('#table-klausul td:contains('+ nama +')').length ? true : false;
-        // console.log(id);
         if (exist || id.length == 0) {
             toastr.warning('Error', 'Silahkan pilih data klausul yang lain!')
         } else {
@@ -191,10 +195,7 @@ $(function () {
             var url = '{{ url("klausul/select") }}/' + id;
 
             $.get(url, function(data) {
-
-                // console.log(data);
                 $.each(data, function(key, value) {
-
                     $('#table-klausul tbody').append('<tr><td>' + hiddenField + value.id
                         + '</td><td>' + value.objektif_audit
                         + '</td><td>' + value.nama
@@ -213,48 +214,54 @@ $(function () {
     });
 
     $("#save").on('click', function(e){
-        // e.preventDefault();
-        $("#current-form").submit(); // Submit the form
+        $("#current-form").submit();
     });
 
-    // validation form
-    $('#current-form').validate({
-        rules: {
-            departemen_id: {required: true},
-            tanggal: {required: true},
-            waktu: {required: true},
-            auditee_user_id: {required: true},
-            auditor_user_id: {required: true},
-            auditor_lead_user_id: {required: true},
-        },
-        messages: {
+    $('#current-form').submit(function (event) {
+        event.preventDefault();
 
-        },
-        submitHandler: function(form) {
-            form.submit();
-        },
-        errorElement: 'div',
-        errorClass: 'invalid-feedback',
-        errorPlacement: function (error, element) {
-            if(element.parent('.input-group').length) {
-                error.insertAfter(element.parent());
-            } else {
-                error.insertAfter(element);
+        var form = $(this);
+        var url = form.attr('action');
+        var method = form.attr('method');
+        var formData = new FormData(form.get(0));
+        var buttonText = $("#save").val();
+        var redirect_to = $('#cancel').attr('href');
+
+        $.ajax({
+            url: url,
+            method: 'POST',
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            beforeSend: function() {
+                $("#save").val('Sending...');
+                $('.is-invalid').removeClass('is-invalid');
+                $('#error-klausul').addClass('d-none');
+            },
+            success: function(response) {
+                if (response.fail) {
+
+                    for (const control in response.errors) {
+                        $('#' + control).addClass('is-invalid');
+                        $('#error-' + control).text(response.errors[control]);
+
+                        if (control == 'klausul_id') {
+                            $('#error-klausul').removeClass('d-none');
+                            $('#error-klausul').text(response.errors[control]);
+                        }
+                    }
+                    $("#save").val(buttonText);
+
+                } else {
+                    window.location.href = response.redirect_to;
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert("Error: " + errorThrown);
+                $("#save").val(buttonText);
             }
-        },
-        highlight: function (element, errorClass, validClass) {
-            $(element).addClass('is-invalid');
-        },
-        unhighlight: function (element, errorClass, validClass) {
-            $(element).removeClass('is-invalid');
-        },
-        onfocusout: false,
-        invalidHandler: function(form, validator) {
-            var errors = validator.numberOfInvalids();
-            if (errors) {
-                validator.errorList[0].element.focus();
-            }
-        }
+        });
     });
 });
 

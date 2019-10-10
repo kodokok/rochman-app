@@ -12,6 +12,6 @@ class Klausul extends Model
 
     public function auditplans()
     {
-        return $this->belongsToMany(AuditPlan::class, 'audit_plan_klausul', 'audit_plan_id', 'klausul_id');
+        return $this->belongsToMany(AuditPlan::class, 'audit_plan_klausul', 'klausul_id', 'audit_plan_id')->withTimestamps();
     }
 }

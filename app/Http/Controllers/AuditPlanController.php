@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use DataTables;
 use Illuminate\Http\Request;
 use PDF;
+use Illuminate\Support\Facades\Validator;
 
 class AuditPlanController extends Controller
 {
@@ -24,6 +25,7 @@ class AuditPlanController extends Controller
      */
     public function index()
     {
+        // session()->flush();
         return view('pages.auditplan.index');
     }
 
@@ -59,38 +61,49 @@ class AuditPlanController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
 
-        $this->validate($request, [
-            'departement_id' => 'required',
+        $rules = [
+            'departemen_id' => 'required',
             'auditee_user_id' => 'required',
-            'auditor__user_id' => 'required|different:auditee_id',
-            'auditor_lead_user_id' => 'required|different:auditee_id',
+            'auditor_user_id' => 'required|different:auditee_user_id',
+            'auditor_lead_user_id' => 'required|different:auditee_user_id',
             'tanggal' => 'required|date_format:m-d-Y',
             'waktu' => 'required|date_format:H:i:s',
-        ]);
+            'klausul_id' => 'required'
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'fail' => true,
+                'errors' => $validator->errors(),
+            ]);
+        }
 
         $tanggal =  Carbon::createFromFormat('m-d-Y', $request->tanggal)->format('Y-m-d');
         $waktu =  Carbon::createFromFormat('H:i:s', $request->waktu)->format('H:i:s');
 
-        AuditPlan::create([
-            'objektif_audit' => $request->objektif_audit,
-            'klausul' => $request->klausul,
-            'departement_id' => $request->departement_id,
-            'approval' => 0,
-            'auditee_id' => $request->auditee_id,
-            'auditor_id' => $request->auditor_id,
-            'auditor_lead_user_id' => $request->auditor_leader_id,
+        $auditplan = AuditPlan::create([
+            'departemen_id' => $request->departemen_id,
+            'approval_kadept' => 0,
             'tanggal' => $tanggal,
             'waktu' => $waktu,
+            'auditee_user_id' => $request->auditee_user_id,
+            'auditor_user_id' => $request->auditor_user_id,
+            'auditor_lead_user_id' => $request->auditor_lead_user_id,
         ]);
 
-        $notification = [
-            'message' => 'Audit Plan successfully created!',
-            'alert-type' => 'success'
-        ];
+        if ($request->has('klausul_id')) {
+            $auditplan->klausuls()->sync($request->klausul_id);
+        }
 
-        return redirect()->route('auditplan.index')->with($notification);
+        $redirect_to = ['redirect_to' => route('auditplan.index')];
+
+        session()->flash('message', 'Audit Plan successfully created!');
+        session()->flash('alert-type', 'success');
+
+        return response()->json($redirect_to);
     }
 
 
