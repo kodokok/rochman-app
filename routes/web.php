@@ -45,6 +45,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::put('auditplan/{auditplan}/send', 'AuditPlanController@send')->name('auditplan.send');
 
         route::get('approval', 'ApprovalController@show')->name('approval.show');
+        route::get('approval/auditplan/datatable', 'ApprovalController@datatable')->name('approval.auditplan.datatable');
         // route fetch data
 
 
