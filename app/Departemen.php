@@ -18,6 +18,6 @@ class Departemen extends Model
 
     public function auditplans()
     {
-        return $this->hasMany(AuditPlan::class, 'departement_id');
+        return $this->hasMany(AuditPlan::class, 'departemen_id');
     }
 }
