@@ -51,7 +51,18 @@ class RolesController extends Controller
 
     public function destroy(Role $role)
     {
-        $role->delete();
+        try {
+            $role->delete();
+
+            session()->flash('message', 'Data berhasil dihapus!');
+            session()->flash('alert-type', 'success');
+        } catch (\Illuminate\Database\QueryException $e) {
+            session()->flash('message', 'Data tidak bisa dihapus!');
+            session()->flash('alert-type', 'error');
+        }
+
+        $redirect_to = ['redirect_to' => route('roles.index')];
+        return response()->json($redirect_to);
     }
 
     public function datatable()

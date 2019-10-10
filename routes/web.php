@@ -22,8 +22,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('klausul/select/{id}', 'KlausulController@select')->name('klausul.select');
     Route::get('departemen/{id}/kadept', 'DepartemenController@kadept')->name('departemen.kadept');
 
-    Route::get('monitoring', 'MonitoringController@index')->name('monitoring.index');
-
     Route::group(['middleware' => ['role:admin,auditor,auditor_lead']], function () {
         // route datatable
 
