@@ -11,8 +11,8 @@
 
 @section('content')
 {!! Form::model($model, [
-    'route' => 'auditplan.store',
-    'method' => 'POST',
+    'route' => ['auditplan.update', $model->id],
+    'method' => 'PUT',
     'autocomplete' => 'off',
     'files' => true,
     'id' => 'current-form'
@@ -20,7 +20,6 @@
 <div class="row">
 
     <div class="col-md-5">
-
         <div class="card card-primary">
             <div class="card-header">
                 <h3 class="card-title">General</h3>
@@ -52,7 +51,7 @@
                                 <input id="tanggal" name="tanggal" type="text"
                                     class="form-control datetimepicker-input"
                                     data-target="#datetimepicker4"
-                                    placeholder="mm-dd-yyyy"
+                                    value="{{ $model->exists ? $model->tanggal : old('tanggal') }}"
                                 />
                                 <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -68,7 +67,7 @@
                                 <input id="waktu" name="waktu" type="text"
                                     class="form-control datetimepicker-input"
                                     data-target="#datetimepicker3"
-                                    placeholder="HH:mm:ss"
+                                    value="{{ $model->exists ? $model->waktu : old('waktu') }}"
                                 />
                                 <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fas fa-clock"></i></div>
@@ -169,28 +168,8 @@ $(function () {
        $('#kadept').val(kadept);
     });
 
-    $('#departemen_id').select2({
-        placeholder: "Pilih departemen...",
-        width: '100%',
-        containerCssClass: "error"
-    });
-
     $('#klausul').select2({
         placeholder: "Pilih klausul...",
-        width: '100%'
-    });
-
-    $('#auditee_user_id').select2({
-        placeholder: "Pilih auditee...",
-        width: '100%'
-    });
-
-    $('#auditor_user_id').select2({
-        placeholder: "Pilih auditor...",
-        width: '100%'
-    });
-    $('#auditor_lead_user_id').select2({
-        placeholder: "Pilih auditor lead...",
         width: '100%'
     });
 
