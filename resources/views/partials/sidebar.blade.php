@@ -31,6 +31,12 @@
                         <p>Temuan Audit</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-tasks"></i>
+                        <p>Approval Request</p>
+                    </a>
+                </li>
                 @hasanyrole('admin')
                 <li class="nav-header">DATA</li>
                 <li class="nav-item">
