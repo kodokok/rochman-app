@@ -1,6 +1,5 @@
 <?php
 
-
 Breadcrumbs::register('home', function ($breadcrumbs) {
     $breadcrumbs->push('home', route('home'));
 });
@@ -63,4 +62,8 @@ Breadcrumbs::register('auditplan.create', function ($breadcrumbs) {
 Breadcrumbs::register('auditplan.edit', function ($breadcrumbs) {
     $breadcrumbs->parent('auditplan');
     $breadcrumbs->push('edit');
+});
+
+Breadcrumbs::register('approval.show', function ($breadcrumbs) {
+    $breadcrumbs->push('approval', route('approval.show'));
 });

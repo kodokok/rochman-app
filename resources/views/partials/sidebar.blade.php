@@ -32,8 +32,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-tasks"></i>
+                    <a href="{{ route('approval.show') }}" class="nav-link {{ active(['approval.*']) }}">
+                        <i class="nav-icon fas fa-list-ul"></i>
                         <p>Approval Request</p>
                     </a>
                 </li>

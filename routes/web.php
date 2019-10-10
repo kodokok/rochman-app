@@ -44,7 +44,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('auditplan', 'AuditPlanController')->parameters(['auditplan' => 'auditplan']);;
         Route::put('auditplan/{auditplan}/send', 'AuditPlanController@send')->name('auditplan.send');
 
-
+        route::get('approval', 'ApprovalController@show')->name('approval.show');
         // route fetch data
 
 
