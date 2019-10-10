@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::get('auditplan/datatable', 'AuditPlanController@datatable')->name('auditplan.datatable');
         Route::resource('auditplan', 'AuditPlanController')->parameters(['auditplan' => 'auditplan']);;
+        Route::put('auditplan/{auditplan}/send', 'AuditPlanController@send')->name('auditplan.send');
 
 
         // route fetch data

@@ -215,6 +215,11 @@ class AuditPlanController extends Controller
         return view('auditplan.confirm', compact(['auditplan']));
     }
 
+    public function send(Request $request, $id)
+    {
+        return false;
+    }
+
     public function confirm(Request $request, $id)
     {
 
@@ -322,14 +327,14 @@ class AuditPlanController extends Controller
             ->addColumn('action', function ($model) {
                 return view('pages.auditplan.action', [
                     'model' => $model,
-                    // 'url_print' => route('auditplan.report', $model->id),
+                    'url_send' => route('auditplan.send', $model->id),
                     // 'url_show' => route('auditplan.show', $model->id),
                     'url_edit' => route('auditplan.edit', $model->id),
                     'url_destroy' => route('auditplan.destroy', $model->id),
                 ]);
             })
             ->addIndexColumn()
-            ->rawColumns(['action'])
+            ->rawColumns(['action', 'status'])
             ->make(true);
     }
 }
