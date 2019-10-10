@@ -17,6 +17,9 @@ class CreateAuditPlanKlausul extends Migration
             $table->unsignedInteger('audit_plan_id');
             $table->unsignedInteger('klausul_id');
             $table->timestamps();
+
+            $table->foreign('audit_plan_id')->references('id')->on('audit_plan')->onDelete('cascade');
+            $table->foreign('klausul_id')->references('id')->on('klausul')->onDelete('cascade');
         });
     }
 

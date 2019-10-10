@@ -59,7 +59,6 @@ class AuditPlanController extends Controller
      */
     public function store(Request $request)
     {
-
         $rules = [
             'departemen_id' => 'required',
             'auditee_user_id' => 'required',
@@ -133,42 +132,49 @@ class AuditPlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, AuditPlan $auditplan)
     {
-        // dd($request->all());
-        $model = AuditPlan::findOrFail($id);
-
-        $this->validate($request, [
-            'objektif_audit' => 'required|string|max:255|unique:audit_plans,objektif_audit,' . $model->id,
-            'klausul' => 'required|string|max:100',
-            'departement_id' => 'required',
-            'auditee_id' => 'required',
-            'auditor_id' => 'required|different:auditee_id',
-            'auditor_leader_id' => 'required|different:auditee_id',
-            'tanggal' => 'required|date_format:m-d-Y',
+        $rules = [
+            'departemen_id' => 'required',
+            'auditee_user_id' => 'required',
+            'auditor_user_id' => 'required|different:auditee_user_id',
+            'auditor_lead_user_id' => 'required|different:auditee_user_id',
+            'tanggal' => 'required|date_format:m-d-Y|after_or_equal:today',
             'waktu' => 'required|date_format:H:i:s',
-        ]);
+            'klausul_id' => 'required'
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'fail' => true,
+                'errors' => $validator->errors(),
+            ]);
+        }
 
         $tanggal =  Carbon::createFromFormat('m-d-Y', $request->tanggal)->format('Y-m-d');
         $waktu =  Carbon::createFromFormat('H:i:s', $request->waktu)->format('H:i:s');
 
-        $model->update([
-            'objektif_audit' => $request->objektif_audit,
-            'klausul' => $request->klausul,
-            'departement_id' => $request->departement_id,
-            'auditee_id' => $request->auditee_id,
-            'auditor_id' => $request->auditor_id,
-            'auditor_leader_id' => $request->auditor_leader_id,
+        $auditplan->update([
+            'departemen_id' => $request->departemen_id,
             'tanggal' => $tanggal,
             'waktu' => $waktu,
+            'auditee_user_id' => $request->auditee_user_id,
+            'auditor_user_id' => $request->auditor_user_id,
+            'auditor_lead_user_id' => $request->auditor_lead_user_id,
         ]);
 
-        $notification = [
-            'message' => 'Audit Plan successfully updated!',
-            'alert-type' => 'info'
-        ];
+        if ($request->has('klausul_id')) {
+            $auditplan->klausuls()->sync($request->klausul_id);
+        }
 
-        return redirect()->back()->with($notification);
+        $redirect_to = ['redirect_to' => route('auditplan.index')];
+
+        session()->flash('message', 'Audit Plan successfully updated!');
+        session()->flash('alert-type', 'success');
+
+        return response()->json($redirect_to);
     }
 
     /**
@@ -177,10 +183,23 @@ class AuditPlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(AuditPlan $auditplan)
     {
-        $model = AuditPlan::findOrFail($id);
-        $model->delete();
+        // $auditplan = AuditPlan::with('klausuls')->find($auditplan->id);
+
+        try {
+            //code...
+            $auditplan->delete();
+            $auditplan->klausuls()->sync([]);
+            session()->flash('message', 'Audit Plan successfully deleted!');
+            session()->flash('alert-type', 'error');
+        } catch (\Illuminate\Database\QueryException $e) {
+            session()->flash('message', 'Data tidak bisa dihapus!');
+            session()->flash('alert-type', 'error');
+        }
+
+        $redirect_to = ['redirect_to' => route('auditplan.index')];
+        return response()->json($redirect_to);
     }
 
     /**
@@ -194,12 +213,6 @@ class AuditPlanController extends Controller
         $auditplan = AuditPlan::findOrFail($id);
 
         return view('auditplan.confirm', compact(['auditplan']));
-    }
-
-    public function getDepartements($id)
-    {
-        $data = AuditPlan::where('departement_id', $id)->where('approval', 2)->get();
-        return $data;
     }
 
     public function confirm(Request $request, $id)
@@ -289,12 +302,7 @@ class AuditPlanController extends Controller
     public function datatable()
     {
         $model = AuditPlan::all();
-        // $klausuls = $model->klausuls()->get();
-        // $model = Klausul::first();
-
-        // dd($model->klausuls()->count());
-
-
+        // dd($model->auditee);
         return DataTables::of($model)
             ->addColumn('departemen', function ($model) {
                 return $model->departemen->nama;

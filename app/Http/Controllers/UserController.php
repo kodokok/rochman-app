@@ -177,9 +177,20 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->roles()->detach();
-        $user->deleteFoto();
-        $user->delete();
+        try {
+            $user->roles()->detach();
+            $user->deleteFoto();
+            $user->delete();
+
+            session()->flash('message', 'Data berhasil dihapus!');
+            session()->flash('alert-type', 'success');
+        } catch (\Illuminate\Database\QueryException $e) {
+            session()->flash('message', 'Data tidak bisa dihapus!');
+            session()->flash('alert-type', 'error');
+        }
+
+        $redirect_to = ['redirect_to' => route('user.index')];
+        return response()->json($redirect_to);
     }
 
     public function datatable()

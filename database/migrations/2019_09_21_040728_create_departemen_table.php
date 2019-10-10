@@ -20,6 +20,10 @@ class CreateDepartemenTable extends Migration
             $table->string('nama', 50);
             $table->string('lokasi', 50)->nullable();
             $table->timestamps();
+
+            $table->foreign('kadept_user_id')
+                ->references('id')->on('user')
+                ->onDelete('restrict');
         });
     }
 

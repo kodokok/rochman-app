@@ -11,7 +11,7 @@
 
 @section('content')
 {!! Form::model($model, [
-    'route' => 'auditplan.store',
+    'route' => ['auditplan.update', $model->id],
     'method' => 'PUT',
     'autocomplete' => 'off',
     'id' => 'current-form'
@@ -139,7 +139,7 @@
                             <tbody>
                                 @foreach ($model->klausuls as $item)
                                     <tr>
-                                        <td>{{ $item->id }}</td>
+                                        <td><input type="hidden" name="klausul_id[]" value="{{ $item->id }}">{{ $item->id }}</td>
                                         <td>{{ $item->objektif_audit }}</td>
                                         <td>{{ $item->nama }}</td>
                                         <td><button id="delete-row" class="btn btn-sm btn-danger"><i class="fas fa-times"></i></button></td>
@@ -252,7 +252,7 @@ $(function () {
 
         $.ajax({
             url: url,
-            method: 'POST',
+            method: method,
             data: formData,
             cache: false,
             contentType: false,

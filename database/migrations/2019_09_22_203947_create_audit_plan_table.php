@@ -24,6 +24,19 @@ class CreateAuditPlanTable extends Migration
             $table->unsignedInteger('auditor_lead_user_id');
             $table->text('catatan', 255)->nullable();
             $table->timestamps();
+
+            $table->foreign('departemen_id')
+                ->references('id')->on('departemen')
+                ->onDelete('restrict');
+            $table->foreign('auditee_user_id')
+                ->references('id')->on('user')
+                ->onDelete('restrict');
+            $table->foreign('auditor_user_id')
+                ->references('id')->on('user')
+                ->onDelete('restrict');
+            $table->foreign('auditor_lead_user_id')
+                ->references('id')->on('user')
+                ->onDelete('restrict');
         });
     }
 

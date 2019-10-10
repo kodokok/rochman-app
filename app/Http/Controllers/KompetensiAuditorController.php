@@ -83,7 +83,18 @@ class KompetensiAuditorController extends Controller
 
     public function destroy(KompetensiAuditor $kompetensi)
     {
-        $kompetensi->delete();
+        try {
+            $kompetensi->delete();
+
+            session()->flash('message', 'Data berhasil dihapus!');
+            session()->flash('alert-type', 'success');
+        } catch (\Illuminate\Database\QueryException $e) {
+            session()->flash('message', 'Data tidak bisa dihapus!');
+            session()->flash('alert-type', 'error');
+        }
+
+        $redirect_to = ['redirect_to' => route('kompetensi.index')];
+        return response()->json($redirect_to);
     }
 
     public function datatable()

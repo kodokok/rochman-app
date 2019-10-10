@@ -87,8 +87,14 @@ $(document).ready(function() {
                         '_token': csrf_token
                     },
                     success: function(response) {
-                        $('#datatable').DataTable().ajax.reload(null, false);
-                        toastr.warning('Deleted!', 'Data telah berhasil dihapus.');
+                        // console.log(...response);
+                        $('#datatable').DataTable().ajax.reload();
+                        window.location.href = response.redirect_to;
+                        // toastr.warning('Deleted!', 'Data telah berhasil dihapus.');
+                    },
+                    error: function(status)
+                    {
+                        console.log(status);
                     }
                 });
             }

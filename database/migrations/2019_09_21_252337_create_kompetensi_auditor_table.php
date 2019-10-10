@@ -19,6 +19,10 @@ class CreateKompetensiAuditorTable extends Migration
             $table->string('pelatihan', 100)->nullable();
             $table->tinyInteger('nilai')->default(0);
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')->on('user')
+                ->onDelete('restrict');
         });
     }
 
