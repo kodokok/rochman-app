@@ -37,8 +37,8 @@ class TemuanAudit extends Model
         return Carbon::parse($value)->format('m-d-Y');
     }
 
-    public function audit_plan()
+    public function auditplan()
     {
-        return $this->belongsTo(AuditPlan::class);
+        return $this->belongsTo(AuditPlan::class, 'audit_plan_id');
     }
 }

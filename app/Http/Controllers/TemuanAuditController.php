@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use DataTables;
 use Carbon\Carbon;
 
-class TemuanAuditsController extends Controller
+class TemuanAuditController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class TemuanAuditsController extends Controller
      */
     public function index()
     {
-        return view('temuanaudit.index');
+        return view('pages.temuanaudit.index');
     }
 
     /**
@@ -210,18 +210,18 @@ class TemuanAuditsController extends Controller
         $temuanaudit->delete();
     }
 
-    public function dataTable()
+    public function datatable()
     {
         $model = TemuanAudit::all();
         // $model = TemuanAudit::findOrFail(1)->get();
-        // dd($model->audit_plan->objektif_audit);
+        // dd($model->auditplan->catatan);
 
         return DataTables::of($model)
-            ->addColumn('auditplan_objectif_audit', function ($model) {
-                return $model->audit_plan->objektif_audit;
-            })
+            // ->addColumn('auditplan_objectif_audit', function ($model) {
+            //     return $model->audit_plan->objektif_audit;
+            // })
             ->addColumn('action', function ($model) {
-                return view('temuanaudit.action', [
+                return view('pages.temuanaudit.action', [
                     'model' => $model,
                     'url_edit' => route('temuanaudit.edit', $model->id),
                     'url_destroy' => route('temuanaudit.destroy', $model->id),

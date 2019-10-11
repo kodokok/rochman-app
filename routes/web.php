@@ -54,8 +54,8 @@ Route::group(['middleware' => ['auth']], function () {
         // Route::get('auditplan/{auditplan}/pdf', 'AuditPlanController@pdf')->name('auditplan.pdf');
         // Route::get('auditplan/{auditplan}/print', 'AuditPlanController@print')->name('auditplan.print');
 
-        Route::get('table/temuanaudits', 'TemuanAuditsController@dataTable')->name('table.temuanaudits');
-        Route::resource('temuanaudit', 'TemuanAuditsController');
-        Route::put('temuanaudit/{temuanaudit}/confirm', 'TemuanAuditsController@confirm')->name('temuanaudit.confirm');
+        Route::get('temuanaudit/datatable', 'TemuanAuditController@datatable')->name('temuanaudit.datatable');
+        Route::resource('temuanaudit', 'TemuanAuditController');
+        // Route::put('temuanaudit/{temuanaudit}/confirm', 'TemuanAuditsController@confirm')->name('temuanaudit.confirm');
     });
 });
