@@ -306,7 +306,9 @@ class AuditPlanController extends Controller
 
     public function datatable()
     {
-        $model = AuditPlan::all();
+        $model = AuditPlan::with([
+            'departemen', 'auditee', 'auditor', 'auditorLead', 'klausuls'
+        ])->get();
         // dd($model->auditee);
         return DataTables::of($model)
             ->addColumn('departemen', function ($model) {

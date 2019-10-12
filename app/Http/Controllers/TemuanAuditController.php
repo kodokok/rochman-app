@@ -212,25 +212,6 @@ class TemuanAuditController extends Controller
 
     public function datatable()
     {
-        // for ($i=1; $i < 20; $i++) {
-            $auditplans = AuditPlan::where('approval_kadept', 1)->get();
-            // print_r($auditplans->find(1));
-            $data = $auditplans->find(1);
-            // $klausul = $data->klausuls->get();
-            print_r($data->id);
-            dd($data->klausuls->random()->id);
-            // foreach ($data->klausuls as $klausul) {
-            //     var_dump($klausul->id);
-            // }
-        // }
-        die;
-        // $klausuls = $auditplans->klausuls->get();
-        // dd($klausuls);
-        // foreach ($auditplans->klausuls as $klausul) {
-        //     var_dump($klausul->nama);
-        // }
-        // die;
-
         $model = TemuanAudit::all();
         // $model = TemuanAudit::findOrFail(1)->get();
         // dd($model->auditplan->catatan);
