@@ -18,21 +18,26 @@ class TemuanAuditTableSeeder extends Seeder
         $faker = Faker::create('id_ID');
         $auditplans = AuditPlan::where('approval_kadept', 1)->get();
 
-        for ($i=0; $i < 20; $i++) {
-            TemuanAudit::create([
-                'audit_plan_id' => $auditplans->random()->id,
-                'status' => rand(0,1),
-                'klasifikasi_temuan' => rand(0,1),
-                'ketidaksesuaian' => $faker->realText(100, 2),
-                'akar_masalah' => $faker->realText(100, 2),
-                'tindakan_perbaikan_pencegahan' => $faker->realText(100, 2),
-                'tanggal_perbaikan_pencegahan' => Carbon::now()->addDay(rand(10, 30)),
-                'approval_kadept' => rand(0,1),
-                'approval_auditee' => rand(0,1),
-                'approval_auditor' => rand(0,1),
-                'approval_auditor_lead' => rand(0,1),
-                'review' => $faker->realText(255, 2),
-            ]);
+        for ($i=1; $i < 10; $i++) {
+            $auditplan = $auditplans->find($i);
+
+            if ($auditplan) {
+                TemuanAudit::create([
+                    'audit_plan_id' => $auditplan->id,
+                    'klausul_id' => $auditplan->klausuls->random()->id,
+                    'status' => rand(0,1),
+                    'klasifikasi_temuan' => rand(0,1),
+                    'ketidaksesuaian' => $faker->realText(100, 2),
+                    'akar_masalah' => $faker->realText(100, 2),
+                    'tindakan_perbaikan_pencegahan' => $faker->realText(100, 2),
+                    'tanggal_perbaikan_pencegahan' => Carbon::now()->addDay(rand(10, 30)),
+                    'approval_kadept' => rand(0,1),
+                    'approval_auditee' => rand(0,1),
+                    'approval_auditor' => rand(0,1),
+                    'approval_auditor_lead' => rand(0,1),
+                    'review' => $faker->realText(255, 2),
+                ]);
+            }
         }
     }
 }

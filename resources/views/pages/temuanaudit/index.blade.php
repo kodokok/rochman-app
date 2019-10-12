@@ -4,16 +4,12 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">
-                    <a href="{{ route('temuanaudit.create') }}" class="btn btn-success" title="Create Audit Plan">
-                        <i class="fas fa-plus mr-2"></i>Create Temuan Audit
-                    </a>
-                </div>
                 <div class="card-body">
                     <table id="datatable" class="table table-bordered table-striped table-responsive" style="width:100%">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>#</th>
+                                <th>Audit Plan</th>
                                 <th style="width: 20%"></th>
                             </tr>
                         </thead>
@@ -40,6 +36,7 @@ $(document).ready(function() {
         ajax: "{{ route('temuanaudit.datatable') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'id'},
+            {data: 'audit_plan_id', name: 'audit_plan_id'},
 
             {data: 'action', name: 'action', 'searchable': false, 'orderable': false, 'className': 'text-center'}
         ]

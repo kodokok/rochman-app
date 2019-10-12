@@ -15,7 +15,8 @@ class CreateTemuanAuditTable extends Migration
     {
         Schema::create('temuan_audit', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->unsignedInteger('audit_plan_id');
+            $table->unsignedInteger('audit_plan_id')->index();
+            $table->unsignedInteger('klausul_id')->index();
             $table->string('ketidaksesuaian', 100);
             $table->string('akar_masalah', 100);
             $table->string('tindakan_perbaikan_pencegahan');
