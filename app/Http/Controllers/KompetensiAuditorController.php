@@ -99,7 +99,7 @@ class KompetensiAuditorController extends Controller
 
     public function datatable()
     {
-        $model = KompetensiAuditor::all();
+        $model = KompetensiAuditor::with('user')->get();
         // dd($model);
         return DataTables::of($model)
             ->addColumn('auditor', function($model) {
