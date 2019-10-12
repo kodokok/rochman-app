@@ -40,11 +40,13 @@
                     {!! Form::email('email', null, ['class' => 'form-control'. ($errors->has('email') ? ' is-invalid': ''), 'id' => 'email', 'autocomplete'=>"new-password"]) !!}
                     <div id="error-new-email" class="invalid-feedback">{{ $errors->first('email') }}</div>
                 </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    {!! Form::text('password', ($user->exists ? '' : null), ['class' => 'form-control password' . ($errors->has('password') ? ' is-invalid': ''), 'id' => 'password', 'oninput' => "turnOnPasswordStyle()"]) !!}
-                    <div id="error-password" class="invalid-feedback">{{ $errors->first('password') }}</div>
-                </div>
+                @if (!$user->exists)
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        {!! Form::text('password', ($user->exists ? '' : null), ['class' => 'form-control password' . ($errors->has('password') ? ' is-invalid': ''), 'id' => 'password', 'oninput' => "turnOnPasswordStyle()"]) !!}
+                        <div id="error-password" class="invalid-feedback">{{ $errors->first('password') }}</div>
+                    </div>
+                @endif
                 <div class="form-group">
                     <label for="roles">Roles</label>
                     {!! Form::select('roles[]',$roles ,null, ['class' => 'form-control' . ($errors->has('roles') ? ' is-invalid': ''), 'id' => 'roles', 'multiple', 'style' => "width: 100%"]) !!}

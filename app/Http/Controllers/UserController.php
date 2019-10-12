@@ -6,7 +6,6 @@ use App\User;
 use Illuminate\Http\Request;
 use DataTables;
 use Spatie\Permission\Models\Role;
-use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 
 class UserController extends Controller
@@ -54,7 +53,7 @@ class UserController extends Controller
         $data = [
             'nama' => $request->nama,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => $request->password,
             'alamat' => $request->alamat,
             'phone' => $request->phone,
             'pendidikan' => $request->pendidikan,
@@ -122,17 +121,17 @@ class UserController extends Controller
         $data = [
             'nama' => $request->nama,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            // 'password' => $request->password,
             'alamat' => $request->alamat,
             'phone' => $request->phone,
             'pendidikan' => $request->pendidikan,
         ];
 
-        if ($request->has('password') && !empty($request->password)) {
+        // if ($request->has('password') && !empty($request->password)) {
 
-            dd($request->all());
-            $data['password'] = Hash::make($data['password']);
-        };
+            // dd($request->all());
+            // $data['password'] = Hash::make($data['password']);
+        // };
 
         if ($request->has('tanggal_masuk') && !empty($request->tanggal_masuk)) {
             $tanggal_masuk = Carbon::createFromFormat('m-d-Y', $request->tanggal_masuk)->format('Y-m-d');

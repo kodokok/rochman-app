@@ -11,7 +11,7 @@ use App\Departemen;
 use App\KompetensiAuditor;
 use App\AuditPlan;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -51,6 +51,11 @@ class User extends Authenticatable
     public function getMasaKerja()
     {
         return Carbon::parse($this->tanggal_masuk)->age;
+    }
+
+    public function setPasswordAttribute($value)
+    {
+        return Hash::make($value);
     }
 
     /**
