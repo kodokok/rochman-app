@@ -65,4 +65,9 @@ class AuditPlan extends Model
         return $this->belongsTo(User::class, 'auditor_lead_user_id');
     }
 
+    public function temuanAudits()
+    {
+        return $this->hasMany(TemuanAudit::class, 'audit_plan_id');
+    }
+
 }

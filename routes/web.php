@@ -22,6 +22,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('klausul/select/{id}', 'KlausulController@select')->name('klausul.select');
     Route::get('departemen/{id}/kadept', 'DepartemenController@kadept')->name('departemen.kadept');
 
+    Route::get('auditplan/datatable', 'AuditPlanController@datatable')->name('auditplan.datatable');
+    Route::resource('auditplan', 'AuditPlanController')->parameters(['auditplan' => 'auditplan']);;
+    Route::get('auditplan/{auditplan}/temuanaudit-add', 'AuditPlanController@addTemuanaudit')->name('auditplan.temuanaudit-add');
+    route::get('approval', 'ApprovalController@show')->name('approval.show');
+    route::get('approval/auditplan/datatable', 'ApprovalController@datatable')->name('approval.auditplan.datatable');
+
+    Route::get('temuanaudit/datatable', 'TemuanAuditController@datatable')->name('temuanaudit.datatable');
+    Route::resource('temuanaudit', 'TemuanAuditController')->parameters(['temuanaudit' => 'temuanaudit']);
+
     Route::group(['middleware' => ['role:admin,auditor,auditor_lead']], function () {
         // route datatable
 
@@ -40,12 +49,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('kompetensi/datatable', 'KompetensiAuditorController@datatable')->name('kompetensi.datatable');
         Route::resource('kompetensi', 'KompetensiAuditorController')->except(['show'])->parameters(['kompetensiAuditor' => 'kompetensi']);
 
-        Route::get('auditplan/datatable', 'AuditPlanController@datatable')->name('auditplan.datatable');
-        Route::resource('auditplan', 'AuditPlanController')->parameters(['auditplan' => 'auditplan']);;
-        Route::put('auditplan/{auditplan}/send', 'AuditPlanController@send')->name('auditplan.send');
-
-        route::get('approval', 'ApprovalController@show')->name('approval.show');
-        route::get('approval/auditplan/datatable', 'ApprovalController@datatable')->name('approval.auditplan.datatable');
         // route fetch data
 
 
@@ -54,8 +57,6 @@ Route::group(['middleware' => ['auth']], function () {
         // Route::get('auditplan/{auditplan}/pdf', 'AuditPlanController@pdf')->name('auditplan.pdf');
         // Route::get('auditplan/{auditplan}/print', 'AuditPlanController@print')->name('auditplan.print');
 
-        Route::get('temuanaudit/datatable', 'TemuanAuditController@datatable')->name('temuanaudit.datatable');
-        Route::resource('temuanaudit', 'TemuanAuditController')->parameters(['temuanaudit' => 'temuanaudit']);
         // Route::put('temuanaudit/{temuanaudit}/confirm', 'TemuanAuditsController@confirm')->name('temuanaudit.confirm');
     });
 });

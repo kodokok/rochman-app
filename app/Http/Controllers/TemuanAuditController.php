@@ -8,6 +8,7 @@ use App\TemuanAudit;
 use Illuminate\Http\Request;
 use DataTables;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
 
 class TemuanAuditController extends Controller
 {
@@ -29,14 +30,15 @@ class TemuanAuditController extends Controller
     public function create()
     {
         // $temuanaudit = new TemuanAudit();
-        $auditplans =  AuditPlan::with(['departemen', 'auditee'])->where('approval_kadept', 1)->get();
-        $auditplans_select = $auditplans->pluck('id', 'id')->unique();
-        $departemens_select = $auditplans->pluck('departemen.nama', 'departemen.id')->unique();
+        // $model =  AuditPlan::with(['departemen', 'auditee', 'klausuls'])->where('approval_kadept', 1)->get();
+        // $klausuls = [];
+        // $departemens_select = $model->pluck('departemen.nama', 'departemen.id')->unique();
 
         // dd($auditplans);
-        return view('pages.temuanaudit.create', compact([
-            'auditplans_select','departemens_select'
-        ]));
+        // return view('pages.auditplan.temuan-form', compact(['model', 'klausuls']));
+        // return view('pages.temuanaudit.create', compact([
+        //     'auditplans_select','departemens_select'
+        // ]));
     }
 
     /**
@@ -47,42 +49,26 @@ class TemuanAuditController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-        $this->validate($request, [
+        $rules = [
             'audit_plan_id' => 'required',
-            'ketidaksesuaian' => 'required|string|max:255',
-            'akar_masalah' => 'required|string|max:255',
-            'tindakan_perbaikan' => 'required|string|max:255',
-            'duedate_perbaikan' => 'required|date_format:m-d-Y',
-            'tindakan_pencegahan' => 'required|string|max:255',
-            'duedate_pencegahan' => 'required|date_format:m-d-Y',
-        ]);
-
-        $duedate_perbaikan =  Carbon::createFromFormat('m-d-Y', $request->duedate_perbaikan)->format('Y-m-d');
-        $duedate_pencegahan =  Carbon::createFromFormat('m-d-Y', $request->duedate_pencegahan)->format('Y-m-d');
-
-        TemuanAudit::create([
-            'audit_plan_id' => $request->audit_plan_id,
-            'ketidaksesuaian' => $request->ketidaksesuaian,
-            'akar_masalah' => $request->akar_masalah,
-            'tindakan_perbaikan' => $request->tindakan_perbaikan,
-            'duedate_perbaikan' => $duedate_perbaikan,
-            'tindakan_pencegahan' => $request->tindakan_pencegahan,
-            'duedate_pencegahan' => $duedate_pencegahan,
-            'status' => 0
-        ]);
-
-        $route = 'temuanaudit.index';
-        if ($request->action === 'Save & Create New') {
-            $route = 'temuanaudit.create';
-        }
-
-        $notification = [
-            'message' => 'Temuan Audit successfully created!',
-            'alert-type' => 'success'
+            'klausul_id' => 'required',
+            'ketidaksesuaian' => 'required|string|max:100',
+            'akar_masalah' => 'required|string|max:100',
+            'klasifikasi_temuan' => 'required',
         ];
 
-        return redirect()->route($route)->with($notification);
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'fail' => true,
+                'errors' => $validator->errors(),
+            ]);
+        }
+        // dd($request->all());
+        TemuanAudit::create($request->all());
+
+        return response()->json(['success' => 'success'], 200);
     }
 
     /**
@@ -217,7 +203,40 @@ class TemuanAuditController extends Controller
 
     public function datatable()
     {
-        $model = TemuanAudit::all();
+        $user = auth()->user();
+        // dd($user->getRoleNames());
+        $model = [];
+
+        // $auditplans = AuditPlan::with('temuanAudits')
+        //     ->whereHas('temuanAudits')
+        //     ->where('auditee_user_id', $user->id)
+        //     ->get();
+        // dd($auditplans);
+        // $model = TemuanAudit::with(['auditplan' => function($q) use ($user) {
+        //     $q->where('auditee_user_id', $user->id);
+        // }])->get();
+        // $model = TemuanAudit::whereHas('auditplan', function ($q) use ($user) {
+        //     $q->where('auditee_user_id', $user->id);
+        // })->get();
+
+        // dd($model);
+
+        switch (true) {
+            case $user->hasAnyRole(['admin', 'auditor_lead', 'direksi', 'auditor']):
+                $model = TemuanAudit::with(['auditplan', 'auditplan.auditee', 'klausul'])->get();
+                break;
+            default:
+                $model = TemuanAudit::whereHas('auditplan', function ($q) use ($user) {
+                    $q->where('auditee_user_id', $user->id);
+                })->with(['auditplan', 'auditplan.auditee', 'klausul'])->get();
+                # code...
+                break;
+        }
+        // if ($user->hasRole('admin')) {
+        //     $model = TemuanAudit::all();
+        // }
+        // die;
+        // $model = TemuanAudit::all();
         // $model = TemuanAudit::findOrFail(1)->get();
         // dd($model->auditplan->catatan);
 

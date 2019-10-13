@@ -10,33 +10,34 @@
 
 @section('content')
 
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <table id="datatables" class="table table-bordered table-striped table-responsive" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th style="width: 20%">Departement</th>
-                                <th style="width: 5%">Status</th>
-                                <th style="width: 5%">Tanggal</th>
-                                <th style="width: 5%">Waktu</th>
-                                <th style="width: 15%">Auditee</th>
-                                <th style="width: 15%">Auditor</th>
-                                <th style="width: 15%">Auditor Leader</th>
-                                <th style="width: 5%">Klausul</th>
-                                <th style="width: 15%"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <table id="datatables" class="table table-bordered table-striped table-responsive" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th style="width: 20%">Departement</th>
+                            <th style="width: 5%">Status</th>
+                            <th style="width: 5%">Tanggal</th>
+                            <th style="width: 5%">Waktu</th>
+                            <th style="width: 15%">Auditee</th>
+                            <th style="width: 15%">Auditor</th>
+                            <th style="width: 15%">Auditor Leader</th>
+                            <th style="width: 5%">Klausul</th>
+                            <th style="width: 15%"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+</div>
 
+@include('partials.modal')
 @endsection
 
 @push('scripts')
@@ -47,6 +48,9 @@ $(document).ready(function() {
         responsive: true,
         processing: true,
         serverSide: true,
+        search: {
+            regex: true,
+        },
         ajax: "{{ route('auditplan.datatable') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'id', 'searchable': false, 'orderable': false},
@@ -63,6 +67,7 @@ $(document).ready(function() {
             {data: 'action', name: 'action', 'searchable': false, 'orderable': false, 'className': 'text-center'}
         ]
     });
+
 });
 </script>
 @endpush

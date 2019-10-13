@@ -120,8 +120,18 @@ class AuditPlanController extends Controller
         $departemen = Departemen::pluck('kode', 'id');
         $klausul = Klausul::pluck('nama', 'id');
         // dd($model->klausuls()->get());
+        $klausul_temuan = [];
+        foreach ($model->klausuls as $klausul) {
+
+            $match = ['audit_plan_id' => $model->id, 'klausul_id' => $klausul->id];
+            $temuan = TemuanAudit::where($match)->count();
+            if ($temuan !== 0) {
+                $klausul_temuan[$klausul->id] = $klausul->nama;
+            }
+        }
+        // dd($klausul_temuan);
         return view('pages.auditplan.edit', compact([
-            'model', 'klausul', 'departemen', 'auditee', 'auditor', 'auditorLead', 'kadept'
+            'model', 'klausul', 'departemen', 'auditee', 'auditor', 'auditorLead', 'kadept', 'klausul_temuan'
         ]));
     }
 
@@ -304,6 +314,24 @@ class AuditPlanController extends Controller
         return $pdf->download($pdfname);
     }
 
+    public function addTemuanaudit(Auditplan $auditplan)
+    {
+        $data = AuditPlan::with('klausuls')->find($auditplan->id);
+        // $klausuls = $data->klausuls->pluck('nama', 'id');
+        $klausuls = [];
+        foreach ($data->klausuls as $klausul) {
+
+            $match = ['audit_plan_id' => $data->id, 'klausul_id' => $klausul->id];
+            $temuan = TemuanAudit::where($match)->count();
+            if ($temuan == 0) {
+                $klausuls[$klausul->id] = $klausul->nama;
+
+            }
+        }
+
+        return view('pages.auditplan.temuan-form', compact(['auditplan', 'klausuls']));
+    }
+
     public function datatable()
     {
         $model = AuditPlan::with([
@@ -329,8 +357,7 @@ class AuditPlanController extends Controller
             ->addColumn('action', function ($model) {
                 return view('pages.auditplan.action', [
                     'model' => $model,
-                    'url_send' => route('auditplan.send', $model->id),
-                    // 'url_show' => route('auditplan.show', $model->id),
+                    'url_temuanaudit' => route('auditplan.temuanaudit-add', $model->id),
                     'url_edit' => route('auditplan.edit', $model->id),
                     'url_destroy' => route('auditplan.destroy', $model->id),
                 ]);

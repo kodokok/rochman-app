@@ -3,9 +3,7 @@
 @section('breadcrumbs', Breadcrumbs::render('temuanaudit'))
 @section('page-title', 'Temuan Audit List')
 @section('page-action')
-<a href="{{ route('temuanaudit.create') }}" class="btn btn-success float-right" title="Create New" style="margin-right: 5px;">
-    <i class="fas fa-plus mr-2"></i>Create New
-</a>
+
 @endsection
 
 @section('content')
@@ -18,7 +16,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Audit Plan ID</th>
-                                <th>Klausul ID</th>
+                                <th>Klausul</th>
                                 <th>Ketidaksesuaian</th>
                                 <th>Akar Masalah</th>
                                 <th>Klasifikasi</th>
@@ -50,7 +48,7 @@ $(document).ready(function() {
         columns: [
             {data: 'id', name: 'id'},
             {data: 'audit_plan_id', name: 'audit_plan_id'},
-            {data: 'klausul_id', name: 'klausul_id'},
+            {data: 'klausul.nama', name: 'klausul_nama'},
             {data: 'ketidaksesuaian', name: 'ketidaksesuaian'},
             {data: 'akar_masalah', name: 'akar_masalah'},
             {data: 'klasifikasi_temuan', name: 'klasifikasi'},

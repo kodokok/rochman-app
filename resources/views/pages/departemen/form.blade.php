@@ -1,7 +1,6 @@
 {!! Form::model($departemen, [
     'route' => $departemen->exists ? ['departemen.update', $departemen->id] : 'departemen.store',
     'method' => $departemen->exists ? 'PUT' : 'POST',
-    'files' => true,
     'autocomplete' => 'off'
 ]) !!}
 

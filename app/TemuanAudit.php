@@ -41,4 +41,9 @@ class TemuanAudit extends Model
     {
         return $this->belongsTo(AuditPlan::class, 'audit_plan_id');
     }
+
+    public function klausul()
+    {
+        return $this->belongsTo(Klausul::class, 'klausul_id');
+    }
 }

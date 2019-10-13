@@ -1,7 +1,7 @@
 {!! Form::model($model, [
 'route' => $model->exists ? ['kompetensi.update', $model->id] : 'kompetensi.store',
 'method' => $model->exists ? 'PUT' : 'POST',
-'files' => true
+'autocomplete' => 'off',
 ]) !!}
 
 <div class="form-group row">

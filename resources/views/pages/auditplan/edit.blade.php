@@ -142,7 +142,11 @@
                                         <td><input type="hidden" name="klausul_id[]" value="{{ $item->id }}">{{ $item->id }}</td>
                                         <td>{{ $item->objektif_audit }}</td>
                                         <td>{{ $item->nama }}</td>
-                                        <td><button id="delete-row" class="btn btn-sm btn-danger"><i class="fas fa-times"></i></button></td>
+                                        <td>
+                                        @if (in_array($item->nama, $klausul_temuan) == 0)
+                                            <button id="delete-row" class="btn btn-sm btn-danger"><i class="fas fa-times"></i></button>
+                                        @endif
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

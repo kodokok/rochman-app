@@ -21,7 +21,7 @@ class UserTableSeeder extends Seeder
         $admin = User::create([
             'nama' => 'Rochman Hidayat',
             'email' => 'admin@mail.com',
-            'password' => Hash::make('admin'),
+            'password' => 'admin',
             'alamat' => $faker->address,
             'phone' => '000-000-0000',
             'pendidikan' => 'S1',
@@ -33,7 +33,7 @@ class UserTableSeeder extends Seeder
             User::create([
                 'nama' => $faker->name,
                 'email' => $faker->safeEmail,
-                'password' => Hash::make('123456'),
+                'password' => '123456',
                 'alamat' => $faker->streetAddress,
                 'phone' => $faker->phoneNumber,
                 'pendidikan' => $faker->randomElement($pendidikan),
