@@ -25,14 +25,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('auditplan/datatable', 'AuditPlanController@datatable')->name('auditplan.datatable');
     Route::resource('auditplan', 'AuditPlanController')->parameters(['auditplan' => 'auditplan']);;
     Route::get('auditplan/{auditplan}/temuanaudit-add', 'AuditPlanController@addTemuanaudit')->name('auditplan.temuanaudit-add');
-    route::get('approval', 'ApprovalController@show')->name('approval.show');
-    route::get('approval/auditplan/datatable', 'ApprovalController@datatable')->name('approval.auditplan.datatable');
+    Route::put('auditplan/{auditplan}/approved', 'AuditPlanController@approved')->name('auditplan.approved');
+    // route::get('approval', 'ApprovalController@show')->name('approval.show');
+    // route::get('approval/auditplan/datatable', 'ApprovalController@datatable')->name('approval.auditplan.datatable');
 
     Route::get('temuanaudit/datatable', 'TemuanAuditController@datatable')->name('temuanaudit.datatable');
     Route::resource('temuanaudit', 'TemuanAuditController')->parameters(['temuanaudit' => 'temuanaudit']);
 
+    // route administrator
     Route::group(['middleware' => ['role:admin,auditor,auditor_lead']], function () {
-        // route datatable
 
         Route::resource('user', 'UserController')->except(['show']);
         Route::get('user/datatable', 'UserController@datatable')->name('user.datatable');

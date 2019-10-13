@@ -31,12 +31,6 @@
                         <p>Temuan Audit</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route('approval.show') }}" class="nav-link {{ active(['approval.*']) }}">
-                        <i class="nav-icon fas fa-list-ul"></i>
-                        <p>Approval Request</p>
-                    </a>
-                </li>
                 @hasanyrole('admin')
                 <li class="nav-header">DATA</li>
                 <li class="nav-item">

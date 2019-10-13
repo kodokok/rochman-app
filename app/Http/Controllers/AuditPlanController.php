@@ -218,77 +218,22 @@ class AuditPlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $id)
+    public function show(Request $request, AuditPlan $auditplan)
     {
-        $auditplan = AuditPlan::findOrFail($id);
+        $model = AuditPlan::with([
+            'departemen', 'departemen.kadept', 'klausuls', 'auditee', 'auditor', 'auditorLead'
+        ])->findOrFail($auditplan->id);
 
-        return view('auditplan.confirm', compact(['auditplan']));
+        return view('pages.auditplan.show', compact([
+            'model'
+        ]));
     }
 
-    public function send(Request $request, $id)
+    public function approved(Request $request, AuditPlan $auditplan)
     {
         return false;
     }
 
-    public function confirm(Request $request, $id)
-    {
-
-        $auditplan = AuditPlan::findOrFail($id);
-
-        switch ($request->action) {
-            case 'pending':
-                $auditplan->update([
-                    'approval' => 0,
-                    'remarks' => $request->remarks
-                ]);
-
-                break;
-            case 'reschedule':
-                $this->validate($request, [
-                    'new_tanggal' => 'required|date_format:m-d-Y',
-                    'new_waktu' => 'required|date_format:H:i:s',
-                    'remarks' => 'required|string'
-                ]);
-
-                $new_tanggal =  Carbon::createFromFormat('m-d-Y', $request->new_tanggal)->format('Y-m-d');
-                $new_waktu =  Carbon::createFromFormat('H:i:s', $request->new_waktu)->format('H:i:s');
-
-                $auditplan->update([
-                    'tanggal' => $new_tanggal,
-                    'waktu' => $new_waktu,
-                    'remarks' => $request->remarks,
-                    'approval' => 1,
-                ]);
-
-                break;
-            case 'approve':
-                $auditplan->update([
-                    'approval' => 2,
-                    'remarks' => $request->remarks
-                ]);
-
-                break;
-            case 'reject':
-                $this->validate($request, [
-                    'remarks' => 'required|string'
-                ]);
-                $auditplan->update([
-                    'approval' => 3,
-                    'remarks' => $request->remarks
-                ]);
-                break;
-        }
-
-        $notification = [
-            'message' => 'Audit Plan successfully updated!',
-            'alert-type' => 'info'
-        ];
-
-        if ($request->has('redirect_to')) {
-            return redirect($request->redirect_to)->with($notification);
-        }
-        return redirect()->back()->with($notification);
-    }
 
     public function report(Request $request, AuditPlan $auditplan)
     {
@@ -358,6 +303,8 @@ class AuditPlanController extends Controller
                 return view('pages.auditplan.action', [
                     'model' => $model,
                     'url_temuanaudit' => route('auditplan.temuanaudit-add', $model->id),
+                    'url_show' => route('auditplan.show', $model->id),
+                    'url_approve' => route('auditplan.approved', $model->id),
                     'url_edit' => route('auditplan.edit', $model->id),
                     'url_destroy' => route('auditplan.destroy', $model->id),
                 ]);
