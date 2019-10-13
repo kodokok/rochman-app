@@ -1,118 +1,84 @@
 @extends('layouts.app')
 
-@section('content')
-<!-- Content Header (Page header) -->
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>{{ $temuanaudit->exists ? 'Edit' : 'Create'}} Temuan Audit</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="{{ route('app') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('temuanaudit.index') }}">Temuan Audit</a></li>
-                    <li class="breadcrumb-item active">{{ $temuanaudit->exists ? 'Edit' : 'Create'}}</li>
-                </ol>
-            </div>
-        </div>
-    </div><!-- /.container-fluid -->
-</section>
-
-<!-- Main content -->
-<section class="content">
-    <div class="row">
-        @if ($temuanaudit->exists)
-            <div class="col-md-4">
-                @include('auditplan.details')
-            </div>
-            <div class="col-md-4">
-                @include('auditplan.detail-team')
-            </div>
-        @else
-            <div class="col-md-6">
-                @include('temuanaudit.select-auditplan')
-            </div>
-        @endif
-        <div class="{{ $temuanaudit->exists ? 'col-md-4' : 'col-md-6'}}">
-            {!! Form::model($temuanaudit, [
-                'route' => $temuanaudit->exists ? ['temuanaudit.update', $temuanaudit->id] : 'temuanaudit.store',
-                'method' => $temuanaudit->exists ? 'PUT' : 'POST',
-                'autocomplete' => 'off'
-            ]) !!}
-
-            @include('temuanaudit.form', ['disabled' => false])
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12 mb-2">
-            <a href="{{ route('temuanaudit.index') }}" class="btn btn-secondary" style="width: 120px;">Cancel</a>
-            @if ($temuanaudit->exists)
-                <input type="submit" value="Update" class="btn btn-success float-right mr-2" style="width: 120px;">
-            @else
-                <input type="submit" name="action" value="Save" class="btn btn-success float-right mr-2" style="width: 150px;">
-                <input type="submit" name="action" value="Save & Create New" class="btn btn-warning float-right mr-2" style="width: 150px;">
-            @endif
-        </div>
-    </div>
-    {!! Form::close() !!}
-</section>
-<!-- /.content -->
-
+@section('breadcrumbs', Breadcrumbs::render('temuanaudit.create'))
+@section('page-title', 'Create Temuan Audit')
+@section('page-action')
+    <input id="save" type="submit" value="Create" class="btn btn-success float-right"
+        style="width: 120px;">
+    <a id="cancel" href="{{ old('redirect_to', url()->previous()) }}" class="btn btn-secondary float-right"
+        style="margin-right: 5px; width: 120px;">Cancel</a>
 @endsection
 
-@push('scripts')
-<script>
-$(document).ready(function(){
+@section('content')
+{!! Form::open() !!}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">General</h3>
+                <div class="card-tools">
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fas fa-minus"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="departemen_id">Departemen</label>
+                    {!! Form::select('departemen_id', $departemens_select, null, ['class' => 'form-control']) !!}
+                    <div id="error-departemen_id" class="invalid-feedback"></div>
+                </div>
+                <div class="form-group">
+                    <label for="audit_plan_id">Audit Plan ID</label>
+                    {!! Form::select('audit_plan_id', $auditplans_select, null, ['class' => 'form-control']) !!}
+                </div>
+                <div class="form-group">
+                    <label for="audit_plan_id">Klausul ID</label>
+                    {!! Form::select('audit_plan_id', $auditplans_select, null, ['class' => 'form-control']) !!}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">General</h3>
+                <div class="card-tools">
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fas fa-minus"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    {!! Form::label('ketidaksesuaian') !!}
+                    {!! Form::textarea('ketidaksesuaian', null, ['class' => 'form-control', 'rows' => '3']) !!}
+                    <div id="error-ketidaksesuaian" class="invalid-feedback"></div>
+                </div>
+                <div class="form-group">
+                    {!! Form::label('akar_masalah') !!}
+                    {!! Form::textarea('akar_masalah', null, ['class' => 'form-control', 'rows' => '3']) !!}
+                    <div id="error-akar_masalah" class="invalid-feedback"></div>
+                </div>
+                <div class="form-group">
+                    {!! Form::label('klasifikasi', null, ['class' => 'mr-3']) !!}
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
+                        <label class="form-check-label" for="inlineRadio1">Minor</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                        <label class="form-check-label" for="inlineRadio2">Mayor</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
-    $('#select_departement').select2({
-        width:'100%',
-        placeholder: 'Please select departement',
-    });
-    $('#select_objektif').select2({
-        width:'100%',
-        placeholder: 'Please select objektif plan',
-    });
 
-    $('#select_departement').on('change', function() {
-        var departement_id = $(this).val();
-        var url = '{{ route("auditplan.departement", ":id") }}'.replace(':id', departement_id);
-
-        $.get(url, function(data) {
-
-            $.each(data, function(index, value) {
-                var option = new Option(value.objektif_audit, value.id);
-                $("#select_objektif").append(option);
-            });
-
-        });
-
-        $("#select_objektif option[value]").remove();
-
-        $("#select_objektif").val("").trigger("change");
-    });
-
-    var oldSelectedObjektif = $('#audit_plan_id');
-    if (oldSelectedObjektif !== '') {
-        $("#select_objektif").val(oldSelectedObjektif).trigger("change");
-    }
-
-    $('#select_objektif').on('change', function() {
-        var value = $(this).val();
-
-        $('#audit_plan_id').val(value);
-    });
-
-    // datetimepicker due date perbaikan
-    $('#datetimepicker1').datetimepicker({
-        format: 'MM-DD-YYYY',
-    });
-
-    // datetimepicker due date pencegahan
-    $('#datetimepicker2').datetimepicker({
-        format: 'MM-DD-YYYY',
-    });
-});
-</script>
-@endpush
+{!! Form::close() !!}
+@endsection

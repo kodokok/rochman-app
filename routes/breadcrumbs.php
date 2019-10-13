@@ -64,9 +64,14 @@ Breadcrumbs::register('auditplan.edit', function ($breadcrumbs) {
     $breadcrumbs->push('edit');
 });
 
-Breadcrumbs::register('temuanaudit.index', function ($breadcrumbs) {
+Breadcrumbs::register('temuanaudit', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
     $breadcrumbs->push('temuan audit', route('temuanaudit.index'));
+});
+
+Breadcrumbs::register('temuanaudit.create', function ($breadcrumbs) {
+    $breadcrumbs->parent('temuanaudit');
+    $breadcrumbs->push('create', route('temuanaudit.create'));
 });
 
 Breadcrumbs::register('approval.show', function ($breadcrumbs) {

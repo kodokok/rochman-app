@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AuditPlan;
-use App\Departement;
+use App\Departemen;
 use App\TemuanAudit;
 use Illuminate\Http\Request;
 use DataTables;
@@ -28,10 +28,15 @@ class TemuanAuditController extends Controller
      */
     public function create()
     {
-        $temuanaudit = new TemuanAudit();
-        $departement = Departement::pluck('name', 'id');
+        // $temuanaudit = new TemuanAudit();
+        $auditplans =  AuditPlan::with(['departemen', 'auditee'])->where('approval_kadept', 1)->get();
+        $auditplans_select = $auditplans->pluck('id', 'id')->unique();
+        $departemens_select = $auditplans->pluck('departemen.nama', 'departemen.id')->unique();
+
         // dd($auditplans);
-        return view('temuanaudit.create', compact(['temuanaudit','departement']));
+        return view('pages.temuanaudit.create', compact([
+            'auditplans_select','departemens_select'
+        ]));
     }
 
     /**
@@ -227,7 +232,7 @@ class TemuanAuditController extends Controller
                     'url_destroy' => route('temuanaudit.destroy', $model->id),
                 ]);
             })
-            ->addIndexColumn()
+            // ->addIndexColumn()
             ->rawColumns(['action'])
             ->make(true);
     }

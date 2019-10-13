@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('breadcrumbs', Breadcrumbs::render('temuanaudit'))
+@section('page-title', 'Temuan Audit List')
+@section('page-action')
+<a href="{{ route('temuanaudit.create') }}" class="btn btn-success float-right" title="Create New" style="margin-right: 5px;">
+    <i class="fas fa-plus mr-2"></i>Create New
+</a>
+@endsection
+
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -40,7 +48,7 @@ $(document).ready(function() {
         scrollX: true,
         ajax: "{{ route('temuanaudit.datatable') }}",
         columns: [
-            {data: 'DT_RowIndex', name: 'id'},
+            {data: 'id', name: 'id'},
             {data: 'audit_plan_id', name: 'audit_plan_id'},
             {data: 'klausul_id', name: 'klausul_id'},
             {data: 'ketidaksesuaian', name: 'ketidaksesuaian'},
