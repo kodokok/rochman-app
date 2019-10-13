@@ -207,23 +207,14 @@ class TemuanAuditController extends Controller
         // dd($user->getRoleNames());
         $model = [];
 
-        // $auditplans = AuditPlan::with('temuanAudits')
-        //     ->whereHas('temuanAudits')
-        //     ->where('auditee_user_id', $user->id)
-        //     ->get();
-        // dd($auditplans);
-        // $model = TemuanAudit::with(['auditplan' => function($q) use ($user) {
-        //     $q->where('auditee_user_id', $user->id);
-        // }])->get();
-        // $model = TemuanAudit::whereHas('auditplan', function ($q) use ($user) {
-        //     $q->where('auditee_user_id', $user->id);
-        // })->get();
-
-        // dd($model);
-
         switch (true) {
             case $user->hasAnyRole(['admin', 'auditor_lead', 'direksi', 'auditor']):
                 $model = TemuanAudit::with(['auditplan', 'auditplan.auditee', 'klausul'])->get();
+                break;
+            case $user->hasAnyRole(['kadept']):
+                $model = TemuanAudit::whereHas('auditplan.departemen.kadept', function ($q) use ($user) {
+                    $q->where('kadept_user_id', $user->id);
+                })->with(['auditplan', 'auditplan.auditee', 'klausul'])->get();
                 break;
             default:
                 $model = TemuanAudit::whereHas('auditplan', function ($q) use ($user) {
@@ -232,18 +223,8 @@ class TemuanAuditController extends Controller
                 # code...
                 break;
         }
-        // if ($user->hasRole('admin')) {
-        //     $model = TemuanAudit::all();
-        // }
-        // die;
-        // $model = TemuanAudit::all();
-        // $model = TemuanAudit::findOrFail(1)->get();
-        // dd($model->auditplan->catatan);
 
         return DataTables::of($model)
-            // ->addColumn('auditplan_objectif_audit', function ($model) {
-            //     return $model->audit_plan->objektif_audit;
-            // })
             ->addColumn('action', function ($model) {
                 return view('pages.temuanaudit.action', [
                     'model' => $model,

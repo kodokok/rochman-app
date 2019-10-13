@@ -3,9 +3,11 @@
 @section('breadcrumbs', Breadcrumbs::render('auditplan'))
 @section('page-title', 'Audit Plan List')
 @section('page-action')
+@hasanyrole('admin|auditor_lead|auditor')
 <a href="{{ route('auditplan.create') }}" class="btn btn-success float-right" title="Create New" style="margin-right: 5px;">
     <i class="fas fa-plus mr-2"></i>Create New
 </a>
+@endhasrole
 @endsection
 
 @section('content')

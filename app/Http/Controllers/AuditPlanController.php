@@ -25,7 +25,6 @@ class AuditPlanController extends Controller
      */
     public function index()
     {
-        // session()->flush();
         return view('pages.auditplan.index');
     }
 
@@ -36,6 +35,10 @@ class AuditPlanController extends Controller
      */
     public function create()
     {
+        if (!auth()->user()->hasAnyRole(['admin', 'auditor_lead', 'auditor'])) {
+            return back();
+        }
+
         $departemen = Departemen::pluck('kode','id');
         $klausul = Klausul::pluck('nama', 'id');
         $auditee = User::pluck('nama', 'id');
@@ -112,6 +115,10 @@ class AuditPlanController extends Controller
      */
     public function edit(AuditPlan $auditplan)
     {
+        if (!auth()->user()->hasAnyRole(['admin', 'auditor_lead', 'auditor'])) {
+            return back();
+        }
+
         $model = $auditplan;
         $kadept = $auditplan->departemen->kadept->nama;
         $auditee = User::with('roles')->pluck('nama', 'id');
@@ -279,10 +286,33 @@ class AuditPlanController extends Controller
 
     public function datatable()
     {
-        $model = AuditPlan::with([
-            'departemen', 'auditee', 'auditor', 'auditorLead', 'klausuls'
-        ])->get();
-        // dd($model->auditee);
+        $user = auth()->user();
+        $model = [];
+
+        switch (true) {
+            case $user->hasAnyRole(['admin', 'auditor_lead', 'auditor', 'direksi']):
+                $model = AuditPlan::with([
+                    'departemen', 'auditee', 'auditor', 'auditorLead', 'klausuls'
+                ])->get();
+                break;
+            case $user->hasAnyRole(['kadept']):
+                $model = AuditPlan::whereHas('departemen.kadept', function ($q) use ($user) {
+                    $q->where('kadept_user_id', $user->id);
+                })->with([
+                    'departemen', 'auditee', 'auditor', 'auditorLead', 'klausuls'
+                ])->get();
+                # code...
+                break;
+            default:
+                $model = AuditPlan::whereHas('auditee', function ($q) use ($user) {
+                    $q->where('id', $user->id);
+                })->with([
+                    'departemen', 'auditee', 'auditor', 'auditorLead', 'klausuls'
+                ])->get();
+                # code...
+                break;
+        }
+
         return DataTables::of($model)
             ->addColumn('departemen', function ($model) {
                 return $model->departemen->nama;
