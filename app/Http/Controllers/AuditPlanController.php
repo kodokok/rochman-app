@@ -204,7 +204,6 @@ class AuditPlanController extends Controller
      */
     public function destroy(AuditPlan $auditplan)
     {
-        // $auditplan = AuditPlan::with('klausuls')->find($auditplan->id);
         try {
             //code...
             $auditplan->delete();
