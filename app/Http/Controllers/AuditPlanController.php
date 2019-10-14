@@ -238,6 +238,7 @@ class AuditPlanController extends Controller
 
     public function approved(Request $request, AuditPlan $auditplan)
     {
+        dd($request->all());
         return false;
     }
 

@@ -2,7 +2,6 @@
 
 @section('content')
 
-<!-- Main content -->
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -34,13 +33,9 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- /.card-body -->
             </div>
-            <!-- /.card -->
         </div>
     </div>
-    <!-- /.row -->
-<!-- /.content -->
 
 @endsection
 
@@ -66,6 +61,46 @@ $(document).ready(function() {
             {data: 'remarks', name: 'remarks'},
             {data: 'action', name: 'action', 'searchable': false, 'orderable': false, 'className': 'text-center'}
         ]
+    });
+
+    $("body").on("click", ".btn-confirm", function(event) {
+        event.preventDefault();
+
+        var me = $(this);
+        var url = me.attr('href');
+        var title = me.attr('title');
+        var csrf_token = $('meta[name="csrf-token"]').attr('content');
+
+        Swal.fire({
+            title: 'Apakah and ingin menghapus ' + title + '?',
+            text: "Data yang terhapus tidak bisa dikembalikan!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, hapus!'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: {
+                        '_method': 'DELETE',
+                        '_token': csrf_token
+                    },
+                    success: function(response) {
+                        // console.log(...response);
+                        $('#datatable').DataTable().ajax.reload();
+                        window.location.href = response.redirect_to;
+                        // toastr.warning('Deleted!', 'Data telah berhasil dihapus.');
+                    },
+                    error: function(status)
+                    {
+                        console.log(status);
+                    }
+                });
+            }
+        });
     });
 });
 </script>

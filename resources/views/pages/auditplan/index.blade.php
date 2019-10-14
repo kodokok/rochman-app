@@ -45,14 +45,12 @@
 @push('scripts')
 <script>
 $(document).ready(function() {
+
     $('#datatables').DataTable({
         stateSave: true,
         responsive: true,
         processing: true,
         serverSide: true,
-        search: {
-            regex: true,
-        },
         ajax: "{{ route('auditplan.datatable') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'id', 'searchable': false, 'orderable': false},
@@ -70,6 +68,44 @@ $(document).ready(function() {
         ]
     });
 
+    $("body").on("click", ".btn-approve", function(event) {
+        event.preventDefault();
+
+        var me = $(this);
+        var url = me.attr('href');
+        var title = me.attr('title');
+        var csrf_token = $('meta[namse="csrf-token"]').attr('content');
+
+        Swal.fire({
+            title: 'Apakah and ingin meng-' + title + '?',
+            type: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, approved!'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: {
+                        '_method': 'PUT',
+                        '_token': csrf_token
+                    },
+                    success: function(response) {
+                        // console.log(...response);
+                        //$('#datatable').DataTable().ajax.reload();
+                        //window.location.href = response.redirect_to;
+                        // toastr.warning('Deleted!', 'Data telah berhasil dihapus.');
+                    },
+                    error: function(status)
+                    {
+                        console.log(status);
+                    }
+                });
+            }
+        });
+    });
 });
 </script>
 @endpush
