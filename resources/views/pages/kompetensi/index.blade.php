@@ -40,6 +40,7 @@
             responsive: true,
             processing: true,
             serverSide: true,
+            stateSave: true,
             ajax: "{{ route('kompetensi.datatable') }}",
             columns: [
                 {data: 'DT_RowIndex', name: 'id', 'searchable': false, 'orderable': false},

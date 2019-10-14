@@ -74,7 +74,7 @@ $(document).ready(function() {
         var me = $(this);
         var url = me.attr('href');
         var title = me.attr('title');
-        var csrf_token = $('meta[namse="csrf-token"]').attr('content');
+        var csrf_token = $('meta[name="csrf-token"]').attr('content');
 
         Swal.fire({
             title: 'Apakah and ingin meng-' + title + '?',
@@ -93,14 +93,12 @@ $(document).ready(function() {
                         '_token': csrf_token
                     },
                     success: function(response) {
-                        // console.log(...response);
-                        //$('#datatable').DataTable().ajax.reload();
-                        //window.location.href = response.redirect_to;
-                        // toastr.warning('Deleted!', 'Data telah berhasil dihapus.');
+                        window.location.href = response.redirect_to;
                     },
-                    error: function(status)
+                    error: function(xhr, status, errorThrown)
                     {
-                        console.log(status);
+                        var res = xhr.responseJSON;
+                        toastr.error(res.message);
                     }
                 });
             }
