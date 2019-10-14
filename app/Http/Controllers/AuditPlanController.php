@@ -115,7 +115,7 @@ class AuditPlanController extends Controller
      */
     public function edit(AuditPlan $auditplan)
     {
-        if (!auth()->user()->hasAnyRole(['admin', 'auditor_lead', 'auditor'])) {
+        if (!auth()->user()->hasAnyRole(['admin', 'auditor_lead', 'auditor', 'kadept'])) {
             return back();
         }
 
@@ -131,8 +131,8 @@ class AuditPlanController extends Controller
         foreach ($model->klausuls as $klausul) {
 
             $match = ['audit_plan_id' => $model->id, 'klausul_id' => $klausul->id];
-            $temuan = TemuanAudit::where($match)->count();
-            if ($temuan !== 0) {
+            $exists = TemuanAudit::where($match)->exists();
+            if ($exists) {
                 $klausul_temuan[$klausul->id] = $klausul->nama;
             }
         }
@@ -160,6 +160,8 @@ class AuditPlanController extends Controller
             'waktu' => 'required|date_format:H:i:s',
             'klausul_id' => 'required'
         ];
+
+        // check if user kadept
 
         $validator = Validator::make($request->all(), $rules);
 
@@ -203,7 +205,6 @@ class AuditPlanController extends Controller
     public function destroy(AuditPlan $auditplan)
     {
         // $auditplan = AuditPlan::with('klausuls')->find($auditplan->id);
-
         try {
             //code...
             $auditplan->delete();
@@ -236,10 +237,26 @@ class AuditPlanController extends Controller
         ]));
     }
 
-    public function approved(Request $request, AuditPlan $auditplan)
+    public function approved(AuditPlan $auditplan)
     {
-        dd($request->all());
-        return false;
+        $user = auth()->user();
+        $check = $auditplan->whereHas('departemen', function($q) use ($user) {
+            $q->where('departemen.kadept_user_id', $user->id);
+        })->exists();
+
+        if (!$check && !($user->hasAnyRole(['admin']))) {
+            return abort(422, 'Unauthorized action.');
+        }
+
+        $auditplan->update([
+            'approval_kadept' => 1
+        ]);
+
+        session()->flash('message', 'Audit Plan '. $auditplan->id . ' telah diapproved!');
+        session()->flash('alert-type', 'success');
+
+        $redirect_to = ['redirect_to' => route('auditplan.index')];
+        return response()->json($redirect_to);
     }
 
 
@@ -275,8 +292,8 @@ class AuditPlanController extends Controller
         foreach ($data->klausuls as $klausul) {
 
             $match = ['audit_plan_id' => $data->id, 'klausul_id' => $klausul->id];
-            $temuan = TemuanAudit::where($match)->count();
-            if ($temuan == 0) {
+            $exists = TemuanAudit::where($match)->exists();
+            if (!$exists) {
                 $klausuls[$klausul->id] = $klausul->nama;
 
             }
@@ -305,11 +322,11 @@ class AuditPlanController extends Controller
                 # code...
                 break;
             default:
-                $model = AuditPlan::whereHas('auditee', function ($q) use ($user) {
-                    $q->where('id', $user->id);
-                })->with([
-                    'departemen', 'auditee', 'auditor', 'auditorLead', 'klausuls'
-                ])->get();
+                // $model = AuditPlan::whereHas('auditee', function ($q) use ($user) {
+                //     $q->where('id', $user->id);
+                // })->with([
+                //     'departemen', 'auditee', 'auditor', 'auditorLead', 'klausuls'
+                // ])->get();
                 # code...
                 break;
         }

@@ -32,12 +32,16 @@
                 <div class="form-group row">
                     <div class="col-sm-6">
                         <label for="departemen_id">Departemen</label>
-                        {{ Form::select('departemen_id', $departemen, null, ['class' => 'form-control', 'id' => 'departemen_id', 'placeholder' => 'Pilih departemen...']) }}
+                        @hasanyrole('admin|auditor_lead|auditor')
+                            {{ Form::select('departemen_id', $departemen, null, ['class' => 'form-control', 'id' => 'departemen_id', 'placeholder' => 'Pilih departemen...']) }}
+                        @else
+                            {{ Form::text('departemen', ($model->departemen->kode . ' - ' . $model->departemen->nama), ['class' => 'form-control', 'disabled']) }}
+                        @endhasanyrole
                         <div id="error-departemen_id" class="invalid-feedback"></div>
                     </div>
                     <div class="col-sm-6">
-                            <label for="kadept">Kadept</label>
-                            {!! Form::text('kadept', $kadept, ['class' => 'form-control', 'id' => 'kadept', 'disabled']) !!}
+                        <label for="kadept">Kadept</label>
+                        {!! Form::text('kadept', $kadept, ['class' => 'form-control', 'id' => 'kadept', 'disabled']) !!}
                     </div>
 
                 </div>
@@ -79,27 +83,39 @@
                 </div>
                 <div class="form-group">
                     <label for="auditee_id">Auditee</label>
-                    {!! Form::select('auditee_user_id', $auditee, null,
-                        ['class' => 'form-control',
-                        'id' => 'auditee_user_id', 'placeholder' => 'Pilih auditee...'])
-                    !!}
-                    <div id="error-auditee_user_id" class="invalid-feedback"></div>
+                    @hasanyrole('admin|auditor_lead|auditor')
+                        {!! Form::select('auditee_user_id', $auditee, null,
+                            ['class' => 'form-control',
+                            'id' => 'auditee_user_id', 'placeholder' => 'Pilih auditee...'])
+                        !!}
+                        <div id="error-auditee_user_id" class="invalid-feedback"></div>
+                    @else
+                        {!! Form::text('auditee', $model->auditee->nama, ['class' => 'form-control', 'disabled']) !!}
+                    @endhasanyrole
                 </div>
                 <div class="form-group">
                     <label for="auditor_user_id">Auditor</label>
-                    {!! Form::select('auditor_user_id', $auditor, null,
-                        ['class' => 'form-control',
-                        'id' => 'auditor_user_id', 'placeholder' => 'Pilih auditor...'])
-                    !!}
-                    <div id="error-auditor_user_id" class="invalid-feedback"></div>
+                    @hasanyrole('admin|auditor_lead|auditor')
+                        {!! Form::select('auditor_user_id', $auditor, null,
+                            ['class' => 'form-control',
+                            'id' => 'auditor_user_id', 'placeholder' => 'Pilih auditor...'])
+                        !!}
+                        <div id="error-auditor_user_id" class="invalid-feedback"></div>
+                    @else
+                        {!! Form::text('auditor', $model->auditor->nama, ['class' => 'form-control', 'disabled']) !!}
+                    @endhasanyrole
                 </div>
                 <div class="form-group">
                     <label for="auditor_lead_user_id">Auditor Leader</label>
-                    {!! Form::select('auditor_lead_user_id', $auditorLead, null,
-                        ['class' => 'form-control',
-                        'id' => 'auditor_lead_user_id', 'placeholder' => 'Pilih auditor lead...'])
-                    !!}
-                    <div id="error-auditor_lead_user_id" class="invalid-feedback"></div>
+                    @hasanyrole('admin|auditor_lead|auditor')
+                        {!! Form::select('auditor_lead_user_id', $auditorLead, null,
+                            ['class' => 'form-control',
+                            'id' => 'auditor_lead_user_id', 'placeholder' => 'Pilih auditor lead...'])
+                        !!}
+                        <div id="error-auditor_lead_user_id" class="invalid-feedback"></div>
+                    @else
+                        {!! Form::text('auditor_lead', $model->auditorLead->nama, ['class' => 'form-control', 'disabled']) !!}
+                    @endhasanyrole
                 </div>
             </div>
 
@@ -117,6 +133,7 @@
                 </div>
             </div>
             <div class="card-body">
+                @hasanyrole('admin|auditor_lead|auditor')
                 <div class="form group row mb-3">
                     <div class="col-10">
                         {{ Form::select('klausul', $klausul, null, ['class' => 'form-control', 'id' => 'klausul', 'placeholder' => 'Pilih klausul...']) }}
@@ -125,6 +142,7 @@
                         <button id="add-row" class="btn btn-outline-success btn-block" type="button" style="width=100%;">Add</button>
                     </div>
                 </div>
+                @endhasanyrole
                 <div class="row">
                     <div class="form-group col-12">
                         <table id="table-klausul" name="table_klausul" class="table table-sm w100">
@@ -143,9 +161,11 @@
                                         <td>{{ $item->objektif_audit }}</td>
                                         <td>{{ $item->nama }}</td>
                                         <td>
-                                        @if (in_array($item->nama, $klausul_temuan) == 0)
-                                            <button id="delete-row" class="btn btn-sm btn-danger"><i class="fas fa-times"></i></button>
-                                        @endif
+                                        @hasanyrole('admin|auditor_lead|auditor')
+                                            @if (in_array($item->nama, $klausul_temuan) == 0)
+                                                <button id="delete-row" class="btn btn-sm btn-danger"><i class="fas fa-times"></i></button>
+                                            @endif
+                                        @endhasanyrole
                                         </td>
                                     </tr>
                                 @endforeach
