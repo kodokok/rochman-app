@@ -136,6 +136,7 @@ class AuditPlanController extends Controller
                 $klausul_temuan[$klausul->id] = $klausul->nama;
             }
         }
+
         // dd($klausul_temuan);
         return view('pages.auditplan.edit', compact([
             'model', 'klausul', 'departemen', 'auditee', 'auditor', 'auditorLead', 'kadept', 'klausul_temuan'

@@ -191,7 +191,7 @@
             <div class="col-md-6">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Ubah Jadwal</h3>
+                        <h3 class="card-title">Ubah Jadwal Audit</h3>
                         <div class="card-tools">
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -203,13 +203,13 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="tanggal">Tanggal</label>
+                                    <label for="tanggal">Tanggal Baru</label>
                                     <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
                                         <input id="tanggal" name="tanggal" type="text"
                                             class="form-control datetimepicker-input"
                                             data-target="#datetimepicker4"
                                             placeholder="mm-dd-yyyy"
-                                            value="{{ $model->tanggal }}"
+                                            value=""
                                         />
                                         <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -218,13 +218,13 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="waktu">Waktu</label>
+                                    <label for="waktu">Waktu Baru</label>
                                     <div class="input-group date" id="datetimepicker3" data-target-input="nearest">
                                         <input id="waktu" name="waktu" type="text"
                                             class="form-control datetimepicker-input"
                                             data-target="#datetimepicker3"
                                             placeholder="HH:mm:ss"
-                                            value="{{ $model->waktu }}"
+                                            value=""
                                         />
                                         <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="fas fa-clock"></i></div>
