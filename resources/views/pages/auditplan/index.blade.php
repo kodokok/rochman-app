@@ -78,7 +78,7 @@ $(document).ready(function() {
 
         Swal.fire({
             title: 'Apakah and ingin meng-' + title + '?',
-            type: 'info',
+            type: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',

@@ -44,8 +44,7 @@ class KlausulTableSeeder extends Seeder
             ['objektif_audit' => $objektif_audit, 'nama' => '9.3 Management Review'],
             ['objektif_audit' => $objektif_audit, 'nama' => '10.1 Umum'],
             ['objektif_audit' => $objektif_audit, 'nama' => '10.2 Ketidaksesusaian dan Tindakan Koreksi'],
-            ['objektif_audit' => $objektif_audit, 'nama' => '10.3 Perbaikan Berkelanjuta'],
-            ['objektif_audit' => $objektif_audit, 'nama' => '10.3 Perbaikan Berkelanjuta'],
+            ['objektif_audit' => $objektif_audit, 'nama' => '10.3 Perbaikan Berkelanjutan'],
         ];
 
         foreach ($data as $klausul) {

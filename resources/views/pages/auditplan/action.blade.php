@@ -11,6 +11,7 @@
 @else
     @hasanyrole('kadept')
         <a href="{{ $url_edit }}" class="btn btn-sm btn-primary edit" title="Edit: {{ $model->id }}"><i class="fas fa-pencil-alt"></i></a></a>
+    @else
+        <a href="{{ $url_show }}" class="btn btn-sm btn-info" title="Show: {{ $model->id }}"><i class="fas fa-eye"></i></a></a>
     @endhasanyrole
-    <a href="{{ $url_show }}" class="btn btn-sm btn-info" title="Show: {{ $model->id }}"><i class="fas fa-eye"></i></a></a>
 @endhasanyrole

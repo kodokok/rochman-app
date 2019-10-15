@@ -3,7 +3,7 @@
 @section('breadcrumbs', Breadcrumbs::render('auditplan.edit'))
 @section('page-title', 'Edit Audit Plan')
 @section('page-action')
-    <input id="save" type="submit" value="Update" class="btn btn-success float-right"
+    <input id="save" type="submit" value="Save" class="btn btn-success float-right"
         style="width: 120px;">
     <a id="cancel" href="{{ old('redirect_to', url()->previous()) }}" class="btn btn-secondary float-right"
         style="margin-right: 5px; width: 120px;">Cancel</a>
@@ -17,7 +17,7 @@
     'id' => 'current-form'
 ]) !!}
 <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-4">
         <div class="card card-primary">
             <div class="card-header">
                 <h3 class="card-title">General</h3>
@@ -45,9 +45,9 @@
                     </div>
 
                 </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
+                <div class="form-group row">
+                    @hasanyrole('admin|auditor_lead|auditor')
+                        <div class="col-sm-6">
                             <label for="tanggal">Tanggal</label>
                             <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
                                 <input id="tanggal" name="tanggal" type="text"
@@ -62,9 +62,7 @@
                                 <div id="error-tanggal" class="invalid-feedback"></div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
+                        <div class="col-sm-6">
                             <label for="waktu">Waktu</label>
                             <div class="input-group date" id="datetimepicker3" data-target-input="nearest">
                                 <input id="waktu" name="waktu" type="text"
@@ -79,7 +77,16 @@
                                 <div id="error-waktu" class="invalid-feedback"></div>
                             </div>
                         </div>
-                    </div>
+                    @else
+                        <div class="col-sm-6">
+                            <label for="tanggal">Tanggal</label>
+                            {!! Form::text('tanngal', $model->tanggal, ['class' => 'form-control', 'disabled']) !!}
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="waktu">Waktu</label>
+                            {!! Form::text('waktu', $model->waktu, ['class' => 'form-control', 'disabled']) !!}
+                        </div>
+                    @endhasanyrole
                 </div>
                 <div class="form-group">
                     <label for="auditee_id">Auditee</label>
@@ -121,63 +128,128 @@
 
         </div>
     </div>
-    <div class="col-md-7">
-        <div class="card card-primary">
-            <div class="card-header">
-                <h3 class="card-title">Klausul</h3>
-                <div class="card-tools">
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                            <i class="fas fa-minus"></i></button>
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Klausul</h3>
+                        <div class="card-tools">
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                    <i class="fas fa-minus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        @hasanyrole('admin|auditor_lead|auditor')
+                        <div class="form group row mb-3">
+                            <div class="col-10">
+                                {{ Form::select('klausul', $klausul, null, ['class' => 'form-control', 'id' => 'klausul', 'placeholder' => 'Pilih klausul...']) }}
+                            </div>
+                            <div class="col-2">
+                                <button id="add-row" class="btn btn-outline-success btn-block" type="button" style="width=100%;">Add</button>
+                            </div>
+                        </div>
+                        @endhasanyrole
+                        <div class="row">
+                            <div class="form-group col-12">
+                                <table id="table-klausul" name="table_klausul" class="table table-sm w100">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:5%;">#</th>
+                                            <th style="width:25%;">Objektif Audit</th>
+                                            <th style="width:50%;">Klausul</th>
+                                            <th class="text-center" style="width:10%;"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($model->klausuls as $item)
+                                            <tr>
+                                                <td><input type="hidden" name="klausul_id[]" value="{{ $item->id }}">{{ $item->id }}</td>
+                                                <td>{{ $item->objektif_audit }}</td>
+                                                <td>{{ $item->nama }}</td>
+                                                <td>
+                                                @hasanyrole('admin|auditor_lead|auditor')
+                                                    @if (in_array($item->nama, $klausul_temuan) == 0)
+                                                        <button id="delete-row" class="btn btn-sm btn-danger"><i class="fas fa-times"></i></button>
+                                                    @endif
+                                                @endhasanyrole
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="error-klausul" class="small form-text text-danger d-none"></div>
                     </div>
                 </div>
             </div>
-            <div class="card-body">
-                @hasanyrole('admin|auditor_lead|auditor')
-                <div class="form group row mb-3">
-                    <div class="col-10">
-                        {{ Form::select('klausul', $klausul, null, ['class' => 'form-control', 'id' => 'klausul', 'placeholder' => 'Pilih klausul...']) }}
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Ubah Jadwal</h3>
+                        <div class="card-tools">
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                    <i class="fas fa-minus"></i></button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-2">
-                        <button id="add-row" class="btn btn-outline-success btn-block" type="button" style="width=100%;">Add</button>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="tanggal">Tanggal</label>
+                                    <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
+                                        <input id="tanggal" name="tanggal" type="text"
+                                            class="form-control datetimepicker-input"
+                                            data-target="#datetimepicker4"
+                                            placeholder="mm-dd-yyyy"
+                                            value="{{ $model->tanggal }}"
+                                        />
+                                        <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
+                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                        </div>
+                                        <div id="error-tanggal" class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="waktu">Waktu</label>
+                                    <div class="input-group date" id="datetimepicker3" data-target-input="nearest">
+                                        <input id="waktu" name="waktu" type="text"
+                                            class="form-control datetimepicker-input"
+                                            data-target="#datetimepicker3"
+                                            placeholder="HH:mm:ss"
+                                            value="{{ $model->waktu }}"
+                                        />
+                                        <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
+                                            <div class="input-group-text"><i class="fas fa-clock"></i></div>
+                                        </div>
+                                        <div id="error-waktu" class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Catatan</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                <label class="custom-control-label" for="customCheck1">Ya, Saya ingin mengubah jadwal audit.</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                @endhasanyrole
-                <div class="row">
-                    <div class="form-group col-12">
-                        <table id="table-klausul" name="table_klausul" class="table table-sm w100">
-                            <thead>
-                                <tr>
-                                    <th style="width:5%;">#</th>
-                                    <th style="width:25%;">Objektif Audit</th>
-                                    <th style="width:50%;">Klausul</th>
-                                    <th class="text-center" style="width:10%;"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($model->klausuls as $item)
-                                    <tr>
-                                        <td><input type="hidden" name="klausul_id[]" value="{{ $item->id }}">{{ $item->id }}</td>
-                                        <td>{{ $item->objektif_audit }}</td>
-                                        <td>{{ $item->nama }}</td>
-                                        <td>
-                                        @hasanyrole('admin|auditor_lead|auditor')
-                                            @if (in_array($item->nama, $klausul_temuan) == 0)
-                                                <button id="delete-row" class="btn btn-sm btn-danger"><i class="fas fa-times"></i></button>
-                                            @endif
-                                        @endhasanyrole
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div id="error-klausul" class="small form-text text-danger d-none"></div>
             </div>
         </div>
     </div>
+
 </div>
 
 {!! Form::close() !!}
