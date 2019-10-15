@@ -15,7 +15,7 @@ class DepartemenTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create('id_ID');
-        $user = User::role(['kadept'])->get();
+        $user = User::role(['kadept', 'direksi'])->get();
         $dept = [
             ['kode' => 'QA', 'nama' => 'Quality Assurance'],
             ['kode' => 'DI', 'nama' => 'Digital Infrastructure'],

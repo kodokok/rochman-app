@@ -18,7 +18,7 @@ class DepartemenController extends Controller
     public function create()
     {
         $departemen = new Departemen();
-        $kadept = User::pluck('nama','id')->all();;
+        $kadept = User::role(['kadept', 'direksi'])->pluck('nama', 'id');
         return view('pages.departemen.form', compact(['departemen','kadept']));
     }
 
@@ -46,7 +46,7 @@ class DepartemenController extends Controller
 
     public function edit(Departemen $departemen)
     {
-        $kadept = User::pluck('nama','id')->all();
+        $kadept = User::role(['kadept', 'direksi'])->pluck('nama', 'id');
         return view('pages.departemen.form', compact(['departemen', 'kadept']));
     }
 
