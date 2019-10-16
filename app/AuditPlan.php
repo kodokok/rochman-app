@@ -70,4 +70,8 @@ class AuditPlan extends Model
         return $this->hasMany(TemuanAudit::class, 'audit_plan_id');
     }
 
+    public function ubahJadwalAudit()
+    {
+        return $this->hasOne(UbahJadwalAudit::class, 'audit_plan_id');
+    }
 }

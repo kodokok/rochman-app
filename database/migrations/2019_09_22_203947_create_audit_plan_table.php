@@ -22,7 +22,6 @@ class CreateAuditPlanTable extends Migration
             $table->unsignedInteger('auditee_user_id');
             $table->unsignedInteger('auditor_user_id');
             $table->unsignedInteger('auditor_lead_user_id');
-            $table->text('catatan', 255)->nullable();
             $table->timestamps();
 
             $table->foreign('departemen_id')

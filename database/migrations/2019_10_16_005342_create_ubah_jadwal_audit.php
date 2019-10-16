@@ -15,7 +15,15 @@ class CreateUbahJadwalAudit extends Migration
     {
         Schema::create('ubah_jadwal_audit', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedInteger('audit_plan_id')->index();
+            $table->date('tanggal');
+            $table->time('waktu');
+            $table->text('catatan', 255)->nullable();
             $table->timestamps();
+
+            $table->foreign('audit_plan_id')
+                ->references('id')->on('audit_plan')
+                ->onDelete('restrict');
         });
     }
 
