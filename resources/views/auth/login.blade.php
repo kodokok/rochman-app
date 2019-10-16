@@ -1,69 +1,54 @@
 @extends('layouts.auth')
 
 @section('content')
-<div class="container h-100">
-    <div class="row h-100 justify-content-center align-items-center">
-        <div class="col-md-12">
-            <div class="login-box">
-                <div class="login-logo">
-                    <a href="#">{{ config('app.name', 'Laravel') }}</a>
-                </div>
-                <!-- /.login-logo -->
-                <div class="card">
-                    <div class="card-body login-card-body">
-                        <p class="login-box-msg">Sign in to start your session</p>
+<div class="card-wrapper m-auto w-75">
+    <div class="card card-body">
+        <div class="row">
+            <div class="col-md-6">
+            </div>
+            <div class="col-md-6">
+                <p class="card-title">Sign in to start your session</p>
 
-                        <form action="{{ route('login') }}" method="post">
-                            @csrf
-                            <div class="input-group mb-3">
-                                <input type="email" name="email" class="form-control" placeholder="Email"
-                                    value="{{ old('email') }}">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
-                                        <span class="fas fa-envelope"></span>
-                                    </div>
-                                </div>
+                <form action="{{ route('login') }}" method="post">
+                    @csrf
+                    <div class="input-group mb-3">
+                        <input type="email" name="email" class="form-control" placeholder="Email"
+                            value="{{ old('email') }}" autocomplete="off">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
                             </div>
-                            <div class="input-group mb-3">
-                                <input type="password" name="password" class="form-control" placeholder="Password">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
-                                        <span class="fas fa-lock"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-8">
-                                    <div class="icheck-primary">
-                                        <input type="checkbox" id="remember" name="remember"
-                                            {{ old('remember') ? 'checked' : '' }}>
-                                        <label for="remember">
-                                            Remember Me
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- /.col -->
-                                <div class="col-4">
-                                    <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
-                                </div>
-                                <!-- /.col -->
-                            </div>
-                        </form>
-
-                        <!-- /.social-auth-links -->
-
-                        <p class="mb-1">
-                            <a href="#">I forgot my password</a>
-                        </p>
-                        <p class="mb-0">
-                            <a href="{{ route('register') }}" class="text-center">Register a new membership</a>
-                        </p>
+                        </div>
                     </div>
-                    <!-- /.login-card-body -->
-                </div>
+                    <div class="input-group mb-3">
+                        <input type="password" name="password" class="form-control" placeholder="Password" autocomplete="off">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="remember" name="remember"
+                                    {{ old('remember') ? 'checked' : '' }}>
+                                <label for="remember">
+                                    Remember Me
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                        </div>
+                    </div>
+                </form>
+
+                <p class="mb-1">
+                    <a href="#">I forgot my password</a>
+                </p>
             </div>
         </div>
     </div>
 </div>
-<!-- /.login-box -->
 @endsection

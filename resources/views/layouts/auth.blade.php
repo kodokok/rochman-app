@@ -3,16 +3,11 @@
 <head>
   @include('layouts.partials.htmlheader')
 </head>
-<style>
-body {
-    height: 100vh !important;
-}
-</style>
 <body>
-
-@yield('content')
-
-@include('layouts.partials.scripts')
+    <div class="container d-flex flex-column min-vh-100">
+        @yield('content')
+    </div>
+    @include('layouts.partials.scripts')
 </body>
 
 </html>
