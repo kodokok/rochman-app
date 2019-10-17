@@ -1,16 +1,37 @@
 @extends('layouts.auth')
 
 @section('content')
-<div class="card-wrapper m-auto w-75">
-    <div class="card card-body">
+<div class="login-box m-auto w-75">
+    <div class="login-container">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 login-form-left">
+                <div class="login-logo logo-box">
+                    <a href="#">{{ config('app.name', 'Laravel') }}</a>
+                </div>
+                <div class="login-left-text">
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Cras justo odio
+                            <span class="badge badge-primary badge-pill">14</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Dapibus ac facilisis in
+                            <span class="badge badge-primary badge-pill">2</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Morbi leo risus
+                            <span class="badge badge-primary badge-pill">1</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="col-md-6">
-                <p class="card-title">Sign in to start your session</p>
+            <div class="col-md-6 login-form-right">
+                <div class="container">
+                <p class="text">Sign in to start your session</p>
 
                 <form action="{{ route('login') }}" method="post">
                     @csrf
+                    <div class="form-group">
                     <div class="input-group mb-3">
                         <input type="email" name="email" class="form-control" placeholder="Email"
                             value="{{ old('email') }}" autocomplete="off">
@@ -19,6 +40,7 @@
                                 <span class="fas fa-envelope"></span>
                             </div>
                         </div>
+                    </div>
                     </div>
                     <div class="input-group mb-3">
                         <input type="password" name="password" class="form-control" placeholder="Password" autocomplete="off">
@@ -47,6 +69,7 @@
                 <p class="mb-1">
                     <a href="#">I forgot my password</a>
                 </p>
+            </div>
             </div>
         </div>
     </div>

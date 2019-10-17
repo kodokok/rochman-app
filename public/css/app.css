@@ -9,6 +9,17 @@
     font-weight: 900;
 }
 
-.card-wrapper {
-    /* margin: auto; */
+.login-container {
+    box-shadow: -5px 0 8px 0 rgba(0, 0, 0, 0.2), -2px 0 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 20px 0 20px 0;
+}
+
+.login-form-left {
+    margin-top: 40px;
+    margin-bottom: 50px;
+}
+
+.logo-box {
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
