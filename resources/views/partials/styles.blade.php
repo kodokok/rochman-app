@@ -14,9 +14,11 @@
 <link rel="stylesheet" href="{{ asset('plugins/sweetalert2/sweetalert2.min.css') }}">
 <!-- toastr -->
 <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.css') }}">
+<!-- toastr -->
 
 <!-- Theme style -->
 <link rel="stylesheet" href="{{ asset('plugins/adminlte/css/adminlte.min.css') }}">
+<link rel="stylesheet" href="{{ asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
 @stack('styles')
