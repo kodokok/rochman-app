@@ -187,67 +187,9 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Ubah Jadwal Audit</h3>
-                        <div class="card-tools">
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                    <i class="fas fa-minus"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <label for="tanggal">Tanggal Baru</label>
-                                    <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-                                        <input id="tanggal" name="tanggal" type="text"
-                                            class="form-control datetimepicker-input"
-                                            data-target="#datetimepicker4"
-                                            placeholder="mm-dd-yyyy"
-                                            value=""
-                                        />
-                                        <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
-                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                        </div>
-                                        <div id="error-tanggal" class="invalid-feedback"></div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <label for="waktu">Waktu Baru</label>
-                                    <div class="input-group date" id="datetimepicker3" data-target-input="nearest">
-                                        <input id="waktu" name="waktu" type="text"
-                                            class="form-control datetimepicker-input"
-                                            data-target="#datetimepicker3"
-                                            placeholder="HH:mm:ss"
-                                            value=""
-                                        />
-                                        <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
-                                            <div class="input-group-text"><i class="fas fa-clock"></i></div>
-                                        </div>
-                                        <div id="error-waktu" class="invalid-feedback"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Catatan</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                <label class="custom-control-label" for="customCheck1">Ya, Saya ingin mengubah jadwal audit.</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @if ($model->ubahJadwalAudit)
+            @include('pages.auditplan.ubah-jadwal')
+        @endif
     </div>
 
 </div>
@@ -359,6 +301,7 @@ $(function () {
                 $('#error-klausul').addClass('d-none');
             },
             success: function(response) {
+
                 if (response.fail) {
 
                     for (const control in response.errors) {
@@ -373,7 +316,11 @@ $(function () {
                     $("#save").val(buttonText);
 
                 } else {
-                    window.location.href = response.redirect_to;
+                    if (response.redirect_to) {
+                        window.location.href = response.redirect_to;
+                    } else {
+                        $("#save").val(buttonText);
+                    }
                 }
             },
             error: function (xhr, textStatus, errorThrown) {

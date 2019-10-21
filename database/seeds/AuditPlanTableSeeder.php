@@ -6,6 +6,7 @@ use App\Departemen;
 use App\AuditPlan;
 use App\Klausul;
 use App\UbahJadwalAudit;
+use Carbon\Carbon;
 use Faker\Factory as Faker;
 
 class AuditPlanTableSeeder extends Seeder
@@ -40,7 +41,7 @@ class AuditPlanTableSeeder extends Seeder
             if (($i % 2) == 0) {
                 if (!$auditplan->approval_kadept) {
                     $ubahJadwal = new UbahJadwalAudit([
-                        'tanggal' => $faker->dateTimeBetween('+1 week', '+2 month')->format('Y-m-d'),
+                        'tanggal' => Carbon::createFromFormat('m-d-Y', $auditplan->tanggal)->addDays(rand(1, 7)),
                         'waktu' => $faker->time('H:i:s','now'),
                         'catatan' => $faker->realText(200, 2),
                     ]);

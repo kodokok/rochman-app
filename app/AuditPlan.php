@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Departement;
 use App\User;
 use App\TemuanAudit;
 use Carbon\Carbon;

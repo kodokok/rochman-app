@@ -126,7 +126,9 @@ class AuditPlanController extends Controller
         $auditorLead = User::role($this->auditorLeadRoles)->pluck('nama', 'id');
         $departemen = Departemen::pluck('kode', 'id');
         $klausul = Klausul::pluck('nama', 'id');
-        // dd($model->klausuls()->get());
+
+        // dd($model->ubahJadwalAudit);
+
         $klausul_temuan = [];
         foreach ($model->klausuls as $klausul) {
 
@@ -162,6 +164,7 @@ class AuditPlanController extends Controller
             'klausul_id' => 'required'
         ];
 
+        // dd($request->all());
         // check if user kadept
 
         $validator = Validator::make($request->all(), $rules);
@@ -175,6 +178,12 @@ class AuditPlanController extends Controller
 
         $tanggal =  Carbon::createFromFormat('m-d-Y', $request->tanggal)->format('Y-m-d');
         $waktu =  Carbon::createFromFormat('H:i:s', $request->waktu)->format('H:i:s');
+
+        if ($request->has('ubah_jadwal_check')) {
+            $tanggal = Carbon::createFromFormat('m-d-Y', $request->tanggal_baru)->format('Y-m-d');
+            $waktu =  Carbon::createFromFormat('H:i:s', $request->waktu_baru)->format('H:i:s');
+            $auditplan->ubahJadwalAudit()->delete();
+        }
 
         $auditplan->update([
             'departemen_id' => $request->departemen_id,
