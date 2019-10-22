@@ -164,9 +164,6 @@ class AuditPlanController extends Controller
             'klausul_id' => 'required'
         ];
 
-        // dd($request->all());
-        // check if user kadept
-
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
