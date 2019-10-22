@@ -127,11 +127,8 @@ class AuditPlanController extends Controller
         $departemen = Departemen::pluck('kode', 'id');
         $klausul = Klausul::pluck('nama', 'id');
 
-        // dd($model->ubahJadwalAudit);
-
         $klausul_temuan = [];
         foreach ($model->klausuls as $klausul) {
-
             $match = ['audit_plan_id' => $model->id, 'klausul_id' => $klausul->id];
             $exists = TemuanAudit::where($match)->exists();
             if ($exists) {
@@ -139,7 +136,6 @@ class AuditPlanController extends Controller
             }
         }
 
-        // dd($klausul_temuan);
         return view('pages.auditplan.edit', compact([
             'model', 'klausul', 'departemen', 'auditee', 'auditor', 'auditorLead', 'kadept', 'klausul_temuan'
         ]));
@@ -212,7 +208,6 @@ class AuditPlanController extends Controller
     public function destroy(AuditPlan $auditplan)
     {
         try {
-            //code...
             $auditplan->delete();
             $auditplan->klausuls()->sync([]);
             session()->flash('message', 'Audit Plan successfully deleted!');
@@ -328,18 +323,18 @@ class AuditPlanController extends Controller
                 # code...
                 break;
             default:
-                // $model = AuditPlan::whereHas('auditee', function ($q) use ($user) {
-                //     $q->where('id', $user->id);
-                // })->with([
-                //     'departemen', 'auditee', 'auditor', 'auditorLead', 'klausuls'
-                // ])->get();
+                $model = AuditPlan::whereHas('auditee', function ($q) use ($user) {
+                    $q->where('id', $user->id);
+                })->with([
+                    'departemen', 'auditee', 'auditor', 'auditorLead', 'klausuls'
+                ])->get();
                 # code...
                 break;
         }
 
         return DataTables::of($model)
             ->addColumn('departemen', function ($model) {
-                return $model->departemen->nama;
+                return $model->departemen->kode;
             })
             ->addColumn('auditee', function ($model) {
                 return $model->auditee->nama;

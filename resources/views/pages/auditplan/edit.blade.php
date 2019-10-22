@@ -7,9 +7,15 @@
         style="width: 120px;">
     <a id="cancel" href="{{ old('redirect_to', url()->previous()) }}" class="btn btn-secondary float-right"
         style="margin-right: 5px; width: 120px;">Cancel</a>
+    <button type="button" class="btn btn-warning float-right mr-2" data-toggle="modal" data-target="#exampleModalCenter">
+        Ubah Jadwal Audit
+    </button>
 @endsection
 
 @section('content')
+
+@include('pages.auditplan.jadwal-modal')
+
 {!! Form::model($model, [
     'route' => ['auditplan.update', $model->id],
     'method' => 'PUT',
@@ -187,9 +193,6 @@
                 </div>
             </div>
         </div>
-        @if ($model->ubahJadwalAudit)
-            @include('pages.auditplan.ubah-jadwal')
-        @endif
     </div>
 
 </div>
@@ -326,6 +329,36 @@ $(function () {
             error: function (xhr, textStatus, errorThrown) {
                 alert("Error: " + errorThrown);
                 $("#save").val(buttonText);
+            }
+        });
+    });
+
+    $("#ubah-jadwal-modal").submit(function(event) {
+        event.preventDefault();
+        $(".modal").modal("hide");
+        console.log('test');
+        window.location.reload();
+
+        var form = $(this);
+        var url = form.attr('action');
+        var method = form.attr('method');
+        var formData = new FormData(form.get(0));
+
+        $.ajax({
+            url: url,
+            method: method,
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            beforeSend: function() {
+            },
+            success: function(response) {
+
+                $(".modal").modal("hide");
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert("Error: " + errorThrown);
             }
         });
     });

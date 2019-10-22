@@ -16,11 +16,11 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <table id="datatables" class="table table-bordered table-striped table-responsive" style="width:100%">
+                <table id="datatable" class="table table-bordered table-striped table-responsive" style="width:100%">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th style="width: 20%">Departement</th>
+                            <th style="width: 20%">Departemen</th>
                             <th style="width: 5%">Status</th>
                             <th style="width: 5%">Tanggal</th>
                             <th style="width: 5%">Waktu</th>
@@ -46,7 +46,7 @@
 <script>
 $(document).ready(function() {
 
-    $('#datatables').DataTable({
+    $('#datatable').DataTable({
         stateSave: true,
         responsive: true,
         processing: true,
