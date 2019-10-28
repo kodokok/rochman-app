@@ -115,6 +115,23 @@ class TemuanAuditController extends Controller
             'duedate_pencegahan' => 'required|date_format:m-d-Y',
         ]);
 
+        $rules = [
+            'audit_plan_id' => 'required',
+            'klausul_id' => 'required',
+            'ketidaksesuaian' => 'required|string|max:100',
+            'akar_masalah' => 'required|string|max:100',
+            'klasifikasi_temuan' => 'required',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'fail' => true,
+                'errors' => $validator->errors(),
+            ]);
+        }
+
         $duedate_perbaikan =  Carbon::createFromFormat('m-d-Y', $request->duedate_perbaikan)->format('Y-m-d');
         $duedate_pencegahan =  Carbon::createFromFormat('m-d-Y', $request->duedate_pencegahan)->format('Y-m-d');
 

@@ -24,12 +24,7 @@ class TemuanAudit extends Model
         return $value ? 'Closed' : 'Open';
     }
 
-    public function getDuedatePerbaikanAttribute($value)
-    {
-        return Carbon::parse($value)->format('m-d-Y');
-    }
-
-    public function getDuedatePencegahanAttribute($value)
+    public function getTanggalPerbaikanPencegahanAttribute($value)
     {
         return Carbon::parse($value)->format('m-d-Y');
     }

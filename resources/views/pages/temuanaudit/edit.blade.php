@@ -117,6 +117,26 @@
             </div>
             <div class="card-body">
                 <div class="form-group">
+                    {!! Form::label('tindakan_perbaikan_pencegahan') !!}
+                    {!! Form::textarea('tindakan_perbaikan_pencegahan', null, ['class' => 'form-control', 'rows' => '5']) !!}
+                    <div id="error-tindakan_perbaikan_pencegahan" class="invalid-feedback"></div>
+                </div>
+                <div class="form-group">
+                    <label for="tanggal_perbaikan_pencegahan">Tanggal Perbaikan Pencegahan</label>
+                    <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
+                        <input id="tanggal_perbaikan_pencegahan" name="tanggal_perbaikan_pencegahan" type="text"
+                            class="form-control datetimepicker-input"
+                            data-target="#datetimepicker4"
+                            placeholder="mm-dd-yyyy"
+                            value="{{ $model->tanggal_perbaikan_pencegahan }}"
+                        />
+                        <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                        <div id="error-tanggal_perbaikan_pencegahan" class="invalid-feedback"></div>
+                    </div>
+                </div>
+                <div class="form-group">
                     {!! Form::label('review') !!}
                     {!! Form::textarea('review', null, ['class' => 'form-control', 'rows' => '5']) !!}
                     <div id="error-review" class="invalid-feedback"></div>
@@ -159,6 +179,10 @@
 @push('scripts')
 <script>
 $(function () {
+    $('#datetimepicker4').datetimepicker({
+        format: 'MM-DD-YYYY',
+    });
+
     $("#save").on('click', function(e){
         $("#current-form").submit();
     });
