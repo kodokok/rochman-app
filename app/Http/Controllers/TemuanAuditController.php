@@ -92,10 +92,7 @@ class TemuanAuditController extends Controller
     public function edit(TemuanAudit $temuanaudit)
     {
         $model = $temuanaudit;
-        $departement = Departement::pluck('name', 'id');
-        $auditplan = AuditPlan::findOrFail($temuanaudit->audit_plan_id);
-
-        return view('temuanaudit.create', compact(['temuanaudit', 'auditplan', 'departement']));
+        return view('pages.temuanaudit.edit', compact(['model']));
     }
 
     /**

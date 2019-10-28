@@ -74,8 +74,8 @@ Breadcrumbs::register('temuanaudit', function ($breadcrumbs) {
     $breadcrumbs->push('temuan audit', route('temuanaudit.index'));
 });
 
-Breadcrumbs::register('temuanaudit.create', function ($breadcrumbs) {
+Breadcrumbs::register('temuanaudit.edit', function ($breadcrumbs) {
     $breadcrumbs->parent('temuanaudit');
-    $breadcrumbs->push('create', route('temuanaudit.create'));
+    $breadcrumbs->push('edit');
 });
 
