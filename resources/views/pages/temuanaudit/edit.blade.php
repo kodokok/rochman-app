@@ -121,6 +121,7 @@
                     {!! Form::textarea('tindakan_perbaikan_pencegahan', null, ['class' => 'form-control', 'rows' => '5']) !!}
                     <div id="error-tindakan_perbaikan_pencegahan" class="invalid-feedback"></div>
                 </div>
+                {{-- {{ empty($model->tanggal_perbaikan_pencegahan) ? $model->tanggal_perbaikan_pencegahan : 'empty' }} --}}
                 <div class="form-group">
                     <label for="tanggal_perbaikan_pencegahan">Tanggal Perbaikan Pencegahan</label>
                     <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
@@ -180,7 +181,7 @@
 <script>
 $(function () {
     $('#datetimepicker4').datetimepicker({
-        format: 'MM-DD-YYYY',
+        format: 'MM-DD-YYYY'
     });
 
     $("#save").on('click', function(e){

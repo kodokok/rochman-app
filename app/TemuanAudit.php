@@ -26,7 +26,7 @@ class TemuanAudit extends Model
 
     public function getTanggalPerbaikanPencegahanAttribute($value)
     {
-        return Carbon::parse($value)->format('m-d-Y');
+        return !empty($value) ? Carbon::parse($value)->format('m-d-Y') : null;
     }
 
     public function auditplan()
