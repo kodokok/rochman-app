@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\AuditPlan;
-use App\Departemen;
 use App\TemuanAudit;
 use Illuminate\Http\Request;
 use DataTables;
@@ -22,24 +21,6 @@ class TemuanAuditController extends Controller
         return view('pages.temuanaudit.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        // $temuanaudit = new TemuanAudit();
-        // $model =  AuditPlan::with(['departemen', 'auditee', 'klausuls'])->where('approval_kadept', 1)->get();
-        // $klausuls = [];
-        // $departemens_select = $model->pluck('departemen.nama', 'departemen.id')->unique();
-
-        // dd($auditplans);
-        // return view('pages.auditplan.temuan-form', compact(['model', 'klausuls']));
-        // return view('pages.temuanaudit.create', compact([
-        //     'auditplans_select','departemens_select'
-        // ]));
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -163,7 +144,7 @@ class TemuanAuditController extends Controller
 
         $redirect_to = ['redirect_to' => route('temuanaudit.index')];
 
-        session()->flash('message', 'Temuan Audit successfully updated!');
+        session()->flash('message', 'Temuan Audit berhasil disimpan!');
         session()->flash('alert-type', 'success');
 
         return response()->json($redirect_to);
@@ -227,7 +208,29 @@ class TemuanAuditController extends Controller
      */
     public function destroy(TemuanAudit $temuanaudit)
     {
-        $temuanaudit->delete();
+        try {
+            $temuanaudit->delete();
+            session()->flash('message', 'Temuan Audit berhasil dihapus!');
+            session()->flash('alert-type', 'error');
+        } catch (\Illuminate\Database\QueryException $e) {
+            session()->flash('message', 'Data tidak bisa dihapus!');
+            session()->flash('alert-type', 'error');
+        }
+
+        $redirect_to = ['redirect_to' => route('temuanaudit.index')];
+        return response()->json($redirect_to);
+    }
+
+    public function reopen(TemuanAudit $temuanaudit)
+    {
+        $temuanaudit->update(['status' => 0]);
+
+        $redirect_to = ['redirect_to' => route('temuanaudit.edit', $temuanaudit->id)];
+
+        session()->flash('message', 'Temuan Audit berhasil di reopen!');
+        session()->flash('alert-type', 'success');
+
+        return response()->json($redirect_to);
     }
 
     public function datatable()

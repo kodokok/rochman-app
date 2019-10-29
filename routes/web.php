@@ -31,6 +31,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('temuanaudit/datatable', 'TemuanAuditController@datatable')->name('temuanaudit.datatable');
     Route::resource('temuanaudit', 'TemuanAuditController')->parameters(['temuanaudit' => 'temuanaudit']);
+    Route::put('temuanaudit/{temuanaudit}/reopen', 'TemuanAuditController@reopen')->name('temuanaudit.reopen');
 
     // route administrator
     Route::group(['middleware' => ['role:admin,auditor,auditor_lead']], function () {

@@ -9,7 +9,7 @@
         style="width: 120px;">Cancel</a>
     @hasanyrole('admin|auditor_lead|auditor')
         @if ($model->isClosed())
-            <a id="reopen" href="#" class="btn btn-warning float-right mr-2"
+            <a id="reopen" href="{{ route('temuanaudit.reopen', $model->id) }}" class="btn btn-warning float-right mr-2"
                 style="width: 120px;">Reopen</a>
         @endif
     @endhasanyrole
@@ -269,6 +269,42 @@ $(function () {
         });
     });
 
+    $("body").on("click", "#reopen", function(event) {
+        event.preventDefault();
+
+        var me = $(this);
+        var url = me.attr('href');
+        var title = me.attr('title');
+        var csrf_token = $('meta[name="csrf-token"]').attr('content');
+
+        Swal.fire({
+            title: 'Apakah and ingin reopen temuan audit ini?',
+            text: '',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, reopen!'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: {
+                        '_method': 'PUT',
+                        '_token': csrf_token
+                    },
+                    success: function(response) {
+                        window.location.href = response.redirect_to;
+                    },
+                    error: function(status)
+                    {
+                        console.log(status);
+                    }
+                });
+            }
+        });
+    });
 });
 
 </script>

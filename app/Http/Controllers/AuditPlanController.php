@@ -100,7 +100,7 @@ class AuditPlanController extends Controller
 
         $redirect_to = ['redirect_to' => route('auditplan.index')];
 
-        session()->flash('message', 'Audit Plan successfully created!');
+        session()->flash('message', 'Audit Plan berhasil dibuat!');
         session()->flash('alert-type', 'success');
 
         return response()->json($redirect_to);
@@ -193,7 +193,7 @@ class AuditPlanController extends Controller
 
         $redirect_to = ['redirect_to' => route('auditplan.index')];
 
-        session()->flash('message', 'Audit Plan successfully updated!');
+        session()->flash('message', 'Audit Plan berhasil disimpan!');
         session()->flash('alert-type', 'success');
 
         return response()->json($redirect_to);
@@ -210,7 +210,7 @@ class AuditPlanController extends Controller
         try {
             $auditplan->delete();
             $auditplan->klausuls()->sync([]);
-            session()->flash('message', 'Audit Plan successfully deleted!');
+            session()->flash('message', 'Audit Plan berhasil dihapus!');
             session()->flash('alert-type', 'error');
         } catch (\Illuminate\Database\QueryException $e) {
             session()->flash('message', 'Data tidak bisa dihapus!');
