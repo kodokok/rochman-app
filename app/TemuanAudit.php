@@ -11,14 +11,6 @@ class TemuanAudit extends Model
     protected $table = 'temuan_audit';
     protected $guarded = [];
 
-    protected $casts = [
-        'approval_kadept' => 'boolean',
-        'approval_auditee' => 'boolean',
-        'approval_auditor' => 'boolean',
-        'approval_auditor_lead' => 'boolean',
-        'status' => 'boolean'
-    ];
-
     public function getStatusAttribute($value)
     {
         return $value ? 'Closed' : 'Open';
@@ -37,5 +29,21 @@ class TemuanAudit extends Model
     public function klausul()
     {
         return $this->belongsTo(Klausul::class, 'klausul_id');
+    }
+
+    public function isCompleted()
+    {
+        if ($this->approval_kadept != 0 && $this->approval_auditee != 0 && $this->approval_auditor != 0 && $this->approval_auditor_lead != 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public function isClosed()
+    {
+        if ($this->status == 'Closed'){
+            return true;
+        }
+        return false;
     }
 }

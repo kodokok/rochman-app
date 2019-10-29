@@ -51,7 +51,9 @@ $(document).ready(function() {
             {data: 'klausul.nama', name: 'klausul_nama'},
             {data: 'ketidaksesuaian', name: 'ketidaksesuaian'},
             {data: 'akar_masalah', name: 'akar_masalah'},
-            {data: 'klasifikasi_temuan', name: 'klasifikasi'},
+            {data: 'klasifikasi_temuan', name: 'klasifikasi', render: function(data) {
+                return data ? 'Mayor' : 'Minor';
+            }},
             {data: 'status', name: 'status'},
 
             {data: 'action', name: 'action', 'searchable': false, 'orderable': false, 'className': 'text-center'}

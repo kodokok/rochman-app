@@ -92,7 +92,29 @@ class TemuanAuditController extends Controller
     public function edit(TemuanAudit $temuanaudit)
     {
         $model = $temuanaudit;
-        return view('pages.temuanaudit.edit', compact(['model']));
+
+        $is_user_kadept = auth()->user()->id === $temuanaudit->auditplan->departemen->kadept->id;
+        $is_user_auditee = auth()->user()->id === $temuanaudit->auditplan->auditee->id;
+        $is_user_auditor = auth()->user()->id === $temuanaudit->auditplan->auditor->id;
+        $is_user_auditor_lead = auth()->user()->id === $temuanaudit->auditplan->auditorLead->id;
+
+        if (auth()->user()->hasAnyRole(['admin', 'auditor_lead', 'auditor'])) {
+            $is_user_kadept = true;
+            $is_user_auditee = true;
+            $is_user_auditor = true;
+            $is_user_auditor_lead = true;
+        }
+
+        if ($model->status == 'Closed') {
+            $is_user_kadept = false;
+            $is_user_auditee = false;
+            $is_user_auditor = false;
+            $is_user_auditor_lead = false;
+        }
+
+        return view('pages.temuanaudit.edit', compact([
+            'model', 'is_user_kadept', 'is_user_auditee', 'is_user_auditor', 'is_user_auditor_lead'
+        ]));
     }
 
     /**
@@ -104,20 +126,7 @@ class TemuanAuditController extends Controller
      */
     public function update(Request $request, TemuanAudit $temuanaudit)
     {
-        // dd($request->all());
-        $this->validate($request, [
-            'audit_plan_id' => 'required',
-            'ketidaksesuaian' => 'required|string|max:255',
-            'akar_masalah' => 'required|string|max:255',
-            'tindakan_perbaikan' => 'required|string|max:255',
-            'duedate_perbaikan' => 'required|date_format:m-d-Y',
-            'tindakan_pencegahan' => 'required|string|max:255',
-            'duedate_pencegahan' => 'required|date_format:m-d-Y',
-        ]);
-
         $rules = [
-            'audit_plan_id' => 'required',
-            'klausul_id' => 'required',
             'ketidaksesuaian' => 'required|string|max:100',
             'akar_masalah' => 'required|string|max:100',
             'klasifikasi_temuan' => 'required',
@@ -132,26 +141,32 @@ class TemuanAuditController extends Controller
             ]);
         }
 
-        $duedate_perbaikan =  Carbon::createFromFormat('m-d-Y', $request->duedate_perbaikan)->format('Y-m-d');
-        $duedate_pencegahan =  Carbon::createFromFormat('m-d-Y', $request->duedate_pencegahan)->format('Y-m-d');
+        $tanggal_perbaikan_pencegahan =  Carbon::createFromFormat('m-d-Y', $request->tanggal_perbaikan_pencegahan)->format('Y-m-d');
 
         $data = [
             'ketidaksesuaian' => $request->ketidaksesuaian,
             'akar_masalah' => $request->akar_masalah,
-            'tindakan_perbaikan' => $request->tindakan_perbaikan,
-            'duedate_perbaikan' => $duedate_perbaikan,
-            'tindakan_pencegahan' => $request->tindakan_pencegahan,
-            'duedate_pencegahan' => $duedate_pencegahan,
+            'tindakan_perbaikan_pencegahan' => $request->tindakan_perbaikan_pencegahan,
+            'tanggal_perbaikan_pencegahan' => $tanggal_perbaikan_pencegahan,
+            'review' => $request->review,
+            'approval_kadept' => $request->approval_kadept ? 1 : 0,
+            'approval_auditee' => $request->approval_auditee ? 1 : 0,
+            'approval_auditor' => $request->approval_auditor ? 1 : 0,
+            'approval_auditor_lead' => $request->approval_auditor_lead ? 1 : 0,
         ];
 
         $temuanaudit->update($data);
 
-        $notification = [
-            'message' => 'Temuan Audit successfully updated!',
-            'alert-type' => 'info'
-        ];
+        if ($temuanaudit->isCompleted()) {
+            $temuanaudit->update(['status' => 1]);
+        }
 
-        return redirect()->route('temuanaudit.index')->with($notification);
+        $redirect_to = ['redirect_to' => route('temuanaudit.index')];
+
+        session()->flash('message', 'Temuan Audit successfully updated!');
+        session()->flash('alert-type', 'success');
+
+        return response()->json($redirect_to);
     }
 
     /**
