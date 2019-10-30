@@ -28,8 +28,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('auditplan/{auditplan}/approved', 'AuditPlanController@approved')->name('auditplan.approved');
     Route::put('auditplan/{auditplan}/ubah-jadwal', 'AuditPlanController@ubahJadwal')->name('auditplan.ubah-jadwal');
     Route::put('auditplan/{auditplan}/update-jadwal', 'AuditPlanController@updateJadwal')->name('auditplan.update-jadwal');
-    // route::get('approval', 'ApprovalController@show')->name('approval.show');
-    // route::get('approval/auditplan/datatable', 'ApprovalController@datatable')->name('approval.auditplan.datatable');
 
     Route::get('temuanaudit/datatable', 'TemuanAuditController@datatable')->name('temuanaudit.datatable');
     Route::resource('temuanaudit', 'TemuanAuditController')->parameters(['temuanaudit' => 'temuanaudit']);
@@ -53,14 +51,5 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('kompetensi/datatable', 'KompetensiAuditorController@datatable')->name('kompetensi.datatable');
         Route::resource('kompetensi', 'KompetensiAuditorController')->except(['show'])->parameters(['kompetensiAuditor' => 'kompetensi']);
 
-        // route fetch data
-
-
-        // Route::put('auditplan/{auditplan}/confirm', 'AuditPlanController@confirm')->name('auditplan.confirm');
-        // Route::get('auditplan/{auditplan}/report', 'AuditPlanController@report')->name('auditplan.report');
-        // Route::get('auditplan/{auditplan}/pdf', 'AuditPlanController@pdf')->name('auditplan.pdf');
-        // Route::get('auditplan/{auditplan}/print', 'AuditPlanController@print')->name('auditplan.print');
-
-        // Route::put('temuanaudit/{temuanaudit}/confirm', 'TemuanAuditsController@confirm')->name('temuanaudit.confirm');
     });
 });
