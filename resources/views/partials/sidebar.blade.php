@@ -33,7 +33,7 @@
                 </li>
                 <li class="nav-header">LAPORAN</li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('laporan.temuanaudit') }}" class="nav-link {{ active(['laporan.temuanaudit']) }}">
                         <i class="nav-icon fas fa-file-medical-alt"></i>
                         <p>Temuan Audit</p>
                     </a>

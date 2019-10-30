@@ -79,3 +79,8 @@ Breadcrumbs::register('temuanaudit.edit', function ($breadcrumbs) {
     $breadcrumbs->push('edit');
 });
 
+Breadcrumbs::register('laporan.temuanaudit', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('laporan temuan audit');
+});
+
