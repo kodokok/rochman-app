@@ -242,7 +242,6 @@ $(function () {
             beforeSend: function() {
                 $("#save").val('Sending...');
                 $('.is-invalid').removeClass('is-invalid');
-                $('#error-klausul').addClass('d-none');
             },
             success: function(response) {
 

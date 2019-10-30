@@ -6,6 +6,7 @@ use App\AuditPlan;
 use App\Departemen;
 use App\Klausul;
 use App\TemuanAudit;
+use App\UbahJadwalAudit;
 use App\User;
 use Carbon\Carbon;
 use DataTables;
@@ -115,7 +116,9 @@ class AuditPlanController extends Controller
      */
     public function edit(AuditPlan $auditplan)
     {
-        if (!auth()->user()->hasAnyRole(['admin', 'auditor_lead', 'auditor', 'kadept'])) {
+        $is_real_kadept = auth()->user()->id === $auditplan->departemen->kadept->id;
+
+        if (!auth()->user()->hasAnyRole(['admin', 'auditor_lead', 'auditor']) && !$is_real_kadept) {
             return back();
         }
 
@@ -137,7 +140,7 @@ class AuditPlanController extends Controller
         }
 
         return view('pages.auditplan.edit', compact([
-            'model', 'klausul', 'departemen', 'auditee', 'auditor', 'auditorLead', 'kadept', 'klausul_temuan'
+            'model', 'klausul', 'departemen', 'auditee', 'auditor', 'auditorLead', 'kadept', 'klausul_temuan', 'is_real_kadept'
         ]));
     }
 
@@ -172,12 +175,6 @@ class AuditPlanController extends Controller
         $tanggal =  Carbon::createFromFormat('m-d-Y', $request->tanggal)->format('Y-m-d');
         $waktu =  Carbon::createFromFormat('H:i:s', $request->waktu)->format('H:i:s');
 
-        if ($request->has('ubah_jadwal_check')) {
-            $tanggal = Carbon::createFromFormat('m-d-Y', $request->tanggal_baru)->format('Y-m-d');
-            $waktu =  Carbon::createFromFormat('H:i:s', $request->waktu_baru)->format('H:i:s');
-            $auditplan->ubahJadwalAudit()->delete();
-        }
-
         $auditplan->update([
             'departemen_id' => $request->departemen_id,
             'tanggal' => $tanggal,
@@ -209,6 +206,7 @@ class AuditPlanController extends Controller
     {
         try {
             $auditplan->delete();
+            $auditplan->ubahJadwalAudit()->delete();
             $auditplan->klausuls()->sync([]);
             session()->flash('message', 'Audit Plan berhasil dihapus!');
             session()->flash('alert-type', 'error');
@@ -253,6 +251,10 @@ class AuditPlanController extends Controller
             'approval_kadept' => 1
         ]);
 
+        if (!empty($auditplan->ubahJadwalAudit())) {
+            $auditplan->ubahJadwalAudit()->delete();
+        }
+
         session()->flash('message', 'Audit Plan '. $auditplan->id . ' telah diapproved!');
         session()->flash('alert-type', 'success');
 
@@ -260,6 +262,71 @@ class AuditPlanController extends Controller
         return response()->json($redirect_to);
     }
 
+    public function ubahJadwal(Request $request, AuditPlan $auditplan)
+    {
+        $rules = [
+            'tanggal_baru' => 'required|date_format:m-d-Y|after_or_equal:today',
+            'waktu_baru' => 'required|date_format:H:i:s',
+            'catatan' => 'required|string|max:200'
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'fail' => true,
+                'errors' => $validator->errors(),
+            ]);
+        }
+
+        $ubahJadwal = new UbahJadwalAudit([
+            'tanggal' => Carbon::createFromFormat('m-d-Y', $request->tanggal_baru)->format('Y-m-d'),
+            'waktu' =>  Carbon::createFromFormat('H:i:s', $request->waktu_baru)->format('H:i:s'),
+            'catatan' => $request->catatan,
+        ]);
+
+        $auditplan->UbahJadwalAudit()->save($ubahJadwal);
+
+        session()->flash('message', 'Ubah jadwal telah berhasil disimpan!');
+        session()->flash('alert-type', 'success');
+
+        $redirect_to = ['redirect_to' => route('auditplan.edit', $auditplan->id)];
+        return response()->json($redirect_to);
+    }
+
+    public function updateJadwal(Request $request, AuditPlan $auditplan)
+    {
+        $rules = [
+            'tanggal_baru' => 'required|date_format:m-d-Y|after_or_equal:today',
+            'waktu_baru' => 'required|date_format:H:i:s',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'fail' => true,
+                'errors' => $validator->errors(),
+            ]);
+        }
+
+        if (!empty($auditplan->ubahJadwalAudit())) {
+            $auditplan->ubahJadwalAudit()->delete();
+        }
+
+        $data = [
+            'tanggal' => Carbon::createFromFormat('m-d-Y', $request->tanggal_baru)->format('Y-m-d'),
+            'waktu' =>  Carbon::createFromFormat('H:i:s', $request->waktu_baru)->format('H:i:s'),
+        ];
+
+        $auditplan->update($data);
+
+        session()->flash('message', 'Jadwal audit telah berhasil di update!');
+        session()->flash('alert-type', 'success');
+
+        $redirect_to = ['redirect_to' => route('auditplan.edit', $auditplan->id)];
+        return response()->json($redirect_to);
+    }
 
     public function report(Request $request, AuditPlan $auditplan)
     {
@@ -277,7 +344,6 @@ class AuditPlanController extends Controller
 
     public function pdf(AuditPlan $auditplan)
     {
-        // dd(storage_path('fonts/'));
         $temuanaudits = TemuanAudit::where('audit_plan_id', $auditplan->id)->get();
         $pdf = PDF::loadView('auditplan.report.print', compact(['auditplan', 'temuanaudits']))->setPaper('a4', 'landscape');;
         $pdfname = $auditplan->objektif_audit . '_' . Carbon::now() . '.pdf';

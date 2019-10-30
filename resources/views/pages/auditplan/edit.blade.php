@@ -5,11 +5,19 @@
 @section('page-action')
     <input id="save" type="submit" value="Save" class="btn btn-success float-right"
         style="width: 120px;">
-    <a id="cancel" href="{{ old('redirect_to', url()->previous()) }}" class="btn btn-secondary float-right"
-        style="margin-right: 5px; width: 120px;">Cancel</a>
-    <button type="button" class="btn btn-warning float-right mr-2" data-toggle="modal" data-target="#exampleModalCenter">
-        Ubah Jadwal Audit
-    </button>
+    <a id="cancel" href="{{ old('redirect_to', url()->previous()) }}" class="btn btn-secondary float-right mr-2"
+        style="width: 120px;">Cancel</a>
+    @if ($model->exists)
+        @hasanyrole('admin|auditor_lead|auditor')
+            @if (!empty($model->ubahJadwalAudit->exists))
+                <a id="ubah-jadwal" href="#" class="btn btn-warning float-right mr-2"  style="width: 120px;">Update Jadwal</a>
+            @endif
+        @else
+            @if ($is_real_kadept)
+                <a id="ubah-jadwal" href="#" class="btn btn-warning float-right mr-2"  style="width: 120px;">Ubah Jadwal</a>
+            @endif
+        @endhasanyrole
+    @endif
 @endsection
 
 @section('content')
@@ -333,16 +341,20 @@ $(function () {
         });
     });
 
-    $("#ubah-jadwal-modal").submit(function(event) {
+    $("body").on("click", "#ubah-jadwal", function(event) {
         event.preventDefault();
-        $(".modal").modal("hide");
-        console.log('test');
-        window.location.reload();
+        $('.is-invalid').removeClass('is-invalid');
+        $("#ubah-jadwal-modal").modal("show");
+    });
+
+    $('#ubah-jadwal-form').submit(function (event) {
+        event.preventDefault();
 
         var form = $(this);
         var url = form.attr('action');
         var method = form.attr('method');
         var formData = new FormData(form.get(0));
+        var buttonText = $("#ubah-jadwal-btn").val();
 
         $.ajax({
             url: url,
@@ -352,13 +364,28 @@ $(function () {
             contentType: false,
             processData: false,
             beforeSend: function() {
+                $("#ubah-jadwal-btn").val('Sending...');
+                $('.is-invalid').removeClass('is-invalid');
             },
             success: function(response) {
+                if (response.fail) {
+                    for (const control in response.errors) {
+                        $('#' + control).addClass('is-invalid');
+                        $('#error-' + control).text(response.errors[control]);
+                    }
+                    $("#ubah-jadwal-btn").val(buttonText);
 
-                $(".modal").modal("hide");
+                } else {
+                    if (response.redirect_to) {
+                        window.location.href = response.redirect_to;
+                    } else {
+                        $("#ubah-jadwal-btn").val(buttonText);
+                    }
+                }
             },
             error: function (xhr, textStatus, errorThrown) {
                 alert("Error: " + errorThrown);
+                $("#ubah-jadwal-btn").val(buttonText);
             }
         });
     });

@@ -26,6 +26,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('auditplan', 'AuditPlanController')->parameters(['auditplan' => 'auditplan']);;
     Route::get('auditplan/{auditplan}/temuanaudit-add', 'AuditPlanController@addTemuanaudit')->name('auditplan.temuanaudit-add');
     Route::put('auditplan/{auditplan}/approved', 'AuditPlanController@approved')->name('auditplan.approved');
+    Route::put('auditplan/{auditplan}/ubah-jadwal', 'AuditPlanController@ubahJadwal')->name('auditplan.ubah-jadwal');
+    Route::put('auditplan/{auditplan}/update-jadwal', 'AuditPlanController@updateJadwal')->name('auditplan.update-jadwal');
     // route::get('approval', 'ApprovalController@show')->name('approval.show');
     // route::get('approval/auditplan/datatable', 'ApprovalController@datatable')->name('approval.auditplan.datatable');
 
