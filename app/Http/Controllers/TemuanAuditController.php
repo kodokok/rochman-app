@@ -122,13 +122,11 @@ class TemuanAuditController extends Controller
             ]);
         }
 
-        $tanggal_perbaikan_pencegahan =  Carbon::createFromFormat('m-d-Y', $request->tanggal_perbaikan_pencegahan)->format('Y-m-d');
-
         $data = [
             'ketidaksesuaian' => $request->ketidaksesuaian,
             'akar_masalah' => $request->akar_masalah,
             'tindakan_perbaikan_pencegahan' => $request->tindakan_perbaikan_pencegahan,
-            'tanggal_perbaikan_pencegahan' => $tanggal_perbaikan_pencegahan,
+            'tanggal_perbaikan_pencegahan' => $request->tanggal_perbaikan_pencegahan ? Carbon::createFromFormat('m-d-Y', $request->tanggal_perbaikan_pencegahan)->format('Y-m-d') : null,
             'review' => $request->review,
             'approval_kadept' => $request->approval_kadept ? 1 : 0,
             'approval_auditee' => $request->approval_auditee ? 1 : 0,
