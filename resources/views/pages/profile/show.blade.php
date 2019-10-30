@@ -17,13 +17,11 @@
                 <p class="text-muted text-center">{{ $user->email }}</p>
                 <ul class="list-group list-group-unbordered mb-3">
                     <li class="list-group-item">
-                        <b>Audit Plan</b> <a class="float-right">1,322</a>
-                    </li>
-                    <li class="list-group-item">
-                        <b>Temuan Audit</b> <a class="float-right">543</a>
-                    </li>
-                    <li class="list-group-item">
-                        <b>Friends</b> <a class="float-right">13,287</a>
+                        <div>Role :
+                        @foreach ($user->roles as $role)
+                            <span class="badge badge-primary mr-2">{{ $role->name }}</span>
+                        @endforeach
+                        </div>
                     </li>
                 </ul>
             </div>
