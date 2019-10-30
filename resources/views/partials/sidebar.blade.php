@@ -31,6 +31,13 @@
                         <p>Temuan Audit</p>
                     </a>
                 </li>
+                <li class="nav-header">LAPORAN</li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-file-medical-alt"></i>
+                        <p>Temuan Audit</p>
+                    </a>
+                </li>
                 @hasanyrole('admin')
                 <li class="nav-header">DATA</li>
                 <li class="nav-item">
