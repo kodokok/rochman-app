@@ -10,11 +10,11 @@
     @if ($model->exists)
         @hasanyrole('admin|auditor_lead|auditor')
             @if (!empty($model->ubahJadwalAudit->exists))
-                <a id="ubah-jadwal" href="#" class="btn btn-warning float-right mr-2"  style="width: 150px;">Update Jadwal</a>
+                <button id="ubah-jadwal" class="btn btn-warning float-right mr-2"  style="width: 150px;">Update Jadwal</button>
             @endif
         @else
             @if ($is_real_kadept)
-                <a id="ubah-jadwal" href="#" class="btn btn-warning float-right mr-2"  style="width: 120px;">Ubah Jadwal</a>
+                <button id="ubah-jadwal" class="btn btn-warning float-right mr-2"  style="width: 120px;">Ubah Jadwal</button>
             @endif
         @endhasanyrole
     @endif
