@@ -7,27 +7,20 @@
 <section class="content">
     <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
-        <div class="row">
-            <div class="col-lg-3 col-6">
-                @include('dashboard.small-box.auditplan')
+        <div class="col">
+            <div class="row">
+                <div class="col-lg-3">
+                    @include('partials.dashboard.small-box.auditplan')
+                </div>
             </div>
-            <div class="col-lg-3 col-6">
-                @include('dashboard.small-box.temuanaudit')
-            </div>
-            <div class="col-lg-3 col-6">
-                {{-- @include('dashboard.small-box.auditplan') --}}
-            </div>
-            <div class="col-lg-3 col-6">
-                {{-- @include('dashboard.small-box.auditplan') --}}
+            <div class="row">
+                <div class="col-lg-3">
+                    @include('partials.dashboard.small-box.temuanaudit')
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-6">
-                {{--  @include('dashboard.list.auditplan')  --}}
-            </div>
-            <div class="col-lg-6">
-                {{--  @include('dashboard.list.temuanaudit')  --}}
-            </div>
+        <div class="col">
+
         </div>
     </div>
 </section>
