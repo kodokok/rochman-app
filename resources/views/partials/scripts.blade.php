@@ -19,6 +19,8 @@
 <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
 <!-- FastClick -->
 <script src="{{ asset('plugins/fastclick/fastclick.js')}} "></script>
+<!-- ChartJS -->
+<script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
 
 <script src="{{ asset('plugins/bs-custom-file-input/dist/bs-custom-file-input.min.js') }}"></script>
 <!-- AdminLTE -->
