@@ -34,7 +34,7 @@ class TemuanAuditTableSeeder extends Seeder
                     'approval_kadept' => rand(0,1),
                     'approval_auditor' => rand(0,1),
                     'approval_auditor_lead' => rand(0,1),
-                    'review' => $faker->realText(255, 2),
+                    'review' => $faker->realText(100, 2),
                 ]);
             }
         }
