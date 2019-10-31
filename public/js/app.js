@@ -87,7 +87,9 @@ $(document).ready(function() {
                         '_token': csrf_token
                     },
                     success: function(response) {
-                        window.location.href = response.redirect_to;
+                        if (response.redirect_to) {
+                            window.location.href = response.redirect_to;
+                        }
                     },
                     error: function(status)
                     {

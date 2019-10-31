@@ -53,7 +53,7 @@ $(document).ready(function() {
         serverSide: true,
         ajax: "{{ route('auditplan.datatable') }}",
         columns: [
-            {data: 'DT_RowIndex', name: 'id', 'searchable': false, 'orderable': false},
+            {data: 'id', name: 'id', 'searchable': false, 'orderable': false},
             {data: 'departemen', name: 'departemen'},
             {data: 'approval_kadept', name: 'status', render: function(data) {
                 return data ? '<span class="badge badge-success">Approved</span>' : '<span class="badge badge-info">Open</span>';

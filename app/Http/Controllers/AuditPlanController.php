@@ -205,14 +205,15 @@ class AuditPlanController extends Controller
     public function destroy(AuditPlan $auditplan)
     {
         try {
-            $auditplan->delete();
             $auditplan->ubahJadwalAudit()->delete();
+            $auditplan->delete();
             $auditplan->klausuls()->sync([]);
             session()->flash('message', 'Audit Plan berhasil dihapus!');
-            session()->flash('alert-type', 'error');
+            session()->flash('alert-type', 'success');
         } catch (\Illuminate\Database\QueryException $e) {
             session()->flash('message', 'Data tidak bisa dihapus!');
             session()->flash('alert-type', 'error');
+            return response()->json($e->getMessage());
         }
 
         $redirect_to = ['redirect_to' => route('auditplan.index')];
@@ -424,7 +425,6 @@ class AuditPlanController extends Controller
                     'url_destroy' => route('auditplan.destroy', $model->id),
                 ]);
             })
-            ->addIndexColumn()
             ->rawColumns(['action', 'status'])
             ->make(true);
     }
