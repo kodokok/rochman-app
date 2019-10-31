@@ -22,10 +22,9 @@ class TemuanAuditTableSeeder extends Seeder
             $auditplan = $auditplans->find($i);
 
             if ($auditplan) {
-                TemuanAudit::create([
+                $temuanaudit = TemuanAudit::create([
                     'audit_plan_id' => $auditplan->id,
                     'klausul_id' => $auditplan->klausuls->random()->id,
-                    'status' => rand(0,1),
                     'klasifikasi_temuan' => rand(0,1),
                     'ketidaksesuaian' => $faker->realText(100, 2),
                     'akar_masalah' => $faker->realText(100, 2),
@@ -36,6 +35,10 @@ class TemuanAuditTableSeeder extends Seeder
                     'approval_auditor_lead' => rand(0,1),
                     'review' => $faker->realText(100, 2),
                 ]);
+
+                if($temuanaudit->isCompleted()) {
+                    $temuanaudit->update(['status' => 1]);
+                }
             }
         }
     }
