@@ -44,7 +44,7 @@
                         <p>Kompetensi Auditor</p>
                     </a>
                 </li>
-                @hasanyrole('admin')
+                @hasanyrole('admin|auditor_lead')
                 <li class="nav-header">DATA</li>
                 <li class="nav-item">
                     <a href="{{ route('user.index') }}" class="nav-link {{ active(['user.*']) }}">
