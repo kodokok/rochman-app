@@ -108,6 +108,7 @@ class TemuanAuditController extends Controller
             'ketidaksesuaian' => 'required|string|max:100',
             'akar_masalah' => 'required|string|max:100',
             'klasifikasi_temuan' => 'required',
+            'review' => 'nullable|max:100',
         ];
 
         $validator = Validator::make($request->all(), $rules);
