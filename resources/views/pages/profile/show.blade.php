@@ -55,7 +55,7 @@
                     </div>
                     <div class="form-group col-6">
                         <label for="email">Email</label>
-                        {!! Form::text('email', ($user->exists ? $user->email : old('email')), ['class' => 'form-control', 'id' => 'email']) !!}
+                        {!! Form::text('email', ($user->exists ? $user->email : old('email')), ['class' => 'form-control', 'id' => 'email', 'disabled']) !!}
                         <div id="error-email" class="invalid-feedback"></div>
                     </div>
                 </div>
