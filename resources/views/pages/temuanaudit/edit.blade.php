@@ -7,7 +7,7 @@
         style="width: 120px;" {{ $model->isClosed() ? 'disabled' : '' }}>
     <a id="cancel" href="{{ route('temuanaudit.index') }}" class="btn btn-secondary float-right mr-2"
         style="width: 120px;">Cancel</a>
-    @hasanyrole('admin|auditor_lead|auditor')
+    @hasanyrole('admin|auditor_lead')
         @if ($model->isClosed())
             <a id="reopen" href="{{ route('temuanaudit.reopen', $model->id) }}" class="btn btn-warning float-right mr-2"
                 style="width: 120px;">Reopen</a>
@@ -80,7 +80,7 @@
             <div class="card-body">
                 <div class="form-group">
                     {!! Form::label('ketidaksesuaian') !!}
-                    @hasanyrole('admin|auditor_lead|auditor')
+                    @hasanyrole('admin|auditor_lead')
                         {!! Form::textarea('ketidaksesuaian', null, ['class' => 'form-control', 'rows' => '3', $model->isClosed() ? 'disabled' : '']) !!}
                     @else
                         {!! Form::textarea('ketidaksesuaian', null, ['class' => 'form-control', 'rows' => '3', 'disabled']) !!}
@@ -89,7 +89,7 @@
                 </div>
                 <div class="form-group">
                     {!! Form::label('akar_masalah') !!}
-                    @hasanyrole('admin|auditor_lead|auditor')
+                    @hasanyrole('admin|auditor_lead')
                         {!! Form::textarea('akar_masalah', null, ['class' => 'form-control', 'rows' => '3', $model->isClosed() ? 'disabled' : '']) !!}
                     @else
                         {!! Form::textarea('akar_masalah', null, ['class' => 'form-control', 'rows' => '3', 'disabled']) !!}
@@ -99,7 +99,7 @@
                 <div class="form-group">
                     {!! Form::label('klasifikasi', null, ['class' => 'mr-3']) !!}
                     <div class="icheck-success d-inline mr-3">
-                        @hasanyrole('admin|auditor_lead|auditor')
+                        @hasanyrole('admin|auditor_lead')
                             {!! Form::radio('klasifikasi_temuan', 0, false, ['id' => 'klasifikasi_minor', $model->isClosed() ? 'disabled' : '']) !!}
                         @else
                             {!! Form::radio('klasifikasi_temuan', 0, false, ['id' => 'klasifikasi_minor', 'disabled']) !!}
@@ -109,7 +109,7 @@
                         </label>
                     </div>
                     <div class="icheck-success d-inline">
-                        @hasanyrole('admin|auditor_lead|auditor')
+                        @hasanyrole('admin|auditor_lead')
                             {!! Form::radio('klasifikasi_temuan', 1, false, ['id' => 'klasifikasi_mayor', $model->isClosed() ? 'disabled' : '']) !!}
                         @else
                             {!! Form::radio('klasifikasi_temuan', 1, false, ['id' => 'klasifikasi_mayor', 'disabled']) !!}
@@ -134,7 +134,7 @@
             <div class="card-body">
                 <div class="form-group">
                     {!! Form::label('tindakan_perbaikan_pencegahan') !!}
-                    @hasanyrole('admin|auditor_lead|auditor')
+                    @hasanyrole('admin|auditor_lead')
                         {!! Form::textarea('tindakan_perbaikan_pencegahan', null, ['class' => 'form-control', 'rows' => '5', $model->isClosed() ? 'disabled' : '']) !!}
                     @else
                         {!! Form::textarea('tindakan_perbaikan_pencegahan', null, ['class' => 'form-control', 'rows' => '5', 'disabled']) !!}
@@ -144,7 +144,7 @@
                 <div class="form-group">
                     <label for="tanggal_perbaikan_pencegahan">Tanggal Perbaikan Pencegahan</label>
                     <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-                        @hasanyrole('admin|auditor_lead|auditor')
+                        @hasanyrole('admin|auditor_lead')
                             <input id="tanggal_perbaikan_pencegahan" name="tanggal_perbaikan_pencegahan" type="text"
                                 class="form-control datetimepicker-input"
                                 data-target="#datetimepicker4"
@@ -163,7 +163,7 @@
                 </div>
                 <div class="form-group">
                     {!! Form::label('review') !!}
-                    @hasanyrole('admin|auditor_lead|auditor')
+                    @hasanyrole('admin|auditor_lead')
                         {!! Form::textarea('review', null, ['class' => 'form-control', 'rows' => '5', $model->isClosed() ? 'disabled' : '']) !!}
                     @else
                         {!! Form::textarea('review', null, ['class' => 'form-control', 'rows' => '5', 'disabled']) !!}
