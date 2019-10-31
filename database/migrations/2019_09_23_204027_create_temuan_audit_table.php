@@ -23,7 +23,7 @@ class CreateTemuanAuditTable extends Migration
             $table->date('tanggal_perbaikan_pencegahan')->nullable();
             $table->unsignedTinyInteger('status')->default(0);
             $table->unsignedTinyInteger('klasifikasi_temuan')->default(0);
-            $table->text('review', 255)->nullable();
+            $table->string('review', 100)->nullable();
             $table->unsignedTinyInteger('approval_kadept')->default(0);
             $table->unsignedTinyInteger('approval_auditor')->default(0);
             $table->unsignedTinyInteger('approval_auditor_lead')->default(0);
