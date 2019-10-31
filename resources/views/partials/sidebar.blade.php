@@ -38,6 +38,12 @@
                         <p>Temuan Audit</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('laporan.kompetensi') }}" class="nav-link {{ active(['laporan.kompetensi']) }}">
+                        <i class="nav-icon fas fa-file-contract"></i>
+                        <p>Kompetensi Auditor</p>
+                    </a>
+                </li>
                 @hasanyrole('admin')
                 <li class="nav-header">DATA</li>
                 <li class="nav-item">

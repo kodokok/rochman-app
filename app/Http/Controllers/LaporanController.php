@@ -10,4 +10,9 @@ class LaporanController extends Controller
     {
         return view('pages.laporan.temuanaudit');
     }
+
+    public function kompetensi()
+    {
+        return view('pages.laporan.kompentensi');
+    }
 }

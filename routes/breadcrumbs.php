@@ -84,3 +84,8 @@ Breadcrumbs::register('laporan.temuanaudit', function ($breadcrumbs) {
     $breadcrumbs->push('laporan temuan audit');
 });
 
+Breadcrumbs::register('laporan.kompetensi', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('laporan kompetensi auditor');
+});
+
