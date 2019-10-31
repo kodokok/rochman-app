@@ -33,7 +33,7 @@ class TemuanAudit extends Model
 
     public function isCompleted()
     {
-        if ($this->approval_kadept != 0 && $this->approval_auditee != 0 && $this->approval_auditor != 0 && $this->approval_auditor_lead != 0) {
+        if ($this->approval_kadept != 0 && $this->approval_auditor != 0 && $this->approval_auditor_lead != 0) {
             return true;
         }
         return false;

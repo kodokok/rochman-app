@@ -75,26 +75,23 @@ class TemuanAuditController extends Controller
         $model = $temuanaudit;
 
         $is_user_kadept = auth()->user()->id === $temuanaudit->auditplan->departemen->kadept->id;
-        $is_user_auditee = auth()->user()->id === $temuanaudit->auditplan->auditee->id;
         $is_user_auditor = auth()->user()->id === $temuanaudit->auditplan->auditor->id;
         $is_user_auditor_lead = auth()->user()->id === $temuanaudit->auditplan->auditorLead->id;
 
         if (auth()->user()->hasAnyRole(['admin', 'auditor_lead', 'auditor'])) {
             $is_user_kadept = true;
-            $is_user_auditee = true;
             $is_user_auditor = true;
             $is_user_auditor_lead = true;
         }
 
         if ($model->status == 'Closed') {
             $is_user_kadept = false;
-            $is_user_auditee = false;
             $is_user_auditor = false;
             $is_user_auditor_lead = false;
         }
 
         return view('pages.temuanaudit.edit', compact([
-            'model', 'is_user_kadept', 'is_user_auditee', 'is_user_auditor', 'is_user_auditor_lead'
+            'model', 'is_user_kadept', 'is_user_auditor', 'is_user_auditor_lead'
         ]));
     }
 
@@ -129,7 +126,6 @@ class TemuanAuditController extends Controller
             'tanggal_perbaikan_pencegahan' => $request->tanggal_perbaikan_pencegahan ? Carbon::createFromFormat('m-d-Y', $request->tanggal_perbaikan_pencegahan)->format('Y-m-d') : null,
             'review' => $request->review,
             'approval_kadept' => $request->approval_kadept ? 1 : 0,
-            'approval_auditee' => $request->approval_auditee ? 1 : 0,
             'approval_auditor' => $request->approval_auditor ? 1 : 0,
             'approval_auditor_lead' => $request->approval_auditor_lead ? 1 : 0,
         ];

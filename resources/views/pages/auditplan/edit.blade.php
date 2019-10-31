@@ -5,7 +5,7 @@
 @section('page-action')
     <input id="save" type="submit" value="Save" class="btn btn-success float-right"
         style="width: 120px;">
-    <a id="cancel" href="{{ old('redirect_to', url()->previous()) }}" class="btn btn-secondary float-right mr-2"
+    <a id="cancel" href="{{ route('auditplan.index') }}" class="btn btn-secondary float-right mr-2"
         style="width: 120px;">Cancel</a>
     @if ($model->exists)
         @hasanyrole('admin|auditor_lead|auditor')

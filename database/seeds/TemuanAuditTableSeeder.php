@@ -32,7 +32,6 @@ class TemuanAuditTableSeeder extends Seeder
                     'tindakan_perbaikan_pencegahan' => $faker->realText(100, 2),
                     'tanggal_perbaikan_pencegahan' => Carbon::now()->addDay(rand(10, 30)),
                     'approval_kadept' => rand(0,1),
-                    'approval_auditee' => rand(0,1),
                     'approval_auditor' => rand(0,1),
                     'approval_auditor_lead' => rand(0,1),
                     'review' => $faker->realText(255, 2),
