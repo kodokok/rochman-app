@@ -10,6 +10,7 @@
             <div class="col-md-3">
                 @include('partials.dashboard.small-box.auditplan')
                 @include('partials.dashboard.small-box.temuanaudit')
+                @include('partials.dashboard.small-box.progress')
             </div>
             <div class="col-md-9">
                 @include('partials.dashboard.chart.line')
