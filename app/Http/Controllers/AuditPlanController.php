@@ -401,7 +401,8 @@ class AuditPlanController extends Controller
 
         return DataTables::of($model)
             ->addColumn('departemen', function ($model) {
-                return $model->departemen->kode;
+                $reschedule = $model->ubahJadwalAudit()->count() ? '<i class="fas fa-exclamation text-danger float-right"></i>' : '';
+                return $model->departemen->kode . $reschedule;
             })
             ->addColumn('auditee', function ($model) {
                 return $model->auditee->nama;
@@ -425,7 +426,7 @@ class AuditPlanController extends Controller
                     'url_destroy' => route('auditplan.destroy', $model->id),
                 ]);
             })
-            ->rawColumns(['action', 'status'])
+            ->rawColumns(['action', 'status', 'departemen'])
             ->make(true);
     }
 }
