@@ -133,7 +133,7 @@
             </div>
             <div class="card-body">
                 <div class="form-group">
-                    {!! Form::label('tindakan_perbaikan_pencegahan') !!}
+                    {!! Form::label('tindakan_perbaikan_pencegahan', 'Tindakan Perbaikan & Pencegahan') !!}
                     @hasanyrole('admin|auditor_lead')
                         {!! Form::textarea('tindakan_perbaikan_pencegahan', null, ['class' => 'form-control', 'rows' => '5', $model->isClosed() ? 'disabled' : '']) !!}
                     @else
@@ -142,7 +142,7 @@
                     <div id="error-tindakan_perbaikan_pencegahan" class="invalid-feedback"></div>
                 </div>
                 <div class="form-group">
-                    <label for="tanggal_perbaikan_pencegahan">Tanggal Perbaikan Pencegahan</label>
+                    <label for="tanggal_perbaikan_pencegahan">Tanggal Perbaikan & Pencegahan</label>
                     <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
                         @hasanyrole('admin|auditor_lead')
                             <input id="tanggal_perbaikan_pencegahan" name="tanggal_perbaikan_pencegahan" type="text"
