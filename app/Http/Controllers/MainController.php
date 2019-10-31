@@ -10,10 +10,15 @@ class MainController extends Controller
     public function home()
     {
         $auditplans = $this->getAuditPlanData();
+        $openedAuditplansCount = $auditplans->where('approval_kadept', 0)->count();
+        $approvedAuditplansCount = $auditplans->where('approval_kadept', 1)->count();
         $temuanaudits = $this->getTemuanAuditData();
+        $closedTemuanCount = $temuanaudits->where('status', 'Closed')->count();
+        $openedTemuanCount = $temuanaudits->where('status', 'Open')->count();
 
         return view('home', compact([
-            'auditplans', 'temuanaudits'
+            'auditplans', 'openedAuditplansCount', 'approvedAuditplansCount',
+            'temuanaudits', 'closedTemuanCount', 'openedTemuanCount'
         ]));
     }
 

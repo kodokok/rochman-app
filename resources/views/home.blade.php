@@ -10,7 +10,6 @@
             <div class="col-md-3">
                 @include('partials.dashboard.small-box.auditplan')
                 @include('partials.dashboard.small-box.temuanaudit')
-                @include('partials.dashboard.small-box.progress')
             </div>
             <div class="col-md-9">
                 @include('partials.dashboard.chart.line')
@@ -50,7 +49,7 @@
             },
         ]
     }
-    
+
     var areaChartOptions = {
         maintainAspectRatio : false,
         responsive : true,
@@ -70,7 +69,7 @@
             }]
         }
     }
-  
+
     //-------------
     //- LINE CHART -
     //--------------
@@ -81,9 +80,9 @@
     lineChartData.datasets[1].fill = false;
     lineChartOptions.datasetFill = false
 
-    var lineChart = new Chart(lineChartCanvas, { 
+    var lineChart = new Chart(lineChartCanvas, {
       type: 'line',
-      data: lineChartData, 
+      data: lineChartData,
       options: lineChartOptions
     })
 </script>
