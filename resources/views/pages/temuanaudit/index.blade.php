@@ -21,6 +21,8 @@
                                 <th>Akar Masalah</th>
                                 <th>Klasifikasi</th>
                                 <th>Status</th>
+                                <th>Tindakan Perbaikan & Pencegahan</th>
+                                <th>Tanggal Perbaikan & Pencegahan</th>
                                 <th style="width: 20%"></th>
                             </tr>
                         </thead>
@@ -55,7 +57,8 @@ $(document).ready(function() {
                 return data ? 'Mayor' : 'Minor';
             }},
             {data: 'status', name: 'status'},
-
+            {data: 'tindakan_perbaikan_pencegahan', name: 'tindakan_perbaikan_pencegahan'},
+            {data: 'tanggal_perbaikan_pencegahan', name: 'tanggal_perbaikan_pencegahan'},
             {data: 'action', name: 'action', 'searchable': false, 'orderable': false, 'className': 'text-center'}
         ]
     });
