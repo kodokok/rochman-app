@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AuditPlan;
+use App\Departemen;
 use App\TemuanAudit;
 
 class MainController extends Controller
@@ -16,9 +17,25 @@ class MainController extends Controller
         $closedTemuanCount = $temuanaudits->where('status', 'Closed')->count();
         $openedTemuanCount = $temuanaudits->where('status', 'Open')->count();
 
+        // cart data
+        $departemen = $this->getDepartemenData();
+        $legendTemuanAudit = [];
+        $dataTemuanAuditOpen = [];
+        $dataTemuanAuditClosed = [];
+
+        foreach ($departemen as $dept) {
+            $legendTemuanAudit[] = $dept->kode;
+            $dataTemuanAuditClosed[] = $temuanaudits->where('status', 'Closed')
+                ->where('auditplan.departemen.id', $dept->id)->count();
+            $dataTemuanAuditOpen[] = $temuanaudits->where('status', 'Open')
+                ->where('auditplan.departemen.id', $dept->id)->count();
+        }
+        // dd($dataTemuanAuditClosed);
+
         return view('home', compact([
             'auditplans', 'openedAuditplansCount', 'approvedAuditplansCount',
-            'temuanaudits', 'closedTemuanCount', 'openedTemuanCount'
+            'temuanaudits', 'closedTemuanCount', 'openedTemuanCount',
+            'legendTemuanAudit', 'dataTemuanAuditOpen', 'dataTemuanAuditClosed'
         ]));
     }
 
@@ -78,5 +95,10 @@ class MainController extends Controller
         }
 
         return $model;
+    }
+
+    public function getDepartemenData()
+    {
+        return Departemen::all();
     }
 }
