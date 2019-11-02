@@ -37,7 +37,7 @@
             min: 0,
             max: 20,
             title: {
-                text: 'Temuan Audit'
+                text: 'Count'
             }
         },
         tooltip: {
