@@ -131,11 +131,11 @@ class AuditPlanController extends Controller
         $klausul = Klausul::pluck('nama', 'id');
 
         $klausul_temuan = [];
-        foreach ($model->klausuls as $klausul) {
-            $match = ['audit_plan_id' => $model->id, 'klausul_id' => $klausul->id];
+        foreach ($model->klausuls as $k) {
+            $match = ['audit_plan_id' => $model->id, 'klausul_id' => $k->id];
             $exists = TemuanAudit::where($match)->exists();
             if ($exists) {
-                $klausul_temuan[$klausul->id] = $klausul->nama;
+                $klausul_temuan[$k->id] = $k->nama;
             }
         }
 
