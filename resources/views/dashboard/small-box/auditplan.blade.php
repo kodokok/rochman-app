@@ -6,7 +6,7 @@
         <p>Audit Plan</p>
     </div>
     <div class="icon">
-        <i class="ion ion-calendar"></i>
+        <i class="ion ion-md-calendar"></i>
     </div>
     <a href="{{ route('auditplan.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
 </div>

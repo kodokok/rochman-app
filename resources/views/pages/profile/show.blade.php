@@ -35,9 +35,9 @@
                 <h3 class="card-title">Edit Profile</h3>
                 <div class="card-tools">
                     <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip"
-                            title="Collapse">
-                            <i class="fas fa-minus"></i></button>
+                        <button type="button" class="btn btn-sm" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -102,18 +102,18 @@
                 <h3 class="card-title">Password</h3>
                 <div class="card-tools">
                     <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip"
-                            title="Collapse">
-                            <i class="fas fa-minus"></i></button>
+                        <button type="button" class="btn btn-sm" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
                     </div>
                 </div>
             </div>
-            {!! Form::open([
-                'route' => ['profile.change-password', $user->id],
-                'method' => 'PUT',
-                'autocomplete' => 'off',
-            ]) !!}
             <div class="card-body">
+                {!! Form::open([
+                    'route' => ['profile.change-password', $user->id],
+                    'method' => 'PUT',
+                    'autocomplete' => 'off',
+                ]) !!}
                 <div class="form-group">
                     <label for="current_password">Current Password</label>
                     {!! Form::text('current_password', null, ['class' => 'form-control' . ($errors->has('current_password') ? ' is-invalid': ''), 'id' => 'current_password', 'oninput' => "turnOnPasswordStyle()"]) !!}
@@ -134,8 +134,8 @@
                 <div class="text-right">
                     {{ Form::submit('Change Password', ['class' => 'btn btn-primary']) }}
                 </div>
+                {!! Form::close() !!}
             </div>
-            {!! Form::close() !!}
         </div>
     </div>
 </div>

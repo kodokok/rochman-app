@@ -9,9 +9,30 @@ window._ = require('lodash');
 try {
     window.Popper = require('popper.js').default;
     window.$ = window.jQuery = require('jquery');
+    window.moment = require('moment');
+    // Load Highcharts
+    window.Highcharts = require('highcharts');
+    // Sweetalert2
+    window.Swal = require('admin-lte/plugins/sweetalert2/sweetalert2.all');
+    // toastr
+    window.toastr = require('admin-lte/plugins/toastr/toastr.min');
 
-    require('bootstrap');
-} catch (e) {}
+    // datatables
+    require('admin-lte/plugins/datatables/jquery.dataTables');
+    require('admin-lte/plugins/datatables-bs4/js/dataTables.bootstrap4');
+    require('admin-lte/plugins/datatables-responsive/js/responsive.bootstrap4');
+    // select2
+    require('admin-lte/plugins/select2/js/select2.full');
+    // datetimepicker require moment.js
+    require('admin-lte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4');
+    // bootstrap
+    require('bootstrap')
+    // AdminLTE code here.
+    require('admin-lte');
+
+} catch (e) {
+    // alert("JQ is not loaded");
+}
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

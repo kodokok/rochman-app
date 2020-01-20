@@ -28,8 +28,8 @@
             <div class="card-header">
                 <h3 class="card-title">Detail Audit Plan</h3>
                 <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                        <i class="fas fa-minus"></i></button>
+                    <button type="button" class="btn btn-sm" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
                 </div>
             </div>
             <div class="card-body">
@@ -73,8 +73,8 @@
             <div class="card-header">
                 <h3 class="card-title">Data Temuan</h3>
                 <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                        <i class="fas fa-minus"></i></button>
+                    <button type="button" class="btn btn-sm" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
                 </div>
             </div>
             <div class="card-body">
@@ -127,8 +127,8 @@
             <div class="card-header">
                 <h3 class="card-title">Detail Temuan</h3>
                 <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                        <i class="fas fa-minus"></i></button>
+                    <button type="button" class="btn btn-sm" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
                 </div>
             </div>
             <div class="card-body">

@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
-    @include('partials.head')
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <!-- Favicon -->
+    <link href="{{ asset('favicon.ico') }}" rel="icon" type="image/png">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    @include('partials.styles')
-
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+    @stack('styles')
 </head>
-<body class="hold-transition sidebar-mini">
+
+<body class="hold-transition sidebar-mini text-sm">
 
     <div class="wrapper">
         @include('partials.navbar')
@@ -28,12 +38,13 @@
         </footer>
     </div>
 
-    @include('partials.scripts')
-
+    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ asset('js/all.js') }}"></script>
+    @stack('scripts')
     <script>
         @if(Session::has('message'))
         var type = "{{ Session::get('alert-type', 'info') }}";
-        switch(type){
+        switch (type) {
             case 'info':
                 toastr.info("{{ Session::get('message') }}");
                 break;
@@ -48,6 +59,8 @@
                 break;
         }
         @endif
+
     </script>
 </body>
+
 </html>

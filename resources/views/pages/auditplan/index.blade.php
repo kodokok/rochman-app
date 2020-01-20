@@ -16,7 +16,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <table id="datatable" class="table table-bordered table-striped table-responsive" style="width:100%">
+                <table id="datatable" class="table table-bordered table-striped dt-responsive nowrap" style="width:100%">
                     <thead>
                         <tr>
                             <th>#</th>

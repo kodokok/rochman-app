@@ -1,0 +1,66 @@
+.breadcrumb {
+    background-color: transparent;
+    margin-bottom: 0;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f105";
+    font-weight: 900;
+}
+
+.login-container {
+    box-shadow: 5px 0 8px 0 rgba(0, 0, 0, 0.2), -2px 0 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.login-form-left {
+    padding: 120px 4%;
+    background: url('../img/left-side-bg1.png') no-repeat center center / cover;
+    background-position-x: 5px;
+    overflow: hidden;
+}
+
+.login-form-right {
+    padding: 10px 40px;
+}
+
+.login-logo {
+    background: white;
+    position: absolute;
+    left: 5px;
+    width: 100%;
+    box-shadow: 5px 0 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.logo-text {
+    /* standard gradient background */
+    background: linear-gradient(red, blue);
+
+    /* clip hackery */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.logo-text span {
+    display: block;
+    font-size: 1rem;
+    font-style: italic;
+}
+
+.login-left-link {
+    padding-top: 150px;
+}
+
+.login-left-link ul li {
+    line-height: 30px;
+    font-size: 1rem;
+}
+
+.login-form-right .errors {
+    margin-top: 150px;
+    padding-bottom: 20px;
+}
+
+.login-form-right .forgot {
+    margin-top: 150px;
+}

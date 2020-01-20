@@ -36,8 +36,9 @@
             <div class="card-header">
                 <h3 class="card-title">General</h3>
                 <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                        <i class="fas fa-minus"></i></button>
+                    <button type="button" class="btn btn-sm" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
                 </div>
 
             </div>
@@ -62,14 +63,14 @@
                     @hasanyrole('admin|auditor_lead|auditor')
                         <div class="col-sm-6">
                             <label for="tanggal">Tanggal</label>
-                            <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-                                <input id="tanggal" name="tanggal" type="text"
+                            <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                                <input id="tanggal" name="tanggal" type="tanggal"
                                     class="form-control datetimepicker-input"
-                                    data-target="#datetimepicker4"
+                                    data-target="#datetimepicker1"
                                     placeholder="mm-dd-yyyy"
                                     value="{{ $model->tanggal }}"
                                 />
-                                <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
+                                <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
                                 <div id="error-tanggal" class="invalid-feedback"></div>
@@ -77,15 +78,15 @@
                         </div>
                         <div class="col-sm-6">
                             <label for="waktu">Waktu</label>
-                            <div class="input-group date" id="datetimepicker3" data-target-input="nearest">
+                            <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
                                 <input id="waktu" name="waktu" type="text"
                                     class="form-control datetimepicker-input"
-                                    data-target="#datetimepicker3"
+                                    data-target="#datetimepicker2"
                                     placeholder="HH:mm:ss"
                                     value="{{ $model->waktu }}"
                                 />
-                                <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
-                                    <div class="input-group-text"><i class="fas fa-clock"></i></div>
+                                <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-clock"></i></div>
                                 </div>
                                 <div id="error-waktu" class="invalid-feedback"></div>
                             </div>
@@ -148,8 +149,9 @@
                     <div class="card-header">
                         <h3 class="card-title">Klausul</h3>
                         <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fas fa-minus"></i></button>
+                            <button type="button" class="btn btn-sm" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
                         </div>
                     </div>
                     <div class="card-body">
@@ -208,13 +210,13 @@
 @push('scripts')
 <script>
 $(function () {
-    $('#datetimepicker4').datetimepicker({
+    $('#datetimepicker1').datetimepicker({
         format: 'MM-DD-YYYY',
     });
-
-    $('#datetimepicker3').datetimepicker({
-        format: 'HH:mm:ss'
+    $('#datetimepicker2').datetimepicker({
+        format: 'HH:mm:ss',
     });
+
 
     $('#departemen_id').select2({
         placeholder: "Pilih departemen...",
