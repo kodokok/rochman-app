@@ -34,7 +34,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('temuanaudit/{temuanaudit}/reopen', 'TemuanAuditController@reopen')->name('temuanaudit.reopen');
 
     Route::get('laporan/temuanaudit', 'LaporanController@temuanaudit')->name('laporan.temuanaudit');
+    Route::get('laporan/temuanaudit-preview', 'LaporanController@temuanauditPreview')->name('laporan.temuanaudit-preview');
     Route::get('laporan/kompetensi', 'LaporanController@kompetensi')->name('laporan.kompetensi');
+    Route::get('laporan/kompetensi-data', 'LaporanController@kompetensiData')->name('laporan.kompetensi-data');
 
     // route administrator
     Route::group(['middleware' => ['role:admin,auditor,auditor_lead']], function () {
