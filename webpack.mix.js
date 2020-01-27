@@ -18,6 +18,7 @@ mix.sass('resources/sass/app.scss', 'public/css')
     .sourceMaps();
 
 mix.scripts([
-        'public/js/custom.js',
-    ], 'public/js/all.js')
-    .sourceMaps();;
+    'public/js/scripts.js',
+], 'public/js/all.js');
+
+mix.disableNotifications();

@@ -99,4 +99,68 @@ $(document).ready(function() {
             }
         });
     });
+
+    $("body").on("click", ".modal-show-print", function(event) {
+        event.preventDefault();
+
+        var me = $(this),
+            url = me.attr("href"),
+            title = me.attr("title");
+
+        $("#modal-title").text(title);
+
+        $('#modal-loader').show();
+        $('#modal-content').html('');
+
+        $.ajax({
+            url: url,
+            type: 'GET',
+            dataType: "html",
+            success: function(response) {
+                $('#modal-content').html('');
+                $("#modal-content").html(response);
+                $('#modal-loader').hide();
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                $("#modal-content").html('<i>'+ errorThrown + '<i/>');
+                $('#modal-loader').hide();
+            }
+        });
+
+        $("#modal-print").modal("show");
+    });
+
+    $("#modal-btn-print").click(function(event) {
+        event.preventDefault();
+
+        var form = $('#modal-content form');
+        var data = new FormData(form.get(0));
+        // console.log(...data);
+        var url = form.attr('action');
+
+        var buttonText = $("#modal-btn-print").text();
+        $("#modal-btn-print").text('Sending...');
+
+        $.ajax({
+            url: url,
+            method: 'POST',
+            data: data,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                toastr.success('Success', 'Report berhasil dibuat.');
+                $("#modal-btn-print").text(buttonText);
+                $("#modal-print").modal("hide");
+                if (response.url) {
+                    window.open(response.url, '_blank');
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                $("#modal-print").modal("hide");
+                $("#modal-btn-print").text(buttonText);
+                toastr.error('Error', 'Report gagal dibuat.' . errorThrown);
+            }
+        })
+    });
 });

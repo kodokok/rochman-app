@@ -79,23 +79,28 @@ Breadcrumbs::register('temuanaudit.edit', function ($breadcrumbs) {
     $breadcrumbs->push('edit');
 });
 
-Breadcrumbs::register('laporan.temuanaudit', function ($breadcrumbs) {
+Breadcrumbs::register('laporan', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
-    $breadcrumbs->push('laporan temuan audit');
+    $breadcrumbs->push('laporan');
 });
 
-Breadcrumbs::register('laporan.temuanaudit-preview', function ($breadcrumbs) {
-    $breadcrumbs->parent('laporan.temuanaudit');
-    $breadcrumbs->push('preview');
-});
+// Breadcrumbs::register('laporan.temuanaudit', function ($breadcrumbs) {
+//     $breadcrumbs->parent('home');
+//     $breadcrumbs->push('laporan temuan audit');
+// });
 
-Breadcrumbs::register('laporan.kompetensi', function ($breadcrumbs) {
-    $breadcrumbs->parent('home');
-    $breadcrumbs->push('laporan kompetensi auditor');
-});
+// Breadcrumbs::register('laporan.temuanaudit-preview', function ($breadcrumbs) {
+//     $breadcrumbs->parent('laporan.temuanaudit');
+//     $breadcrumbs->push('preview');
+// });
 
-Breadcrumbs::register('laporan.kompetensi-preview', function ($breadcrumbs) {
-    $breadcrumbs->parent('laporan.kompetensi');
-    $breadcrumbs->push('preview');
-});
+// Breadcrumbs::register('laporan.kompetensi', function ($breadcrumbs) {
+//     $breadcrumbs->parent('home');
+//     $breadcrumbs->push('laporan kompetensi auditor');
+// });
+
+// Breadcrumbs::register('laporan.kompetensi-preview', function ($breadcrumbs) {
+//     $breadcrumbs->parent('laporan.kompetensi');
+//     $breadcrumbs->push('preview');
+// });
 
