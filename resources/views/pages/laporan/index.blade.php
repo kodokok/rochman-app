@@ -35,7 +35,7 @@
                                 </a>
                             </li>
                             <li class="nav-item border-0">
-                                <a href="#" class="nav-link modal-show-print" title="Temuan Audit" >
+                                <a href="{{ route('laporan.temuanaudit-show') }}" class="nav-link modal-show-print" title="Temuan Audit" >
                                     <i class="fas fa-chevron-right mr-2"></i>Temuan Audit
                                 </a>
                             </li>

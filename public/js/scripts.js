@@ -54,7 +54,7 @@ $(document).ready(function() {
                     toastr.success('Saved', 'Data telah berhasil disimpan.');
                 }
             },
-            error: function (xhr, textStatus, errorThrown) {
+            error: function (_xhr, _textStatus, errorThrown) {
                 alert("Error: " + errorThrown);
                 $("#modal-btn-save").text(buttonText);
             }
@@ -121,7 +121,7 @@ $(document).ready(function() {
                 $("#modal-content").html(response);
                 $('#modal-loader').hide();
             },
-            error: function(xhr, textStatus, errorThrown) {
+            error: function(_xhr, _textStatus, errorThrown) {
                 $("#modal-content").html('<i>'+ errorThrown + '<i/>');
                 $('#modal-loader').hide();
             }
@@ -156,7 +156,7 @@ $(document).ready(function() {
                     window.open(response.url, '_blank');
                 }
             },
-            error: function (xhr, textStatus, errorThrown) {
+            error: function (_xhr, _textStatus) {
                 $("#modal-print").modal("hide");
                 $("#modal-btn-print").text(buttonText);
                 toastr.error('Error', 'Report gagal dibuat.' . errorThrown);

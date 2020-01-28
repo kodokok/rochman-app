@@ -41,6 +41,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('laporan/excel/{filename}', 'LaporanController@getExcel')->name('laporan.excel');
     Route::get('laporan/kompetensi-show', 'LaporanController@kompetensiShow')->name('laporan.kompetensi-show');
     Route::post('laporan/kompetensi-print', 'LaporanController@kompetensiPrint')->name('laporan.kompetensi-print');
+    Route::get('laporan/temuanaudit-show', 'LaporanController@temuanauditShow')->name('laporan.temuanaudit-show');
+    Route::post('laporan/temuanaudit-print', 'LaporanController@temuanauditPrint')->name('laporan.temuanaudit-print');
 
     // route administrator
     Route::group(['middleware' => ['role:admin,auditor,auditor_lead']], function () {
