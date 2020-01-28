@@ -21,12 +21,13 @@ table tr td {
 <body>
     <div class="container-fluid">
         {{-- title row --}}
-        <div class="row">
-            <div class="col-md-12">
-                <h2 class="page-header">
-                    <div class="report-title">Laporan Temuan Audit</div>
-                </h2>
-            </div>
+        <div class="row text-center">
+            <h2 class="page-header">
+                <div class="report-title">Laporan Temuan Audit</div>
+            </h2>
+        </div>
+        <div class="row text-center">
+            <small>{{ $week != null ? $week : 'Semua'}}</small>
         </div>
         {{-- table row --}}
         <div class="row">

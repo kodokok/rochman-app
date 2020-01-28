@@ -86,13 +86,14 @@ class LaporanController extends Controller
     {
         $dateFrom = $request['dateFrom'] ? Carbon::parse($request['dateFrom'])->format('Y-m-d') : null;
         $dateTo = $request['dateTo'] ? Carbon::parse($request['dateTo'])->format('Y-m-d') : null;
-
         $data = Departemen::query();
+        $week = null;
 
         if ($dateFrom != null || $dateTo != null) {
             $data = $data->whereHas('auditplans', function($q) use ($dateFrom, $dateTo){
                 $q->whereBetween('tanggal', [$dateFrom, $dateTo]);
             });
+            $week = $dateTo != null ? $dateTo->weekOfYear : $dateFrom->weekOfYear;
         } else {
             $data = $data->has('auditplans');
         }
@@ -103,7 +104,7 @@ class LaporanController extends Controller
         $filename = 'temuanaudit_' . now()->format('YmdHis') . '.pdf';
 
         if ($request->has('output') && $request->output == 'pdf') {
-            $pdf = PDF::loadView('pages.laporan.temuanaudit.pdf', compact(['data']));
+            $pdf = PDF::loadView('pages.laporan.temuanaudit.pdf', compact(['data', 'week']));
             $pdf->setOptions([
                 'footer-right' => 'Page [page] from [topage]',
                 'footer-font-size' => 8
