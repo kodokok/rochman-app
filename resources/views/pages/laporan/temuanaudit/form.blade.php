@@ -25,10 +25,6 @@
                     <input type="radio" name="output" value="pdf" id="pdf" checked>
                     <label class="font-weight-normal" for="pdf">PDF</label>
                 </div>
-                <div class="icheck-primary">
-                    <input type="radio" name="output" value="excel" id="excel" disabled>
-                    <label class="font-weight-normal" for="excel">Excel</label>
-                </div>
             </div>
         </div>
     </div>
