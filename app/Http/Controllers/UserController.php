@@ -35,6 +35,16 @@ class UserController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show()
+    {
+
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -66,7 +76,7 @@ class UserController extends Controller
 
         // upload image to the storage
         if ($request->hasFile('foto')) {
-            $foto = $request->foto->store('img\user');
+            $foto = $request->foto->store('user');
 
             $data['foto'] = $foto;
         }
@@ -141,7 +151,7 @@ class UserController extends Controller
         // check if new image
         if ($request->hasFile('foto')) {
             // upload image
-            $foto = $request->foto->store('img\user');
+            $foto = $request->foto->store('user');
 
             // delete image
             $user->deleteFoto();

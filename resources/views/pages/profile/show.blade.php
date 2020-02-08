@@ -10,7 +10,7 @@
         <div class="card card-primary card-outline">
             <div class="card-body box-profile">
                 <div class="text-center">
-                    <img class="profile-user-img img-fluid img-circle" src="{{ asset('img/avatar.png') }}"
+                    <img class="profile-user-img" src="{{ $user->foto ? asset('storage/' . $user->foto) : asset('img/avatar.png') }}"
                         alt="User profile picture">
                 </div>
                 <h3 class="profile-username text-center">{{ $user->nama }}</h3>

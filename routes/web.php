@@ -47,7 +47,7 @@ Route::group(['middleware' => ['auth']], function () {
     // route administrator
     Route::group(['middleware' => ['role:admin,auditor,auditor_lead']], function () {
 
-        Route::resource('user', 'UserController')->except(['show']);
+        Route::resource('user', 'UserController')->except('show');
         Route::get('user/datatable', 'UserController@datatable')->name('user.datatable');
 
         Route::resource('roles', 'RolesController')->only(['index', 'create', 'store', 'destroy']);

@@ -15,11 +15,11 @@
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link" data-toggle="dropdown">
                         {{ auth()->user()->nama }}
-                        <img src="{{ auth()->user()->image ? asset('storage/' . auth()->user()->image) : asset('img/avatar.png') }}"
+                        <img src="{{ auth()->user()->foto ? asset('storage/' . auth()->user()->foto) : asset('img/avatar.png') }}"
                         width="30"
                         height="30"
                         class="d-inline-block align-top img-circle"
-                        alt="User Image">
+                        >
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                     <a href="{{ route('profile.show', auth()->user()->id) }}" class="dropdown-item dropdown-footer">PROFILE</a>

@@ -16,6 +16,8 @@ try {
     window.Swal = require('admin-lte/plugins/sweetalert2/sweetalert2.all');
     // toastr
     window.toastr = require('admin-lte/plugins/toastr/toastr.min');
+    // bs-custom-file-input
+    window.bsCustomFileInput = require('bs-custom-file-input/dist/bs-custom-file-input');
 
     // datatables
     require('admin-lte/plugins/datatables/jquery.dataTables');
