@@ -44,34 +44,23 @@ class LaporanController extends Controller
         $filepath = '';
         $filename = '';
 
-        if ($request->has('output') && $request->output == 'pdf') {
-            $data = User::whereHas('kompetensi_auditors')
-                ->where('nama', 'LIKE', "%$request->filter_nama%")
-                ->with('kompetensi_auditors')
-                ->orderBy('nama')->get();
+        $data = User::whereHas('kompetensi_auditors')
+            ->where('nama', 'LIKE', "%$request->filter_nama%")
+            ->with('kompetensi_auditors')
+            ->orderBy('nama')->get();
+        $filepath = Storage::disk('public')->path('pdf/');
+        $filename = 'kompetensi_' . now()->format('YmdHis') . '.pdf';
 
-            $filepath = Storage::disk('public')->path('pdf/');
-            $filename = 'kompetensi_' . now()->format('YmdHis') . '.pdf';
+        $pdf = PDF::loadView('pages.laporan.kompetensi.pdf', compact(['data']));
+        $pdf->setOptions([
+            'footer-right' => 'Page [page] of [toPage]',
+            'footer-font-size' => 7
+        ]);
+        $pdf->save($filepath . $filename);
 
-            $pdf = PDF::loadView('pages.laporan.kompetensi.pdf', compact(['data']));
-            $pdf->setOptions([
-                'footer-right' => 'Page [page] from [topage]',
-                'footer-font-size' => 8
-            ]);
-            $pdf->save($filepath . $filename);
-
-            $res = [
-                'url' => route('laporan.pdf', $filename)
-            ];
-        } else {
-            $filepath = 'excel/';
-            $filename = 'kompetensi_' . now()->format('YmdHis') . '.xlsx';
-            $excel = Excel::store((new KompetensiAuditorExport)->searchName($request->filter_nama), $filepath . $filename, 'public');
-
-            $res = [
-                'url' => route('laporan.excel', $filename)
-            ];
-        }
+        $res = [
+            'url' => route('laporan.pdf', $filename)
+        ];
 
         return response()->json($res, 200);
     }
@@ -106,7 +95,7 @@ class LaporanController extends Controller
         if ($request->has('output') && $request->output == 'pdf') {
             $pdf = PDF::loadView('pages.laporan.temuanaudit.pdf', compact(['data', 'week']));
             $pdf->setOptions([
-                'footer-right' => 'Page [page] from [topage]',
+                'footer-right' => 'Page [page] from [toPage]',
                 'footer-font-size' => 8
             ]);
             $pdf->save($filepath . $filename);
