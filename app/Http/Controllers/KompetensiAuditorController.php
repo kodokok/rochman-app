@@ -29,7 +29,7 @@ class KompetensiAuditorController extends Controller
     {
         $rules = [
             'user_id' => 'required',
-            'nilai' => 'nullable|integer',
+            'nilai' => 'required|numeric|min:0|lte:100',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -60,7 +60,7 @@ class KompetensiAuditorController extends Controller
     {
         $rules =  [
             'user_id' => 'required',
-            'nilai' => 'nullable|integer'
+            'nilai' => 'required|numeric|min:0|lte:100'
         ];
 
         $validator = Validator::make($request->all(), $rules);
