@@ -37,20 +37,8 @@
                         <p>Laporan</p>
                     </a>
                 </li>
-                {{-- <li class="nav-header">LAPORAN</li>
-                <li class="nav-item">
-                    <a href="{{ route('laporan.temuanaudit') }}" class="nav-link {{ active(['laporan.temuanaudit']) }}">
-                        <i class="nav-icon fas fa-file-medical-alt"></i>
-                        <p>Temuan Audit</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('laporan.kompetensi') }}" class="nav-link {{ active(['laporan.kompetensi']) }}">
-                        <i class="nav-icon fas fa-file-contract"></i>
-                        <p>Kompetensi Auditor</p>
-                    </a>
-                </li> --}}
-                @hasanyrole('admin|auditor_lead')
+
+                @hasanyrole('admin|auditor_lead|auditor')
                 <li class="nav-header">DATA</li>
                 <li class="nav-item">
                     <a href="{{ route('user.index') }}" class="nav-link {{ active(['user.*']) }}">
