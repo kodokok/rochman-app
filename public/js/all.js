@@ -149,11 +149,13 @@ $(document).ready(function() {
             contentType: false,
             processData: false,
             success: function(response) {
-                toastr.success('Success', 'Report berhasil dibuat.');
                 $("#modal-btn-print").text(buttonText);
                 $("#modal-print").modal("hide");
                 if (response.url) {
+                    toastr.success('Success', 'Report berhasil dibuat.');
                     window.open(response.url, '_blank');
+                } else {
+                    toastr.error('Error', response.message);
                 }
             },
             error: function (_xhr, _textStatus) {

@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Departemen;
 use App\Exports\KompetensiAuditorExport;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -27,19 +28,6 @@ class LaporanController extends Controller
 
     public function kompetensiPrint(Request $request)
     {
-        $rules = [
-            'filter_nama' => 'nullable'
-        ];
-
-        $validator = Validator::make($request->all(), $rules);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'fail' => true,
-                'errors' => $validator->errors(),
-            ]);
-        }
-
         $res = [];
         $filepath = '';
         $filename = '';
@@ -48,19 +36,27 @@ class LaporanController extends Controller
             ->where('nama', 'LIKE', "%$request->filter_nama%")
             ->with('kompetensi_auditors')
             ->orderBy('nama')->get();
-        $filepath = Storage::disk('public')->path('pdf/');
-        $filename = 'kompetensi_' . now()->format('YmdHis') . '.pdf';
 
-        $pdf = PDF::loadView('pages.laporan.kompetensi.pdf', compact(['data']));
-        $pdf->setOptions([
-            'footer-right' => 'Page [page] of [toPage]',
-            'footer-font-size' => 7
-        ]);
-        $pdf->save($filepath . $filename);
+        if (!$data->isEmpty()) {
+            $filepath = Storage::disk('public')->path('pdf/');
+            $filename = 'kompetensi_' . now()->format('YmdHis') . '.pdf';
 
-        $res = [
-            'url' => route('laporan.pdf', $filename)
-        ];
+            $pdf = PDF::loadView('pages.laporan.kompetensi.pdf', compact(['data']));
+            $pdf->setOptions([
+                'footer-right' => 'Page [page] of [toPage]',
+                'footer-font-size' => 7
+            ]);
+
+            $pdf->save($filepath . $filename);
+            $res = [
+                'url' => route('laporan.pdf', $filename)
+            ];
+        } else {
+            $res = [
+                'url' => '',
+                'message' => 'Data tidak ditemukan "' . $request->filter_nama . '"'
+            ];
+        }
 
         return response()->json($res, 200);
     }
@@ -82,17 +78,19 @@ class LaporanController extends Controller
             $data = $data->whereHas('auditplans', function($q) use ($dateFrom, $dateTo){
                 $q->whereBetween('tanggal', [$dateFrom, $dateTo]);
             });
-            $week = $dateTo != null ? $dateTo->weekOfYear : $dateFrom->weekOfYear;
+            $week = !empty($dateTo) ? Carbon::parse($dateTo)->format('w') :
+                !empty($dateFrom) ? Carbon::parse($dateFrom)->format('w') : '';
         } else {
             $data = $data->has('auditplans');
         }
 
         $data = $data->with('auditplans', 'auditplans.temuanAudits', 'auditplans.temuanAudits.klausul')->get();
+        $res = [];
 
-        $filepath = Storage::disk('public')->path('pdf/');
-        $filename = 'temuanaudit_' . now()->format('YmdHis') . '.pdf';
+        if (!$data->isEmpty()) {
+            $filepath = Storage::disk('public')->path('pdf/');
+            $filename = 'temuanaudit_' . now()->format('YmdHis') . '.pdf';
 
-        if ($request->has('output') && $request->output == 'pdf') {
             $pdf = PDF::loadView('pages.laporan.temuanaudit.pdf', compact(['data', 'week']));
             $pdf->setOptions([
                 'footer-right' => 'Page [page] from [toPage]',
@@ -102,6 +100,12 @@ class LaporanController extends Controller
 
             $res = [
                 'url' => route('laporan.pdf', $filename)
+            ];
+
+        } else {
+            $res = [
+                'url' => '',
+                'message' => 'Data tidak ditemukan untuk minggu ke-' . $week
             ];
         }
 
